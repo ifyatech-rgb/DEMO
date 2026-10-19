@@ -1,4 +1,4 @@
-"""Tighten pauses, reframe to 9:16, clean voice. Writes assets/cut.mp4 and assets/segments.json."""
+"""Tighten pauses, strip the letterbox bars at native size, clean voice. Writes assets/cut.mp4 and assets/segments.json."""
 import json, re, subprocess, sys
 SRC = "assets/source.mp4"; PAD = 0.05
 log = subprocess.run(["ffmpeg", "-i", "assets/source16k.wav", "-af", "silencedetect=noise=-30dB:d=0.11",
@@ -14,8 +14,8 @@ for s, e in zip(st, en):
 if cur is not None: segs.append((cur, total))
 json.dump(segs, open("assets/segments.json", "w"), indent=1)
 print(len(segs), "segments, out duration %.2f" % sum(b - a for a, b in segs))
-# Crop the 1072x928 picture area (bars removed) to 466x828 around the face, then fill 1080x1920.
-crop = "crop=466:828:352:596,scale=1080:1920:flags=lanczos,unsharp=5:5:0.6:3:3:0,setsar=1"
+# Keep only the native 1072x928 picture area (no scaling); the composition re-adds the black bars.
+crop = "crop=1072:928:4:496,setsar=1"
 fc = []
 for i, (a, b) in enumerate(segs):
     fc.append(f"[0:v]trim={a:.3f}:{b:.3f},setpts=PTS-STARTPTS[v{i}]")

@@ -31,26 +31,83 @@
         overflow: hidden;
         background: #000;
         font-family: "Montserrat", "Noto Color Emoji", sans-serif;
+        font-weight: 900;
+        color: #fff;
+      }
+      .yel { color: #ffd60a; }
+      .grn { color: #22e06b; }
+      .red { color: #ff2b2b; }
+      .emo { font-family: "Noto Color Emoji", sans-serif; }
+
+      /* Native-size picture box: the original letterbox position (y 496-1424). */
+      #box {
+        position: absolute;
+        left: 0;
+        top: 496px;
+        width: 1080px;
+        height: 928px;
+        overflow: hidden;
       }
       #cam {
         position: absolute;
         inset: 0;
-        transform-origin: 50% 32%;
+        transform-origin: 50% 40%;
       }
       #aroll {
         position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+        left: 4px;
+        top: 0;
+        width: 1072px;
+        height: 928px;
       }
-      /* Captions: lower middle, below the chin line (~1080px). */
+
+      /* Top bar: section headline + small tags. */
+      .head {
+        position: absolute;
+        left: 30px;
+        right: 30px;
+        top: 50px;
+        height: 320px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .head-in {
+        display: block;
+        max-width: 1000px;
+        font-size: 112px;
+        line-height: 1.05;
+        text-align: center;
+        letter-spacing: -1px;
+      }
+      .ln { display: block; white-space: nowrap; }
+      .tag {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 382px;
+        height: 96px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .pill {
+        display: block;
+        padding: 12px 30px 10px;
+        border-radius: 14px;
+        background: #ffd60a;
+        color: #000;
+        font-size: 44px;
+        letter-spacing: 1px;
+      }
+
+      /* Bottom bar: captions, then the CTA under them. */
       #captions {
         position: absolute;
         left: 0;
         right: 0;
-        top: 1170px;
-        height: 300px;
+        top: 1450px;
+        height: 250px;
       }
       .cg {
         position: absolute;
@@ -61,65 +118,406 @@
         align-content: center;
         justify-content: center;
         gap: 0 38px;
-        padding: 0 60px;
+        padding: 0 50px;
         opacity: 0;
       }
       .w {
         display: inline-block;
-        font-size: 104px;
+        font-size: 100px;
         line-height: 1.12;
-        font-weight: 900;
         color: #fff;
         -webkit-text-stroke: 16px #000;
         paint-order: stroke fill;
-        text-shadow: 0 8px 0 #000, 0 10px 18px rgba(0, 0, 0, 0.55);
+        text-shadow: 0 8px 0 #000;
         opacity: 0.55;
-      }
-      .pop {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 110px;
-        height: 120px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .pill {
-        display: block;
-        padding: 16px 34px 14px;
-        border-radius: 18px;
-        background: #ffd60a;
-        color: #000;
-        font-size: 58px;
-        font-weight: 900;
-        letter-spacing: 1px;
-        border: 5px solid #000;
-        box-shadow: 0 10px 0 #000;
       }
       #cta {
         position: absolute;
         left: 0;
         right: 0;
-        bottom: 150px;
-        height: 200px;
+        bottom: 34px;
+        height: 170px;
         display: flex;
         align-items: center;
         justify-content: center;
       }
       #cta-box {
         display: block;
-        max-width: 920px;
-        padding: 26px 40px 22px;
-        border-radius: 26px;
+        max-width: 940px;
+        padding: 22px 36px 18px;
+        border-radius: 24px;
+        background: #e3121e;
+        font-size: 54px;
+        line-height: 1.15;
+        text-align: center;
+        box-shadow: 0 10px 0 #7a0000;
+      }
+
+      /* B-roll cutaways (motion graphics) over the picture box. */
+      .broll, .money {
+        position: absolute;
+        left: 0;
+        top: 496px;
+        width: 1080px;
+        height: 928px;
+        overflow: hidden;
+      }
+      .br-in, .bg {
+        position: absolute;
+        inset: 0;
+      }
+      .label {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 46px;
+        text-align: center;
+        font-size: 66px;
+        -webkit-text-stroke: 12px #000;
+        paint-order: stroke fill;
+      }
+      /* trash */
+      .lead {
+        position: absolute;
+        left: 460px;
+        top: 330px;
+        width: 160px;
+        height: 100px;
+        border-radius: 10px;
+        background: #fff;
+        color: #b91c1c;
+        font-size: 36px;
+        line-height: 100px;
+        text-align: center;
+        box-shadow: 0 6px 0 rgba(0, 0, 0, 0.35);
+      }
+      .bin {
+        position: absolute;
+        left: 380px;
+        top: 380px;
+        width: 320px;
+        height: 330px;
+      }
+      .can {
+        position: absolute;
+        inset: 30px 10px 0;
+        background: linear-gradient(90deg, #6b7280, #9ca3af 45%, #4b5563);
+        border-radius: 0 0 30px 30px;
+        display: flex;
+        justify-content: space-evenly;
+        padding-top: 40px;
+        box-sizing: border-box;
+      }
+      .can i {
+        display: block;
+        width: 18px;
+        height: 200px;
+        border-radius: 9px;
+        background: rgba(0, 0, 0, 0.25);
+      }
+      .lid {
+        position: absolute;
+        left: -10px;
+        top: 0;
+        width: 340px;
+        height: 34px;
+        border-radius: 12px;
+        background: #4b5563;
+        transform-origin: 0% 100%;
+      }
+      .stamp {
+        position: absolute;
+        left: 340px;
+        top: 160px;
+        width: 400px;
+        height: 400px;
+        font-size: 420px;
+        line-height: 400px;
+        text-align: center;
+        color: #ff2b2b;
+        -webkit-text-stroke: 14px #000;
+        paint-order: stroke fill;
+        opacity: 0;
+      }
+      /* house */
+      .sun {
+        position: absolute;
+        right: 120px;
+        top: 70px;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: #ffd60a;
+        box-shadow: 0 0 60px #ffe680;
+      }
+      .lawn {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 250px;
+        background: linear-gradient(#4ade80, #16a34a);
+      }
+      .tree {
+        position: absolute;
+        top: 470px;
+        width: 130px;
+        height: 230px;
+        border-radius: 65px 65px 20px 20px;
+        background: #15803d;
+      }
+      .house {
+        position: absolute;
+        left: 270px;
+        top: 200px;
+        width: 540px;
+        height: 500px;
+      }
+      .roof {
+        position: absolute;
+        left: -30px;
+        top: 0;
+        width: 600px;
+        height: 210px;
+        background: linear-gradient(#7c2d12, #431407);
+        clip-path: polygon(50% 0, 100% 100%, 0 100%);
+        transform-origin: 50% 100%;
+      }
+      .walls {
+        position: absolute;
+        left: 0;
+        top: 210px;
+        width: 540px;
+        height: 290px;
+        background: #fdf0d5;
+      }
+      .win {
+        position: absolute;
+        top: 50px;
+        width: 110px;
+        height: 100px;
+        background: #7dd3fc;
+        border: 8px solid #fff;
+      }
+      .door {
+        position: absolute;
+        left: 215px;
+        bottom: 0;
+        width: 110px;
+        height: 170px;
+        background: #92400e;
+        border-radius: 10px 10px 0 0;
+      }
+      .check {
+        position: absolute;
+        left: 700px;
+        top: 130px;
+        width: 190px;
+        height: 190px;
+        border-radius: 50%;
+        background: #16a34a;
+        border: 10px solid #fff;
+        font-size: 130px;
+        line-height: 190px;
+        text-align: center;
+        opacity: 0;
+      }
+      /* phone */
+      .ring {
+        position: absolute;
+        left: 340px;
+        top: 180px;
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+        border: 10px solid rgba(255, 255, 255, 0.8);
+        box-sizing: border-box;
+        opacity: 0;
+      }
+      .phone {
+        position: absolute;
+        left: 380px;
+        top: 70px;
+        width: 320px;
+        height: 620px;
+        border-radius: 50px;
+        background: #0a0a0a;
+        border: 8px solid #374151;
+        box-sizing: border-box;
+      }
+      .scr {
+        position: absolute;
+        inset: 18px;
+        border-radius: 34px;
+        background: linear-gradient(#1f2937, #111827);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 70px;
+        box-sizing: border-box;
+      }
+      .ava {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: #374151;
+        font-family: "Noto Color Emoji", sans-serif;
+        font-size: 90px;
+        line-height: 150px;
+        text-align: center;
+      }
+      .who { margin-top: 26px; font-size: 34px; }
+      .calling { margin-top: 10px; font-size: 28px; font-weight: 800; color: #9ca3af; }
+      .btns {
+        position: absolute;
+        bottom: 60px;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: space-evenly;
+      }
+      .b { display: block; width: 84px; height: 84px; border-radius: 50%; }
+      .b.red { background: #ef4444; }
+      .b.green { background: #22c55e; }
+      /* calendar */
+      .cal {
+        position: absolute;
+        left: 90px;
+        top: 50px;
+        width: 900px;
+        height: 680px;
+        border-radius: 30px;
+        background: #fff;
+        overflow: hidden;
+        color: #111;
+      }
+      .calhd {
+        height: 96px;
         background: #e3121e;
         color: #fff;
-        font-size: 60px;
-        line-height: 1.15;
-        font-weight: 900;
+        font-size: 50px;
+        line-height: 96px;
         text-align: center;
-        border: 6px solid #000;
-        box-shadow: 0 12px 0 #000;
+      }
+      .days {
+        display: flex;
+        height: 54px;
+        font-size: 26px;
+        color: #6b7280;
+        align-items: center;
+      }
+      .days span { flex: 1; text-align: center; }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        height: 530px;
+        border-top: 2px solid #e5e7eb;
+      }
+      .cell {
+        position: relative;
+        border-right: 2px solid #e5e7eb;
+        border-bottom: 2px solid #e5e7eb;
+      }
+      .cell b {
+        position: absolute;
+        left: 12px;
+        top: 8px;
+        font-size: 24px;
+        color: #9ca3af;
+      }
+      .chip {
+        position: absolute;
+        left: 12px;
+        right: 12px;
+        bottom: 14px;
+        height: 58px;
+        border-radius: 12px;
+        background: #16a34a;
+        color: #fff;
+        font-size: 26px;
+        line-height: 58px;
+        text-align: center;
+        opacity: 0;
+      }
+      /* handshake */
+      .burst {
+        position: absolute;
+        left: 240px;
+        top: 90px;
+        width: 600px;
+        height: 600px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255, 230, 120, 0.9), rgba(255, 230, 120, 0) 70%);
+        opacity: 0;
+      }
+      .person {
+        position: absolute;
+        top: 120px;
+        width: 260px;
+        height: 520px;
+      }
+      #br-hands-p1, #br-hands2-p1 { left: 110px; }
+      #br-hands-p2, #br-hands2-p2 { left: 710px; }
+      .hd {
+        position: absolute;
+        left: 55px;
+        top: 60px;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: #c68642;
+      }
+      .hat {
+        position: absolute;
+        left: 40px;
+        top: 40px;
+        width: 180px;
+        height: 76px;
+        border-radius: 90px 90px 10px 10px;
+        background: #facc15;
+        z-index: 2;
+        border-bottom: 14px solid #eab308;
+      }
+      .bd {
+        position: absolute;
+        left: 0;
+        top: 225px;
+        width: 260px;
+        height: 230px;
+        border-radius: 110px 110px 24px 24px;
+      }
+      .nm {
+        position: absolute;
+        left: -40px;
+        right: -40px;
+        top: 470px;
+        text-align: center;
+        font-size: 36px;
+      }
+      .shake {
+        position: absolute;
+        left: 400px;
+        top: 230px;
+        width: 280px;
+        height: 280px;
+        font-family: "Noto Color Emoji", sans-serif;
+        font-size: 220px;
+        line-height: 280px;
+        text-align: center;
+        opacity: 0;
+      }
+      /* money burst */
+      .cash {
+        position: absolute;
+        top: 800px;
+        width: 130px;
+        height: 130px;
+        font-family: "Noto Color Emoji", sans-serif;
+        font-size: 110px;
+        line-height: 130px;
+        text-align: center;
+        opacity: 0;
       }
     </style>
   </head>
@@ -132,40 +530,39 @@
       data-height="1920"
       data-duration="{{DUR}}"
     >
-      <div id="cam">
-        <video
-          id="aroll"
-          class="clip"
-          src="assets/cut.mp4"
-          playsinline
-          data-has-audio="true"
-          data-start="0"
-          data-duration="{{DUR}}"
-          data-track-index="0"
-          data-volume="1"
-        ></video>
+      <div id="box">
+        <div id="cam">
+          <video
+            id="aroll"
+            class="clip"
+            src="assets/cut.mp4"
+            playsinline
+            data-has-audio="true"
+            data-start="0"
+            data-duration="{{DUR}}"
+            data-track-index="0"
+            data-volume="1"
+          ></video>
+        </div>
       </div>
-      <audio
-        id="music"
-        src="assets/music.wav"
-        data-start="0"
-        data-duration="{{DUR}}"
-        data-track-index="1"
-        data-volume="0.1"
-      ></audio>
-      <div id="captions" class="clip" data-start="0" data-duration="{{DUR}}" data-track-index="2">
+{{BROLL}}
+{{MONEY}}
+{{HEADS}}
+{{TAGS}}
+      <div id="captions" class="clip" data-start="0" data-duration="{{DUR}}" data-track-index="6">
 {{CAPTIONS}}
       </div>
-{{POPS}}
-      <div id="cta" class="clip" data-start="{{CTA_START}}" data-duration="{{CTA_DUR}}" data-track-index="3">
-        <span id="cta-box">CHECK IF YOUR AREA IS AVAILABLE 👇</span>
+      <div id="cta" class="clip" data-start="{{CTA_START}}" data-duration="{{CTA_DUR}}" data-track-index="7">
+        <span id="cta-box">CHECK IF YOUR AREA IS AVAILABLE <span class="emo">👇</span></span>
       </div>
     </div>
+    <audio id="music" src="assets/music.wav" data-start="0" data-duration="{{DUR}}" data-track-index="1" data-volume="0.14"></audio>
+{{SFX}}
     <script>
       const DATA = {{DATA}};
       const tl = gsap.timeline({ paused: true });
 
-      // Word-by-word captions: group pops in, each word lights up and punches as it is spoken.
+      // Word-by-word captions: group pops in, each word lights up as spoken, keywords turn yellow.
       DATA.groups.forEach(function (g, gi) {
         const el = document.getElementById("cg-" + gi);
         tl.fromTo(el, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.12, ease: "back.out(2)" }, g.start);
@@ -173,7 +570,7 @@
           const w = DATA.words[wi];
           const node = document.getElementById("w" + wi);
           const lit = { opacity: 1, scale: 1.1, duration: 0.08, ease: "power2.out" };
-          if (node.classList.contains("hl")) lit.color = "#ffd60a"; // keywords turn yellow as they are spoken
+          if (node.classList.contains("hl")) lit.color = "#ffd60a";
           tl.fromTo(node, { opacity: 0.55, scale: 1, color: "#ffffff" }, lit, w.start);
           tl.to(node, { scale: 1, duration: 0.12, ease: "power2.out" }, Math.max(w.start + 0.08, w.end));
         });
@@ -181,29 +578,86 @@
         tl.set(el, { opacity: 0, visibility: "hidden" }, g.end);
       });
 
-      // Punch-in zooms on the key lines (~113%), then back out.
+      // Punch-in zooms inside the picture box (the black bars stay put).
       DATA.zooms.forEach(function (z, zi) {
         const next = DATA.zooms[zi + 1];
-        tl.fromTo("#cam", { scale: 1 }, { scale: 1.13, duration: 0.16, ease: "power3.out", immediateRender: false }, z[0]);
-        if (next && next[0] - z[1] < 0.4) {
-          tl.set("#cam", { scale: 1 }, next[0] - 0.001); // back-to-back lines: snap out, punch in again
-        } else {
-          tl.to("#cam", { scale: 1, duration: 0.28, ease: "power2.inOut" }, z[1] + 0.05);
-        }
+        tl.fromTo("#cam", { scale: 1 }, { scale: z[2], duration: 0.16, ease: "power3.out", immediateRender: false }, z[0]);
+        if (next && next[0] - z[1] < 0.4) tl.set("#cam", { scale: 1 }, next[0] - 0.001);
+        else tl.to("#cam", { scale: 1, duration: 0.25, ease: "power2.inOut" }, Math.min(z[1] + 0.05, DATA.dur - 0.25));
       });
 
-      // Top-of-frame text pop-ups.
-      for (let k = 0; k < DATA.pops; k++) {
-        const clip = document.getElementById("pop-" + k);
-        const s = parseFloat(clip.dataset.start);
-        const e = s + parseFloat(clip.dataset.duration);
-        tl.fromTo("#pill-" + k, { opacity: 0, scale: 0.5, y: -30 }, { opacity: 1, scale: 1, y: 0, duration: 0.25, ease: "back.out(2.5)" }, s);
-        if (e < {{DUR}} - 0.1) tl.to("#pill-" + k, { opacity: 0, scale: 0.9, duration: 0.15, ease: "power2.in" }, e - 0.15);
+      // Section headlines in the top bar; the first one is red and pulses.
+      DATA.heads.forEach(function (h, k) {
+        tl.fromTo("#headin-" + k, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.2)" }, h[0]);
+        if (k === 0) {
+          const n = Math.max(1, Math.floor((h[1] - h[0] - 0.35) / 0.5));
+          tl.to("#headin-0", { scale: 1.08, duration: 0.25, ease: "sine.inOut", yoyo: true, repeat: n * 2 - 1 }, h[0] + 0.3);
+        }
+      });
+      DATA.tags.forEach(function (t, k) {
+        tl.fromTo("#pill-" + k, { opacity: 0, scale: 0.5, y: -20 }, { opacity: 1, scale: 1, y: 0, duration: 0.25, ease: "back.out(2.5)" }, t[0]);
+        tl.to("#pill-" + k, { opacity: 0, duration: 0.12, ease: "power2.in" }, t[1] - 0.12);
+      });
+
+      // B-roll cutaways: punch in, scene-specific motion, quick fade out.
+      const SCENES = {
+        trash(p, s, d) {
+          tl.fromTo("#" + p + "-lid", { rotation: 0 }, { rotation: -70, duration: 0.18, ease: "power2.out" }, s + 0.05);
+          const dx = [-380, 360, -160, 260, -40];
+          for (let i = 0; i < 5; i++) {
+            tl.fromTo("#" + p + "-c" + i, { x: dx[i], y: -560, rotation: dx[i] / 6, opacity: 1 },
+              { x: 0, y: 120, rotation: (i % 2 ? 1 : -1) * 25, duration: 0.42, ease: "power2.in" }, s + 0.12 + i * 0.12);
+            tl.to("#" + p + "-c" + i, { opacity: 0, duration: 0.04 }, s + 0.54 + i * 0.12);
+          }
+          tl.to("#" + p + "-lid", { rotation: 0, duration: 0.12, ease: "bounce.out" }, s + d - 0.45);
+          tl.fromTo("#" + p + "-x", { opacity: 0, scale: 2.2 }, { opacity: 1, scale: 1, duration: 0.18, ease: "power4.in" }, s + d - 0.4);
+        },
+        house(p, s, d) {
+          tl.fromTo("#" + p + "-h", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: "power3.out" }, s + 0.05);
+          tl.fromTo("#" + p + "-roof", { scaleY: 0 }, { scaleY: 1, duration: 0.35, ease: "back.out(1.8)" }, s + 0.3);
+          tl.fromTo("#" + p + "-sun", { scale: 0.6 }, { scale: 1, duration: d, ease: "sine.out" }, s);
+          tl.fromTo("#" + p + "-ok", { opacity: 0, scale: 0, rotation: -40 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.3, ease: "back.out(3)" }, s + 0.75);
+        },
+        phone(p, s, d) {
+          tl.fromTo("#" + p + "-ph", { rotation: -6 }, { rotation: 6, duration: 0.06, ease: "none", yoyo: true, repeat: 9 }, s + 0.1);
+          tl.set("#" + p + "-ph", { rotation: 0 }, s + 0.7);
+          for (let i = 0; i < 3; i++) {
+            tl.fromTo("#" + p + "-r" + i, { opacity: 0.9, scale: 0.6 }, { opacity: 0, scale: 1.9, duration: 0.7, ease: "power2.out" }, s + 0.1 + i * 0.3);
+          }
+          tl.fromTo("#" + p + "-ans", { scale: 1 }, { scale: 1.35, duration: 0.15, yoyo: true, repeat: 3, ease: "sine.inOut" }, s + 0.6);
+        },
+        calendar(p, s, d) {
+          tl.fromTo("#" + p + "-cal", { y: 60, rotation: -3 }, { y: 0, rotation: 0, duration: 0.3, ease: "power3.out" }, s);
+          [1, 3, 6, 8, 10, 12, 15, 17, 19].forEach(function (c, i) {
+            tl.fromTo("#" + p + "-k" + c, { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.18, ease: "back.out(3)" }, s + 0.25 + i * 0.13);
+          });
+        },
+        hands(p, s, d) {
+          tl.fromTo("#" + p + "-p1", { x: -380 }, { x: 0, duration: 0.35, ease: "power3.out" }, s);
+          tl.fromTo("#" + p + "-p2", { x: 380 }, { x: 0, duration: 0.35, ease: "power3.out" }, s);
+          tl.fromTo("#" + p + "-hs", { opacity: 0, scale: 0.2 }, { opacity: 1, scale: 1, duration: 0.28, ease: "back.out(3)" }, s + 0.3);
+          tl.fromTo("#" + p + "-bu", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1.2, duration: 0.4, ease: "power2.out" }, s + 0.3);
+        },
+      };
+      DATA.broll.forEach(function (b) {
+        const [k, s, e] = b;
+        const p = "br-" + k;
+        tl.fromTo("#brin-" + k, { opacity: 0, scale: 1.18 }, { opacity: 1, scale: 1, duration: 0.18, ease: "power3.out" }, s);
+        tl.fromTo("#" + p + "-lb", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.22, ease: "back.out(2)" }, s + 0.12);
+        SCENES[k.replace(/2$/, "")](p, s, e - s);
+        tl.to("#brin-" + k, { opacity: 0, duration: 0.1, ease: "power2.in" }, e - 0.1);
+      });
+
+      // Money flying on "only pay per estimate".
+      for (let i = 0; i < 7; i++) {
+        const side = Math.sign(i - 3); // bills fan outward so they never cross
+        tl.fromTo("#cash-" + i, { opacity: 1, y: 0, x: 0, rotation: side * 15 },
+          { y: -820 - (i % 3) * 90, x: side * 60, rotation: side * 35, duration: 1.1, ease: "power2.out" }, DATA.money + (i % 3) * 0.05);
       }
 
-      // End-card call to action.
-      tl.fromTo("#cta-box", { opacity: 0, y: 80, scale: 0.8 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(2)" }, {{CTA_START}});
-      tl.to("#cta-box", { scale: 1.05, duration: 0.4, ease: "sine.inOut", yoyo: true, repeat: 5 }, {{CTA_START}} + 0.4);
+      // End-card CTA in the bottom bar.
+      tl.fromTo("#cta-box", { opacity: 0, y: 60, scale: 0.8 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(2)" }, DATA.cta);
+      tl.to("#cta-box", { scale: 1.05, duration: 0.4, ease: "sine.inOut", yoyo: true, repeat: 5 }, DATA.cta + 0.4);
 
       window.__timelines["main"] = tl;
     </script>
