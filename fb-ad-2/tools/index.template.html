@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Roofing Appointments Facebook Ad</title>
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "Montserrat";
+        font-weight: 900;
+        src: url("vendor/montserrat-latin-900-normal.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "Montserrat";
+        font-weight: 800;
+        src: url("vendor/montserrat-latin-800-normal.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "Noto Color Emoji";
+        src: url("vendor/NotoColorEmoji.ttf") format("truetype");
+      }
+      body {
+        margin: 0;
+        background: #000;
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #000;
+        font-family: "Montserrat", "Noto Color Emoji", sans-serif;
+        font-weight: 900;
+        color: #fff;
+      }
+      .yel { color: #ffd60a; }
+      .grn { color: #22e06b; }
+      .red { color: #ff2b2b; }
+      .emo { font-family: "Noto Color Emoji", sans-serif; }
+
+      /* Native-size picture box: the original letterbox position (y 448-1472). */
+      #box {
+        position: absolute;
+        left: 0;
+        top: 448px;
+        width: 1080px;
+        height: 1024px;
+        overflow: hidden;
+      }
+      #cam {
+        position: absolute;
+        inset: 0;
+        transform-origin: 50% 40%;
+      }
+      #aroll {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1080px;
+        height: 1024px;
+      }
+
+      /* Top bar: section headline. */
+      .head {
+        position: absolute;
+        left: 20px;
+        right: 20px;
+        top: 24px;
+        height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .head-in {
+        display: block;
+        line-height: 1.04;
+        text-align: center;
+        letter-spacing: -1px;
+      }
+      .ln { display: block; white-space: nowrap; }
+
+      /* Bottom bar: captions, then the CTA under them. */
+      #captions {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 1488px;
+        height: 240px;
+      }
+      .cg {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        gap: 0 54px;
+        padding: 0 50px;
+        opacity: 0;
+      }
+      .w {
+        display: inline-block;
+        font-size: inherit;
+        line-height: 1.1;
+        color: #fff;
+        -webkit-text-stroke: 16px #000;
+        paint-order: stroke fill;
+        text-shadow: 0 8px 0 #000;
+        opacity: 0.55;
+      }
+      #cta {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 26px;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #cta-box {
+        display: block;
+        padding: 24px 44px 20px;
+        border-radius: 24px;
+        background: #e3121e;
+        font-size: 64px;
+        text-align: center;
+        white-space: nowrap;
+        box-shadow: 0 10px 0 #7a0000;
+      }
+
+      /* B-roll over the picture box. */
+      .broll {
+        position: absolute;
+        left: 0;
+        top: 448px;
+        width: 1080px;
+        height: 1024px;
+        overflow: hidden;
+      }
+      .br-in, .bg, .scrim {
+        position: absolute;
+        inset: 0;
+      }
+      .scrim { background: rgba(0, 0, 0, 0.55); }
+      .label {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 50px;
+        text-align: center;
+        font-size: 68px;
+        -webkit-text-stroke: 12px #000;
+        paint-order: stroke fill;
+      }
+      /* Overlay card (door / lead site / money counters) floating over the dimmed picture. */
+      .card {
+        position: absolute;
+        left: 110px;
+        top: 130px;
+        width: 860px;
+        height: 760px;
+        border-radius: 36px;
+        overflow: hidden;
+        border: 8px solid #000;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+        box-sizing: border-box;
+      }
+      .card .label { bottom: 36px; font-size: 62px; }
+      .bigx {
+        position: absolute;
+        left: 130px;
+        top: 60px;
+        width: 600px;
+        height: 560px;
+        font-size: 600px;
+        line-height: 560px;
+        text-align: center;
+        color: #ff2b2b;
+        -webkit-text-stroke: 18px #000;
+        paint-order: stroke fill;
+        opacity: 0;
+      }
+      .door {
+        position: absolute;
+        left: 280px;
+        top: 70px;
+        width: 290px;
+        height: 520px;
+        background: linear-gradient(90deg, #92400e, #b45309 50%, #78350f);
+        border: 12px solid #451a03;
+        border-bottom: none;
+        border-radius: 12px 12px 0 0;
+      }
+      .panel {
+        position: absolute;
+        left: 40px;
+        width: 210px;
+        height: 180px;
+        border: 8px solid rgba(0, 0, 0, 0.25);
+        box-sizing: border-box;
+      }
+      .knob {
+        position: absolute;
+        right: 26px;
+        top: 270px;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: #facc15;
+      }
+      .browser {
+        position: absolute;
+        left: 70px;
+        top: 50px;
+        width: 700px;
+        height: 520px;
+        border-radius: 20px;
+        background: #fff;
+        overflow: hidden;
+        color: #111;
+      }
+      .bar {
+        height: 56px;
+        background: #d1d5db;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0 18px;
+      }
+      .bar i { display: block; width: 18px; height: 18px; border-radius: 50%; background: #9ca3af; }
+      .bar span {
+        margin-left: 14px;
+        flex: 1;
+        height: 34px;
+        border-radius: 17px;
+        background: #fff;
+        font-size: 20px;
+        font-weight: 800;
+        line-height: 34px;
+        padding-left: 16px;
+        color: #6b7280;
+      }
+      .site { padding: 22px 30px; }
+      .logo { font-size: 46px; color: #0f766e; margin-bottom: 14px; }
+      .logo b { color: #f97316; }
+      .row { display: flex; align-items: center; gap: 16px; height: 62px; border-bottom: 2px solid #e5e7eb; }
+      .row i { display: block; width: 42px; height: 42px; border-radius: 8px; background: #cbd5e1; }
+      .row span { display: block; flex: 1; height: 16px; border-radius: 8px; background: #e2e8f0; }
+      .row em { font-style: normal; font-size: 26px; color: #f59e0b; }
+      .shared {
+        margin-top: 16px;
+        display: inline-block;
+        padding: 6px 16px;
+        border-radius: 10px;
+        background: #fee2e2;
+        color: #b91c1c;
+        font-size: 26px;
+      }
+      .money-card {
+        background: radial-gradient(circle at 50% 35%, #14532d, #052e16);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .ctop { font-size: 52px; color: #bbf7d0; }
+      .num {
+        margin: 18px 0;
+        font-size: 150px;
+        line-height: 1;
+        color: #ffd60a;
+        -webkit-text-stroke: 10px #000;
+        paint-order: stroke fill;
+        font-variant-numeric: tabular-nums;
+      }
+      .csub { font-size: 56px; }
+      /* calendars */
+      .cal {
+        position: absolute;
+        left: 80px;
+        top: 70px;
+        width: 920px;
+        height: 760px;
+        border-radius: 30px;
+        background: #fff;
+        overflow: hidden;
+        color: #111;
+      }
+      .calhd {
+        height: 100px;
+        background: #e3121e;
+        color: #fff;
+        font-size: 50px;
+        line-height: 100px;
+        text-align: center;
+      }
+      .days {
+        display: flex;
+        height: 56px;
+        font-size: 26px;
+        color: #6b7280;
+        align-items: center;
+      }
+      .days span { flex: 1; text-align: center; }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        height: 604px;
+        border-top: 2px solid #e5e7eb;
+      }
+      .cell {
+        position: relative;
+        border-right: 2px solid #e5e7eb;
+        border-bottom: 2px solid #e5e7eb;
+      }
+      .cell b {
+        position: absolute;
+        left: 12px;
+        top: 8px;
+        font-size: 24px;
+        color: #9ca3af;
+      }
+      .chip {
+        position: absolute;
+        left: 12px;
+        right: 12px;
+        bottom: 16px;
+        height: 64px;
+        border-radius: 12px;
+        background: #16a34a;
+        color: #fff;
+        font-size: 26px;
+        line-height: 64px;
+        text-align: center;
+        opacity: 0;
+      }
+      .chip.full { background: #dc2626; }
+      /* checklist */
+      .cltitle {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 70px;
+        text-align: center;
+        font-size: 76px;
+      }
+      .list {
+        position: absolute;
+        left: 110px;
+        top: 220px;
+        width: 860px;
+      }
+      .item {
+        display: flex;
+        align-items: center;
+        gap: 34px;
+        height: 132px;
+        font-size: 60px;
+        opacity: 0;
+      }
+      .box {
+        display: block;
+        width: 92px;
+        height: 92px;
+        border-radius: 18px;
+        background: #22c55e;
+        color: #fff;
+        font-size: 70px;
+        line-height: 92px;
+        text-align: center;
+        flex: none;
+      }
+      /* house */
+      .sun {
+        position: absolute;
+        right: 120px;
+        top: 80px;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: #ffd60a;
+        box-shadow: 0 0 60px #ffe680;
+      }
+      .lawn {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 280px;
+        background: linear-gradient(#4ade80, #16a34a);
+      }
+      .tree {
+        position: absolute;
+        top: 520px;
+        width: 130px;
+        height: 240px;
+        border-radius: 65px 65px 20px 20px;
+        background: #15803d;
+      }
+      .house {
+        position: absolute;
+        left: 270px;
+        top: 250px;
+        width: 540px;
+        height: 500px;
+      }
+      .roof {
+        position: absolute;
+        left: -30px;
+        top: 0;
+        width: 600px;
+        height: 210px;
+        background: linear-gradient(#7c2d12, #431407);
+        clip-path: polygon(50% 0, 100% 100%, 0 100%);
+        transform-origin: 50% 100%;
+      }
+      .walls {
+        position: absolute;
+        left: 0;
+        top: 210px;
+        width: 540px;
+        height: 290px;
+        background: #fdf0d5;
+      }
+      .win {
+        position: absolute;
+        top: 50px;
+        width: 110px;
+        height: 100px;
+        background: #7dd3fc;
+        border: 8px solid #fff;
+      }
+      .hdoor {
+        position: absolute;
+        left: 215px;
+        bottom: 0;
+        width: 110px;
+        height: 170px;
+        background: #92400e;
+        border-radius: 10px 10px 0 0;
+      }
+      .check {
+        position: absolute;
+        left: 700px;
+        top: 170px;
+        width: 190px;
+        height: 190px;
+        border-radius: 50%;
+        background: #16a34a;
+        border: 10px solid #fff;
+        font-size: 130px;
+        line-height: 190px;
+        text-align: center;
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-width="1080"
+      data-height="1920"
+      data-duration="{{DUR}}"
+    >
+      <div id="box">
+        <div id="cam">
+          <video
+            id="aroll"
+            class="clip"
+            src="assets/cut.mp4"
+            playsinline
+            data-has-audio="true"
+            data-start="0"
+            data-duration="{{DUR}}"
+            data-track-index="0"
+            data-volume="1"
+          ></video>
+        </div>
+      </div>
+{{BROLL}}
+{{HEADS}}
+      <div id="captions" class="clip" data-start="0" data-duration="{{DUR}}" data-track-index="6">
+{{CAPTIONS}}
+      </div>
+      <div id="cta" class="clip" data-start="{{CTA_START}}" data-duration="{{CTA_DUR}}" data-track-index="7">
+        <span id="cta-box">CLICK LEARN MORE <span class="emo">👇</span></span>
+      </div>
+    </div>
+    <audio id="music" src="assets/music.wav" data-start="0" data-duration="{{DUR}}" data-track-index="1" data-volume="0.14"></audio>
+{{SFX}}
+    <script>
+      const DATA = {{DATA}};
+      const tl = gsap.timeline({ paused: true });
+
+      // Word-by-word captions: group pops in, each word lights up as spoken, keywords turn yellow.
+      DATA.groups.forEach(function (g, gi) {
+        const el = document.getElementById("cg-" + gi);
+        tl.fromTo(el, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.12, ease: "back.out(2)" }, g.start);
+        g.words.forEach(function (wi) {
+          const w = DATA.words[wi];
+          const node = document.getElementById("w" + wi);
+          const lit = { opacity: 1, scale: 1.06, duration: 0.08, ease: "power2.out" };
+          if (node.classList.contains("hl")) lit.color = "#ffd60a";
+          tl.fromTo(node, { opacity: 0.55, scale: 1, color: "#ffffff" }, lit, w.start);
+          tl.to(node, { scale: 1, duration: 0.12, ease: "power2.out" }, Math.max(w.start + 0.08, w.end));
+        });
+        tl.to(el, { opacity: 0, duration: 0.06, ease: "power2.in" }, g.end - 0.06);
+        tl.set(el, { opacity: 0, visibility: "hidden" }, g.end);
+      });
+
+      // Punch-in zooms inside the picture box (the black bars stay put).
+      DATA.zooms.forEach(function (z, zi) {
+        const next = DATA.zooms[zi + 1];
+        tl.fromTo("#cam", { scale: 1 }, { scale: z[2], duration: 0.16, ease: "power3.out", immediateRender: false }, z[0]);
+        if (next && next[0] - z[1] < 0.4) tl.set("#cam", { scale: 1 }, next[0] - 0.001);
+        else tl.to("#cam", { scale: 1, duration: 0.25, ease: "power2.inOut" }, Math.min(z[1] + 0.05, DATA.dur - 0.25));
+      });
+
+      // Section headlines in the top bar; the opening one is red and pulses.
+      DATA.heads.forEach(function (h, k) {
+        tl.fromTo("#headin-" + k, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.2)" }, h[0]);
+        if (k === 0) {
+          const n = Math.max(1, Math.floor((h[1] - h[0] - 0.35) / 0.5));
+          tl.to("#headin-0", { scale: 1.07, duration: 0.25, ease: "sine.inOut", yoyo: true, repeat: n * 2 - 1 }, h[0] + 0.3);
+        }
+      });
+
+      const fmt = (v) => "$" + Math.round(v).toLocaleString("en-US");
+      const SCENES = {
+        door(p, s, d) {
+          tl.fromTo("#" + p + "-x", { opacity: 0, scale: 2.4, rotation: -20 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.16, ease: "power4.in" }, DATA.dead[0] - 0.12);
+        },
+        leadsite(p, s, d) {
+          tl.fromTo("#" + p + "-x", { opacity: 0, scale: 2.4, rotation: 20 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.16, ease: "power4.in" }, DATA.dead[1] - 0.12);
+        },
+        calendar(p, s, d) {
+          tl.fromTo("#" + p + "-cal", { y: 60, rotation: -3 }, { y: 0, rotation: 0, duration: 0.3, ease: "power3.out" }, s);
+          [1, 3, 6, 8, 10, 12, 15, 17, 19].forEach(function (c, i) {
+            tl.fromTo("#" + p + "-k" + c, { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.16, ease: "back.out(3)" }, s + 0.2 + i * 0.11);
+          });
+        },
+        booked(p, s, d) {
+          tl.fromTo("#" + p + "-cal", { y: 60, rotation: 3 }, { y: 0, rotation: 0, duration: 0.3, ease: "power3.out" }, s);
+          for (let c = 0; c < 20; c++) {
+            tl.fromTo("#" + p + "-k" + c, { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.14, ease: "back.out(3)" }, s + 0.15 + c * 0.045);
+          }
+        },
+        checklist(p, s, d) {
+          tl.fromTo("#" + p + "-tt", { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.25, ease: "back.out(2)" }, s);
+          DATA.checks.forEach(function (t, n) {
+            tl.fromTo("#" + p + "-i" + n, { opacity: 0, x: -80 }, { opacity: 1, x: 0, duration: 0.2, ease: "power3.out" }, t);
+            tl.fromTo("#" + p + "-b" + n, { scale: 0 }, { scale: 1, duration: 0.22, ease: "back.out(3)" }, t + 0.05);
+          });
+        },
+        house(p, s, d) {
+          tl.fromTo("#" + p + "-h", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.25, ease: "power3.out" }, s + 0.03);
+          tl.fromTo("#" + p + "-roof", { scaleY: 0 }, { scaleY: 1, duration: 0.3, ease: "back.out(1.8)" }, s + 0.2);
+          tl.fromTo("#" + p + "-sun", { scale: 0.6 }, { scale: 1, duration: d, ease: "sine.out" }, s);
+          tl.fromTo("#" + p + "-ok", { opacity: 0, scale: 0, rotation: -40 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.28, ease: "back.out(3)" }, s + 0.45);
+        },
+        count(p, s, d, k) {
+          const [target, done] = DATA.counts[k];
+          const num = document.getElementById(p + "-n");
+          const state = { v: 0 };
+          tl.fromTo(state, { v: 0 }, { v: target, duration: done - s - 0.05, ease: "power2.out",
+            onUpdate: function () { num.textContent = fmt(state.v); } }, s + 0.05);
+          tl.fromTo("#" + p + "-n", { scale: 1 }, { scale: 1.15, duration: 0.12, yoyo: true, repeat: 1, ease: "power2.out" }, done);
+          tl.fromTo("#" + p + "-sub", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.25, ease: "back.out(2)" }, s + 0.35);
+        },
+      };
+      DATA.broll.forEach(function (b) {
+        const [k, s, e, overlay] = b;
+        const p = "br-" + k;
+        if (overlay) {
+          tl.fromTo("#brin-" + k, { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "power2.out" }, s);
+          tl.fromTo("#" + p + "-card", { scale: 0.6, y: 80 }, { scale: 1, y: 0, duration: 0.25, ease: "back.out(1.8)" }, s);
+        } else {
+          tl.fromTo("#brin-" + k, { opacity: 0, scale: 1.18 }, { opacity: 1, scale: 1, duration: 0.18, ease: "power3.out" }, s);
+        }
+        const lb = document.getElementById(p + "-lb");
+        if (lb) tl.fromTo(lb, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.22, ease: "back.out(2)" }, s + 0.1);
+        const name = k.startsWith("count") ? "count" : k;
+        SCENES[name](p, s, e - s, k);
+        tl.to("#brin-" + k, { opacity: 0, duration: 0.1, ease: "power2.in" }, e - 0.1);
+      });
+
+      // Red pulsing CTA in the bottom bar.
+      tl.fromTo("#cta-box", { opacity: 0, y: 60, scale: 0.8 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(2)" }, DATA.cta);
+      tl.to("#cta-box", { scale: 1.07, duration: 0.3, ease: "sine.inOut", yoyo: true, repeat: 3 }, DATA.cta + 0.4);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

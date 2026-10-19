@@ -1,0 +1,710 @@
+[
+  {
+    "text": "roofing",
+    "start": 0.11,
+    "end": 0.47,
+    "id": "w0"
+  },
+  {
+    "text": "companies",
+    "start": 0.47,
+    "end": 1.08,
+    "id": "w1"
+  },
+  {
+    "text": "door",
+    "start": 1.11,
+    "end": 1.33,
+    "id": "w2"
+  },
+  {
+    "text": "knocking",
+    "start": 1.33,
+    "end": 1.84,
+    "id": "w3"
+  },
+  {
+    "text": "is",
+    "start": 1.84,
+    "end": 1.96,
+    "id": "w4"
+  },
+  {
+    "text": "dead",
+    "start": 1.96,
+    "end": 2.24,
+    "id": "w5"
+  },
+  {
+    "text": "angie",
+    "start": 2.24,
+    "end": 2.7,
+    "id": "w6"
+  },
+  {
+    "text": "is",
+    "start": 2.7,
+    "end": 2.87,
+    "id": "w7"
+  },
+  {
+    "text": "dead",
+    "start": 2.87,
+    "end": 3.27,
+    "id": "w8"
+  },
+  {
+    "text": "we",
+    "start": 3.4,
+    "end": 3.44,
+    "id": "w9"
+  },
+  {
+    "text": "have",
+    "start": 3.44,
+    "end": 3.66,
+    "id": "w10"
+  },
+  {
+    "text": "built",
+    "start": 3.66,
+    "end": 3.93,
+    "id": "w11"
+  },
+  {
+    "text": "a",
+    "start": 3.93,
+    "end": 3.98,
+    "id": "w12"
+  },
+  {
+    "text": "system",
+    "start": 3.98,
+    "end": 4.32,
+    "id": "w13"
+  },
+  {
+    "text": "that",
+    "start": 4.32,
+    "end": 4.48,
+    "id": "w14"
+  },
+  {
+    "text": "puts",
+    "start": 4.48,
+    "end": 4.8,
+    "id": "w15"
+  },
+  {
+    "text": "three",
+    "start": 4.8,
+    "end": 5.04,
+    "id": "w16"
+  },
+  {
+    "text": "to",
+    "start": 5.04,
+    "end": 5.28,
+    "id": "w17"
+  },
+  {
+    "text": "six",
+    "start": 5.28,
+    "end": 5.62,
+    "id": "w18"
+  },
+  {
+    "text": "qualified",
+    "start": 5.79,
+    "end": 6.27,
+    "id": "w19"
+  },
+  {
+    "text": "roofing",
+    "start": 6.27,
+    "end": 6.72,
+    "id": "w20"
+  },
+  {
+    "text": "appointments",
+    "start": 6.72,
+    "end": 7.51,
+    "id": "w21"
+  },
+  {
+    "text": "on",
+    "start": 7.51,
+    "end": 7.64,
+    "id": "w22"
+  },
+  {
+    "text": "your",
+    "start": 7.64,
+    "end": 7.9,
+    "id": "w23"
+  },
+  {
+    "text": "sales",
+    "start": 7.9,
+    "end": 8.23,
+    "id": "w24"
+  },
+  {
+    "text": "reps",
+    "start": 8.23,
+    "end": 8.49,
+    "id": "w25"
+  },
+  {
+    "text": "calendars",
+    "start": 8.49,
+    "end": 9.07,
+    "id": "w26"
+  },
+  {
+    "text": "every",
+    "start": 9.08,
+    "end": 9.35,
+    "id": "w27"
+  },
+  {
+    "text": "single",
+    "start": 9.42,
+    "end": 9.81,
+    "id": "w28"
+  },
+  {
+    "text": "day",
+    "start": 9.81,
+    "end": 10.08,
+    "id": "w29"
+  },
+  {
+    "text": "and",
+    "start": 10.08,
+    "end": 10.2,
+    "id": "w30"
+  },
+  {
+    "text": "we",
+    "start": 10.29,
+    "end": 10.38,
+    "id": "w31"
+  },
+  {
+    "text": "handle",
+    "start": 10.43,
+    "end": 10.8,
+    "id": "w32"
+  },
+  {
+    "text": "everything",
+    "start": 10.8,
+    "end": 11.3,
+    "id": "w33"
+  },
+  {
+    "text": "the",
+    "start": 11.47,
+    "end": 11.57,
+    "id": "w34"
+  },
+  {
+    "text": "marketing",
+    "start": 11.57,
+    "end": 12.21,
+    "id": "w35"
+  },
+  {
+    "text": "the",
+    "start": 12.21,
+    "end": 12.42,
+    "id": "w36"
+  },
+  {
+    "text": "ads",
+    "start": 12.42,
+    "end": 12.63,
+    "id": "w37"
+  },
+  {
+    "text": "lead",
+    "start": 12.63,
+    "end": 12.91,
+    "id": "w38"
+  },
+  {
+    "text": "qualification",
+    "start": 12.91,
+    "end": 13.83,
+    "id": "w39"
+  },
+  {
+    "text": "appointment",
+    "start": 13.83,
+    "end": 14.61,
+    "id": "w40"
+  },
+  {
+    "text": "setting",
+    "start": 14.62,
+    "end": 15.03,
+    "id": "w41"
+  },
+  {
+    "text": "and",
+    "start": 15.1,
+    "end": 15.31,
+    "id": "w42"
+  },
+  {
+    "text": "follow-up",
+    "start": 15.31,
+    "end": 15.88,
+    "id": "w43"
+  },
+  {
+    "text": "your",
+    "start": 15.97,
+    "end": 16.21,
+    "id": "w44"
+  },
+  {
+    "text": "team",
+    "start": 16.31,
+    "end": 16.55,
+    "id": "w45"
+  },
+  {
+    "text": "just",
+    "start": 16.56,
+    "end": 16.8,
+    "id": "w46"
+  },
+  {
+    "text": "shows",
+    "start": 16.8,
+    "end": 17.12,
+    "id": "w47"
+  },
+  {
+    "text": "up",
+    "start": 17.13,
+    "end": 17.36,
+    "id": "w48"
+  },
+  {
+    "text": "and",
+    "start": 17.36,
+    "end": 17.43,
+    "id": "w49"
+  },
+  {
+    "text": "closes",
+    "start": 17.63,
+    "end": 17.92,
+    "id": "w50"
+  },
+  {
+    "text": "every",
+    "start": 17.92,
+    "end": 18.19,
+    "id": "w51"
+  },
+  {
+    "text": "appointment",
+    "start": 18.28,
+    "end": 18.99,
+    "id": "w52"
+  },
+  {
+    "text": "is",
+    "start": 18.99,
+    "end": 19.08,
+    "id": "w53"
+  },
+  {
+    "text": "with",
+    "start": 19.12,
+    "end": 19.39,
+    "id": "w54"
+  },
+  {
+    "text": "a",
+    "start": 19.39,
+    "end": 19.45,
+    "id": "w55"
+  },
+  {
+    "text": "qualified",
+    "start": 19.45,
+    "end": 20.05,
+    "id": "w56"
+  },
+  {
+    "text": "homeowner",
+    "start": 20.05,
+    "end": 20.65,
+    "id": "w57"
+  },
+  {
+    "text": "who",
+    "start": 20.65,
+    "end": 20.79,
+    "id": "w58"
+  },
+  {
+    "text": "is",
+    "start": 20.92,
+    "end": 20.98,
+    "id": "w59"
+  },
+  {
+    "text": "ready",
+    "start": 20.98,
+    "end": 21.31,
+    "id": "w60"
+  },
+  {
+    "text": "to",
+    "start": 21.31,
+    "end": 21.44,
+    "id": "w61"
+  },
+  {
+    "text": "buy",
+    "start": 21.44,
+    "end": 21.64,
+    "id": "w62"
+  },
+  {
+    "text": "not",
+    "start": 21.64,
+    "end": 21.84,
+    "id": "w63"
+  },
+  {
+    "text": "just",
+    "start": 21.84,
+    "end": 22.04,
+    "id": "w64"
+  },
+  {
+    "text": "shopping",
+    "start": 22.17,
+    "end": 22.72,
+    "id": "w65"
+  },
+  {
+    "text": "for",
+    "start": 22.83,
+    "end": 22.9,
+    "id": "w66"
+  },
+  {
+    "text": "the",
+    "start": 22.9,
+    "end": 23.08,
+    "id": "w67"
+  },
+  {
+    "text": "cheapest",
+    "start": 23.08,
+    "end": 23.57,
+    "id": "w68"
+  },
+  {
+    "text": "price",
+    "start": 23.57,
+    "end": 23.86,
+    "id": "w69"
+  },
+  {
+    "text": "one",
+    "start": 23.95,
+    "end": 24.05,
+    "id": "w70"
+  },
+  {
+    "text": "of",
+    "start": 24.05,
+    "end": 24.17,
+    "id": "w71"
+  },
+  {
+    "text": "our",
+    "start": 24.17,
+    "end": 24.33,
+    "id": "w72"
+  },
+  {
+    "text": "partners",
+    "start": 24.35,
+    "end": 24.84,
+    "id": "w73"
+  },
+  {
+    "text": "closed",
+    "start": 24.84,
+    "end": 25.2,
+    "id": "w74"
+  },
+  {
+    "text": "seventy",
+    "start": 25.2,
+    "end": 25.61,
+    "id": "w75"
+  },
+  {
+    "text": "thousand",
+    "start": 25.61,
+    "end": 25.99,
+    "id": "w76"
+  },
+  {
+    "text": "dollars",
+    "start": 26.12,
+    "end": 26.53,
+    "id": "w77"
+  },
+  {
+    "text": "in",
+    "start": 26.53,
+    "end": 26.65,
+    "id": "w78"
+  },
+  {
+    "text": "the",
+    "start": 26.65,
+    "end": 26.83,
+    "id": "w79"
+  },
+  {
+    "text": "first",
+    "start": 26.83,
+    "end": 27.2,
+    "id": "w80"
+  },
+  {
+    "text": "seven",
+    "start": 27.2,
+    "end": 27.56,
+    "id": "w81"
+  },
+  {
+    "text": "days",
+    "start": 27.67,
+    "end": 28.08,
+    "id": "w82"
+  },
+  {
+    "text": "another",
+    "start": 28.19,
+    "end": 28.57,
+    "id": "w83"
+  },
+  {
+    "text": "closed",
+    "start": 28.57,
+    "end": 28.97,
+    "id": "w84"
+  },
+  {
+    "text": "over",
+    "start": 29.07,
+    "end": 29.22,
+    "id": "w85"
+  },
+  {
+    "text": "4",
+    "start": 29.31,
+    "end": 29.48,
+    "id": "w86"
+  },
+  {
+    "text": "million",
+    "start": 29.48,
+    "end": 29.94,
+    "id": "w87"
+  },
+  {
+    "text": "dollars",
+    "start": 30.01,
+    "end": 30.34,
+    "id": "w88"
+  },
+  {
+    "text": "in",
+    "start": 30.51,
+    "end": 30.6,
+    "id": "w89"
+  },
+  {
+    "text": "just",
+    "start": 30.6,
+    "end": 30.88,
+    "id": "w90"
+  },
+  {
+    "text": "14",
+    "start": 30.88,
+    "end": 31.3,
+    "id": "w91"
+  },
+  {
+    "text": "months",
+    "start": 31.31,
+    "end": 31.72,
+    "id": "w92"
+  },
+  {
+    "text": "so",
+    "start": 31.72,
+    "end": 31.86,
+    "id": "w93"
+  },
+  {
+    "text": "if",
+    "start": 31.86,
+    "end": 32,
+    "id": "w94"
+  },
+  {
+    "text": "you",
+    "start": 32,
+    "end": 32.21,
+    "id": "w95"
+  },
+  {
+    "text": "want",
+    "start": 32.21,
+    "end": 32.49,
+    "id": "w96"
+  },
+  {
+    "text": "to",
+    "start": 32.49,
+    "end": 32.6,
+    "id": "w97"
+  },
+  {
+    "text": "keep",
+    "start": 32.63,
+    "end": 32.93,
+    "id": "w98"
+  },
+  {
+    "text": "your",
+    "start": 33.03,
+    "end": 33.12,
+    "id": "w99"
+  },
+  {
+    "text": "sales",
+    "start": 33.12,
+    "end": 33.44,
+    "id": "w100"
+  },
+  {
+    "text": "team",
+    "start": 33.44,
+    "end": 33.7,
+    "id": "w101"
+  },
+  {
+    "text": "booked",
+    "start": 33.87,
+    "end": 34.13,
+    "id": "w102"
+  },
+  {
+    "text": "solid",
+    "start": 34.13,
+    "end": 34.43,
+    "id": "w103"
+  },
+  {
+    "text": "with",
+    "start": 34.43,
+    "end": 34.65,
+    "id": "w104"
+  },
+  {
+    "text": "qualified",
+    "start": 34.75,
+    "end": 35.25,
+    "id": "w105"
+  },
+  {
+    "text": "appointments",
+    "start": 35.25,
+    "end": 36,
+    "id": "w106"
+  },
+  {
+    "text": "click",
+    "start": 36,
+    "end": 36.31,
+    "id": "w107"
+  },
+  {
+    "text": "learn",
+    "start": 36.31,
+    "end": 36.62,
+    "id": "w108"
+  },
+  {
+    "text": "more",
+    "start": 36.62,
+    "end": 36.87,
+    "id": "w109"
+  },
+  {
+    "text": "to",
+    "start": 36.87,
+    "end": 36.98,
+    "id": "w110"
+  },
+  {
+    "text": "see",
+    "start": 36.99,
+    "end": 37.17,
+    "id": "w111"
+  },
+  {
+    "text": "if",
+    "start": 37.17,
+    "end": 37.29,
+    "id": "w112"
+  },
+  {
+    "text": "your",
+    "start": 37.29,
+    "end": 37.54,
+    "id": "w113"
+  },
+  {
+    "text": "market",
+    "start": 37.54,
+    "end": 37.91,
+    "id": "w114"
+  },
+  {
+    "text": "is",
+    "start": 37.91,
+    "end": 37.99,
+    "id": "w115"
+  },
+  {
+    "text": "still",
+    "start": 38.04,
+    "end": 38.38,
+    "id": "w116"
+  },
+  {
+    "text": "available",
+    "start": 38.41,
+    "end": 38.8,
+    "id": "w117"
+  }
+]
