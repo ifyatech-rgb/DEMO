@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Roofing Appointments VSL</title>
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Inter"; font-weight: 500; src: url("vendor/inter-latin-500-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 600; src: url("vendor/inter-latin-600-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 700; src: url("vendor/inter-latin-700-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 800; src: url("vendor/inter-latin-800-normal.woff2") format("woff2"); }
+      body { margin: 0; background: #000; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #0b0907; font-family: "Inter", sans-serif; color: #fff; }
+      .y { color: #ffcf3a; }
+
+      /* Talking head */
+      #cam { position: absolute; inset: 0; transform-origin: 50% 38%; }
+      #aroll { position: absolute; inset: 0; width: 1920px; height: 1080px; object-fit: cover; }
+
+      /* B-roll: Ken Burns wrappers are untimed; the <video>/<img> clip inside carries the timing. */
+      .kb, .full { position: absolute; inset: 0; overflow: hidden; }
+      .kb { transform-origin: 50% 50%; }
+      .media { position: absolute; inset: 0; width: 1920px; height: 1080px; object-fit: cover; }
+
+      /* Full-screen cards */
+      .card { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: #050505; }
+      .card.warm { background: radial-gradient(ellipse at 50% 45%, #2a1d10, #0a0705 70%); }
+      .card.glass { background: rgba(10, 8, 6, 0.72); }
+      .stop { text-align: center; font-weight: 800; letter-spacing: -2px; }
+      #stop-a { font-size: 190px; line-height: 1; }
+      #stop-b { margin-top: 18px; font-size: 92px; letter-spacing: 2px; color: #ffcf3a; }
+      .nopay { text-align: center; font-weight: 800; }
+      .np1 { font-size: 104px; letter-spacing: -1px; }
+      .np2 { font-size: 80px; color: rgba(255, 255, 255, 0.5); margin: 4px 0; }
+      .np3 { font-size: 150px; letter-spacing: -2px; color: #ffcf3a; }
+
+      .ov { position: absolute; inset: 0; }
+      /* Price drop */
+      .price { position: absolute; left: 140px; top: 300px; padding: 40px 54px; border-radius: 26px; background: rgba(12, 10, 8, 0.66);
+               backdrop-filter: blur(6px); border: 1px solid rgba(255, 255, 255, 0.14); }
+      .plabel { font-size: 30px; font-weight: 700; letter-spacing: 6px; color: rgba(255, 255, 255, 0.75); }
+      .pval { margin-top: 10px; font-size: 150px; font-weight: 800; letter-spacing: -3px; color: #ff6b4a; font-variant-numeric: tabular-nums; }
+      .pbar { margin-top: 18px; width: 560px; height: 10px; border-radius: 5px; background: rgba(255, 255, 255, 0.15); overflow: hidden; }
+      .pbar i { display: block; width: 560px; height: 10px; background: linear-gradient(90deg, #ffcf3a, #ff6b4a); transform-origin: 0 50%; }
+
+      /* One lead, five competitors */
+      .grid5 { position: absolute; inset: 0; }
+      /* 3-over-2 grid of landscape frames */
+      .cellmedia { position: absolute; overflow: hidden; height: 536px; }
+      #cm0 { left: 0; top: 0; width: 636px; } #cm1 { left: 642px; top: 0; width: 636px; } #cm2 { left: 1284px; top: 0; width: 636px; } #cm2 .media { object-position: 50% 90%; }
+      #cm3 { left: 0; top: 544px; width: 956px; } #cm4 { left: 964px; top: 544px; width: 956px; }
+      .cellmedia .media { width: 100%; height: 100%; }
+      .g5label { position: absolute; left: 0; right: 0; top: 500px; text-align: center; font-size: 60px; font-weight: 800; letter-spacing: 4px;
+                 text-shadow: 0 4px 24px rgba(0, 0, 0, 0.8); z-index: 3; }
+
+      /* Checkmarks */
+      .checks { position: absolute; left: 130px; top: 290px; padding: 44px 56px; border-radius: 26px; background: rgba(12, 10, 8, 0.62);
+                backdrop-filter: blur(6px); border: 1px solid rgba(255, 255, 255, 0.14); }
+      .chk { display: flex; align-items: center; gap: 28px; height: 116px; font-size: 58px; font-weight: 700; letter-spacing: -0.5px; opacity: 0; }
+      .tick { display: block; width: 66px; height: 66px; border-radius: 50%; background: #2fb766 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M5 12.5l4.2 4.2L19 7' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/64% no-repeat; flex: none; }
+
+      /* Counters */
+      .counter { position: absolute; left: 0; right: 0; top: 330px; text-align: center; }
+      .cwho { font-size: 34px; font-weight: 700; letter-spacing: 8px; color: rgba(255, 255, 255, 0.82); }
+      .cval { margin-top: 6px; font-size: 200px; font-weight: 800; letter-spacing: -5px; font-variant-numeric: tabular-nums; color: #fff;
+              text-shadow: 0 8px 50px rgba(0, 0, 0, 0.65); }
+      .clab { font-size: 56px; font-weight: 700; color: #ffcf3a; text-shadow: 0 4px 24px rgba(0, 0, 0, 0.7); }
+
+      /* Map */
+      .mapov { position: absolute; inset: 0; }
+      .dim { position: absolute; inset: 0; background: radial-gradient(circle 300px at 50% 46%, rgba(0, 0, 0, 0) 98%, rgba(6, 5, 4, 0.62) 100%); opacity: 0; }
+      .area { position: absolute; left: 660px; top: 197px; width: 600px; height: 600px; opacity: 0; }
+      .area i { position: absolute; inset: 0; border-radius: 50%; border: 6px solid #ffcf3a; box-shadow: 0 0 40px rgba(255, 207, 58, 0.6), inset 0 0 60px rgba(255, 207, 58, 0.25); }
+      .mlabel { position: absolute; left: 0; right: 0; top: 830px; text-align: center; font-size: 46px; font-weight: 800; letter-spacing: 4px;
+                text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8); }
+
+      /* Step titles + call timer */
+      .steptitle { position: absolute; left: 120px; top: 110px; }
+      .steptitle.right { left: auto; right: 120px; text-align: right; }
+      .stn { font-size: 30px; font-weight: 800; letter-spacing: 10px; color: #ffcf3a; }
+      .stl { margin-top: 8px; font-size: 64px; font-weight: 800; letter-spacing: -1px; text-shadow: 0 4px 28px rgba(0, 0, 0, 0.6); }
+      .timer { position: absolute; right: 120px; top: 120px; display: flex; align-items: center; gap: 22px; padding: 22px 34px; border-radius: 18px;
+               background: rgba(20, 20, 20, 0.72); border: 1px solid rgba(255, 255, 255, 0.16); font-size: 36px; font-weight: 700; }
+      .timer .dot { width: 18px; height: 18px; border-radius: 50%; background: #ff4d4d; }
+      .timer b { font-variant-numeric: tabular-nums; font-size: 40px; }
+
+      /* End card */
+      .endcard { text-align: center; }
+      .eb { font-size: 150px; font-weight: 800; letter-spacing: -3px; }
+      .arrow { margin: 26px auto 0; width: 70px; height: 70px; border-right: 12px solid #ffcf3a; border-bottom: 12px solid #ffcf3a; transform: rotate(45deg); }
+      .es { margin-top: 40px; font-size: 40px; font-weight: 600; color: rgba(255, 255, 255, 0.8); }
+
+      /* Captions: bottom third, 3-5 words, subtle shadow */
+      #captions { position: absolute; left: 0; right: 0; bottom: 92px; height: 120px; }
+      .cg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 200px;
+            font-size: 62px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.12; opacity: 0;
+            text-shadow: 0 2px 3px rgba(0, 0, 0, 0.7), 0 4px 14px rgba(0, 0, 0, 0.55), 0 8px 36px rgba(0, 0, 0, 0.45); }
+      .cg .line { display: block; max-width: 1500px; }
+
+      #capscrim { position: absolute; left: 0; right: 0; bottom: 0; height: 360px; pointer-events: none;
+                  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.32) 45%, rgba(0, 0, 0, 0.6)); }
+
+      /* Film finish: light leak, vignette, grain */
+      #leak { position: absolute; inset: -20%; opacity: 0; pointer-events: none; mix-blend-mode: screen;
+              background: radial-gradient(ellipse 40% 55% at 25% 40%, rgba(255, 150, 60, 0.85), rgba(255, 90, 30, 0.25) 45%, rgba(0, 0, 0, 0) 70%),
+                          radial-gradient(ellipse 30% 40% at 70% 65%, rgba(255, 200, 120, 0.5), rgba(0, 0, 0, 0) 70%); }
+      #vignette { position: absolute; inset: 0; pointer-events: none;
+                  background: radial-gradient(ellipse 75% 70% at 50% 50%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.42) 100%); }
+      #grain { position: absolute; inset: 0; pointer-events: none; opacity: 0.075; mix-blend-mode: overlay;
+               background-image: url("assets/grain.png"); background-size: 1024px 1024px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-width="1920" data-height="1080" data-duration="{{DUR}}">
+      <div id="cam">
+        <video id="aroll" class="clip" src="assets/aroll.mp4" playsinline data-has-audio="true" data-start="0" data-duration="{{A_DUR}}" data-track-index="0" data-volume="1"></video>
+      </div>
+      {{ELEMENTS}}
+      <div id="leak"></div>
+      <div id="vignette"></div>
+      <div id="capscrim"></div>
+      <div id="captions" class="clip" data-start="0" data-duration="{{DUR}}" data-track-index="30">
+        {{CAPTIONS}}
+      </div>
+      <div id="grain"></div>
+    </div>
+    <audio id="score" src="assets/score.wav" data-start="0" data-duration="{{DUR}}" data-track-index="1" data-volume="0.12"></audio>
+    {{AUDIO}}
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      {{JS}}
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

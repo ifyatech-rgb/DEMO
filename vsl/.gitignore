@@ -3,3 +3,9 @@ broll/*.jpg
 assets/
 renders/
 .hyperframes/
+screens/*/vendor/
+screens/*/index.html
+screens/*/.hyperframes/
+screens/socialad/ad.jpg
+broll/photos/
+index.html
