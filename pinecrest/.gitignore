@@ -1,0 +1,8 @@
+assets/
+broll/*.mp4
+broll/photos/
+renders/
+stills/
+.hyperframes/
+index.html
+vendor/NotoColorEmoji.ttf
