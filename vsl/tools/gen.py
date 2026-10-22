@@ -199,8 +199,8 @@ def disp(i):
 el, js = [], []
 def kb_js(sel, kind, t0, t1):
     d = t1 - t0
-    if kind == "in": js.append(f'tl.fromTo("{sel}", {{scale: 1.0}}, {{scale: 1.07, duration: {d:.3f}, ease: "none"}}, {t0});')
-    elif kind == "out": js.append(f'tl.fromTo("{sel}", {{scale: 1.08}}, {{scale: 1.0, duration: {d:.3f}, ease: "none"}}, {t0});')
+    if kind == "in": js.append(f'tl.fromTo("{sel}", {{scale: 1.0}}, {{scale: 1.15, duration: {d:.3f}, ease: "sine.inOut"}}, {t0});')
+    elif kind == "out": js.append(f'tl.fromTo("{sel}", {{scale: 1.16}}, {{scale: 1.0, duration: {d:.3f}, ease: "sine.inOut"}}, {t0});')
     elif kind == "drone": js.append(f'tl.fromTo("{sel}", {{scale: 1.05, xPercent: -2, yPercent: 1.5}}, {{scale: 1.18, xPercent: 2, yPercent: -1.5, duration: {d:.3f}, ease: "none"}}, {t0});')
 def visual(m, sid, t0, t1, track, cls="full"):
     """A video clip (timed <video> in an untimed Ken Burns wrapper) or a photo inside a timed clip."""
@@ -216,7 +216,7 @@ def overlay(sid, t0, t1, inner, track=20, cls="ov"):
     el.append(f'<div class="clip {cls}" id="{sid}" data-start="{t0:.3f}" data-duration="{t1 - t0:.3f}" data-track-index="{track}">{inner}</div>')
 
 sfx = []
-def fx(name, t, vol): sfx.append((name, round(max(0, t), 3), vol))
+def fx(name, t, vol, ms=0.0): sfx.append((name, round(max(0, t), 3), round(min(vol * 2.5, 0.6), 3), ms))  # 2.5x: effects were buried
 for n, s in enumerate(S):
     sid, t0, t1, k = f"s{n:02d}", s["t0"], s["t1"], s["kind"]
     if k in ("v", "p"):
@@ -324,10 +324,21 @@ aroll_runs, last = [], 0.0
 for a, b in broll_windows:
     if a - last > 1.2: aroll_runs.append((last, a))
     last = max(last, b)
+# Every return to camera alternates wide / tight (jump-cut punch), drifts slowly, and longer runs snap in mid-way.
 for k, (a, b) in enumerate(aroll_runs):
     if a <= T_BROKEN < b: continue
-    z = 1.06 if k % 2 else 1.0
-    js.append(f'tl.fromTo("#cam", {{scale: {z}}}, {{scale: {2.06 - z if z > 1 else 1.05}, duration: {b - a:.3f}, ease: "none", immediateRender: false}}, {a:.3f});')
+    base = 1.0 if k % 2 == 0 else 1.17
+    js.append(f'tl.set("#cam", {{scale: {base}}}, {a:.3f});')
+    if a > 0.5: fx("whoosh-short", a - 0.1, 0.08)
+    if b - a > 2.8:
+        mid = round(a + (b - a) * 0.5, 3)
+        js.append(f'tl.fromTo("#cam", {{scale: {base}}}, {{scale: {base + 0.03}, duration: {mid - a:.3f}, ease: "none", immediateRender: false}}, {a:.3f});')
+        js.append(f'tl.fromTo("#cam", {{scale: {base + 0.03}}}, {{scale: {base + 0.14}, duration: 0.22, ease: "power3.out", immediateRender: false}}, {mid:.3f});')
+        js.append(f'tl.fromTo("#cam", {{scale: {base + 0.14}}}, {{scale: {base + 0.16}, duration: {b - mid - 0.22:.3f}, ease: "none", immediateRender: false}}, {mid + 0.22:.3f});')
+        fx("whoosh", mid - 0.12, 0.09)
+    else:
+        js.append(f'tl.fromTo("#cam", {{scale: {base}}}, {{scale: {base + 0.04}, duration: {b - a:.3f}, ease: "none", immediateRender: false}}, {a:.3f});')
+js.append(f'tl.set("#cam", {{scale: 1.0}}, {DUR - 0.01:.3f});')
 
 # Light leaks at section turns.
 js.append('tl.set("#leak", {opacity: 0, xPercent: -20}, 0);')
@@ -339,6 +350,12 @@ frames = int(DUR * 25)
 js.append(f'tl.fromTo("#grain", {{backgroundPosition: "0px 0px"}}, {{backgroundPosition: "{frames * 337 % 1024}px {frames * 211 % 1024}px",'
           f' duration: {DUR}, ease: "steps({frames})"}}, 0);')
 
+# Pops on the yellow keyphrases, risers into the big turns.
+for ix in phrases:
+    fx("pop", words[ix[0]]["start"], 0.1)
+for t in (t_stop, T_BUILT, T_RES):
+    fx("riser", t - 2.6, 0.1, ms=7.4)
+
 cap = []
 for gi, (g, s0, e0) in enumerate(G):
     ws = " ".join(f'<span class="{"y" if i in hl else ""}">{html.escape(disp(i))}</span>' for i in g)
@@ -347,10 +364,12 @@ for gi, (g, s0, e0) in enumerate(G):
     js.append(f'tl.to("#cg{gi}", {{opacity: 0, duration: 0.08}}, {e0 - 0.08:.3f});')
     js.append(f'tl.set("#cg{gi}", {{opacity: 0, visibility: "hidden"}}, {e0:.3f});')
 
-SRC = {"whoosh-short": "sfx-whoosh-short.mp3", "whoosh": "sfx-whoosh.mp3", "impact": "sfx-impact.mp3", "tick": "sfx-tick.mp3", "kaching": "sfx-kaching.wav"}
+SRC = {"whoosh-short": "sfx-whoosh-short.mp3", "whoosh": "sfx-whoosh.mp3", "impact": "sfx-impact.mp3", "tick": "sfx-tick.mp3",
+       "kaching": "sfx-kaching.wav", "pop": "sfx-pop.mp3", "riser": "sfx-riser.mp3"}
 LEN = {k: probe("assets/" + v) for k, v in SRC.items()}
-aud = [f'<audio id="fx{n}" src="assets/{SRC[k]}" data-start="{t:.3f}" data-duration="{min(LEN[k], DUR - t):.3f}" data-track-index="{40 + n}" data-volume="{v}"></audio>'
-       for n, (k, t, v) in enumerate(sorted(sfx, key=lambda x: x[1]))]
+aud = [f'<audio id="fx{n}" src="assets/{SRC[k]}" data-start="{t:.3f}" data-duration="{min(LEN[k] - ms, DUR - t):.3f}"'
+       + (f' data-media-start="{ms}"' if ms else "") + f' data-track-index="{40 + n}" data-volume="{v}"></audio>'
+       for n, (k, t, v, ms) in enumerate(sorted(sfx, key=lambda x: x[1]))]
 
 tpl = open("tools/vsl.template.html").read()
 for k, v in {"{{A_DUR}}": f"{A_DUR}", "{{DUR}}": f"{DUR}", "{{ELEMENTS}}": "\n      ".join(el), "{{CAPTIONS}}": "\n        ".join(cap),
