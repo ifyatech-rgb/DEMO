@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1350" />
+    <title>Roofing Appointments Facebook Ad</title>
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "Montserrat";
+        font-weight: 900;
+        src: url("vendor/montserrat-latin-900-normal.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "Montserrat";
+        font-weight: 800;
+        src: url("vendor/montserrat-latin-800-normal.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "Noto Color Emoji";
+        src: url("vendor/NotoColorEmoji.ttf") format("truetype");
+      }
+      body {
+        margin: 0;
+        background: #000;
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #000;
+        font-family: "Montserrat", "Noto Color Emoji", sans-serif;
+        font-weight: 900;
+        color: #fff;
+      }
+      .yel { color: #ffd60a; }
+      .grn { color: #22e06b; }
+      .red { color: #ff2b2b; }
+      .emo { font-family: "Noto Color Emoji", sans-serif; }
+
+      /* Native-size picture box: the original letterbox position (y 448-1472). */
+      #box {
+        position: absolute;
+        left: 0;
+        top: 448px;
+        width: 1080px;
+        height: 1024px;
+        overflow: hidden;
+      }
+      #cam {
+        position: absolute;
+        inset: 0;
+        transform-origin: 50% 40%;
+      }
+      #aroll {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1080px;
+        height: 1024px;
+      }
+
+      /* Top bar: section headline. */
+      .head {
+        position: absolute;
+        left: 20px;
+        right: 20px;
+        top: 24px;
+        height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .head-in {
+        display: block;
+        line-height: 1.04;
+        text-align: center;
+        letter-spacing: -1px;
+      }
+      .ln { display: block; white-space: nowrap; }
+
+      /* Bottom bar: captions, then the CTA under them. */
+      #captions {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 1488px;
+        height: 240px;
+      }
+      .cg {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        gap: 0 54px;
+        padding: 0 50px;
+        opacity: 0;
+      }
+      .w {
+        display: inline-block;
+        font-size: inherit;
+        line-height: 1.1;
+        color: #fff;
+        -webkit-text-stroke: 16px #000;
+        paint-order: stroke fill;
+        text-shadow: 0 8px 0 #000;
+        opacity: 0.55;
+      }
+      #cta {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 26px;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #cta-box {
+        display: block;
+        padding: 24px 44px 20px;
+        border-radius: 24px;
+        background: #e3121e;
+        font-size: 64px;
+        text-align: center;
+        white-space: nowrap;
+        box-shadow: 0 10px 0 #7a0000;
+      }
+
+      /* B-roll over the picture box. */
+      .broll {
+        position: absolute;
+        left: 0;
+        top: 448px;
+        width: 1080px;
+        height: 1024px;
+        overflow: hidden;
+      }
+      .br-in, .bg, .scrim {
+        position: absolute;
+        inset: 0;
+      }
+      .scrim { background: rgba(0, 0, 0, 0.55); }
+      .label {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 50px;
+        text-align: center;
+        font-size: 68px;
+        -webkit-text-stroke: 12px #000;
+        paint-order: stroke fill;
+      }
+      /* Overlay card (door / lead site / money counters) floating over the dimmed picture. */
+      .card {
+        position: absolute;
+        left: 110px;
+        top: 130px;
+        width: 860px;
+        height: 760px;
+        border-radius: 36px;
+        overflow: hidden;
+        border: 8px solid #000;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+        box-sizing: border-box;
+      }
+      .card .label { bottom: 36px; font-size: 62px; }
+      .bigx {
+        position: absolute;
+        left: 130px;
+        top: 60px;
+        width: 600px;
+        height: 560px;
+        font-size: 600px;
+        line-height: 560px;
+        text-align: center;
+        color: #ff2b2b;
+        -webkit-text-stroke: 18px #000;
+        paint-order: stroke fill;
+        opacity: 0;
+      }
+      .door {
+        position: absolute;
+        left: 280px;
+        top: 70px;
+        width: 290px;
+        height: 520px;
+        background: linear-gradient(90deg, #92400e, #b45309 50%, #78350f);
+        border: 12px solid #451a03;
+        border-bottom: none;
+        border-radius: 12px 12px 0 0;
+      }
+      .panel {
+        position: absolute;
+        left: 40px;
+        width: 210px;
+        height: 180px;
+        border: 8px solid rgba(0, 0, 0, 0.25);
+        box-sizing: border-box;
+      }
+      .knob {
+        position: absolute;
+        right: 26px;
+        top: 270px;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: #facc15;
+      }
+      .browser {
+        position: absolute;
+        left: 70px;
+        top: 50px;
+        width: 700px;
+        height: 520px;
+        border-radius: 20px;
+        background: #fff;
+        overflow: hidden;
+        color: #111;
+      }
+      .bar {
+        height: 56px;
+        background: #d1d5db;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0 18px;
+      }
+      .bar i { display: block; width: 18px; height: 18px; border-radius: 50%; background: #9ca3af; }
+      .bar span {
+        margin-left: 14px;
+        flex: 1;
+        height: 34px;
+        border-radius: 17px;
+        background: #fff;
+        font-size: 20px;
+        font-weight: 800;
+        line-height: 34px;
+        padding-left: 16px;
+        color: #6b7280;
+      }
+      .site { padding: 22px 30px; }
+      .logo { font-size: 46px; color: #0f766e; margin-bottom: 14px; }
+      .logo b { color: #f97316; }
+      .row { display: flex; align-items: center; gap: 16px; height: 62px; border-bottom: 2px solid #e5e7eb; }
+      .row i { display: block; width: 42px; height: 42px; border-radius: 8px; background: #cbd5e1; }
+      .row span { display: block; flex: 1; height: 16px; border-radius: 8px; background: #e2e8f0; }
+      .row em { font-style: normal; font-size: 26px; color: #f59e0b; }
+      .shared {
+        margin-top: 16px;
+        display: inline-block;
+        padding: 6px 16px;
+        border-radius: 10px;
+        background: #fee2e2;
+        color: #b91c1c;
+        font-size: 26px;
+      }
+      .money-card {
+        background: radial-gradient(circle at 50% 35%, #14532d, #052e16);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .ctop { font-size: 52px; color: #bbf7d0; }
+      .num {
+        margin: 18px 0;
+        font-size: 150px;
+        line-height: 1;
+        color: #ffd60a;
+        -webkit-text-stroke: 10px #000;
+        paint-order: stroke fill;
+        font-variant-numeric: tabular-nums;
+      }
+      .csub { font-size: 56px; }
+      /* calendars */
+      .cal {
+        position: absolute;
+        left: 80px;
+        top: 70px;
+        width: 920px;
+        height: 760px;
+        border-radius: 30px;
+        background: #fff;
+        overflow: hidden;
+        color: #111;
+      }
+      .calhd {
+        height: 100px;
+        background: #e3121e;
+        color: #fff;
+        font-size: 50px;
+        line-height: 100px;
+        text-align: center;
+      }
+      .days {
+        display: flex;
+        height: 56px;
+        font-size: 26px;
+        color: #6b7280;
+        align-items: center;
+      }
+      .days span { flex: 1; text-align: center; }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        height: 604px;
+        border-top: 2px solid #e5e7eb;
+      }
+      .cell {
+        position: relative;
+        border-right: 2px solid #e5e7eb;
+        border-bottom: 2px solid #e5e7eb;
+      }
+      .cell b {
+        position: absolute;
+        left: 12px;
+        top: 8px;
+        font-size: 24px;
+        color: #9ca3af;
+      }
+      .chip {
+        position: absolute;
+        left: 12px;
+        right: 12px;
+        bottom: 16px;
+        height: 64px;
+        border-radius: 12px;
+        background: #16a34a;
+        color: #fff;
+        font-size: 26px;
+        line-height: 64px;
+        text-align: center;
+        opacity: 0;
+      }
+      .chip.full { background: #dc2626; }
+      /* checklist */
+      .cltitle {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 70px;
+        text-align: center;
+        font-size: 76px;
+      }
+      .list {
+        position: absolute;
+        left: 110px;
+        top: 220px;
+        width: 860px;
+      }
+      .item {
+        display: flex;
+        align-items: center;
+        gap: 34px;
+        height: 132px;
+        font-size: 60px;
+        opacity: 0;
+      }
+      .box {
+        display: block;
+        width: 92px;
+        height: 92px;
+        border-radius: 18px;
+        background: #22c55e;
+        color: #fff;
+        font-size: 70px;
+        line-height: 92px;
+        text-align: center;
+        flex: none;
+      }
+      /* house */
+      .sun {
+        position: absolute;
+        right: 120px;
+        top: 80px;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: #ffd60a;
+        box-shadow: 0 0 60px #ffe680;
+      }
+      .lawn {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 280px;
+        background: linear-gradient(#4ade80, #16a34a);
+      }
+      .tree {
+        position: absolute;
+        top: 520px;
+        width: 130px;
+        height: 240px;
+        border-radius: 65px 65px 20px 20px;
+        background: #15803d;
+      }
+      .house {
+        position: absolute;
+        left: 270px;
+        top: 250px;
+        width: 540px;
+        height: 500px;
+      }
+      .roof {
+        position: absolute;
+        left: -30px;
+        top: 0;
+        width: 600px;
+        height: 210px;
+        background: linear-gradient(#7c2d12, #431407);
+        clip-path: polygon(50% 0, 100% 100%, 0 100%);
+        transform-origin: 50% 100%;
+      }
+      .walls {
+        position: absolute;
+        left: 0;
+        top: 210px;
+        width: 540px;
+        height: 290px;
+        background: #fdf0d5;
+      }
+      .win {
+        position: absolute;
+        top: 50px;
+        width: 110px;
+        height: 100px;
+        background: #7dd3fc;
+        border: 8px solid #fff;
+      }
+      .hdoor {
+        position: absolute;
+        left: 215px;
+        bottom: 0;
+        width: 110px;
+        height: 170px;
+        background: #92400e;
+        border-radius: 10px 10px 0 0;
+      }
+      .check {
+        position: absolute;
+        left: 700px;
+        top: 170px;
+        width: 190px;
+        height: 190px;
+        border-radius: 50%;
+        background: #16a34a;
+        border: 10px solid #fff;
+        font-size: 130px;
+        line-height: 190px;
+        text-align: center;
+        opacity: 0;
+      }
+
+      /* ---- 4:5 feed layout (derived by tools/make_4x5.py) ---- */
+      #box, .broll, .money { top: 163px; }
+      .head { left: 44px; right: 44px; top: 14px; height: 135px; }
+      .head-in { line-height: 1.04; }
+      .tag { top: 149px; height: 0px; }
+      .pill { font-size: 36px; padding: 10px 26px 8px; }
+      #captions { top: 1187px; height: 163px; }
+      .cg { flex-wrap: nowrap; gap: 0 0.6em; padding: 0 44px; }
+      .w { font-size: inherit; -webkit-text-stroke-width: 0.15em; text-shadow: 0 0.07em 0 #000; }
+      #cta { top: 1001px; bottom: auto; height: 160px; }
+      #cta-box { max-width: 900px; }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-width="1080"
+      data-height="1350"
+      data-duration="39.06"
+    >
+      <div id="box">
+        <div id="cam">
+          <video
+            id="aroll"
+            class="clip"
+            src="assets/cut.mp4"
+            playsinline
+            data-has-audio="true"
+            data-start="0"
+            data-duration="39.06"
+            data-track-index="0"
+            data-volume="1"
+          ></video>
+        </div>
+      </div>
+      <div class="clip broll" id="br-door" data-start="1.110" data-duration="1.110" data-track-index="2"><div class="br-in" id="brin-door"><div class="scrim"></div><div class="card" id="br-door-card" style="background:linear-gradient(#3b2a1d,#1c130c)"><div class="door"><div class="knob"></div><div class="panel" style="top:60px"></div><div class="panel" style="top:300px"></div></div><div class="bigx" id="br-door-x">✕</div><div class="label" id="br-door-lb">DOOR KNOCKING</div></div></div></div>
+      <div class="clip broll" id="br-leadsite" data-start="2.240" data-duration="1.110" data-track-index="2"><div class="br-in" id="brin-leadsite"><div class="scrim"></div><div class="card" id="br-leadsite-card" style="background:linear-gradient(#e5e7eb,#9ca3af)"><div class="browser"><div class="bar"><i></i><i></i><i></i><span>leads-marketplace.com</span></div><div class="site"><div class="logo">LEADS<b>4</b>SALE</div><div class="row"><i></i><span></span><em>★★★☆☆</em></div><div class="row"><i></i><span></span><em>★★★☆☆</em></div><div class="row"><i></i><span></span><em>★★★☆☆</em></div><div class="row"><i></i><span></span><em>★★★☆☆</em></div><div class="shared">SOLD TO 5 ROOFERS</div></div></div><div class="bigx" id="br-leadsite-x">✕</div><div class="label" id="br-leadsite-lb">SHARED LEAD SITES</div></div></div></div>
+      <div class="clip broll" id="br-calendar" data-start="7.510" data-duration="1.540" data-track-index="2"><div class="br-in" id="brin-calendar"><div class="bg" style="background:linear-gradient(135deg,#0f3d2e,#062018)"></div><div class="cal" id="br-calendar-cal"><div class="calhd">SALES REP CALENDAR</div><div class="days"><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span></div><div class="grid"><div class="cell"><b>1</b></div><div class="cell"><b>2</b><div class="chip" id="br-calendar-k1">APPT 9AM</div></div><div class="cell"><b>3</b></div><div class="cell"><b>4</b><div class="chip" id="br-calendar-k3">APPT 11AM</div></div><div class="cell"><b>5</b></div><div class="cell"><b>8</b></div><div class="cell"><b>9</b><div class="chip" id="br-calendar-k6">APPT 9AM</div></div><div class="cell"><b>10</b></div><div class="cell"><b>11</b><div class="chip" id="br-calendar-k8">APPT 11AM</div></div><div class="cell"><b>12</b></div><div class="cell"><b>15</b><div class="chip" id="br-calendar-k10">APPT 8AM</div></div><div class="cell"><b>16</b></div><div class="cell"><b>17</b><div class="chip" id="br-calendar-k12">APPT 10AM</div></div><div class="cell"><b>18</b></div><div class="cell"><b>19</b></div><div class="cell"><b>22</b><div class="chip" id="br-calendar-k15">APPT 8AM</div></div><div class="cell"><b>23</b></div><div class="cell"><b>24</b><div class="chip" id="br-calendar-k17">APPT 10AM</div></div><div class="cell"><b>25</b></div><div class="cell"><b>26</b><div class="chip" id="br-calendar-k19">APPT 12AM</div></div></div></div><div class="label" id="br-calendar-lb">ON YOUR REPS' <span class="grn">CALENDARS</span></div></div></div>
+      <div class="clip broll" id="br-checklist" data-start="11.470" data-duration="4.440" data-track-index="2"><div class="br-in" id="brin-checklist"><div class="bg" style="background:linear-gradient(160deg,#1e3a8a,#0b1437)"></div><div class="cltitle" id="br-checklist-tt">WE HANDLE <span class="yel">EVERYTHING</span></div><div class="list"><div class="item" id="br-checklist-i0"><span class="box" id="br-checklist-b0">✓</span>MARKETING</div><div class="item" id="br-checklist-i1"><span class="box" id="br-checklist-b1">✓</span>ADS</div><div class="item" id="br-checklist-i2"><span class="box" id="br-checklist-b2">✓</span>LEAD QUALIFICATION</div><div class="item" id="br-checklist-i3"><span class="box" id="br-checklist-b3">✓</span>APPOINTMENT SETTING</div><div class="item" id="br-checklist-i4"><span class="box" id="br-checklist-b4">✓</span>FOLLOW-UP</div></div></div></div>
+      <div class="clip broll" id="br-house" data-start="20.550" data-duration="1.440" data-track-index="2"><div class="br-in" id="brin-house"><div class="bg" style="background:linear-gradient(#5ab8ff,#bfe6ff 70%)"></div><div class="sun" id="br-house-sun"></div><div class="lawn"></div><div class="tree" style="left:140px"></div><div class="tree" style="left:810px"></div><div class="house" id="br-house-h"><div class="roof" id="br-house-roof"></div><div class="walls"><div class="win" style="left:70px"></div><div class="win" style="right:70px"></div><div class="hdoor"></div></div></div><div class="check" id="br-house-ok">✓</div><div class="label" id="br-house-lb"><span class="grn">READY TO BUY</span></div></div></div>
+      <div class="clip broll" id="br-count70" data-start="25.200" data-duration="2.930" data-track-index="2"><div class="br-in" id="brin-count70"><div class="scrim"></div><div class="card money-card" id="br-count70-card"><div class="ctop">PARTNER CLOSED</div><div class="num" id="br-count70-n" style="font-size:150px">$0</div><div class="csub" id="br-count70-sub">IN THE FIRST 7 DAYS</div></div></div></div>
+      <div class="clip broll" id="br-count4m" data-start="29.070" data-duration="2.590" data-track-index="2"><div class="br-in" id="brin-count4m"><div class="scrim"></div><div class="card money-card" id="br-count4m-card"><div class="ctop">PARTNER CLOSED</div><div class="num" id="br-count4m-n" style="font-size:118px">$0</div><div class="csub" id="br-count4m-sub">IN JUST 14 MONTHS</div></div></div></div>
+      <div class="clip broll" id="br-booked" data-start="32.630" data-duration="2.050" data-track-index="2"><div class="br-in" id="brin-booked"><div class="bg" style="background:linear-gradient(135deg,#4c0519,#1a0108)"></div><div class="cal" id="br-booked-cal"><div class="calhd">FULLY BOOKED</div><div class="days"><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span></div><div class="grid"><div class="cell"><b>1</b><div class="chip full" id="br-booked-k0">BOOKED</div></div><div class="cell"><b>2</b><div class="chip full" id="br-booked-k1">BOOKED</div></div><div class="cell"><b>3</b><div class="chip full" id="br-booked-k2">BOOKED</div></div><div class="cell"><b>4</b><div class="chip full" id="br-booked-k3">BOOKED</div></div><div class="cell"><b>5</b><div class="chip full" id="br-booked-k4">BOOKED</div></div><div class="cell"><b>8</b><div class="chip full" id="br-booked-k5">BOOKED</div></div><div class="cell"><b>9</b><div class="chip full" id="br-booked-k6">BOOKED</div></div><div class="cell"><b>10</b><div class="chip full" id="br-booked-k7">BOOKED</div></div><div class="cell"><b>11</b><div class="chip full" id="br-booked-k8">BOOKED</div></div><div class="cell"><b>12</b><div class="chip full" id="br-booked-k9">BOOKED</div></div><div class="cell"><b>15</b><div class="chip full" id="br-booked-k10">BOOKED</div></div><div class="cell"><b>16</b><div class="chip full" id="br-booked-k11">BOOKED</div></div><div class="cell"><b>17</b><div class="chip full" id="br-booked-k12">BOOKED</div></div><div class="cell"><b>18</b><div class="chip full" id="br-booked-k13">BOOKED</div></div><div class="cell"><b>19</b><div class="chip full" id="br-booked-k14">BOOKED</div></div><div class="cell"><b>22</b><div class="chip full" id="br-booked-k15">BOOKED</div></div><div class="cell"><b>23</b><div class="chip full" id="br-booked-k16">BOOKED</div></div><div class="cell"><b>24</b><div class="chip full" id="br-booked-k17">BOOKED</div></div><div class="cell"><b>25</b><div class="chip full" id="br-booked-k18">BOOKED</div></div><div class="cell"><b>26</b><div class="chip full" id="br-booked-k19">BOOKED</div></div></div></div><div class="label" id="br-booked-lb"><span class="yel">BOOKED SOLID</span></div></div></div>
+      <div class="clip head" id="head-0" data-start="0.000" data-duration="1.110" data-track-index="3"><div class="head-in red" id="headin-0" style="font-size:63px"><span class="ln">ATTENTION ROOFING</span><span class="ln">COMPANIES <span class="emo">🚨</span></span></div></div>
+      <div class="clip head" id="head-1" data-start="1.110" data-duration="2.290" data-track-index="3"><div class="head-in " id="headin-1" style="font-size:66px"><span class="ln">OLD WAYS ARE DEAD <span class="emo">❌</span></span></div></div>
+      <div class="clip head" id="head-2" data-start="3.400" data-duration="6.680" data-track-index="3"><div class="head-in " id="headin-2" style="font-size:63px"><span class="ln">3-6 APPOINTMENTS</span><span class="ln">/ DAY <span class="emo">📅</span></span></div></div>
+      <div class="clip head" id="head-3" data-start="10.080" data-duration="13.870" data-track-index="3"><div class="head-in " id="headin-3" style="font-size:63px"><span class="ln">WE DO IT ALL.</span><span class="ln"><span class="yel">YOU CLOSE.</span></span></div></div>
+      <div class="clip head" id="head-4" data-start="23.950" data-duration="7.770" data-track-index="3"><div class="head-in yel" id="headin-4" style="font-size:86px"><span class="ln">REAL RESULTS <span class="emo">💰</span></span></div></div>
+      <div class="clip head" id="head-5" data-start="31.720" data-duration="7.340" data-track-index="3"><div class="head-in " id="headin-5" style="font-size:63px"><span class="ln">IS YOUR MARKET</span><span class="ln">AVAILABLE? <span class="emo">⚠️</span></span></div></div>
+      <div id="captions" class="clip" data-start="0" data-duration="39.06" data-track-index="6">
+        <div class="cg" id="cg-0" style="font-size:70px"><span class="w" id="w0">ROOFING</span><span class="w" id="w1">COMPANIES</span></div>
+        <div class="cg" id="cg-1" style="font-size:91px"><span class="w hl" id="w2">DOOR</span><span class="w hl" id="w3">KNOCKING</span></div>
+        <div class="cg" id="cg-2" style="font-size:96px"><span class="w hl" id="w4">IS</span><span class="w hl" id="w5">DEAD</span></div>
+        <div class="cg" id="cg-3" style="font-size:96px"><span class="w hl" id="w6">ANGI</span><span class="w hl" id="w7">IS</span><span class="w hl" id="w8">DEAD</span></div>
+        <div class="cg" id="cg-4" style="font-size:91px"><span class="w" id="w9">WE</span><span class="w" id="w10">HAVE</span><span class="w" id="w11">BUILT</span></div>
+        <div class="cg" id="cg-5" style="font-size:88px"><span class="w" id="w12">A</span><span class="w" id="w13">SYSTEM</span><span class="w" id="w14">THAT</span></div>
+        <div class="cg" id="cg-6" style="font-size:96px"><span class="w" id="w15">PUTS</span></div>
+        <div class="cg" id="cg-7" style="font-size:96px"><span class="w hl" id="w16">3</span><span class="w hl" id="w17">TO</span><span class="w hl" id="w18">6</span></div>
+        <div class="cg" id="cg-8" style="font-size:40px"><span class="w" id="w19">QUALIFIED</span><span class="w" id="w20">ROOFING</span><span class="w" id="w21">APPOINTMENTS</span></div>
+        <div class="cg" id="cg-9" style="font-size:90px"><span class="w" id="w22">ON</span><span class="w" id="w23">YOUR</span><span class="w" id="w24">SALES</span></div>
+        <div class="cg" id="cg-10" style="font-size:81px"><span class="w" id="w25">REPS</span><span class="w" id="w26">CALENDARS</span></div>
+        <div class="cg" id="cg-11" style="font-size:75px"><span class="w hl" id="w27">EVERY</span><span class="w hl" id="w28">SINGLE</span><span class="w hl" id="w29">DAY</span></div>
+        <div class="cg" id="cg-12" style="font-size:96px"><span class="w" id="w30">AND</span></div>
+        <div class="cg" id="cg-13" style="font-size:58px"><span class="w hl" id="w31">WE</span><span class="w hl" id="w32">HANDLE</span><span class="w hl" id="w33">EVERYTHING</span></div>
+        <div class="cg" id="cg-14" style="font-size:90px"><span class="w" id="w34">THE</span><span class="w" id="w35">MARKETING</span></div>
+        <div class="cg" id="cg-15" style="font-size:96px"><span class="w" id="w36">THE</span><span class="w" id="w37">ADS</span></div>
+        <div class="cg" id="cg-16" style="font-size:69px"><span class="w" id="w38">LEAD</span><span class="w" id="w39">QUALIFICATION</span></div>
+        <div class="cg" id="cg-17" style="font-size:62px"><span class="w" id="w40">APPOINTMENT</span><span class="w" id="w41">SETTING</span></div>
+        <div class="cg" id="cg-18" style="font-size:86px"><span class="w" id="w42">AND</span><span class="w" id="w43">FOLLOW-UP</span></div>
+        <div class="cg" id="cg-19" style="font-size:81px"><span class="w" id="w44">YOUR</span><span class="w" id="w45">TEAM</span><span class="w" id="w46">JUST</span></div>
+        <div class="cg" id="cg-20" style="font-size:96px"><span class="w hl" id="w47">SHOWS</span><span class="w hl" id="w48">UP</span></div>
+        <div class="cg" id="cg-21" style="font-size:96px"><span class="w hl" id="w49">AND</span><span class="w hl" id="w50">CLOSES</span></div>
+        <div class="cg" id="cg-22" style="font-size:59px"><span class="w" id="w51">EVERY</span><span class="w" id="w52">APPOINTMENT</span><span class="w" id="w53">IS</span></div>
+        <div class="cg" id="cg-23" style="font-size:78px"><span class="w" id="w54">WITH</span><span class="w" id="w55">A</span><span class="w" id="w56">QUALIFIED</span></div>
+        <div class="cg" id="cg-24" style="font-size:71px"><span class="w" id="w57">HOMEOWNER</span><span class="w" id="w58">WHO</span><span class="w" id="w59">IS</span></div>
+        <div class="cg" id="cg-25" style="font-size:96px"><span class="w hl" id="w60">READY</span><span class="w hl" id="w61">TO</span><span class="w hl" id="w62">BUY</span></div>
+        <div class="cg" id="cg-26" style="font-size:70px"><span class="w" id="w63">NOT</span><span class="w" id="w64">JUST</span><span class="w" id="w65">SHOPPING</span></div>
+        <div class="cg" id="cg-27" style="font-size:72px"><span class="w" id="w66">FOR</span><span class="w" id="w67">THE</span><span class="w" id="w68">CHEAPEST</span></div>
+        <div class="cg" id="cg-28" style="font-size:96px"><span class="w" id="w69">PRICE</span></div>
+        <div class="cg" id="cg-29" style="font-size:96px"><span class="w" id="w70">ONE</span><span class="w" id="w71">OF</span><span class="w" id="w72">OUR</span></div>
+        <div class="cg" id="cg-30" style="font-size:57px"><span class="w" id="w73">PARTNERS</span><span class="w" id="w74">CLOSED</span><span class="w hl" id="w75">$70K</span></div>
+        <div class="cg" id="cg-31" style="font-size:96px"><span class="w" id="w76">IN</span><span class="w" id="w77">THE</span><span class="w" id="w78">FIRST</span></div>
+        <div class="cg" id="cg-32" style="font-size:96px"><span class="w hl" id="w79">7</span><span class="w hl" id="w80">DAYS</span></div>
+        <div class="cg" id="cg-33" style="font-size:60px"><span class="w" id="w81">ANOTHER</span><span class="w" id="w82">CLOSED</span><span class="w" id="w83">OVER</span></div>
+        <div class="cg" id="cg-34" style="font-size:71px"><span class="w hl" id="w84">$4 MILLION</span><span class="w" id="w85">IN</span><span class="w" id="w86">JUST</span></div>
+        <div class="cg" id="cg-35" style="font-size:96px"><span class="w hl" id="w87">14</span><span class="w hl" id="w88">MONTHS</span></div>
+        <div class="cg" id="cg-36" style="font-size:96px"><span class="w" id="w89">SO</span><span class="w" id="w90">IF</span><span class="w" id="w91">YOU</span></div>
+        <div class="cg" id="cg-37" style="font-size:95px"><span class="w" id="w92">WANT</span><span class="w" id="w93">TO</span><span class="w" id="w94">KEEP</span></div>
+        <div class="cg" id="cg-38" style="font-size:76px"><span class="w" id="w95">YOUR</span><span class="w" id="w96">SALES</span><span class="w" id="w97">TEAM</span></div>
+        <div class="cg" id="cg-39" style="font-size:96px"><span class="w hl" id="w98">BOOKED</span><span class="w hl" id="w99">SOLID</span></div>
+        <div class="cg" id="cg-40" style="font-size:44px"><span class="w" id="w100">WITH</span><span class="w" id="w101">QUALIFIED</span><span class="w" id="w102">APPOINTMENTS</span></div>
+        <div class="cg" id="cg-41" style="font-size:73px"><span class="w" id="w103">CLICK</span><span class="w hl" id="w104">LEARN</span><span class="w hl" id="w105">MORE</span></div>
+        <div class="cg" id="cg-42" style="font-size:96px"><span class="w" id="w106">TO</span><span class="w" id="w107">SEE</span><span class="w" id="w108">IF</span></div>
+        <div class="cg" id="cg-43" style="font-size:84px"><span class="w" id="w109">YOUR</span><span class="w" id="w110">MARKET</span><span class="w" id="w111">IS</span></div>
+        <div class="cg" id="cg-44" style="font-size:81px"><span class="w" id="w112">STILL</span><span class="w" id="w113">AVAILABLE</span></div>
+      </div>
+      <div id="cta" class="clip" data-start="36.000" data-duration="3.060" data-track-index="7">
+        <span id="cta-box">CLICK LEARN MORE <span class="emo">👇</span></span>
+      </div>
+    </div>
+    <audio id="music" src="assets/music.wav" data-start="0" data-duration="39.06" data-track-index="1" data-volume="0.14"></audio>
+    <audio id="sfx-0" src="assets/sfx-siren.wav" data-start="0.000" data-duration="0.900" data-track-index="8" data-volume="0.09"></audio>
+    <audio id="sfx-1" src="assets/sfx-impact.mp3" data-start="0.000" data-duration="2.116" data-track-index="9" data-volume="0.12"></audio>
+    <audio id="sfx-2" src="assets/sfx-whoosh.mp3" data-start="0.990" data-duration="0.575" data-track-index="10" data-volume="0.22"></audio>
+    <audio id="sfx-3" src="assets/sfx-pop.mp3" data-start="1.110" data-duration="0.720" data-track-index="11" data-volume="0.28"></audio>
+    <audio id="sfx-4" src="assets/sfx-buzzer.wav" data-start="1.960" data-duration="0.550" data-track-index="12" data-volume="0.14"></audio>
+    <audio id="sfx-5" src="assets/sfx-whoosh.mp3" data-start="2.120" data-duration="0.575" data-track-index="13" data-volume="0.22"></audio>
+    <audio id="sfx-6" src="assets/sfx-pop.mp3" data-start="2.240" data-duration="0.720" data-track-index="14" data-volume="0.28"></audio>
+    <audio id="sfx-7" src="assets/sfx-buzzer.wav" data-start="2.870" data-duration="0.550" data-track-index="15" data-volume="0.14"></audio>
+    <audio id="sfx-8" src="assets/sfx-whoosh.mp3" data-start="4.680" data-duration="0.575" data-track-index="16" data-volume="0.22"></audio>
+    <audio id="sfx-9" src="assets/sfx-pop.mp3" data-start="4.800" data-duration="0.720" data-track-index="17" data-volume="0.28"></audio>
+    <audio id="sfx-10" src="assets/sfx-whoosh.mp3" data-start="7.390" data-duration="0.575" data-track-index="18" data-volume="0.22"></audio>
+    <audio id="sfx-11" src="assets/sfx-notify.mp3" data-start="7.860" data-duration="2.455" data-track-index="19" data-volume="0.28"></audio>
+    <audio id="sfx-12" src="assets/sfx-whoosh-short.mp3" data-start="8.950" data-duration="0.575" data-track-index="20" data-volume="0.16"></audio>
+    <audio id="sfx-13" src="assets/sfx-whoosh.mp3" data-start="8.960" data-duration="0.575" data-track-index="21" data-volume="0.22"></audio>
+    <audio id="sfx-14" src="assets/sfx-pop.mp3" data-start="9.080" data-duration="0.720" data-track-index="22" data-volume="0.28"></audio>
+    <audio id="sfx-15" src="assets/sfx-pop.mp3" data-start="10.290" data-duration="0.720" data-track-index="23" data-volume="0.28"></audio>
+    <audio id="sfx-16" src="assets/sfx-whoosh.mp3" data-start="11.350" data-duration="0.575" data-track-index="24" data-volume="0.22"></audio>
+    <audio id="sfx-17" src="assets/sfx-pop.mp3" data-start="11.570" data-duration="0.720" data-track-index="25" data-volume="0.28"></audio>
+    <audio id="sfx-18" src="assets/sfx-pop.mp3" data-start="12.210" data-duration="0.720" data-track-index="26" data-volume="0.28"></audio>
+    <audio id="sfx-19" src="assets/sfx-pop.mp3" data-start="12.630" data-duration="0.720" data-track-index="27" data-volume="0.28"></audio>
+    <audio id="sfx-20" src="assets/sfx-pop.mp3" data-start="13.830" data-duration="0.720" data-track-index="28" data-volume="0.28"></audio>
+    <audio id="sfx-21" src="assets/sfx-pop.mp3" data-start="15.310" data-duration="0.720" data-track-index="29" data-volume="0.28"></audio>
+    <audio id="sfx-22" src="assets/sfx-whoosh-short.mp3" data-start="15.810" data-duration="0.575" data-track-index="30" data-volume="0.16"></audio>
+    <audio id="sfx-23" src="assets/sfx-whoosh.mp3" data-start="15.850" data-duration="0.575" data-track-index="31" data-volume="0.22"></audio>
+    <audio id="sfx-24" src="assets/sfx-pop.mp3" data-start="16.800" data-duration="0.720" data-track-index="32" data-volume="0.28"></audio>
+    <audio id="sfx-25" src="assets/sfx-whoosh.mp3" data-start="20.430" data-duration="0.575" data-track-index="33" data-volume="0.22"></audio>
+    <audio id="sfx-26" src="assets/sfx-pop.mp3" data-start="20.980" data-duration="0.720" data-track-index="34" data-volume="0.28"></audio>
+    <audio id="sfx-27" src="assets/sfx-whoosh-short.mp3" data-start="21.890" data-duration="0.575" data-track-index="35" data-volume="0.16"></audio>
+    <audio id="sfx-28" src="assets/sfx-whoosh.mp3" data-start="25.080" data-duration="0.575" data-track-index="36" data-volume="0.22"></audio>
+    <audio id="sfx-29" src="assets/sfx-pop.mp3" data-start="25.200" data-duration="0.720" data-track-index="37" data-volume="0.28"></audio>
+    <audio id="sfx-30" src="assets/sfx-kaching.wav" data-start="26.680" data-duration="1.100" data-track-index="38" data-volume="0.35"></audio>
+    <audio id="sfx-31" src="assets/sfx-pop.mp3" data-start="27.200" data-duration="0.720" data-track-index="39" data-volume="0.28"></audio>
+    <audio id="sfx-32" src="assets/sfx-whoosh.mp3" data-start="28.950" data-duration="0.575" data-track-index="40" data-volume="0.22"></audio>
+    <audio id="sfx-33" src="assets/sfx-pop.mp3" data-start="29.310" data-duration="0.720" data-track-index="41" data-volume="0.28"></audio>
+    <audio id="sfx-34" src="assets/sfx-kaching.wav" data-start="30.490" data-duration="1.100" data-track-index="42" data-volume="0.35"></audio>
+    <audio id="sfx-35" src="assets/sfx-pop.mp3" data-start="30.880" data-duration="0.720" data-track-index="43" data-volume="0.28"></audio>
+    <audio id="sfx-36" src="assets/sfx-whoosh.mp3" data-start="32.510" data-duration="0.575" data-track-index="44" data-volume="0.22"></audio>
+    <audio id="sfx-37" src="assets/sfx-notify.mp3" data-start="33.030" data-duration="2.455" data-track-index="45" data-volume="0.28"></audio>
+    <audio id="sfx-38" src="assets/sfx-pop.mp3" data-start="33.870" data-duration="0.720" data-track-index="46" data-volume="0.28"></audio>
+    <audio id="sfx-39" src="assets/sfx-whoosh-short.mp3" data-start="34.580" data-duration="0.575" data-track-index="47" data-volume="0.16"></audio>
+    <audio id="sfx-40" src="assets/sfx-pop.mp3" data-start="36.310" data-duration="0.720" data-track-index="48" data-volume="0.28"></audio>
+    <script>
+      const DATA = {"groups": [{"words": [0, 1], "start": 0.11, "end": 1.11}, {"words": [2, 3], "start": 1.11, "end": 1.84}, {"words": [4, 5], "start": 1.84, "end": 2.24}, {"words": [6, 7, 8], "start": 2.24, "end": 3.4}, {"words": [9, 10, 11], "start": 3.4, "end": 3.93}, {"words": [12, 13, 14], "start": 3.93, "end": 4.48}, {"words": [15], "start": 4.48, "end": 4.8}, {"words": [16, 17, 18], "start": 4.8, "end": 5.79}, {"words": [19, 20, 21], "start": 5.79, "end": 7.51}, {"words": [22, 23, 24], "start": 7.51, "end": 8.23}, {"words": [25, 26], "start": 8.23, "end": 9.08}, {"words": [27, 28, 29], "start": 9.08, "end": 10.08}, {"words": [30], "start": 10.08, "end": 10.29}, {"words": [31, 32, 33], "start": 10.29, "end": 11.47}, {"words": [34, 35], "start": 11.47, "end": 12.21}, {"words": [36, 37], "start": 12.21, "end": 12.63}, {"words": [38, 39], "start": 12.63, "end": 13.83}, {"words": [40, 41], "start": 13.83, "end": 15.1}, {"words": [42, 43], "start": 15.1, "end": 15.97}, {"words": [44, 45, 46], "start": 15.97, "end": 16.8}, {"words": [47, 48], "start": 16.8, "end": 17.36}, {"words": [49, 50], "start": 17.36, "end": 17.92}, {"words": [51, 52, 53], "start": 17.92, "end": 19.12}, {"words": [54, 55, 56], "start": 19.12, "end": 20.05}, {"words": [57, 58, 59], "start": 20.05, "end": 20.98}, {"words": [60, 61, 62], "start": 20.98, "end": 21.64}, {"words": [63, 64, 65], "start": 21.64, "end": 22.83}, {"words": [66, 67, 68], "start": 22.83, "end": 23.57}, {"words": [69], "start": 23.57, "end": 23.95}, {"words": [70, 71, 72], "start": 23.95, "end": 24.35}, {"words": [73, 74, 75], "start": 24.35, "end": 26.53}, {"words": [76, 77, 78], "start": 26.53, "end": 27.2}, {"words": [79, 80], "start": 27.2, "end": 28.19}, {"words": [81, 82, 83], "start": 28.19, "end": 29.31}, {"words": [84, 85, 86], "start": 29.31, "end": 30.88}, {"words": [87, 88], "start": 30.88, "end": 31.72}, {"words": [89, 90, 91], "start": 31.72, "end": 32.21}, {"words": [92, 93, 94], "start": 32.21, "end": 33.03}, {"words": [95, 96, 97], "start": 33.03, "end": 33.87}, {"words": [98, 99], "start": 33.87, "end": 34.43}, {"words": [100, 101, 102], "start": 34.43, "end": 36}, {"words": [103, 104, 105], "start": 36, "end": 36.87}, {"words": [106, 107, 108], "start": 36.87, "end": 37.29}, {"words": [109, 110, 111], "start": 37.29, "end": 38.04}, {"words": [112, 113], "start": 38.04, "end": 39.06}], "words": [{"start": 0.11, "end": 0.47}, {"start": 0.47, "end": 1.08}, {"start": 1.11, "end": 1.33}, {"start": 1.33, "end": 1.84}, {"start": 1.84, "end": 1.96}, {"start": 1.96, "end": 2.24}, {"start": 2.24, "end": 2.7}, {"start": 2.7, "end": 2.87}, {"start": 2.87, "end": 3.27}, {"start": 3.4, "end": 3.44}, {"start": 3.44, "end": 3.66}, {"start": 3.66, "end": 3.93}, {"start": 3.93, "end": 3.98}, {"start": 3.98, "end": 4.32}, {"start": 4.32, "end": 4.48}, {"start": 4.48, "end": 4.8}, {"start": 4.8, "end": 5.04}, {"start": 5.04, "end": 5.28}, {"start": 5.28, "end": 5.62}, {"start": 5.79, "end": 6.27}, {"start": 6.27, "end": 6.72}, {"start": 6.72, "end": 7.51}, {"start": 7.51, "end": 7.64}, {"start": 7.64, "end": 7.9}, {"start": 7.9, "end": 8.23}, {"start": 8.23, "end": 8.49}, {"start": 8.49, "end": 9.07}, {"start": 9.08, "end": 9.35}, {"start": 9.42, "end": 9.81}, {"start": 9.81, "end": 10.08}, {"start": 10.08, "end": 10.2}, {"start": 10.29, "end": 10.38}, {"start": 10.43, "end": 10.8}, {"start": 10.8, "end": 11.3}, {"start": 11.47, "end": 11.57}, {"start": 11.57, "end": 12.21}, {"start": 12.21, "end": 12.42}, {"start": 12.42, "end": 12.63}, {"start": 12.63, "end": 12.91}, {"start": 12.91, "end": 13.83}, {"start": 13.83, "end": 14.61}, {"start": 14.62, "end": 15.03}, {"start": 15.1, "end": 15.31}, {"start": 15.31, "end": 15.88}, {"start": 15.97, "end": 16.21}, {"start": 16.31, "end": 16.55}, {"start": 16.56, "end": 16.8}, {"start": 16.8, "end": 17.12}, {"start": 17.13, "end": 17.36}, {"start": 17.36, "end": 17.43}, {"start": 17.63, "end": 17.92}, {"start": 17.92, "end": 18.19}, {"start": 18.28, "end": 18.99}, {"start": 18.99, "end": 19.08}, {"start": 19.12, "end": 19.39}, {"start": 19.39, "end": 19.45}, {"start": 19.45, "end": 20.05}, {"start": 20.05, "end": 20.65}, {"start": 20.65, "end": 20.79}, {"start": 20.92, "end": 20.98}, {"start": 20.98, "end": 21.31}, {"start": 21.31, "end": 21.44}, {"start": 21.44, "end": 21.64}, {"start": 21.64, "end": 21.84}, {"start": 21.84, "end": 22.04}, {"start": 22.17, "end": 22.72}, {"start": 22.83, "end": 22.9}, {"start": 22.9, "end": 23.08}, {"start": 23.08, "end": 23.57}, {"start": 23.57, "end": 23.86}, {"start": 23.95, "end": 24.05}, {"start": 24.05, "end": 24.17}, {"start": 24.17, "end": 24.33}, {"start": 24.35, "end": 24.84}, {"start": 24.84, "end": 25.2}, {"start": 25.2, "end": 26.53}, {"start": 26.53, "end": 26.65}, {"start": 26.65, "end": 26.83}, {"start": 26.83, "end": 27.2}, {"start": 27.2, "end": 27.56}, {"start": 27.67, "end": 28.08}, {"start": 28.19, "end": 28.57}, {"start": 28.57, "end": 28.97}, {"start": 29.07, "end": 29.22}, {"start": 29.31, "end": 30.34}, {"start": 30.51, "end": 30.6}, {"start": 30.6, "end": 30.88}, {"start": 30.88, "end": 31.3}, {"start": 31.31, "end": 31.72}, {"start": 31.72, "end": 31.86}, {"start": 31.86, "end": 32}, {"start": 32, "end": 32.21}, {"start": 32.21, "end": 32.49}, {"start": 32.49, "end": 32.6}, {"start": 32.63, "end": 32.93}, {"start": 33.03, "end": 33.12}, {"start": 33.12, "end": 33.44}, {"start": 33.44, "end": 33.7}, {"start": 33.87, "end": 34.13}, {"start": 34.13, "end": 34.43}, {"start": 34.43, "end": 34.65}, {"start": 34.75, "end": 35.25}, {"start": 35.25, "end": 36}, {"start": 36, "end": 36.31}, {"start": 36.31, "end": 36.62}, {"start": 36.62, "end": 36.87}, {"start": 36.87, "end": 36.98}, {"start": 36.99, "end": 37.17}, {"start": 37.17, "end": 37.29}, {"start": 37.29, "end": 37.54}, {"start": 37.54, "end": 37.91}, {"start": 37.91, "end": 37.99}, {"start": 38.04, "end": 38.38}, {"start": 38.41, "end": 38.8}], "zooms": [[1.11, 3.35, 1.13], [4.8, 7.51, 1.13], [9.08, 10.08, 1.06], [15.97, 17.92, 1.13], [25.2, 28.13, 1.13], [29.07, 31.66, 1.13]], "heads": [[0.0, 1.11], [1.11, 3.4], [3.4, 10.08], [10.08, 23.95], [23.95, 31.72], [31.72, 39.06]], "broll": [["door", 1.11, 2.22, true], ["leadsite", 2.24, 3.35, true], ["calendar", 7.51, 9.05, false], ["checklist", 11.47, 15.91, false], ["house", 20.55, 21.99, false], ["count70", 25.2, 28.13, true], ["count4m", 29.07, 31.66, true], ["booked", 32.63, 34.68, false]], "checks": [11.57, 12.21, 12.63, 13.83, 15.31], "dead": [1.96, 2.87], "counts": {"count70": [70000, 26.68], "count4m": [4000000, 30.49]}, "cta": 36, "dur": 39.06};
+      const tl = gsap.timeline({ paused: true });
+
+      // Word-by-word captions: group pops in, each word lights up as spoken, keywords turn yellow.
+      DATA.groups.forEach(function (g, gi) {
+        const el = document.getElementById("cg-" + gi);
+        tl.fromTo(el, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.12, ease: "back.out(2)" }, g.start);
+        g.words.forEach(function (wi) {
+          const w = DATA.words[wi];
+          const node = document.getElementById("w" + wi);
+          const lit = { opacity: 1, scale: 1.06, duration: 0.08, ease: "power2.out" };
+          if (node.classList.contains("hl")) lit.color = "#ffd60a";
+          tl.fromTo(node, { opacity: 0.55, scale: 1, color: "#ffffff" }, lit, w.start);
+          tl.to(node, { scale: 1, duration: 0.12, ease: "power2.out" }, Math.max(w.start + 0.08, w.end));
+        });
+        tl.to(el, { opacity: 0, duration: 0.06, ease: "power2.in" }, g.end - 0.06);
+        tl.set(el, { opacity: 0, visibility: "hidden" }, g.end);
+      });
+
+      // Punch-in zooms inside the picture box (the black bars stay put).
+      DATA.zooms.forEach(function (z, zi) {
+        const next = DATA.zooms[zi + 1];
+        tl.fromTo("#cam", { scale: 1 }, { scale: z[2], duration: 0.16, ease: "power3.out", immediateRender: false }, z[0]);
+        if (next && next[0] - z[1] < 0.4) tl.set("#cam", { scale: 1 }, next[0] - 0.001);
+        else tl.to("#cam", { scale: 1, duration: 0.25, ease: "power2.inOut" }, Math.min(z[1] + 0.05, DATA.dur - 0.25));
+      });
+
+      // Section headlines in the top bar; the opening one is red and pulses.
+      DATA.heads.forEach(function (h, k) {
+        tl.fromTo("#headin-" + k, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.2)" }, h[0]);
+        if (k === 0) {
+          const n = Math.max(1, Math.floor((h[1] - h[0] - 0.35) / 0.5));
+          tl.to("#headin-0", { scale: 1.07, duration: 0.25, ease: "sine.inOut", yoyo: true, repeat: n * 2 - 1 }, h[0] + 0.3);
+        }
+      });
+
+      const fmt = (v) => "$" + Math.round(v).toLocaleString("en-US");
+      const SCENES = {
+        door(p, s, d) {
+          tl.fromTo("#" + p + "-x", { opacity: 0, scale: 2.4, rotation: -20 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.16, ease: "power4.in" }, DATA.dead[0] - 0.12);
+        },
+        leadsite(p, s, d) {
+          tl.fromTo("#" + p + "-x", { opacity: 0, scale: 2.4, rotation: 20 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.16, ease: "power4.in" }, DATA.dead[1] - 0.12);
+        },
+        calendar(p, s, d) {
+          tl.fromTo("#" + p + "-cal", { y: 60, rotation: -3 }, { y: 0, rotation: 0, duration: 0.3, ease: "power3.out" }, s);
+          [1, 3, 6, 8, 10, 12, 15, 17, 19].forEach(function (c, i) {
+            tl.fromTo("#" + p + "-k" + c, { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.16, ease: "back.out(3)" }, s + 0.2 + i * 0.11);
+          });
+        },
+        booked(p, s, d) {
+          tl.fromTo("#" + p + "-cal", { y: 60, rotation: 3 }, { y: 0, rotation: 0, duration: 0.3, ease: "power3.out" }, s);
+          for (let c = 0; c < 20; c++) {
+            tl.fromTo("#" + p + "-k" + c, { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.14, ease: "back.out(3)" }, s + 0.15 + c * 0.045);
+          }
+        },
+        checklist(p, s, d) {
+          tl.fromTo("#" + p + "-tt", { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.25, ease: "back.out(2)" }, s);
+          DATA.checks.forEach(function (t, n) {
+            tl.fromTo("#" + p + "-i" + n, { opacity: 0, x: -80 }, { opacity: 1, x: 0, duration: 0.2, ease: "power3.out" }, t);
+            tl.fromTo("#" + p + "-b" + n, { scale: 0 }, { scale: 1, duration: 0.22, ease: "back.out(3)" }, t + 0.05);
+          });
+        },
+        house(p, s, d) {
+          tl.fromTo("#" + p + "-h", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.25, ease: "power3.out" }, s + 0.03);
+          tl.fromTo("#" + p + "-roof", { scaleY: 0 }, { scaleY: 1, duration: 0.3, ease: "back.out(1.8)" }, s + 0.2);
+          tl.fromTo("#" + p + "-sun", { scale: 0.6 }, { scale: 1, duration: d, ease: "sine.out" }, s);
+          tl.fromTo("#" + p + "-ok", { opacity: 0, scale: 0, rotation: -40 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.28, ease: "back.out(3)" }, s + 0.45);
+        },
+        count(p, s, d, k) {
+          const [target, done] = DATA.counts[k];
+          const num = document.getElementById(p + "-n");
+          const state = { v: 0 };
+          tl.fromTo(state, { v: 0 }, { v: target, duration: done - s - 0.05, ease: "power2.out",
+            onUpdate: function () { num.textContent = fmt(state.v); } }, s + 0.05);
+          tl.fromTo("#" + p + "-n", { scale: 1 }, { scale: 1.15, duration: 0.12, yoyo: true, repeat: 1, ease: "power2.out" }, done);
+          tl.fromTo("#" + p + "-sub", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.25, ease: "back.out(2)" }, s + 0.35);
+        },
+      };
+      DATA.broll.forEach(function (b) {
+        const [k, s, e, overlay] = b;
+        const p = "br-" + k;
+        if (overlay) {
+          tl.fromTo("#brin-" + k, { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "power2.out" }, s);
+          tl.fromTo("#" + p + "-card", { scale: 0.6, y: 80 }, { scale: 1, y: 0, duration: 0.25, ease: "back.out(1.8)" }, s);
+        } else {
+          tl.fromTo("#brin-" + k, { opacity: 0, scale: 1.18 }, { opacity: 1, scale: 1, duration: 0.18, ease: "power3.out" }, s);
+        }
+        const lb = document.getElementById(p + "-lb");
+        if (lb) tl.fromTo(lb, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.22, ease: "back.out(2)" }, s + 0.1);
+        const name = k.startsWith("count") ? "count" : k;
+        SCENES[name](p, s, e - s, k);
+        tl.to("#brin-" + k, { opacity: 0, duration: 0.1, ease: "power2.in" }, e - 0.1);
+      });
+
+      // Red pulsing CTA in the bottom bar.
+      tl.fromTo("#cta-box", { opacity: 0, y: 60, scale: 0.8 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(2)" }, DATA.cta);
+      tl.to("#cta-box", { scale: 1.07, duration: 0.3, ease: "sine.inOut", yoyo: true, repeat: 3 }, DATA.cta + 0.4);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
