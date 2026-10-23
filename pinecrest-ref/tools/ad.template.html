@@ -13,7 +13,7 @@
       body { margin: 0; background: #000; }
       #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #000; color: #fff; font-family: "Inter", sans-serif; }
 
-      /* Presenter: punch levels on #cam, bloom/blur settle on #settle */
+      /* Presenter: two deliberate zooms on #cam, bloom/blur settle on #settle */
       #cam, #settle { position: absolute; inset: 0; transform-origin: 50% 24%; }
       #aroll { position: absolute; inset: 0; width: 1080px; height: 1920px; object-fit: cover; }
       #bloom { position: absolute; inset: 0; background: #f4f1ea; opacity: 0; pointer-events: none; }
@@ -32,6 +32,13 @@
             text-shadow: 0 4px 14px rgba(0, 0, 0, 0.45); }
       .kw.b { color: #24a8e0; }
       .kw.w { color: #fff; }
+
+      /* Hook banner, frame 0 until the seal takes over */
+      .hookban { position: absolute; left: 60px; right: 60px; top: 120px; height: 230px; display: flex; align-items: center; justify-content: center; }
+      #hb { display: flex; flex-direction: column; align-items: center; padding: 18px 40px 20px; border-radius: 16px; background: #e3121e;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45); font-family: "Anton", sans-serif; line-height: 1.02; text-align: center; }
+      .hb1 { font-size: 64px; color: #fff; letter-spacing: 1px; }
+      .hb2 { font-size: 80px; color: #fff; letter-spacing: 1px; }
 
       /* Pinned offer seal */
       .seal { position: absolute; left: 92px; top: 112px; width: 232px; height: 232px; filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.35)); }
@@ -65,7 +72,7 @@
   <body>
     <div id="root" data-composition-id="main" data-start="0" data-width="1080" data-height="1920" data-duration="{{DUR}}">
       <div id="cam"><div id="settle">
-        <video id="aroll" class="clip" src="assets/aroll.mp4" playsinline data-has-audio="true" data-start="0" data-duration="{{DUR}}" data-track-index="0" data-volume="1"></video>
+        <video id="aroll" class="clip" src="assets/aroll_v2.mp4" playsinline data-has-audio="true" data-start="0" data-duration="{{DUR}}" data-track-index="0" data-volume="1"></video>
       </div></div>
       {{ELEMENTS}}
       <div id="bloom"></div>
@@ -73,7 +80,7 @@
         {{CAPTIONS}}
       </div>
     </div>
-    <audio id="music" src="assets/music.wav" data-start="0" data-duration="{{DUR}}" data-track-index="1" data-volume="0.12"></audio>
+    <audio id="music" src="assets/music_mk32.wav" data-start="0" data-duration="{{DUR}}" data-track-index="1" data-volume="0.25"></audio>
     {{AUDIO}}
     <script>
       const tl = gsap.timeline({ paused: true });

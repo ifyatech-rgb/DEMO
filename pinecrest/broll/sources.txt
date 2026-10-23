@@ -43,3 +43,8 @@ photos/house-brick-1.jpg	Wikimedia Commons	https://commons.wikimedia.org/wiki/Fi
 photos/house-ranch-tract.jpg	Wikimedia Commons	https://commons.wikimedia.org/wiki/File%3ANEWRANCHTRACT.JPG	Public domain Public domain - author: Mcheath  at  English Wikipedia
 photos/house-brick-2.jpg	Wikimedia Commons	https://commons.wikimedia.org/wiki/File%3ABrick_House_Clifford_Dec_08.JPG	Public domain Public domain - author: Pubdog  ( talk )
 photos/c093-aerial.jpg	Wikimedia Commons	https://commons.wikimedia.org/wiki/File:South-Los-Angeles-subdivision-houses-near-Darby-Park-Aerial-view-from-north-August-2014.jpg	CC0 - author: Alfred Twu
+
+# Audio added for pinecrest-ref v2
+music  "Driving Ambition" by Ahjay Stelino, https://mixkit.co/free-stock-music/ (assets.mixkit.co/music/32/32.mp3), Mixkit Stock Music Free License, used 36.5s-84.95s
+sfx    Mixkit #1491 "Cinematic whoosh fast transition", https://mixkit.co/free-sound-effects/whoosh/, Mixkit Sound Effects Free License
+sfx    Mixkit #1492 "Air woosh", https://mixkit.co/free-sound-effects/whoosh/, Mixkit Sound Effects Free License

@@ -29,7 +29,7 @@ B, P = "broll/", "broll/photos/"
 # ---------------- shot list (B-roll over the presenter) ----------------
 # (slot source, start, end, move, extra) ; moves: push | pull | tilt-up | still | snap@t
 S = []
-def shot(src, t0, t1, move="push", x=0.5, ss=0.0, vf="", snaps=(), enter="cut", bright=False):
+def shot(src, t0, t1, move="pan", x=0.5, ss=0.0, vf="", snaps=(), enter="cut", bright=False):
     S.append(dict(src=src, t0=round(t0, 3), t1=round(t1, 3), move=move, x=x, ss=ss, vf=vf, snaps=list(snaps), enter=enter, bright=bright))
 
 T = {k: at(v) for k, v in dict(texas="texas", most="most homeowners", could="could be costing", thousands="thousands", and_="and i get",
@@ -43,34 +43,38 @@ T = {k: at(v) for k, v in dict(texas="texas", most="most homeowners", could="cou
                                 roof_before="roof before it", tap="tap the link", free="free inspection").items()}
 T["end_honesty"] = end("honesty")
 
-shot(P + "hail-hole.jpg", T["thousands"], T["and_"], "push", x=0.7, snaps=[(T["thousands"] + 0.02, 1.12)])
+# Hook montage: fast cuts on real damage under the kinetic words (no zooms).
+shot(B + "storm-water-roof--mixkit-21212-720p.mp4", T["most"], T["most"] + 1.0, "still", x=0.5, ss=1)
+shot(P + "house-ranch-tract.jpg", T["most"] + 1.0, T["could"], "pan", x=0.5)
+shot(P + "cedar-damaged-2.jpg", T["could"], T["thousands"], "pan", x=0.5)
+shot(P + "hail-hole.jpg", T["thousands"], T["and_"], "pan", x=0.7)
 shot(P + "house-brick-2.jpg", T["down"], T["but"], "tilt-up", x=0.58)
-shot(P + "fema-c005.jpg", T["but"], T["interior"], "push", x=0.45, snaps=[(T["glaring"], 1.12)])
-shot(P + "ceiling-damage.jpg", T["interior"] + 0.22, T["black"], "push", x=0.5, vf="crop=iw:ih*0.62:0:0")
+shot(P + "fema-c005.jpg", T["but"], T["interior"], "pan", x=0.45)
+shot(P + "ceiling-damage.jpg", T["interior"] + 0.22, T["black"], "pan", x=0.5, vf="crop=iw:ih*0.62:0:0")
 shot(P + "ceiling-damage.jpg", T["black"], T["these"], "still", x=0.2, vf="crop=iw*0.55:ih*0.32:iw*0.25:0")
-shot(P + "hail-doc-2.jpg", T["routine"], T["damage2"], "push", x=0.42)
+shot(P + "hail-doc-2.jpg", T["routine"], T["damage2"], "pan", x=0.42)
 shot(P + "house-brick-2.jpg", T["damage2"], T["damage2"] + 0.7, "still", x=0.58)
-shot(P + "cedar-damaged-1.jpg", T["damage2"] + 0.7, T["good"], "push", x=0.42, snaps=[(T["visible"], 1.1)])
-shot(B + "tablet-photos--mixkit-41204-2160p.mp4", T["all_"], T["nt2"], "push", x=0.5, ss=2, bright=True)
-shot(B + "storm-powerlines--mixkit-16199-720p.mp4", T["nt2"], T["hail_alley"], "push", x=0.5, ss=2)
-shot(B + "storm-rain-ground--mixkit-21185-720p.mp4", T["hail_alley"], T["hail2"], "push", x=0.5, ss=1)
-shot(P + "hailstones-field.jpg", T["hail2"], T["ive"], "push", x=0.5, snaps=[(T["grape"], 1.25)])
-shot(B + "handoff-door--mixkit-31137-2160p.mp4", T["taken"], T["its"], "push", x=0.35, ss=1)
-shot(P + "fema-c014.jpg", T["oos"], T["show"], "push", x=0.3, vf="crop=iw*0.62:ih*0.5:0:ih*0.5")
-shot(P + "fema-c014.jpg", T["show"], T["force"], "push", x=0.55, vf="crop=iw*0.75:ih*0.55:iw*0.25:ih*0.45")
-shot(B + "signing-blue-ink--mixkit-38492-720p.mp4", T["force"], T["that_need"], "push", x=0.55, ss=1, snaps=[(T["force"] + 0.02, 1.1)])
-shot(P + "fema-c014.jpg", T["that_need"], T["at_pine"], "pull-fast", x=0.6, vf="crop=iw*0.75:ih*0.55:iw*0.25:ih*0.45")
-shot("assets/truck.mov", T["pine"], T["we_value"], "push", x=0.5, ss=25.0, snaps=[(T["pine"] + 0.02, 1.12)])
-shot("assets/truck.mov", T["we_value"], T["end_honesty"] + 0.3, "push", x=0.5, ss=9.0, snaps=[(T["we_value"] + 0.02, 1.2)])
-shot(P + "fema-c063.jpg", T["we_get"], T["take"], "push", x=0.5)
-shot(P + "hail-doc-1.jpg", T["take"], T["photos"], "push", x=0.72)
+shot(P + "cedar-damaged-1.jpg", T["damage2"] + 0.7, T["good"], "pan", x=0.42)
+shot(B + "tablet-photos--mixkit-41204-2160p.mp4", T["all_"], T["nt2"], "still", x=0.5, ss=2, bright=True)
+shot(B + "storm-powerlines--mixkit-16199-720p.mp4", T["nt2"], T["hail_alley"], "still", x=0.5, ss=2)
+shot(B + "storm-rain-ground--mixkit-21185-720p.mp4", T["hail_alley"], T["hail2"], "still", x=0.5, ss=1)
+shot(P + "hailstones-field.jpg", T["hail2"], T["ive"], "pan", x=0.5)
+shot(B + "handoff-door--mixkit-31137-2160p.mp4", T["taken"], T["its"], "still", x=0.35, ss=1)
+shot(P + "fema-c014.jpg", T["oos"], T["show"], "pan", x=0.3, vf="crop=iw*0.62:ih*0.5:0:ih*0.5")
+shot(P + "fema-c014.jpg", T["show"], T["force"], "pan", x=0.55, vf="crop=iw*0.75:ih*0.55:iw*0.25:ih*0.45")
+shot(B + "signing-blue-ink--mixkit-38492-720p.mp4", T["force"], T["that_need"], "still", x=0.55, ss=1)
+shot(P + "fema-c014.jpg", T["that_need"], T["at_pine"], "pan", x=0.6, vf="crop=iw*0.75:ih*0.55:iw*0.25:ih*0.45")
+shot("assets/truck.mov", T["pine"], T["we_value"], "still", x=0.5, ss=25.0)
+shot("assets/truck.mov", T["we_value"], T["end_honesty"] + 0.3, "still", x=0.5, ss=9.0)
+shot(P + "fema-c063.jpg", T["we_get"], T["take"], "pan", x=0.5)
+shot(P + "hail-doc-1.jpg", T["take"], T["photos"], "pan", x=0.72)
 REPORT = (T["photos"], T["exactly"] + 0.38)          # inspection-report page stack plays here
-shot(B + "handshake-office--mixkit-30005-2160p.mp4", T["exactly"] + 0.38, T["if_"], "push", x=0.55, ss=1)
-shot(P + "fema-c065.jpg", T["roof_before"], T["tap"], "push", x=0.55, bright=True)
+shot(B + "handshake-office--mixkit-30005-2160p.mp4", T["exactly"] + 0.38, T["if_"], "still", x=0.55, ss=1)
+shot(P + "fema-c065.jpg", T["roof_before"], T["tap"], "pan", x=0.55, bright=True)
 
 # Presenter punch levels (jump cuts on the same take): (time, scale). 1.0 chest-up, 1.18 shoulders, 1.35 face.
-PUNCH = [(0.0, 1.35), (T["most"], 1.0), (T["could"], 1.18), (T["and_"], 1.18), (T["these"], 1.35), (T["good"], 1.0),
-         (T["ive"], 1.35), (T["its"], 1.18), (T["end_honesty"] + 0.3, 1.0), (T["if_"], 1.18), (T["tap"], 1.0)]
+# Presenter stays framed at 1.0. Only two deliberate zooms in the whole ad: (start, scale, reset under the next B-roll cut).
+ZOOMS = [(T["these"], 1.14, T["routine"]), (T["ive"], 1.14, T["taken"])]
 
 # ---------------- prep (grade + 9:16 conform) ----------------
 jobs = []
@@ -89,8 +93,10 @@ el, js, sfx = [], [], []
 def fx(name, t, vol, ms=0.0): sfx.append((name, round(max(0, t), 3), vol, ms))
 
 # Presenter base layer.
-js.append('tl.set("#cam", {scale: 1.35}, 0);')
-for t, sc in PUNCH[1:]: js.append(f'tl.set("#cam", {{scale: {sc}}}, {t:.3f});')
+js.append('tl.set("#cam", {scale: 1}, 0);')
+for t, sc, back in ZOOMS:
+    js.append(f'tl.fromTo("#cam", {{scale: 1}}, {{scale: {sc}, duration: 0.6, ease: "power2.inOut", immediateRender: false}}, {t:.3f});')
+    js.append(f'tl.set("#cam", {{scale: 1}}, {back:.3f});')
 
 for n, s in enumerate(S):
     sid, t0, t1 = f"s{n:02d}", s["t0"], s["t1"]
@@ -102,11 +108,12 @@ for n, s in enumerate(S):
         el.append(f'<div class="clip {cls}" id="c-{sid}" data-start="{t0:.3f}" data-duration="{t1 - t0:.3f}" data-track-index="{2 + n % 2}">'
                   f'<div class="kb" id="kb-{sid}"><div class="snap" id="sn-{sid}"><img class="media photo" src="{s["file"]}" alt="" /></div></div></div>')
     sel, d, mv = f"#kb-{sid}", t1 - t0, s["move"]
-    if mv == "push": js.append(f'tl.fromTo("{sel}", {{scale: 1.0}}, {{scale: 1.08, duration: {d:.3f}, ease: "none"}}, {t0});')
+    if mv == "pan": js.append(f'tl.fromTo("{sel}", {{scale: 1.06, xPercent: -1.6}}, {{scale: 1.06, xPercent: 1.6, duration: {d:.3f}, ease: "none"}}, {t0});')
+    elif mv == "push": js.append(f'tl.fromTo("{sel}", {{scale: 1.0}}, {{scale: 1.08, duration: {d:.3f}, ease: "none"}}, {t0});')
     elif mv == "push-fast": js.append(f'tl.fromTo("{sel}", {{scale: 1.0, yPercent: 0}}, {{scale: 1.18, yPercent: -3, duration: {d:.3f}, ease: "none"}}, {t0});')
     elif mv == "pull-fast": js.append(f'tl.fromTo("{sel}", {{scale: 1.3}}, {{scale: 1.0, duration: 0.45, ease: "power3.out"}}, {t0});')
     elif mv == "tilt-up": js.append(f'tl.fromTo("{sel}", {{scale: 1.15, yPercent: 6}}, {{scale: 1.15, yPercent: -6, duration: {d:.3f}, ease: "sine.inOut"}}, {t0});')
-    elif mv == "still": js.append(f'tl.fromTo("{sel}", {{scale: 1.0}}, {{scale: 1.03, duration: {d:.3f}, ease: "none"}}, {t0});')
+    elif mv == "still": pass
     prev = 1.0
     for k, (ts, sc) in enumerate(s["snaps"]):
         js.append(f'tl.fromTo("#sn-{sid}", {{scale: {prev}}}, {{scale: {sc}, duration: 0.13, ease: "power4.out", immediateRender: {"true" if k == 0 else "false"}}}, {ts:.3f});')
@@ -117,8 +124,13 @@ for n, s in enumerate(S):
         js.append(f'tl.fromTo("#flash", {{opacity: 0.9}}, {{opacity: 0, duration: 0.3, ease: "power2.out", immediateRender: false}}, {t0});')
 
 # ---------------- reference-style graphics ----------------
-# Pinned circular offer seal (top-left, whole ad).
-el.append(f'<div class="clip seal" id="seal" data-layout-ignore data-start="0" data-duration="{DUR}" data-track-index="25">'
+# Hook banner from frame 0 (holds the scroll), then the pinned circular offer seal takes the top-left.
+HOOK_END = T["and_"]
+el.append(f'<div class="clip hookban" id="hookban" data-start="0" data-duration="{HOOK_END:.3f}" data-track-index="28">'
+          '<div id="hb"><span class="hb1">WATCH THIS BEFORE</span><span class="hb2">YOU REPLACE YOUR ROOF</span></div></div>')
+js.append('tl.fromTo("#hb", {opacity: 0, y: -40}, {opacity: 1, y: 0, duration: 0.25, ease: "power3.out"}, 0);')
+js.append(f'tl.fromTo("#hb", {{opacity: 1}}, {{opacity: 0, duration: 0.2, ease: "none", immediateRender: false}}, {HOOK_END - 0.2:.3f});')
+el.append(f'<div class="clip seal" id="seal" data-layout-ignore data-start="{HOOK_END:.3f}" data-duration="{DUR - HOOK_END:.3f}" data-track-index="25">'
           '<svg viewBox="0 0 240 240" width="232" height="232"><defs>'
           '<path id="arcT" d="M 32 120 A 88 88 0 0 1 208 120"/><path id="arcB" d="M 30 120 A 90 90 0 0 0 210 120"/></defs>'
           '<circle cx="120" cy="120" r="116" fill="#0f2a44"/><circle cx="120" cy="120" r="108" fill="#fff"/>'
@@ -127,6 +139,7 @@ el.append(f'<div class="clip seal" id="seal" data-layout-ignore data-start="0" d
           '<text class="arc"><textPath href="#arcB" startOffset="50%" text-anchor="middle" dominant-baseline="hanging">NORTH TEXAS</textPath></text>'
           '<text x="120" y="122" class="sbig" text-anchor="middle">FREE</text>'
           '<text x="120" y="152" class="ssmall" text-anchor="middle">INSPECTION</text></svg></div>')
+js.append(f'tl.fromTo("#seal", {{opacity: 0, x: -30}}, {{opacity: 1, x: 0, duration: 0.3, ease: "power3.out"}}, {HOOK_END:.3f});')
 
 # Kinetic opener: stacked condensed words appear as they are spoken (no captions underneath).
 def wt(p, k=0): return words[find(p)[k]]["start"]
@@ -169,16 +182,14 @@ step = (REPORT[1] - REPORT[0] - 0.3) / 4
 for pg in range(4):
     tp = REPORT[0] + pg * step
     js.append(f'tl.fromTo("#rp{pg}", {{opacity: 0, y: 260, scale: 1.08}}, {{opacity: 1, y: 0, scale: 1, duration: 0.22, ease: "power3.out"}}, {tp:.3f});')
-    fx("shutter", tp + 0.05, 0.3)
     if pg:   # the page underneath keeps only its edge visible once covered
         js.append(f'tl.set("#rp{pg - 1} .rhead, #rp{pg - 1} .rgrid", {{visibility: "hidden"}}, {tp + 0.22:.3f});')
-js.append(f'tl.fromTo("#report .rbg", {{scale: 1}}, {{scale: 1.05, duration: {REPORT[1] - REPORT[0]:.3f}, ease: "none"}}, {REPORT[0]:.3f});')
 
 # BOOK NOW pill under the closing caption.
 el.append(f'<div class="clip booknow" id="booknow" data-start="{T["tap"]:.3f}" data-duration="{DUR - T["tap"]:.3f}" data-track-index="27"><span id="bn">BOOK NOW</span></div>')
 js.append(f'tl.fromTo("#bn", {{opacity: 0, scale: 0.6}}, {{opacity: 1, scale: 1, duration: 0.18, ease: "back.out(2.5)"}}, {T["tap"]:.3f});')
 
-# Back to the presenter: quick bloom-dissolve into a zoomed, blurred frame that settles sharp.
+# Back to the presenter: soft bloom-dissolve and a short blur settle (no scale change).
 cover = sorted((s["t0"], s["t1"]) for s in S) + [REPORT]
 cover.sort()
 returns = []
@@ -186,8 +197,8 @@ for k, (a0, a1) in enumerate(cover):
     nxt = cover[k + 1][0] if k + 1 < len(cover) else DUR
     if nxt - a1 > 0.25: returns.append(a1)
 for t in returns:
-    js.append(f'tl.fromTo("#bloom", {{opacity: 0.75}}, {{opacity: 0, duration: 0.28, ease: "power2.out", immediateRender: false}}, {t:.3f});')
-    js.append(f'tl.fromTo("#settle", {{scale: 1.1, filter: "blur(10px)"}}, {{scale: 1, filter: "blur(0px)", duration: 0.3, ease: "power2.out", immediateRender: false}}, {t:.3f});')
+    js.append(f'tl.fromTo("#bloom", {{opacity: 0.4}}, {{opacity: 0, duration: 0.3, ease: "power2.out", immediateRender: false}}, {t:.3f});')
+    js.append(f'tl.fromTo("#settle", {{filter: "blur(8px)"}}, {{filter: "blur(0px)", duration: 0.3, ease: "power2.out", immediateRender: false}}, {t:.3f});')
 
 # ---------------- captions: small sentence-case text on black tags, 2-3 words, no highlights ----------------
 ia = find("all of it's")[0]
@@ -222,17 +233,12 @@ for gi, g in enumerate(groups):
     js.append(f'tl.set("#cg{gi}", {{opacity: 1, visibility: "visible"}}, {s0:.3f});')
     js.append(f'tl.set("#cg{gi}", {{opacity: 0, visibility: "hidden"}}, {e0:.3f});')
 
-# ---------------- sound design: clean, like the reference (whooshes on cuts, a few anchors) ----------------
-for k, stack in enumerate(KIN):
-    for line in stack: fx("pop", line[-1][3], 0.08)
-fx("impact", T["texas"], 0.14)
-fx("thunder", T["nt2"], 0.2); fx("hail", T["hail_alley"], 0.12)
-fx("whoosh", T["pine"] - 0.1, 0.22)
-fx("notify", T["free"], 0.22)
-for t in returns: fx("whoosh-short", t - 0.08, 0.07)
-for s in S:
-    if s["t0"] > 0.1: fx("whoosh-short", s["t0"] - 0.06, 0.06)
-EXT = {"impact": "mp3", "whoosh": "mp3", "whoosh-short": "mp3", "pop": "mp3", "chime": "mp3", "notify": "mp3", "riser": "mp3"}
+# ---------------- sound design: real Mixkit whooshes only, used sparingly ----------------
+fx("mk1491", T["most"] - 0.12, 0.35)          # into the hook montage
+fx("mk1492", T["and_"] - 0.3, 0.25)           # back to the presenter after the hook
+fx("mk1491", T["pine"] - 0.12, 0.35)          # truck reveal
+fx("mk1492", REPORT[0] - 0.3, 0.22)           # inspection report
+EXT = {}
 aud = []
 for n, (k, t, v, ms) in enumerate(sorted(sfx, key=lambda x: x[1])):
     f = f"assets/sfx-{k}.{EXT.get(k, 'wav')}"
@@ -245,6 +251,6 @@ for k, v in {"{{DUR}}": f"{DUR}", "{{ELEMENTS}}": "\n      ".join(el), "{{CAPTIO
 open("index.html", "w").write(tpl)
 json.dump({k: v for k, v in T.items()}, open("assets/times.json", "w"), indent=1)
 spans, last = [], 0.0
-ev = sorted({0.0, *[s["t0"] for s in S], *[s["t1"] for s in S], *[t for t, _ in PUNCH], *[t for s in S for t, _ in s["snaps"]]})
+ev = sorted({0.0, *[s["t0"] for s in S], *[s["t1"] for s in S], *[t for t, _, _ in ZOOMS]})
 gaps = [(round(a, 2), round(b - a, 2)) for a, b in zip(ev, ev[1:] + [DUR]) if b - a > 3.0]
 print(f"duration {DUR}s · {len(S)} B-roll shots · {len(groups)} caption groups · {len(sfx)} sfx · gaps>3s: {gaps or 'none'}")
