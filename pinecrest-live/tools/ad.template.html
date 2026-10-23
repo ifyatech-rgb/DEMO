@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Pinecrest Live Ad</title>
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Montserrat"; font-weight: 900; src: url("vendor/montserrat-latin-900-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 600; src: url("vendor/inter-latin-600-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 800; src: url("vendor/inter-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Noto Color Emoji"; src: url("vendor/NotoColorEmoji.ttf") format("truetype"); }
+      body { margin: 0; background: #000; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #000; color: #fff;
+              font-family: "Montserrat", "Noto Color Emoji", sans-serif; font-weight: 900; }
+      .emo { font-family: "Noto Color Emoji", sans-serif; }
+      .red { color: #ff3b30; }
+
+      /* Presenter take: jump-cut punch levels on an untimed wrapper, origin on the face */
+      #cam { position: absolute; inset: 0; transform-origin: 50% 24%; }
+      #aroll { position: absolute; inset: 0; width: 1080px; height: 1920px; object-fit: cover; }
+
+      /* B-roll: Ken Burns wrapper > snap wrapper > timed media */
+      .kb, .shot { position: absolute; inset: 0; overflow: hidden; }
+      .kb { transform-origin: 50% 45%; }
+      .snap { position: absolute; inset: 0; transform-origin: 50% 45%; }
+      .media { position: absolute; inset: 0; width: 1080px; height: 1920px; object-fit: cover; }
+      .bright .media { filter: brightness(1.1) saturate(1.06); }
+      .leak { position: absolute; inset: 0; mix-blend-mode: screen; opacity: 0; pointer-events: none; }
+      #flash { position: absolute; inset: 0; background: #fff6e0; opacity: 0; pointer-events: none; }
+      #lift { position: absolute; inset: 0; background: rgba(255, 236, 200, 0.10); mix-blend-mode: screen; opacity: 0; pointer-events: none; }
+
+      /* Mute-first text. Meta safe zone: y 300-1220, 70 px side margins. */
+      .pop { position: absolute; left: 70px; right: 70px; top: 330px; height: 230px; display: flex; align-items: center; justify-content: center; text-align: center; }
+      #pop1 { top: 770px; height: 200px; }   /* $30,000 card sits on the chest, clear of the face */
+      #pop1 .hook2 { font-size: 66px; } #pop1 .hook2 .red { font-size: 118px; }
+      .hook { font-size: 118px; line-height: 1; color: #ffd60a; -webkit-text-stroke: 14px #000; paint-order: stroke fill; text-shadow: 0 8px 0 #000; }
+      .hook2 { font-size: 78px; line-height: 1.08; -webkit-text-stroke: 12px #000; paint-order: stroke fill; text-shadow: 0 7px 0 #000; }
+      .hook2 .red { display: block; font-size: 140px; }
+      .pill { display: block; padding: 20px 34px 16px; border-radius: 20px; background: #fff; color: #111; font-size: 52px; white-space: nowrap;
+              box-shadow: 0 12px 34px rgba(0, 0, 0, 0.45); }
+      .pill.red { background: #dc2626; color: #fff; }
+      .pill.green { background: #16a34a; color: #fff; font-size: 46px; }
+      .dlist { position: absolute; left: 70px; top: 340px; width: 760px; }
+      .dl { display: block; width: fit-content; margin-bottom: 14px; padding: 10px 22px 8px; border-radius: 12px; background: rgba(0, 0, 0, 0.72);
+            border-left: 10px solid #ffd60a; font-size: 50px; opacity: 0; }
+      .disc { position: absolute; left: 70px; right: 70px; top: 1190px; height: 34px; text-align: center; font-family: "Inter", sans-serif; font-weight: 600;
+              font-size: 28px; color: rgba(255, 255, 255, 0.78); text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8); }
+      .brand { position: absolute; left: 70px; right: 70px; top: 330px; height: 240px; display: flex; align-items: center; justify-content: center; }
+      .brandin { position: relative; overflow: hidden; padding: 24px 40px 28px; border-radius: 20px; background: rgba(10, 10, 10, 0.55);
+                 border: 2px solid rgba(214, 178, 94, 0.8); text-align: center; }
+      .b1 { font-size: 118px; letter-spacing: 5px; color: #e8c77a; line-height: 1; }
+      .b2 { margin-top: 10px; font-family: "Inter", sans-serif; font-weight: 800; font-size: 38px; letter-spacing: 8px; }
+      #sweep { position: absolute; top: -20%; bottom: -20%; left: 0; width: 34%;
+               background: linear-gradient(100deg, rgba(255, 255, 255, 0) 0%, rgba(255, 245, 210, 0.75) 50%, rgba(255, 255, 255, 0) 100%); }
+      .cta { position: absolute; left: 70px; right: 70px; top: 725px; height: 290px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
+      .ctaname { margin-bottom: 16px; font-size: 40px; letter-spacing: 2px; color: #e8c77a; -webkit-text-stroke: 8px #000; paint-order: stroke fill; }
+      .ctabtn { width: 100%; padding: 30px 20px 26px; border-radius: 28px; background: #e3121e; text-align: center; font-size: 60px; line-height: 1.1;
+                box-shadow: 0 12px 0 #7a0000, 0 18px 44px rgba(227, 18, 30, 0.45); box-sizing: border-box; }
+
+      /* Captions: centred at y~1120, above the Reels caption/CTA stack */
+      #captions { position: absolute; left: 0; right: 0; top: 1030px; height: 180px; }
+      .cg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; }
+      .cg .line { display: flex; flex-wrap: nowrap; justify-content: center; gap: 0 0.6em; max-width: 1000px; }
+      .w { display: inline-block; line-height: 1.1; color: #fff; -webkit-text-stroke: 12px #000; paint-order: stroke fill;
+           text-shadow: 0 7px 0 #000, 0 10px 22px rgba(0, 0, 0, 0.5); opacity: 0.6; white-space: nowrap; }
+
+      #vignette { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 80% 65% at 50% 45%, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.4) 100%); }
+      #grain { position: absolute; inset: 0; pointer-events: none; opacity: 0.07; mix-blend-mode: overlay; background-image: url("assets/grain.png"); background-size: 1024px 1024px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-width="1080" data-height="1920" data-duration="{{DUR}}">
+      <div id="cam">
+        <video id="aroll" class="clip" src="assets/aroll.mp4" playsinline data-has-audio="true" data-start="0" data-duration="{{DUR}}" data-track-index="0" data-volume="1"></video>
+      </div>
+      {{ELEMENTS}}
+      <div id="lift"></div>
+      <div id="flash"></div>
+      <div id="vignette"></div>
+      <div id="captions" class="clip" data-start="0" data-duration="{{DUR}}" data-track-index="30">
+        {{CAPTIONS}}
+      </div>
+      <div id="grain"></div>
+    </div>
+    <audio id="music" src="assets/music.wav" data-start="0" data-duration="{{DUR}}" data-track-index="1" data-volume="0.13"></audio>
+    {{AUDIO}}
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      {{JS}}
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

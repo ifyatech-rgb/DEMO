@@ -42,3 +42,4 @@ photos/ladder-roof.jpg	Wikimedia Commons	https://commons.wikimedia.org/wiki/File
 photos/house-brick-1.jpg	Wikimedia Commons	https://commons.wikimedia.org/wiki/File%3ABrick_House_driveway_from_Broadnax_Road.jpg	Public domain - author: Nyttend
 photos/house-ranch-tract.jpg	Wikimedia Commons	https://commons.wikimedia.org/wiki/File%3ANEWRANCHTRACT.JPG	Public domain Public domain - author: Mcheath  at  English Wikipedia
 photos/house-brick-2.jpg	Wikimedia Commons	https://commons.wikimedia.org/wiki/File%3ABrick_House_Clifford_Dec_08.JPG	Public domain Public domain - author: Pubdog  ( talk )
+photos/c093-aerial.jpg	Wikimedia Commons	https://commons.wikimedia.org/wiki/File:South-Los-Angeles-subdivision-houses-near-Darby-Park-Aerial-view-from-north-August-2014.jpg	CC0 - author: Alfred Twu
