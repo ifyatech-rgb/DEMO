@@ -205,7 +205,7 @@ for k, t in enumerate((at("pictures of"), at("pictures of") + 0.42, at("everythi
     fx("shutter" if k % 2 == 0 else "shutter2", t, 0.45)
 fx("warm", at("we'll tell you"), 0.42)
 fx("tap", at("tap the link"), 0.45)
-fx("notify", at("free inspection"), 0.4)
+fx("notify", at("free inspection"), 0.4); fx("boom", at("free inspection"), 0.26)   # last hit with the music
 
 aud = []
 for n, (k, t, v, d) in enumerate(sorted(sfx, key=lambda x: x[1])):

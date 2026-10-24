@@ -1,9 +1,8 @@
 Audio sources for the Pinecrest rough-cut ad (all Mixkit free licenses: https://mixkit.co/license/)
 
 Music (Mixkit Stock Music Free License, #musicFree)
-  676  "Epical Drums 01" by Grigoriy Nuzhny      tense hook, 0-14.2 s
-  686  "Epical Drums 06" by Grigoriy Nuzhny      storm-chaser section (low-passed), 27.5-40.3 s
-  32   "Driving Ambition" by Ahjay Stelino       main bed, lift and warm build to the end
+  77   "Running Out of Time" by Ahjay Stelino    the whole bed (v2), one continuous take from 20.5 s
+  (v1 used 676 "Epical Drums 01", 686 "Epical Drums 06" by Grigoriy Nuzhny and 32 "Driving Ambition" by Ahjay Stelino)
 
 Sound effects (Mixkit Sound Effects Free License, #sfxFree), https://assets.mixkit.co/active_storage/sfx/ID/ID-preview.mp3
   2908 Movie trailer epic impact (boom)        1993 Clinking coins + 931 Service bell (ka-ching)
