@@ -1,0 +1,18 @@
+Audio sources for the Pinecrest rough-cut ad (all Mixkit free licenses: https://mixkit.co/license/)
+
+Music (Mixkit Stock Music Free License, #musicFree)
+  676  "Epical Drums 01" by Grigoriy Nuzhny      tense hook, 0-14.2 s
+  686  "Epical Drums 06" by Grigoriy Nuzhny      storm-chaser section (low-passed), 27.5-40.3 s
+  32   "Driving Ambition" by Ahjay Stelino       main bed, lift and warm build to the end
+
+Sound effects (Mixkit Sound Effects Free License, #sfxFree), https://assets.mixkit.co/active_storage/sfx/ID/ID-preview.mp3
+  2908 Movie trailer epic impact (boom)        1993 Clinking coins + 931 Service bell (ka-ching)
+  2964 System beep buzzer fail (warning beep)  2464 Morning sound in a garden (birds)
+  1474 Transition windy swoosh (whip)          2834 Dropping ice into a glass (hail hit)
+  2943 Tree branch brake (crack)               337  Wooden floorboard creak
+  3179 Water drop splashes in cave (drip)      951  Positive notification (ding)
+  1296 Thunder deep rumble                     2370 Fast signing with a pen
+  1538 Fast car drive by (peel-out)            1464 Quick swoosh accent + 3005 Explainer video pops whoosh light pop
+  1430 / 1133 Camera shutter clicks            3109 Relaxing bell chime (warm hit)
+  1120 Click (phone tap)                       933  Bell notification
+  166 / 3115 Fast sweep / swoosh (punch-in whooshes)

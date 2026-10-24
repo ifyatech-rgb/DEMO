@@ -49,3 +49,13 @@ next-env.d.ts
 /pinecrest-live-ad.mp4
 /pinecrest-ref-style-ad.mp4
 /pinecrest-ref-style-ad-v2.mp4
+/pinecrest-roughcut-9x16.mp4
+/pinecrest-roughcut-4x5.mp4
+/roughcut/assets/source.mp4
+/roughcut/assets/dl/
+/roughcut/assets/sfx/
+/roughcut/assets/*.wav
+/roughcut/renders/
+/roughcut-4x5/renders/
+/roughcut/.hyperframes/
+/roughcut-4x5/.hyperframes/
