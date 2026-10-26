@@ -73,9 +73,10 @@
       #sweep { position: absolute; top: -30%; bottom: -30%; left: 0; width: 26%; transform: skewX(-18deg);
                background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,250,230,0.85) 50%, rgba(255,255,255,0) 100%); }
       .proof { text-align: center; }
-      .cnt { font-size: 200px; line-height: 1; color: #ffd60a; -webkit-text-stroke: 14px #000; paint-order: stroke fill; text-shadow: 0 12px 0 #000; }
-      .cl { font-size: 56px; margin-top: 6px; -webkit-text-stroke: 9px #000; paint-order: stroke fill; }
-      .houses { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px 10px; width: 760px; margin: 22px auto 0; }
+      .dz { margin-top: 26px; color: #ffd60a; -webkit-text-stroke: 12px #000; paint-order: stroke fill; text-shadow: 0 10px 0 #000; line-height: 1.02; }
+      .dz1 { display: block; font-size: 76px; white-space: nowrap; }
+      .dz2 { display: block; font-size: 122px; white-space: nowrap; }
+      .houses { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px 10px; width: 760px; margin: 0 auto; }
       .hs { display: inline-block; font-size: 72px; line-height: 1; opacity: 0.35; filter: grayscale(1); font-family: "Noto Color Emoji", sans-serif; }
       .approved { display: inline-block; margin-top: 26px; padding: 22px 40px 18px; border-radius: 22px; background: #16a34a; font-size: 82px; white-space: nowrap; opacity: 0;
                   box-shadow: 0 14px 36px rgba(0,0,0,0.5); }
@@ -140,7 +141,7 @@
       <div class="clip stage" id="s-gotyou" data-start="18.150" data-duration="2.080" data-track-index="23"><div class="gotyou" id="gy"><span class="emo">✅</span> WE'VE GOT YOU</div></div>
       <div class="clip stage2" id="s-where" data-start="18.430" data-duration="1.800" data-track-index="24"><div class="kin small"><span id="kw0">THAT'S</span> <span id="kw1">WHERE</span> <span id="kw2" class="y">WE COME IN</span></div></div>
       <div class="clip stage" id="s-brand" data-start="20.230" data-duration="1.930" data-track-index="23"><div class="brandin" id="brandin"><div class="b1">PINECREST</div><div class="b2">ROOFING &amp; CONSTRUCTION</div><i id="sweep" data-layout-allow-overflow></i></div></div>
-      <div class="clip stage" id="s-proof" data-start="22.690" data-duration="4.010" data-track-index="22"><div class="proof"><div class="cnt"><b id="cnum">0</b><span>+</span></div><div class="cl">LOCAL HOMEOWNERS HELPED</div><div class="houses"><span class="hs" id="hs0">🏠</span><span class="hs" id="hs1">🏠</span><span class="hs" id="hs2">🏠</span><span class="hs" id="hs3">🏠</span><span class="hs" id="hs4">🏠</span><span class="hs" id="hs5">🏠</span><span class="hs" id="hs6">🏠</span><span class="hs" id="hs7">🏠</span><span class="hs" id="hs8">🏠</span><span class="hs" id="hs9">🏠</span><span class="hs" id="hs10">🏠</span><span class="hs" id="hs11">🏠</span></div><div class="approved" id="appr">FULLY APPROVED <span class="emo">✅</span></div></div></div>
+      <div class="clip stage" id="s-proof" data-start="22.690" data-duration="4.010" data-track-index="22"><div class="proof"><div class="houses"><span class="hs" id="hs0">🏠</span><span class="hs" id="hs1">🏠</span><span class="hs" id="hs2">🏠</span><span class="hs" id="hs3">🏠</span><span class="hs" id="hs4">🏠</span><span class="hs" id="hs5">🏠</span><span class="hs" id="hs6">🏠</span><span class="hs" id="hs7">🏠</span><span class="hs" id="hs8">🏠</span><span class="hs" id="hs9">🏠</span><span class="hs" id="hs10">🏠</span><span class="hs" id="hs11">🏠</span></div><div class="dz"><span class="dz1">DOZENS OF LOCAL</span><span class="dz2">HOMEOWNERS</span></div><div class="approved" id="appr">FULLY APPROVED <span class="emo">✅</span></div></div></div>
       <div class="clip stage" id="s-track" data-start="26.730" data-duration="3.380" data-track-index="22"><div class="track"><div class="th">WE HANDLE THE CLAIM</div><div class="steps"><div class="stp" id="sp0"><span class="dot" id="dt0">1</span><b>INSPECTION</b></div><i class="bar"><i id="br0"></i></i><div class="stp" id="sp1"><span class="dot" id="dt1">2</span><b>CLAIM</b></div><i class="bar"><i id="br1"></i></i><div class="stp" id="sp2"><span class="dot" id="dt2">3</span><b>APPROVAL</b></div></div></div></div>
       <div class="clip stage" id="s-entitled" data-start="30.210" data-duration="1.780" data-track-index="20"><div class="kin small"><span id="ke0">GET</span> <span id="ke1">WHAT</span> <span id="ke2">YOU'RE</span> <span id="ke3" class="y">ENTITLED TO</span></div></div>
       <div class="clip stage" id="s-limited" data-start="31.990" data-duration="2.340" data-track-index="23"><div class="limited" id="lim"><span class="emo">⏳</span> LIMITED TIME</div></div>
@@ -362,9 +363,8 @@
       tl.to("#brandin", {opacity: 0, scale: 0.92, duration: 0.12, ease: "power2.in"}, 22.040);
       tl.set("#flash", {opacity: 1}, 21.120);
       tl.set("#flash", {opacity: 0}, 21.187);
-      tl.fromTo("#s-proof .cnt", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2.2)"}, 22.690);
-      tl.fromTo("#s-proof .cl", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2.2)"}, 22.790);
-      tl.fromTo("#cnum", {textContent: 0}, {textContent: 24, duration: 2.040, ease: "power1.out", snap: {textContent: 1}}, 22.790);
+      tl.fromTo("#s-proof .houses", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2.2)"}, 22.690);
+      tl.fromTo("#s-proof .dz", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2.2)"}, 22.790);
       tl.to("#hs0", {opacity: 1, filter: "grayscale(0)", scale: 1.25, duration: 0.06}, 22.960);
       tl.to("#hs0", {scale: 1, duration: 0.1}, 23.020);
       tl.to("#hs1", {opacity: 1, filter: "grayscale(0)", scale: 1.25, duration: 0.06}, 23.130);

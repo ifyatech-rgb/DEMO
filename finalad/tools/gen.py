@@ -222,13 +222,12 @@ OUTF("#brandin", B1)
 fx("swoosh", T["pine"] - 0.12, 0.4); fx("pop", T["pine"] + 0.06, 0.4); flash(21.12)
 
 # ---------------- 5. proof ----------------
-NH = 24   # "dozens" = at least two dozen
 houses = "".join(f'<span class="hs" id="hs{j}">🏠</span>' for j in range(12))
-add(f'<div class="proof"><div class="cnt"><b id="cnum">0</b><span>+</span></div><div class="cl">LOCAL HOMEOWNERS HELPED</div>'
-    f'<div class="houses">{houses}</div><div class="approved" id="appr">FULLY APPROVED {E("✅")}</div></div>', ("stage", "s-proof"), T["dozens"] - 0.1, 27.4, 22)
-POP("#s-proof .cnt", T["dozens"] - 0.1); POP("#s-proof .cl", T["dozens"]); fx("wB", T["dozens"] - 0.15, 0.18)
+add(f'<div class="proof"><div class="houses">{houses}</div><div class="dz"><span class="dz1">DOZENS OF LOCAL</span><span class="dz2">HOMEOWNERS</span></div>'
+    f'<div class="approved" id="appr">FULLY APPROVED {E("✅")}</div></div>', ("stage", "s-proof"), T["dozens"] - 0.1, 27.4, 22)
+# no count: the houses fill in and the words carry it
+POP("#s-proof .houses", T["dozens"] - 0.1); POP("#s-proof .dz", T["dozens"]); fx("wB", T["dozens"] - 0.15, 0.18)
 c0, c1 = T["dozens"], T["fully"] - 0.15
-js.append(f'tl.fromTo("#cnum", {{textContent: 0}}, {{textContent: {NH}, duration: {c1 - c0:.3f}, ease: "power1.out", snap: {{textContent: 1}}}}, {c0:.3f});')
 for j in range(12):
     t = c0 + (c1 - c0) * (j + 1) / 12
     js.append(f'tl.to("#hs{j}", {{opacity: 1, filter: "grayscale(0)", scale: 1.25, duration: 0.06}}, {t:.3f});')
@@ -442,9 +441,10 @@ CSS = f"""
       #sweep {{ position: absolute; top: -30%; bottom: -30%; left: 0; width: 26%; transform: skewX(-18deg);
                background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,250,230,0.85) 50%, rgba(255,255,255,0) 100%); }}
       .proof {{ text-align: center; }}
-      .cnt {{ font-size: 200px; line-height: 1; color: #ffd60a; -webkit-text-stroke: 14px #000; paint-order: stroke fill; text-shadow: 0 12px 0 #000; }}
-      .cl {{ font-size: 56px; margin-top: 6px; -webkit-text-stroke: 9px #000; paint-order: stroke fill; }}
-      .houses {{ display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px 10px; width: 760px; margin: 22px auto 0; }}
+      .dz {{ margin-top: 26px; color: #ffd60a; -webkit-text-stroke: 12px #000; paint-order: stroke fill; text-shadow: 0 10px 0 #000; line-height: 1.02; }}
+      .dz1 {{ display: block; font-size: 76px; white-space: nowrap; }}
+      .dz2 {{ display: block; font-size: 122px; white-space: nowrap; }}
+      .houses {{ display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px 10px; width: 760px; margin: 0 auto; }}
       .hs {{ display: inline-block; font-size: 72px; line-height: 1; opacity: 0.35; filter: grayscale(1); font-family: "Noto Color Emoji", sans-serif; }}
       .approved {{ display: inline-block; margin-top: 26px; padding: 22px 40px 18px; border-radius: 22px; background: #16a34a; font-size: 82px; white-space: nowrap; opacity: 0;
                   box-shadow: 0 14px 36px rgba(0,0,0,0.5); }}
