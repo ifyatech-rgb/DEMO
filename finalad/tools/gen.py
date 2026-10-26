@@ -142,8 +142,6 @@ def callout(cid, t0, t1, spots):
         fx("pop", t0 + j * 0.45 + 0.15, 0.22)
     call.append(f'<div class="clip callout" id="{cid}" data-start="{t0:.3f}" data-duration="{t1 - t0:.3f}" data-track-index="{6 + len(call)}">'
                 f'<svg viewBox="0 0 1080 1920" width="1080" height="1920">{"".join(svg)}</svg>{"".join(labels)}</div>')
-callout("ca", 1.96, 2.62, [("circle", 300, 1020, "WORN SHINGLES?", "r")])
-callout("cb", 6.25, 6.86, [("circle", 620, 820, "HAIL DAMAGE?", "l")])
 callout("cc", 30.08, 32.3, [("circle", 760, 1260, "HAIL DAMAGE?", "l"), ("arrow", 260, 1500, "WORN SHINGLES?", "r")])
 callout("cd", 37.02, 38.55, [("circle", 840, 900, "STORM DAMAGE?", "l"), ("arrow", 330, 990, "WORN SHINGLES?", "r")])
 
