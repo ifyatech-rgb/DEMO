@@ -1,0 +1,10 @@
+Pinecrest final ad: added sound effects (Mixkit Sound Effects Free License, https://mixkit.co/license/#sfxFree)
+The background music and voiceover are the client's own track, untouched apart from loudness.
+  2908 Movie trailer epic impact (boom)          1993 Clinking coins + 931 Service bell (ka-ching)
+  1989 Money bag drop (coin drop)                1120 Modern click box check (ticks, phone taps)
+  1296 Thunder deep rumble                        2182 Wood hard hit (+ 2299 Short bass hit) (stamps)
+  954  Wrong long buzzer                          790  Cinematic trailer riser
+  2299 Short bass hit + 2908 (bass drop)          1464 Quick swoosh accent / 3005 light pop
+  2568 Cool interface click tone (counter)        600  Achievement bell (ding)
+  2585 Light switch tap (tracker clicks)          1063 Fast wall clock ticking
+  933  Bell notification                          166 / 3115 / 1474 swooshes and whip
