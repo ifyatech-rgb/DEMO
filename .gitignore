@@ -66,3 +66,9 @@ next-env.d.ts
 /roughcut-final/assets/
 /pinecrest-roughcut-9x16-v4-nomusic.mp4
 /pinecrest-roughcut-4x5-v4-nomusic.mp4
+/pinecrest-final-ad-*.mp4
+/finalad/assets/
+/finalad/renders/
+/finalad-4x5/renders/
+/finalad/.hyperframes/
+/finalad-4x5/.hyperframes/
