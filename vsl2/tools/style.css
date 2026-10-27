@@ -9,7 +9,7 @@
       #bgpanel { position: absolute; inset: 0; background: radial-gradient(ellipse at 75% 45%, #1b2533 0%, #0b0f14 70%); }
       #slide { position: absolute; inset: 0; overflow: hidden; transform-origin: 50% 50%; box-shadow: 0 30px 80px rgba(0,0,0,0.6); }
       #cam, #punch, #shake, #soft, #grade { position: absolute; inset: 0; transform-origin: 52% 35%; }
-      #src, .freeze { position: absolute; inset: 0; width: 1920px; height: 1080px; object-fit: cover; }
+      #src, #srcsoft, .freeze { position: absolute; inset: 0; width: 1920px; height: 1080px; object-fit: cover; }
       #vignette { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 80% 75% at 50% 45%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.35) 100%); }
       #flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
 
@@ -142,3 +142,4 @@
       .cg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; }
       .cg .line { display: flex; flex-wrap: nowrap; justify-content: center; align-items: center; gap: 0 0.3em; max-width: 1700px; line-height: 1.08; }
       .w { display: inline-block; color: #fff; -webkit-text-stroke: 0.17em #000; paint-order: stroke fill; text-shadow: 0 0.08em 0 #000, 0 0.1em 0.25em rgba(0,0,0,0.5); opacity: 0.55; white-space: nowrap; }
+      #srcsoft { opacity: 0; }

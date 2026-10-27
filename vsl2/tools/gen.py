@@ -70,7 +70,7 @@ PA = at("pay attention")
 add(f'<div class="kin"><span id="ks0">STOP</span> <span id="ks1">WHAT</span> <span id="ks2">YOU\'RE</span> <span id="ks3">DOING</span></div>', "stage", "g-stop", L1, PA - 0.02)
 for j, t in enumerate((L1, at("what you're"), at("you're doing"), at("doing"))): SNAP(f"#ks{j}", t, "scale: 1.8")
 DIM.append((L1, PA))
-FREEZE = [(PA, "assets/freeze-pay.jpg"), (at("so we built"), "assets/freeze-turn.jpg")]
+FREEZE = [(PA, "assets/freeze-pay-soft.jpg"), (at("so we built"), "assets/freeze-turn-soft.jpg")]   # both land under a big graphic, so pre-dimmed
 flash(PA); fx("boom", PA, 0.45); shake(PA + 0.02, 14, 6)
 add(f'<div class="big y" id="pa">PAY ATTENTION {E("👇")}</div>', "stage", "g-pay", PA, at("what i'm") + 0.9)
 POP("#pa", PA + 0.03, 0.26); OUT("#pa", at("what i'm") + 0.9)
@@ -380,7 +380,7 @@ G = {"base": "contrast(1.06) saturate(1.06) brightness(1.02)", "dark": "contrast
 js.append(f'tl.set("#grade", {{filter: "{G["base"]}"}}, 0);')
 js.append(f'tl.to("#grade", {{filter: "{G["dark"]}", duration: 0.4}}, {at("you\'ve probably"):.3f});')
 js.append(f'tl.set("#grade", {{filter: "{G["bright"]}"}}, {TU:.3f});')
-ON, OFF = "blur(7px) brightness(0.66)", "blur(0px) brightness(1)"
+ON, OFF = "1", "0"   # opacity of the pre-blurred, darkened copy (assets/base_soft.mp4): far cheaper to render than a live CSS blur
 def windows(lst):
     m = []
     for a, b in sorted(lst):
@@ -388,10 +388,10 @@ def windows(lst):
         else: m.append((a, b))
     return m
 DW = windows([d for d in DIM if not any(s[0] <= d[0] < s[1] for s in SLIDE)])
-js.append(f'tl.set("#soft", {{filter: "{ON if DW and DW[0][0] == 0 else OFF}"}}, 0);')
+js.append(f'tl.set("#srcsoft", {{opacity: {ON if DW and DW[0][0] == 0 else OFF}}}, 0);')
 for k, (a, b) in enumerate(DW):
-    if not (k == 0 and a == 0): js.append(f'tl.to("#soft", {{filter: "{ON}", duration: 0.2}}, {a:.3f});')
-    if b < DUR - 0.05: js.append(f'tl.to("#soft", {{filter: "{OFF}", duration: 0.2}}, {b:.3f});')
+    if not (k == 0 and a == 0): js.append(f'tl.to("#srcsoft", {{opacity: {ON}, duration: 0.2}}, {a:.3f});')
+    if b < DUR - 0.05: js.append(f'tl.to("#srcsoft", {{opacity: {OFF}, duration: 0.2}}, {b:.3f});')
 for a, b in windows(SLIDE):
     js.append(f'tl.to("#slide", {{x: -440, scale: 0.52, borderRadius: 28, duration: 0.35, ease: "power3.inOut"}}, {a - 0.05:.3f});')
     js.append(f'tl.to("#slide", {{x: 0, scale: 1, borderRadius: 0, duration: 0.35, ease: "power3.inOut"}}, {b - 0.2:.3f});')
@@ -458,6 +458,7 @@ doc = f"""<!doctype html>
       <div id="bgpanel"></div>
       <div id="slide"><div id="cam"><div id="punch"><div id="shake"><div id="soft"><div id="grade">
         <video id="src" class="clip" src="assets/base.mp4" muted playsinline data-start="0" data-duration="{DUR}" data-track-index="0"></video>
+        <video id="srcsoft" class="clip" src="assets/base_soft.mp4" muted playsinline data-start="0" data-duration="{DUR}" data-track-index="3"></video>
         {nl.join(fz)}
       </div></div></div></div></div></div>
       <div id="vignette"></div>

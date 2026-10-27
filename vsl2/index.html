@@ -17,7 +17,7 @@
       #bgpanel { position: absolute; inset: 0; background: radial-gradient(ellipse at 75% 45%, #1b2533 0%, #0b0f14 70%); }
       #slide { position: absolute; inset: 0; overflow: hidden; transform-origin: 50% 50%; box-shadow: 0 30px 80px rgba(0,0,0,0.6); }
       #cam, #punch, #shake, #soft, #grade { position: absolute; inset: 0; transform-origin: 52% 35%; }
-      #src, .freeze { position: absolute; inset: 0; width: 1920px; height: 1080px; object-fit: cover; }
+      #src, #srcsoft, .freeze { position: absolute; inset: 0; width: 1920px; height: 1080px; object-fit: cover; }
       #vignette { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 80% 75% at 50% 45%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.35) 100%); }
       #flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
 
@@ -150,6 +150,7 @@
       .cg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; }
       .cg .line { display: flex; flex-wrap: nowrap; justify-content: center; align-items: center; gap: 0 0.3em; max-width: 1700px; line-height: 1.08; }
       .w { display: inline-block; color: #fff; -webkit-text-stroke: 0.17em #000; paint-order: stroke fill; text-shadow: 0 0.08em 0 #000, 0 0.1em 0.25em rgba(0,0,0,0.5); opacity: 0.55; white-space: nowrap; }
+      #srcsoft { opacity: 0; }
 
     </style>
   </head>
@@ -158,8 +159,9 @@
       <div id="bgpanel"></div>
       <div id="slide"><div id="cam"><div id="punch"><div id="shake"><div id="soft"><div id="grade">
         <video id="src" class="clip" src="assets/base.mp4" muted playsinline data-start="0" data-duration="157.12" data-track-index="0"></video>
-        <img class="clip freeze" id="fz0" src="assets/freeze-pay.jpg" alt="" data-start="10.360" data-duration="0.5" data-track-index="4" />
-      <img class="clip freeze" id="fz1" src="assets/freeze-turn.jpg" alt="" data-start="53.020" data-duration="0.5" data-track-index="5" />
+        <video id="srcsoft" class="clip" src="assets/base_soft.mp4" muted playsinline data-start="0" data-duration="157.12" data-track-index="3"></video>
+        <img class="clip freeze" id="fz0" src="assets/freeze-pay-soft.jpg" alt="" data-start="10.360" data-duration="0.5" data-track-index="4" />
+      <img class="clip freeze" id="fz1" src="assets/freeze-turn-soft.jpg" alt="" data-start="53.020" data-duration="0.5" data-track-index="5" />
       </div></div></div></div></div></div>
       <div id="vignette"></div>
       <div class="clip stage" id="g-hook" data-start="0.000" data-duration="1.220" data-track-index="20"><div class="hook" id="hk"><i class="haz"></i><div class="hk1">ROOFERS, STOP. <span class="emo">🚨</span></div><i class="haz"></i></div></div>
@@ -865,21 +867,21 @@
       tl.set("#grade", {filter: "contrast(1.06) saturate(1.06) brightness(1.02)"}, 0);
       tl.to("#grade", {filter: "contrast(1.1) saturate(0.7) brightness(0.84)", duration: 0.4}, 15.240);
       tl.set("#grade", {filter: "contrast(1.06) saturate(1.15) sepia(0.08) brightness(1.08)"}, 53.020);
-      tl.set("#soft", {filter: "blur(7px) brightness(0.66)"}, 0);
-      tl.to("#soft", {filter: "blur(0px) brightness(1)", duration: 0.2}, 1.240);
-      tl.to("#soft", {filter: "blur(7px) brightness(0.66)", duration: 0.2}, 9.090);
-      tl.to("#soft", {filter: "blur(0px) brightness(1)", duration: 0.2}, 11.900);
-      tl.to("#soft", {filter: "blur(7px) brightness(0.66)", duration: 0.2}, 29.020);
-      tl.to("#soft", {filter: "blur(0px) brightness(1)", duration: 0.2}, 55.460);
-      tl.to("#soft", {filter: "blur(7px) brightness(0.66)", duration: 0.2}, 61.020);
-      tl.to("#soft", {filter: "blur(0px) brightness(1)", duration: 0.2}, 67.450);
-      tl.to("#soft", {filter: "blur(7px) brightness(0.66)", duration: 0.2}, 75.020);
-      tl.to("#soft", {filter: "blur(0px) brightness(1)", duration: 0.2}, 93.350);
-      tl.to("#soft", {filter: "blur(7px) brightness(0.66)", duration: 0.2}, 101.120);
-      tl.to("#soft", {filter: "blur(0px) brightness(1)", duration: 0.2}, 107.110);
-      tl.to("#soft", {filter: "blur(7px) brightness(0.66)", duration: 0.2}, 112.330);
-      tl.to("#soft", {filter: "blur(0px) brightness(1)", duration: 0.2}, 142.320);
-      tl.to("#soft", {filter: "blur(7px) brightness(0.66)", duration: 0.2}, 148.320);
+      tl.set("#srcsoft", {opacity: 1}, 0);
+      tl.to("#srcsoft", {opacity: 0, duration: 0.2}, 1.240);
+      tl.to("#srcsoft", {opacity: 1, duration: 0.2}, 9.090);
+      tl.to("#srcsoft", {opacity: 0, duration: 0.2}, 11.900);
+      tl.to("#srcsoft", {opacity: 1, duration: 0.2}, 29.020);
+      tl.to("#srcsoft", {opacity: 0, duration: 0.2}, 55.460);
+      tl.to("#srcsoft", {opacity: 1, duration: 0.2}, 61.020);
+      tl.to("#srcsoft", {opacity: 0, duration: 0.2}, 67.450);
+      tl.to("#srcsoft", {opacity: 1, duration: 0.2}, 75.020);
+      tl.to("#srcsoft", {opacity: 0, duration: 0.2}, 93.350);
+      tl.to("#srcsoft", {opacity: 1, duration: 0.2}, 101.120);
+      tl.to("#srcsoft", {opacity: 0, duration: 0.2}, 107.110);
+      tl.to("#srcsoft", {opacity: 1, duration: 0.2}, 112.330);
+      tl.to("#srcsoft", {opacity: 0, duration: 0.2}, 142.320);
+      tl.to("#srcsoft", {opacity: 1, duration: 0.2}, 148.320);
       tl.to("#slide", {x: -440, scale: 0.52, borderRadius: 28, duration: 0.35, ease: "power3.inOut"}, 1.190);
       tl.to("#slide", {x: 0, scale: 1, borderRadius: 0, duration: 0.35, ease: "power3.inOut"}, 8.890);
       tl.to("#slide", {x: -440, scale: 0.52, borderRadius: 28, duration: 0.35, ease: "power3.inOut"}, 15.190);
