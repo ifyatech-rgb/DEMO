@@ -1,0 +1,6 @@
+VSL v2 audio sources (Mixkit free licenses, https://mixkit.co/license/)
+Music: 614 "Silent Descent" by Eugenio Mininni (Mixkit Stock Music Free License), played from 0 s, ducked under the voice.
+Sound effects (Mixkit Sound Effects Free License): 2908 trailer impact, 1993 coins + 931 bell (ka-ching), 1120 click/tick,
+  2182 wood hit + 2299 bass hit (stamps, bass drop), 954 wrong buzzer, 790 cinematic riser, 1464/3005 swoosh + pop,
+  2568 counter click, 600 achievement bell, 2585 tap, 933 notification bell, 1350 office telephone ring,
+  2858 gear lock, 2655 fast impact blow, 166/3115/1474 swooshes.
