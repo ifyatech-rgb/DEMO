@@ -143,3 +143,38 @@
       .cg .line { display: flex; flex-wrap: nowrap; justify-content: center; align-items: center; gap: 0 0.3em; max-width: 1700px; line-height: 1.08; }
       .w { display: inline-block; color: #fff; -webkit-text-stroke: 0.17em #000; paint-order: stroke fill; text-shadow: 0 0.08em 0 #000, 0 0.1em 0.25em rgba(0,0,0,0.5); opacity: 0.55; white-space: nowrap; }
       #srcsoft { opacity: 0; }
+
+      /* ---- split-screen (right panel) versions of the former full-width cards ---- */
+      #slide { box-shadow: 0 30px 80px rgba(0,0,0,0.55); }
+      .panel .card2 { gap: 26px; }
+      .panel .c2a { font-size: 46px; line-height: 1.12; white-space: normal; max-width: 780px; text-align: center; }
+      .panel .c2b { font-size: 72px; text-align: center; max-width: 800px; }
+      .panel .kin, .panel .kin.mid { font-size: 88px; text-align: center; }
+      .panel .gotit { font-size: 54px; padding: 24px 34px 18px; }
+      .panel .nopay { gap: 18px; }
+      .panel .np { font-size: 56px; padding: 14px 34px 10px; gap: 20px; }
+      .panel .np .xx { font-size: 64px; }
+      .panel .okc { font-size: 44px; line-height: 1.15; white-space: normal; max-width: 760px; text-align: center; }
+      .panel .stepc { padding: 26px 90px 6px; }
+      .panel .stepc span { font-size: 72px; } .panel .stepc b { font-size: 240px; }
+      .panel .ycard { font-size: 68px; padding: 36px 50px 28px; max-width: 760px; text-align: center; }
+      .panel .lead.big { width: 600px; }
+      .fwrap { position: relative; }
+      .panel .lead.big { left: 0; top: 0; }
+      .panel .lead.big b { font-size: 40px; white-space: nowrap; }
+      .panel .fout { font-size: 70px; left: 60px; top: 150px; white-space: nowrap; }
+      .panel .apb { font-size: 80px; padding: 28px 46px 22px; }
+      .panel .apl { font-size: 44px; text-align: center; }
+      .race2 { position: relative; width: 760px; height: 640px; }
+      .race2 svg { position: absolute; left: 0; top: 0; }
+      .race2 .rf { position: absolute; top: 30px; width: 90px; font-size: 76px; line-height: 1; opacity: 0; }
+      .race2 .ho { position: absolute; left: 230px; top: 200px; width: 300px; font-size: 80px; line-height: 1; text-align: center; opacity: 0; }
+      .race2 .ho b { display: block; margin-top: 6px; font-size: 30px; -webkit-text-stroke: 6px #000; paint-order: stroke fill; }
+      .race2 .price { position: absolute; left: 140px; width: 480px; top: 370px; padding: 14px 0 10px; border-radius: 20px; background: #fff; color: #111; font-size: 96px; text-align: center; opacity: 0; box-shadow: 0 16px 40px rgba(0,0,0,0.5); }
+      .race2 .rtb { position: absolute; left: 40px; width: 680px; top: 530px; padding: 8px 0 4px; border-radius: 16px; background: #e3121e; color: #fff; font-size: 54px; white-space: nowrap; text-align: center; opacity: 0; }
+      .panel .leads { position: relative; width: 800px; height: 560px; }
+      .panel .lead { left: 250px; top: 140px; width: 260px; }
+      .panel .sold { left: 120px; top: 200px; font-size: 96px; }
+      .panel .youpay { top: 470px; font-size: 52px; }
+      .lead, .lead * { -webkit-text-stroke: 0; text-shadow: none; }
+      .lead.big b { line-height: 1.15; margin-top: 12px; } .lead.big i { margin-top: 8px; }

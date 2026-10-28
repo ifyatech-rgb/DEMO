@@ -1,10 +1,10 @@
 """Website VSL (1920x1080): designed motion graphics, kinetic type, captions, camera moves and sound on top of the
 client's talking-head take (assets/base.mp4, natural pace; only one >1 s pause shortened).
 
-Picture stack (untimed wrappers around one muted <video>):
-  #slide (moves the shot to the left third when a mockup takes the right) > #cam (slow push / pull / drift) >
-  #punch (115 % punch-ins) > #shake > #soft (dim + blur under big graphics) > #grade > video + freeze frames
-Graphics: .stage (centre, above the captions) or .panel (right side while the shot is slid left).
+Three layouts only (see LAYOUT): talk (shot full frame, sharp), split (shot in a rounded frame left, graphic right)
+and full (shot hidden, graphic full screen). The face is never blurred or darkened behind a graphic.
+Picture stack: #slide (layout) > #cam (slow push / pull / drift) > #punch (115 % punch-ins) > #shake > #grade > video.
+Graphics: .stage (full layout) or .panel (right side in split layout). Captions stay at the bottom in every layout.
 One font (Montserrat 900/800), one palette (yellow #ffd60a, red #e3121e, white, green #16a34a), one pop-in.
 """
 import html, json, os, re, subprocess, sys
@@ -67,20 +67,11 @@ for j, (_, ta, tb) in enumerate(TI):
 OUT("#g-list .ptitle, #g-list .li", L1)
 # stop + pay attention: freeze, flash, big card
 PA = at("pay attention")
-add(f'<div class="kin"><span id="ks0">STOP</span> <span id="ks1">WHAT</span> <span id="ks2">YOU\'RE</span> <span id="ks3">DOING</span></div>', "stage", "g-stop", L1, PA - 0.02)
-for j, t in enumerate((L1, at("what you're"), at("you're doing"), at("doing"))): SNAP(f"#ks{j}", t, "scale: 1.8")
-DIM.append((L1, PA))
-FREEZE = [(PA, "assets/freeze-pay-soft.jpg"), (at("so we built"), "assets/freeze-turn-soft.jpg")]   # both land under a big graphic, so pre-dimmed
+FREEZE = [(at("so we built"), "assets/freeze-turn.jpg")]   # the turn lands in split screen, so the frozen frame shows sharp in the left frame
 flash(PA); fx("boom", PA, 0.45); shake(PA + 0.02, 14, 6)
 add(f'<div class="big y" id="pa">PAY ATTENTION {E("👇")}</div>', "stage", "g-pay", PA, at("what i'm") + 0.9)
 POP("#pa", PA + 0.03, 0.26); OUT("#pa", at("what i'm") + 0.9)
 DIM.append((PA, at("what i'm") + 0.9))
-CH0 = at("change how")
-add('<div class="kin mid"><div><span id="kc0">THIS WILL</span> <span id="kc1" class="y">CHANGE</span></div><div><span id="kc2">HOW YOU RUN YOUR</span></div>'
-    '<div><span id="kc3" class="y">ROOFING COMPANY</span></div></div>', "stage", "g-change", at("will change") - 0.05, at("you've probably") - 0.1)
-for j, t in enumerate((at("will change") - 0.05, CH0, at("how you run"), at("roofing company"))): SNAP(f"#kc{j}", t, "x: 140")
-WH(at("will change")); OUT("#g-change .kin", at("you've probably") - 0.1)
-
 # ======================= 2. THE PROBLEM =======================
 def phone(pid, screen):
     return f'<div class="phone" id="{pid}"><div class="pscr">{screen}</div><i class="notch"></i></div>'
@@ -102,8 +93,6 @@ for j, t in enumerate(NT):
     js.append(f'tl.set("#ibn", {{textContent: "{j + 1}"}}, {t:.3f});')
     fx("notify", t, 0.22 if j < 3 else 0.16)
 js.append(f'tl.fromTo("#g-inbox .note", {{borderColor: "rgba(255,255,255,0)"}}, {{borderColor: "#e3121e", duration: 0.2, immediateRender: false}}, {at("low-intent"):.3f});')
-add('<div class="tagline" id="lowi"><span class="r">RECYCLED.</span> <span class="r">LOW-INTENT.</span></div>', "lower3", "g-lowi", at("recycled"), IB1 - 0.05, 21)
-POP("#lowi", at("recycled")); fx("pop", at("recycled"), 0.3)
 OUT("#g-inbox .ptitle, #ph1", IB1 - 0.05)
 # call failed -> seen 3 days ago
 CF0, CF1 = at("you call"), at("the ones who")
@@ -123,10 +112,10 @@ fx("buzzer", at("ghost you", find("follow up")[0]), 0.24)
 OUT("#g-call .ptitle, #ph2", CF1 - 0.05)
 # 1 homeowner -> 5 roofers, price drop, race to the bottom
 RB0, RB1 = CF1, at("here's what nobody")
-lines = "".join(f'<line id="ln{k}" x1="800" y1="300" x2="{240 + k * 280}" y2="90" stroke="#ffd60a" stroke-width="6" stroke-linecap="round" stroke-dasharray="400" stroke-dashoffset="400"/>' for k in range(5))
-roofers = "".join(f'<div class="rf" id="rf{k}" style="left:{240 + k * 280 - 55}px">{E("👷")}</div>' for k in range(5))
-add(f'<div class="race"><svg viewBox="0 0 1600 360" width="1600" height="360">{lines}</svg>{roofers}<div class="ho" id="ho">{E("🏠")}<b>1 HOMEOWNER</b></div>'
-    f'<div class="price" id="price"><span id="pv">$18,000</span></div><div class="rtb" id="rtb">RACE TO THE BOTTOM</div></div>', "stage", "g-race", RB0, RB1 - 0.05)
+lines = "".join(f'<line id="ln{k}" x1="380" y1="230" x2="{80 + k * 150}" y2="92" stroke="#ffd60a" stroke-width="5" stroke-linecap="round" stroke-dasharray="300" stroke-dashoffset="300"/>' for k in range(5))
+roofers = "".join(f'<div class="rf" id="rf{k}" style="left:{80 + k * 150 - 45}px">{E("👷")}</div>' for k in range(5))
+add(f'<div class="race2"><svg viewBox="0 0 760 300" width="760" height="300">{lines}</svg>{roofers}<div class="ho" id="ho">{E("🏠")}<b>1 HOMEOWNER</b></div>'
+    f'<div class="price" id="price"><span id="pv">$18,000</span></div><div class="rtb" id="rtb">RACE TO THE BOTTOM</div></div>', "panel", "g-race", RB0, RB1 - 0.05)
 DIM.append((RB0, RB1)); POP("#ho", RB0); WH(RB0)
 FIVE = at("five other")
 for k in range(5):
@@ -142,31 +131,27 @@ for j, (v, t) in enumerate(PR):
     fx("blow", t, 0.28)
 js.append(f'tl.fromTo("#rtb", {{opacity: 0, scale: 2.6, rotation: -6}}, {{opacity: 1, scale: 1, rotation: -3, duration: 0.14, ease: "power4.in"}}, {at("race to the bottom") - 0.08:.3f});')
 fx("stamp_heavy", at("race to the bottom") + 0.02, 0.32); shake(at("race to the bottom") + 0.04, 10, 5)
-OUT("#g-race .race", RB1 - 0.05)
+OUT("#g-race .race2", RB1 - 0.05)
 # nobody wants to admit / don't care / get paid either way
-NB0 = RB1
-add(f'<div class="kin mid"><div><span id="kn0">HERE\'S WHAT</span></div><div><span id="kn1" class="y">NOBODY</span> <span id="kn2">WANTS TO ADMIT</span></div></div>', "stage", "g-nobody", NB0, at("most lead") - 0.05)
-for j, t in enumerate((NB0, at("nobody"), at("wants to"))): SNAP(f"#kn{j}", t, "y: 60")
-WH(NB0); OUT("#g-nobody .kin", at("most lead") - 0.05); DIM.append((NB0, at("most lead")))
 DC0 = at("most lead")
-add('<div class="card2"><div class="c2a" id="dc1">MOST LEAD COMPANIES &amp; AGENCIES</div><div class="c2b r" id="dc2">DON\'T CARE ABOUT YOUR RESULTS</div></div>', "stage", "g-care", DC0, at("they get paid") - 0.05)
+add('<div class="card2"><div class="c2a" id="dc1">MOST LEAD COMPANIES &amp; AGENCIES</div><div class="c2b r" id="dc2">DON\'T CARE ABOUT YOUR RESULTS</div></div>', "panel", "g-care", DC0, at("they get paid") - 0.05)
 POP("#dc1", DC0); WH(DC0); js.append(f'tl.fromTo("#dc2", {{opacity: 0, scale: 2.2}}, {{opacity: 1, scale: 1, duration: 0.14, ease: "power4.in"}}, {at("don\'t care") - 0.06:.3f});')
 fx("stamp", at("don't care") + 0.02, 0.36); OUT("#g-care .card2", at("they get paid") - 0.05); DIM.append((DC0, at("they get paid")))
 GP0 = at("they get paid")
-add(f'<div class="card2"><div class="c2a" id="gp1">{E("💸")} THEY GET PAID WHEN LEADS LAND</div><div class="c2b y" id="gp2">CLOSE OR NOT.</div></div>', "stage", "g-paid", GP0, at("the same lead") - 0.05)
+add(f'<div class="card2"><div class="c2a" id="gp1">{E("💸")} THEY GET PAID WHEN LEADS LAND</div><div class="c2b y" id="gp2">CLOSE OR NOT.</div></div>', "panel", "g-paid", GP0, at("the same lead") - 0.05)
 POP("#gp1", GP0); WH(GP0); SNAP("#gp2", at("whether you")); fx("pop", at("whether you"), 0.3); OUT("#g-paid .card2", at("the same lead") - 0.05)
 DIM.append((GP0, at("the same lead")))
 # sold 5x
 SL0, SL1 = at("the same lead"), at("you're not broken")
 card = lambda k: (f'<div class="lead" id="ld{k}"><div class="lh">🔔 NEW LEAD</div><b>Roof replacement</b><i>Homeowner · Your area</i></div>')
 add('<div class="leads">' + "".join(card(k) for k in range(5)) + '<div class="sold" id="sold" data-layout-allow-overlap>SOLD 5X</div><div class="youpay" id="ypay">…AND YOU PAY FOR IT</div></div>',
-    "stage", "g-sold", SL0, SL1 - 0.05)
+    "panel", "g-sold", SL0, SL1 - 0.05)
 DIM.append((SL0, SL1)); js.append(f'tl.fromTo("#ld0", {{opacity: 0, scale: 0.6}}, {{opacity: 1, scale: 1, x: 0, duration: 0.22, ease: "back.out(2.2)"}}, {SL0:.3f});'); WH(SL0)
 SO = at("sold to five")
 for k in range(1, 5):
-    js.append(f'tl.fromTo("#ld{k}", {{opacity: 0, x: 0}}, {{opacity: 1, x: {(k - 2) * 300 - (-2) * 0}, duration: 0.2, ease: "power3.out"}}, {SO + k * 0.12:.3f});')
+    js.append(f'tl.fromTo("#ld{k}", {{opacity: 0, x: 0, y: 0, rotation: 0}}, {{opacity: 1, x: {(k - 2) * 95}, y: {(k - 2) * 34}, rotation: {(k - 2) * 5}, duration: 0.2, ease: "power3.out"}}, {SO + k * 0.12:.3f});')
     fx("pop", SO + k * 0.12, 0.2)
-js.append(f'tl.to("#ld0", {{x: -600, duration: 0.2, ease: "power3.out"}}, {SO:.3f});')
+js.append(f'tl.to("#ld0", {{x: -190, y: -68, rotation: -10, duration: 0.2, ease: "power3.out"}}, {SO:.3f});')
 js.append(f'tl.fromTo("#sold", {{opacity: 0, scale: 2.8, rotation: -12}}, {{opacity: 1, scale: 1, rotation: -8, duration: 0.13, ease: "power4.in"}}, {at("competitors") - 0.08:.3f});')
 fx("stamp_heavy", at("competitors") + 0.02, 0.4); shake(at("competitors") + 0.03, 8, 4)
 POP("#ypay", at("you're the one")); fx("blow", at("you're the one"), 0.25)
@@ -174,13 +159,13 @@ OUT("#g-sold .leads", SL1 - 0.05)
 # you're not broken. the system is.
 NB = at("you're not broken"); SY = at("the system is")
 add('<div class="kin xl"><div id="nb1">YOU\'RE NOT BROKEN.</div><div id="nb2" class="y">THE SYSTEM IS.</div></div>', "stage", "g-broken", NB, at("so we built") - 0.02)
-SNAP("#nb1", NB, "y: 80"); SNAP("#nb2", SY, "scale: 2.2"); fx("boom", SY, 0.24); shake(SY + 0.02, 8, 4)
+SNAP("#nb1", NB, "y: 80"); SNAP("#nb2", SY, "scale: 2.2"); fx("boom", SY, 0.14); shake(SY + 0.02, 8, 4)
 DIM.append((NB, at("so we built")))
 
 # ======================= 3. THE TURN =======================
 TU = at("so we built")
 fx("riser", TU - 1.6, 0.3); flash(TU); fx("drop", TU, 0.3)
-add(f'<div class="gotit" id="dsys">{E("✅")} A DIFFERENT SYSTEM</div>', "stage", "g-diff", TU, at("where we only") + 1.0)
+add(f'<div class="gotit" id="dsys">{E("✅")} A DIFFERENT SYSTEM</div>', "panel", "g-diff", TU, at("where we only") + 1.0)
 POP("#dsys", TU + 0.04, 0.26); OUT("#dsys", at("where we only") + 1.0); DIM.append((TU, at("where we only") + 1.0))
 WO0, WO1 = at("where we only") + 1.0, at("you don't pay for")
 chips = [("REAL HOMEOWNER", at("real homeowner")), ("REAL BUDGET", at("real budget")), ("READY TO MOVE", at("ready to move"))]
@@ -196,19 +181,19 @@ for j, (_, t) in enumerate(chips):
 POP("#ftf", at("face to face")); fx("pop", at("face to face"), 0.35); OUT("#g-when .ptitle, #g-when .ck, #ftf", WO1 - 0.05)
 NP0, NP1 = WO1, at("here's how it works")
 add('<div class="nopay"><div class="np" id="np0"><span class="xx">✕</span>PAY FOR LEADS</div><div class="np" id="np1"><span class="xx">✕</span>MONTHLY RETAINER</div>'
-    f'<div class="okc" id="okc">{E("✅")} ONLY PAY WHEN YOU\'RE FACE TO FACE</div></div>', "stage", "g-nopay", NP0, NP1 + 0.6)
+    f'<div class="okc" id="okc">{E("✅")} ONLY PAY WHEN YOU\'RE FACE TO FACE</div></div>', "panel", "g-nopay", NP0, NP1 + 0.6)
 DIM.append((NP0, NP1 + 0.6))
 for j, t in enumerate((at("pay for leads"), at("monthly retainer"))):
     POP(f"#np{j}", t - 0.1); fx("buzzer2", t + 0.05, 0.22); WH(t - 0.1, 0.12)
 js.append(f'tl.fromTo("#okc", {{opacity: 0, scale: 0.5}}, {{opacity: 1, scale: 1, duration: 0.24, ease: "back.out(2.4)"}}, {end("monthly retainer") + 0.05:.3f});')
 fx("ding", end("monthly retainer") + 0.05, 0.32); OUT("#g-nopay .nopay", NP1 + 0.6)
-add('<div class="kin mid"><div><span id="kh0">HOW IT WORKS:</span></div><div><span id="kh1" class="y">3 STEPS</span></div></div>', "stage", "g-how", NP1 + 0.6, at("step one") - 0.02)
+add('<div class="kin mid"><div><span id="kh0">HOW IT WORKS:</span></div><div><span id="kh1" class="y">3 STEPS</span></div></div>', "panel", "g-how", NP1 + 0.6, at("step one") - 0.02)
 SNAP("#kh0", NP1 + 0.6, "y: 60"); SNAP("#kh1", at("three steps"), "scale: 2.2"); fx("boom", at("three steps"), 0.25)
 DIM.append((NP1 + 0.6, at("step one")))
 
 # ======================= 4. THE 3 STEPS =======================
 def step_card(n, t, t1):
-    add(f'<div class="stepc" id="sc{n}"><span>STEP</span><b>{n}</b></div>', "stage", f"g-step{n}", t, t1, 24)
+    add(f'<div class="stepc" id="sc{n}"><span>STEP</span><b>{n}</b></div>', "panel", f"g-step{n}", t, t1, 24)
     js.append(f'tl.fromTo("#sc{n}", {{opacity: 0, scale: 2.4}}, {{opacity: 1, scale: 1, duration: 0.16, ease: "power4.in"}}, {t - 0.06:.3f});')
     fx("boom", t + 0.04, 0.22); flash(t + 0.04); OUT(f"#sc{n}", t1); DIM.append((t, t1))
 S1 = at("step one"); step_card(1, S1, at("we run") + 0.45)
@@ -223,18 +208,8 @@ js.append(f'tl.fromTo("#genad", {{opacity: 0, x: 80}}, {{opacity: 1, x: 0, durat
 js.append(f'tl.to("#genad", {{filter: "grayscale(1) brightness(0.55)", duration: 0.3}}, {at("generic") + 0.5:.3f});')
 fx("pop", at("generic") - 0.1, 0.25); fx("buzzer2", at("every roofer", find("generic")[0]), 0.16)
 OUT("#g-ads .ptitle, #g-ads .adrow", AD1 - 0.05)
-# same ads -> same leads -> competing on price
-SA0 = at("if you run")
-add('<div class="kin mid"><div><span id="sa0">SAME ADS</span> <span id="sa1">=</span> <span id="sa2" class="y">SAME LEADS</span></div><div><span id="sa3" class="r">COMPETING ON PRICE</span></div></div>',
-    "stage", "g-same", SA0, at("that's why") - 0.05)
-for j, t in enumerate((at("same ads"), at("same ads") + 0.3, at("same exact"), at("competing on"))): SNAP(f"#sa{j}", t, "x: 120")
-WH(at("same ads")); fx("pop", at("same exact"), 0.22); fx("blow", at("competing on"), 0.25); OUT("#g-same .kin", at("that's why") - 0.05); DIM.append((SA0, at("that's why")))
-NW0 = at("that's why")
-add('<div class="kin mid"><div><span id="nw0">A NEW WAY OF</span></div><div><span id="nw1" class="y">MARKETING YOUR COMPANY</span></div></div>', "stage", "g-newway", NW0, at("not by") - 0.05)
-SNAP("#nw0", at("new way") - 0.2, "y: 60"); SNAP("#nw1", at("marketing your"), "scale: 1.8"); WH(at("new way") - 0.2); fx("pop", at("marketing your"), 0.25)
-OUT("#g-newway .kin", at("not by") - 0.05); DIM.append((NW0, at("not by")))
 NC0 = at("not by")
-add('<div class="card2"><div class="c2a" id="nc1"><s>A COMMODITY</s></div><div class="c2b y" id="nc2">THE ONE THING THEY CAN\'T COPY</div></div>', "stage", "g-commodity", NC0, at("step two") - 0.02)
+add('<div class="card2"><div class="c2a" id="nc1"><s>A COMMODITY</s></div><div class="c2b y" id="nc2">THE ONE THING THEY CAN\'T COPY</div></div>', "panel", "g-commodity", NC0, at("step two") - 0.02)
 POP("#nc1", at("commodity")); WH(at("commodity")); SNAP("#nc2", at("the one thing"), "scale: 1.8"); fx("ding", at("replicate"), 0.25)
 OUT("#g-commodity .card2", at("step two") - 0.02); DIM.append((NC0, at("step two")))
 # step 2
@@ -260,15 +235,15 @@ for j, (_, t) in enumerate(checks):
     fx("tick", t + 0.18, 0.35)
 OUT("#g-call2 .ptitle, #g-call2 .adrow", CA1 + 0.1)
 FO0, FO1 = CA1 + 0.1, at("lastly")
-add('<div class="lead big" id="fl"><div class="lh">🔔 NEW LEAD</div><b>“Just looking for a price”</b><i>Not ready to buy</i></div><div class="fout" id="fout" data-layout-allow-overlap>FILTERED OUT</div>',
-    "stage", "g-filter", FO0, FO1 - 0.02)
+add('<div class="fwrap"><div class="lead big" id="fl"><div class="lh">🔔 NEW LEAD</div><b>“Just looking for a price”</b><i>Not ready to buy</i></div><div class="fout" id="fout" data-layout-allow-overlap>FILTERED OUT</div></div>',
+    "panel", "g-filter", FO0, FO1 - 0.02)
 DIM.append((FO0, FO1)); POP("#fl", FO0); WH(FO0)
 js.append(f'tl.fromTo("#fout", {{opacity: 0, scale: 2.6, rotation: -10}}, {{opacity: 1, scale: 1, rotation: -6, duration: 0.13, ease: "power4.in"}}, {at("tire kickers") - 0.06:.3f});')
 fx("stamp", at("tire kickers") + 0.02, 0.4)
 js.append(f'tl.to("#fl, #fout", {{x: 1500, rotation: 8, duration: 0.45, ease: "power3.in"}}, {at("ready to buy") - 0.2:.3f});'); fx("whip", at("ready to buy") - 1.0, 0.26)
 # step 3
 S3 = at("lastly"); step_card(3, S3, at("we book") - 0.3)
-CL0, CL1 = at("we book") - 0.3, at("so all you")
+CL0, CL1 = at("we book") - 0.3, at("show up") - 0.05   # hold the calendar until the full-screen beat
 days = ["MON", "TUE", "WED", "THU", "FRI"]
 BK = [(0, 1, "Roof estimate · 9:00"), (2, 0, "Roof estimate · 8:30"), (1, 2, "Roof estimate · 1:00"), (3, 1, "Roof estimate · 10:30"), (4, 0, "Roof estimate · 9:30"), (2, 2, "Roof estimate · 3:00")]
 grid = "".join(f'<div class="cd"><b>{d}</b>' + "".join(f'<div class="slot"></div>' for _ in range(3)) + '</div>' for d in days)
@@ -305,22 +280,12 @@ js.append(f'const c2 = {{v: 0}}; tl.fromTo(c2, {{v: 0}}, {{v: 500000, duration: 
 for k in range(6): fx("count", C2a + (C2b - C2a) * k / 6, 0.2)
 fx("kaching", C2b, 0.4); js.append(f'tl.fromTo("#cn2", {{scale: 1}}, {{scale: 1.12, duration: 0.1, yoyo: true, repeat: 1}}, {C2b:.3f});')
 OUT("#g-cnt .cnt", at("that's what happens") - 0.05)
-RM0 = at("that's what happens")
-add('<div class="kin mid"><div><span id="rm0">RIGHT MESSAGE.</span></div><div><span id="rm1">RIGHT HOMEOWNER.</span></div><div><span id="rm2" class="y">RIGHT TIME.</span></div></div>',
-    "stage", "g-right", RM0, at("one more thing") - 0.05)
-for j, t in enumerate((at("right message"), at("right homeowner"), at("right time"))): SNAP(f"#rm{j}", t, "x: -140"); fx("blow", t, 0.22)
-OUT("#g-right .kin", at("one more thing") - 0.05); DIM.append((RM0, at("one more thing")))
-
-# ======================= 6. QUALIFIER + EXCLUSIVITY =======================
-OM = at("one more thing")
-add(f'<div class="big" id="omt">ONE MORE THING {E("☝️")}</div>', "stage", "g-one", OM, at("this only works") - 0.05)
-POP("#omt", OM); WH(OM); OUT("#omt", at("this only works") - 0.05); DIM.append((OM, at("this only works")))
 BC0 = at("this only works")
-add('<div class="ycard" id="ycard">BUILT FOR ROOFERS WHO CAN CLOSE</div>', "stage", "g-close", BC0, at("if you do well") + 1.2)
+add('<div class="ycard" id="ycard">BUILT FOR ROOFERS WHO CAN CLOSE</div>', "panel", "g-close", BC0, at("if you do well") + 1.2)
 POP("#ycard", BC0 + 0.05, 0.26); fx("blow", at("can close"), 0.32); OUT("#ycard", at("if you do well") + 1.2); DIM.append((BC0, at("if you do well") + 1.2))
 BN0 = at("if you do well") + 1.2
 add('<div class="kin mid"><div><span id="bn0">YOUR REAL BOTTLENECK:</span></div><div><span id="bn1" class="y">QUALIFIED APPOINTMENTS</span></div><div><span id="bn2">→ THIS IS BUILT FOR YOU</span></div></div>',
-    "stage", "g-bottle", BN0, at("we only work") - 0.05)
+    "panel", "g-bottle", BN0, at("we only work") - 0.05)
 SNAP("#bn0", at("bottleneck"), "y: 60"); SNAP("#bn1", at("qualified appointments"), "scale: 1.8"); SNAP("#bn2", at("this is built"), "x: 120")
 WH(at("bottleneck")); fx("pop", at("qualified appointments"), 0.25); fx("ding", at("this is built"), 0.25)
 OUT("#g-bottle .kin", at("we only work") - 0.05); DIM.append((BN0, at("we only work")))
@@ -338,14 +303,11 @@ POP("#gone", at("it's gone")); fx("blow", at("it's gone"), 0.3)
 OUT("#g-map .ptitle, #g-map .map, #gone", MP1 - 0.05)
 
 # ======================= 7. ENDING =======================
-SG0 = at("so if you're")
-add('<div class="kin mid"><div><span id="sg0">SERIOUS ABOUT</span> <span id="sg1" class="y">GROWTH?</span></div><div><span id="sg2">DONE HOPING?</span></div></div>', "stage", "g-serious", SG0, at("scroll down") - 0.05)
-SNAP("#sg0", at("serious about"), "y: 60"); SNAP("#sg1", at("growth"), "scale: 2"); SNAP("#sg2", at("done hoping"), "x: 120"); WH(at("serious about"))
 fx("riser", at("scroll down") - 1.6, 0.34)
-OUT("#g-serious .kin", at("scroll down") - 0.05); DIM.append((SG0, at("scroll down")))
+SG0 = at("so if you're")
 AP = at("scroll down")
 add(f'<div class="apply"><div class="apb" id="apb">APPLY BELOW {E("👇")}</div><svg class="arrow" id="arw" viewBox="0 0 120 150" width="110" height="138"><path d="M42 0h36v80h32L60 145 10 80h32z" fill="#ffd60a" stroke="#000" stroke-width="8" stroke-linejoin="round"/></svg>'
-    '<div class="apl" id="apl">We\'ll check if your area is open</div></div>', "stage", "g-apply", AP, DUR)
+    '<div class="apl" id="apl">We\'ll check if your area is open</div></div>', "panel", "g-apply", AP, DUR)
 flash(AP); fx("drop", AP, 0.28)
 js.append(f'tl.fromTo("#apb", {{opacity: 0, scale: 2.2}}, {{opacity: 1, scale: 1, duration: 0.16, ease: "power4.in"}}, {AP - 0.06:.3f});')
 POP("#arw", AP + 0.25); POP("#apl", at("check if your") - 0.4); fx("pop", at("check if your") - 0.4, 0.25)
@@ -368,7 +330,7 @@ for k, c0 in enumerate(MV):
             "driftL": ("scale: 1.06, xPercent: 1.2", "scale: 1.08, xPercent: -1.2"), "driftR": ("scale: 1.06, xPercent: -1.2", "scale: 1.08, xPercent: 1.2"),
             "slowpush": ("scale: 1, xPercent: 0", "scale: 1.16, xPercent: 0")}[mv]
     js.append(f'tl.fromTo("#cam", {{{a}}}, {{{b}, duration: {c1 - c0:.3f}, ease: "sine.inOut", immediateRender: {"true" if k == 0 else "false"}}}, {c0:.3f});')
-KEY = ["dead-end leads", "price shoppers", "ghost you", "pay attention", "low-intent", "race to the bottom", "sold to five", "the system is", "different one",
+KEY = ["change how", "new way", "same ads", "same exact", "competing on", "right message", "right homeowner", "right time", "one more thing", "serious about", "dead-end leads", "price shoppers", "ghost you", "pay attention", "low-intent", "race to the bottom", "sold to five", "the system is", "different one",
        "face to face", "within", "your calendar", "four million", "five hundred thousand", "one roofer per service area", "you don't pay", "apply"]
 PUNCH = sorted({at(k) for k in KEY})
 for t in PUNCH:
@@ -380,21 +342,28 @@ G = {"base": "contrast(1.06) saturate(1.06) brightness(1.02)", "dark": "contrast
 js.append(f'tl.set("#grade", {{filter: "{G["base"]}"}}, 0);')
 js.append(f'tl.to("#grade", {{filter: "{G["dark"]}", duration: 0.4}}, {at("you\'ve probably"):.3f});')
 js.append(f'tl.set("#grade", {{filter: "{G["bright"]}"}}, {TU:.3f});')
-ON, OFF = "1", "0"   # opacity of the pre-blurred, darkened copy (assets/base_soft.mp4): far cheaper to render than a live CSS blur
-def windows(lst):
-    m = []
-    for a, b in sorted(lst):
-        if m and a - m[-1][1] < 0.2: m[-1] = (m[-1][0], max(b, m[-1][1]))
-        else: m.append((a, b))
-    return m
-DW = windows([d for d in DIM if not any(s[0] <= d[0] < s[1] for s in SLIDE)])
-js.append(f'tl.set("#srcsoft", {{opacity: {ON if DW and DW[0][0] == 0 else OFF}}}, 0);')
-for k, (a, b) in enumerate(DW):
-    if not (k == 0 and a == 0): js.append(f'tl.to("#srcsoft", {{opacity: {ON}, duration: 0.2}}, {a:.3f});')
-    if b < DUR - 0.05: js.append(f'tl.to("#srcsoft", {{opacity: {OFF}, duration: 0.2}}, {b:.3f});')
-for a, b in windows(SLIDE):
-    js.append(f'tl.to("#slide", {{x: -440, scale: 0.52, borderRadius: 28, duration: 0.35, ease: "power3.inOut"}}, {a - 0.05:.3f});')
-    js.append(f'tl.to("#slide", {{x: 0, scale: 1, borderRadius: 0, duration: 0.35, ease: "power3.inOut"}}, {b - 0.2:.3f});')
+# Three layouts only, never a blurred/darkened face:
+#   talk  = my shot full frame, sharp, captions only
+#   split = my shot in a rounded frame on the left, graphic on the right (dark background)
+#   full  = shot hidden, graphic full screen on the dark background (voice keeps playing)
+LAYOUT = [(0.0, "full"), (at("tired of"), "split"), (at("stop what"), "talk"), (PA, "full"), (at("what i'm") + 0.9, "talk"),
+          (at("you've probably"), "split"), (at("here's what nobody"), "talk"), (at("most lead"), "split"), (NB, "full"),
+          (TU, "split"), (at("if you run"), "talk"), (at("not by"), "split"), (at("show up") - 0.05, "full"),
+          (at("that's what happens"), "talk"), (at("this only works"), "split"), (at("so if you're"), "talk"), (AP, "split")]
+STATE = {"talk": "x: 0, y: 0, scale: 1, borderRadius: 0, opacity: 1", "split": "x: -440, y: -20, scale: 0.52, borderRadius: 54, opacity: 1",
+         "full": "opacity: 0"}
+js.append(f'tl.set("#slide", {{{STATE["full"]}}}, 0);')
+prev = "full"
+for t, mode in LAYOUT[1:]:
+    if mode == "full":                                     # quick cut away from the shot
+        js.append(f'tl.to("#slide", {{opacity: 0, duration: 0.12, ease: "power1.in"}}, {t - 0.06:.3f});')
+    elif prev == "full":                                   # cut back in, already in place
+        js.append(f'tl.set("#slide", {{{STATE[mode].replace(", opacity: 1", "")}}}, {t - 0.07:.3f});')
+        js.append(f'tl.to("#slide", {{opacity: 1, duration: 0.12, ease: "power1.out"}}, {t - 0.07:.3f});')
+    else:                                                  # quick slide between talk and split
+        js.append(f'tl.to("#slide", {{{STATE[mode]}, duration: 0.35, ease: "power3.inOut"}}, {t - 0.18:.3f});')
+    if mode != "full": fx("wB", t - 0.12, 0.12)
+    prev = mode
 fz = [f'<img class="clip freeze" id="fz{k}" src="{img}" alt="" data-start="{t:.3f}" data-duration="0.5" data-track-index="{4 + k}" />' for k, (t, img) in enumerate(FREEZE)]
 
 # ======================= captions =======================
@@ -458,7 +427,6 @@ doc = f"""<!doctype html>
       <div id="bgpanel"></div>
       <div id="slide"><div id="cam"><div id="punch"><div id="shake"><div id="soft"><div id="grade">
         <video id="src" class="clip" src="assets/base.mp4" muted playsinline data-start="0" data-duration="{DUR}" data-track-index="0"></video>
-        <video id="srcsoft" class="clip" src="assets/base_soft.mp4" muted playsinline data-start="0" data-duration="{DUR}" data-track-index="3"></video>
         {nl.join(fz)}
       </div></div></div></div></div></div>
       <div id="vignette"></div>
@@ -482,4 +450,17 @@ doc = f"""<!doctype html>
 open("index.html", "w").write(doc)
 gr = sorted([float(re.search(r'data-start="([\d.]+)"', e).group(1)) for e in el] + PUNCH + [t for _, t, _, _ in sfx])
 gaps = [(round(a, 2), round(b - a, 2)) for a, b in zip([0.0] + gr, gr + [DUR]) if b - a > 3.5]
-print(f"{DUR}s · {len(el)} graphics · {len(PUNCH)} punches · {len(groups)} captions · {len(sfx)} sfx · slide windows {len(windows(SLIDE))} · gaps>3.5s: {gaps or 'none'}")
+print(f"{DUR}s · {len(el)} graphics · {len(PUNCH)} punches · {len(groups)} captions · {len(sfx)} sfx · layout switches {len(LAYOUT) - 1} · gaps>3.5s: {gaps or 'none'}")
+# layout check: a split screen must never show an empty right panel
+pan = sorted((float(a), float(a) + float(b)) for a, b in re.findall(r'class="clip panel" id="[^"]+" data-start="([\d.]+)" data-duration="([\d.]+)"', "".join(el)))
+empty = []
+for k, (t, mode) in enumerate(LAYOUT):
+    if mode != "split": continue
+    t1 = LAYOUT[k + 1][0] if k + 1 < len(LAYOUT) else DUR
+    cur = t
+    for a, b in pan:
+        if b <= cur or a >= t1: continue
+        if a - cur > 0.3: empty.append((round(cur, 2), round(a - cur, 2)))
+        cur = max(cur, b)
+    if t1 - cur > 0.3: empty.append((round(cur, 2), round(t1 - cur, 2)))
+print("empty split panels:", empty or "none")
