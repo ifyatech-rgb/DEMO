@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Connor Commercial</title>
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Inter"; font-weight: 500; src: url("vendor/inter-latin-500-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 600; src: url("vendor/inter-latin-600-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 700; src: url("vendor/inter-latin-700-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 800; src: url("vendor/inter-latin-800-normal.woff2") format("woff2"); }
+      :root { --green: #1f5a3d; --green2: #2f7a53; --ink: #14231b; --muted: #5d6b63; --accent: #f2c14e; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #000; color: #fff; font-family: "Inter", sans-serif; }
+      #hand, #cam { position: absolute; inset: 0; }
+      #cam { transform-origin: 50% 36%; }
+      #src { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      .kb { position: absolute; inset: 0; opacity: 0; overflow: hidden; }
+      .kb video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+      /* captions: fixed lower third, same spot for the whole video */
+      #captions { position: absolute; left: 70px; right: 70px; top: 1300px; height: 170px; }
+      .cg { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; opacity: 0; }
+      .cg div { font-size: 54px; font-weight: 600; line-height: 1.24; letter-spacing: -0.005em; text-align: center; white-space: nowrap; color: #fff;
+                text-shadow: 0 2px 4px rgba(0,0,0,0.5), 0 3px 22px rgba(0,0,0,0.5); }
+      .cg .hl { color: var(--accent); }
+
+      /* graphics */
+      .g { position: absolute; left: 0; right: 0; display: flex; justify-content: center; }
+      .card { background: rgba(255,255,255,0.95); color: var(--ink); border-radius: 26px; box-shadow: 0 18px 50px rgba(0,0,0,0.28), 0 2px 6px rgba(0,0,0,0.12); opacity: 0; }
+      .tag { position: absolute; top: 250px; left: 0; right: 0; display: flex; justify-content: center; }
+      .tag .card { display: flex; align-items: center; gap: 14px; padding: 18px 30px 18px 24px; border-radius: 999px; font-size: 34px; font-weight: 600; }
+      .tag svg { width: 30px; height: 30px; }
+      .name { top: 1290px; justify-content: flex-start; padding-left: 80px; }
+      .name .card { display: flex; align-items: stretch; gap: 22px; padding: 26px 40px 26px 26px; }
+      .name .bar { width: 8px; border-radius: 4px; background: var(--green2); }
+      .name b { display: block; font-size: 50px; font-weight: 700; line-height: 1.1; }
+      .name i { display: block; margin-top: 6px; font-style: normal; font-size: 30px; font-weight: 600; color: var(--green); }
+      .prob { top: 1300px; }
+      .prob .card { padding: 32px 46px; font-size: 44px; font-weight: 600; line-height: 1.2; text-align: center; max-width: 900px; }
+      .prob .card span { display: block; margin-bottom: 10px; font-size: 28px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+      .proc { top: 1270px; }
+      .proc .card { width: 900px; padding: 34px 44px 30px; }
+      .proc .ttl { font-size: 28px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-align: center; margin-bottom: 26px; }
+      .steps { position: relative; display: flex; justify-content: space-between; }
+      .track { position: absolute; left: 70px; right: 70px; top: 27px; height: 4px; border-radius: 2px; background: #dfe5e1; }
+      .fill { position: absolute; left: 0; top: 0; bottom: 0; width: 100%; border-radius: 2px; background: var(--green2); transform-origin: 0 50%; transform: scaleX(0); }
+      .st { position: relative; width: 180px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+      .dot { width: 58px; height: 58px; border-radius: 50%; background: #fff; border: 4px solid #dfe5e1; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700; color: var(--muted); }
+      .dot.on { background: var(--green2); border-color: var(--green2); color: #fff; }
+      .st b { font-size: 32px; font-weight: 600; color: var(--muted); }
+      .st b.on { color: var(--ink); }
+      .offer { top: 1290px; }
+      .offer .card { padding: 32px 56px 30px; text-align: center; }
+      .offer b { display: block; font-size: 54px; font-weight: 800; letter-spacing: -0.01em; }
+      .offer i { display: block; margin-top: 10px; font-style: normal; font-size: 32px; font-weight: 600; color: var(--green); }
+      .end { top: 1250px; }
+      .end .card { width: 900px; padding: 34px 40px 28px; text-align: center; }
+      .end .co { font-size: 28px; font-weight: 700; letter-spacing: 0.12em; color: var(--green); }
+      .end b { display: block; margin-top: 12px; font-size: 56px; font-weight: 800; letter-spacing: -0.01em; }
+      .end .btn { display: inline-flex; align-items: center; gap: 12px; margin-top: 22px; padding: 18px 34px; border-radius: 999px; background: var(--green2); color: #fff; font-size: 30px; font-weight: 600; }
+      .end svg { display: block; margin: 16px auto 0; width: 44px; height: 44px; }
+
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-width="1080" data-height="1920" data-duration="61.84">
+      <div id="hand"><div id="cam">
+        <video id="src" class="clip" src="assets/look.mp4" muted playsinline data-start="0" data-duration="61.84" data-track-index="0"></video>
+      </div></div>
+      <div class="kb" id="kb0"><video id="bv0" class="clip" src="assets/br/b02-claimform.mp4" muted playsinline data-start="6.980" data-duration="2.140" data-track-index="2"></video></div>
+      <div class="kb" id="kb1"><video id="bv1" class="clip" src="assets/br/b03-hailstorm.mp4" muted playsinline data-start="14.280" data-duration="2.540" data-track-index="3"></video></div>
+      <div class="kb" id="kb2"><video id="bv2" class="clip" src="assets/br/b05-agingroof.mp4" muted playsinline data-start="19.730" data-duration="2.390" data-track-index="2"></video></div>
+      <div class="kb" id="kb3"><video id="bv3" class="clip" src="assets/br/b07-crew-aerial.mp4" muted playsinline data-start="33.880" data-duration="2.290" data-track-index="3"></video></div>
+      <div class="kb" id="kb4"><video id="bv4" class="clip" src="assets/br/b09-neighborhood.mp4" muted playsinline data-start="35.930" data-duration="2.790" data-track-index="2"></video></div>
+      <div class="kb" id="kb5"><video id="bv5" class="clip" src="assets/br/b11-crew.mp4" muted playsinline data-start="42.630" data-duration="2.790" data-track-index="3"></video></div>
+      <div class="kb" id="kb6"><video id="bv6" class="clip" src="assets/br/b14-inspector.mp4" muted playsinline data-start="54.630" data-duration="1.890" data-track-index="2"></video></div>
+      <div class="kb" id="kb7"><video id="bv7" class="clip" src="assets/br/b04-damage.mp4" muted playsinline data-start="56.280" data-duration="1.790" data-track-index="3"></video></div>
+      <div class="clip g tag" id="g-tag" data-start="0.000" data-duration="3.000" data-track-index="20"><div class="card"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.6a2.6 2.6 0 1 1 0-5.2 2.6 2.6 0 0 1 0 5.2z" fill="#2f7a53"/></svg>Texas Homeowners</div></div>
+      <div class="clip g prob" id="g-prob" data-start="9.150" data-duration="2.500" data-track-index="20"><div class="card"><span>Texas roof insurance</span>Claims often get underpaid<br>or denied</div></div>
+      <div class="clip g name" id="g-name" data-start="26.530" data-duration="2.500" data-track-index="20"><div class="card"><i class="bar"></i><div><b>Connor</b><i>Pinecrest Roofing &amp; Construction</i></div></div></div>
+      <div class="clip g proc" id="g-proc" data-start="30.550" data-duration="2.850" data-track-index="20"><div class="card"><div class="ttl">How we help</div><div class="steps"><div class="track"><div class="fill" id="fill"></div></div><div class="st"><div class="dot" id="dt0">1</div><b id="sl0">Inspection</b></div><div class="st"><div class="dot" id="dt1">2</div><b id="sl1">Claim</b></div><div class="st"><div class="dot" id="dt2">3</div><b id="sl2">Approval</b></div></div></div></div>
+      <div class="clip g offer" id="g-offer" data-start="51.370" data-duration="2.700" data-track-index="20"><div class="card"><b>Free Roof Inspection</b><i>No Obligation</i></div></div>
+      <div class="clip g end" id="g-end" data-start="58.200" data-duration="3.640" data-track-index="20"><div class="card"><div class="co">PINECREST ROOFING &amp; CONSTRUCTION</div><b>Book Your Free Inspection</b><svg viewBox="0 0 24 24" id="arw"><path d="M12 4v15m0 0l-6-6m6 6l6-6" stroke="#2f7a53" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+      <div id="captions" class="clip" data-start="0" data-duration="61.84" data-track-index="30">
+        <div class="cg" id="cg0"><div>Texas homeowners</div></div>
+        <div class="cg" id="cg1"><div>watch this video</div></div>
+        <div class="cg" id="cg2"><div>before you spend <span class="hl">$30,000</span></div><div>on a new roof</div></div>
+        <div class="cg" id="cg3"><div><span class="hl">47%</span> of roof insurance claims</div><div>in the state of Texas</div></div>
+        <div class="cg" id="cg4"><div>were denied and not paid out at all</div></div>
+        <div class="cg" id="cg5"><div>And if your roof is</div><div>10 to 15 years old</div></div>
+        <div class="cg" id="cg6"><div>and was recently</div><div>hit by a storm</div></div>
+        <div class="cg" id="cg7"><div>you may already be</div><div>in the <span class="hl">risk</span> window</div></div>
+        <div class="cg" id="cg8"><div>because insurance companies</div></div>
+        <div class="cg" id="cg9"><div>are tightening guidelines</div><div>on aging roofs</div></div>
+        <div class="cg" id="cg10"><div>But you don&#x27;t need</div><div>to worry now</div></div>
+        <div class="cg" id="cg11"><div>because that is exactly</div><div>where we come in</div></div>
+        <div class="cg" id="cg12"><div>At Pinecrest Roofing and Construction</div></div>
+        <div class="cg" id="cg13"><div>we&#x27;ve helped dozens</div><div>of local homeowners</div></div>
+        <div class="cg" id="cg14"><div>get their roofs fully approved</div><div>by their insurance</div></div>
+        <div class="cg" id="cg15"><div>and we&#x27;re launching the new</div><div>Roof Protection Program</div></div>
+        <div class="cg" id="cg16"><div>exclusively for homeowners</div><div>in North and East Texas</div></div>
+        <div class="cg" id="cg17"><div>This program is designed</div><div>specifically for aging roofs</div></div>
+        <div class="cg" id="cg18"><div>and just to maintain</div><div>quality and precision</div></div>
+        <div class="cg" id="cg19"><div>we limit it to just <span class="hl">nine</span></div><div>full roof projects per month</div></div>
+        <div class="cg" id="cg20"><div>For a limited time</div><div>we&#x27;re also offering a free</div></div>
+        <div class="cg" id="cg21"><div>no-obligation roof inspection</div></div>
+        <div class="cg" id="cg22"><div>complete with photo and</div><div>video documentation</div></div>
+        <div class="cg" id="cg23"><div>to check for storm damage</div></div>
+        <div class="cg" id="cg24"><div>Just click the Learn More</div><div>button below</div></div>
+        <div class="cg" id="cg25"><div>and book your free inspection</div></div>
+      </div>
+      <audio id="fx0" src="assets/sfx/whoosh.wav" data-start="0.000" data-duration="0.800" data-track-index="40" data-volume="0.16"></audio>
+      <audio id="fx1" src="assets/sfx/whoosh.wav" data-start="9.100" data-duration="0.800" data-track-index="41" data-volume="0.16"></audio>
+      <audio id="fx2" src="assets/sfx/whoosh.wav" data-start="26.480" data-duration="0.800" data-track-index="42" data-volume="0.16"></audio>
+      <audio id="fx3" src="assets/sfx/whoosh.wav" data-start="30.500" data-duration="0.800" data-track-index="43" data-volume="0.16"></audio>
+      <audio id="fx4" src="assets/sfx/click.wav" data-start="31.000" data-duration="0.157" data-track-index="44" data-volume="0.22"></audio>
+      <audio id="fx5" src="assets/sfx/click.wav" data-start="31.600" data-duration="0.157" data-track-index="45" data-volume="0.22"></audio>
+      <audio id="fx6" src="assets/sfx/click.wav" data-start="32.200" data-duration="0.157" data-track-index="46" data-volume="0.22"></audio>
+      <audio id="fx7" src="assets/sfx/whoosh.wav" data-start="51.320" data-duration="0.800" data-track-index="47" data-volume="0.16"></audio>
+      <audio id="fx8" src="assets/sfx/chime.wav" data-start="58.300" data-duration="1.800" data-track-index="48" data-volume="0.2"></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.set("#hand", {x: 3.96, y: 3.31, rotation: 0.107}, 0);
+      tl.to("#hand", {x: 3.27, y: 3.62, rotation: 0.116, duration: 0.5, ease: "none"}, 0.00);
+      tl.to("#hand", {x: 2.40, y: 2.83, rotation: 0.120, duration: 0.5, ease: "none"}, 0.50);
+      tl.to("#hand", {x: 2.92, y: 1.16, rotation: 0.118, duration: 0.5, ease: "none"}, 1.00);
+      tl.to("#hand", {x: 4.21, y: -0.61, rotation: 0.110, duration: 0.5, ease: "none"}, 1.50);
+      tl.to("#hand", {x: 4.22, y: -1.68, rotation: 0.097, duration: 0.5, ease: "none"}, 2.00);
+      tl.to("#hand", {x: 1.99, y: -1.80, rotation: 0.079, duration: 0.5, ease: "none"}, 2.50);
+      tl.to("#hand", {x: -1.07, y: -1.45, rotation: 0.058, duration: 0.5, ease: "none"}, 3.00);
+      tl.to("#hand", {x: -2.74, y: -1.37, rotation: 0.033, duration: 0.5, ease: "none"}, 3.50);
+      tl.to("#hand", {x: -2.49, y: -2.01, rotation: 0.007, duration: 0.5, ease: "none"}, 4.00);
+      tl.to("#hand", {x: -1.93, y: -3.10, rotation: -0.019, duration: 0.5, ease: "none"}, 4.50);
+      tl.to("#hand", {x: -2.74, y: -3.88, rotation: -0.044, duration: 0.5, ease: "none"}, 5.00);
+      tl.to("#hand", {x: -4.50, y: -3.64, rotation: -0.067, duration: 0.5, ease: "none"}, 5.50);
+      tl.to("#hand", {x: -5.14, y: -2.33, rotation: -0.088, duration: 0.5, ease: "none"}, 6.00);
+      tl.to("#hand", {x: -3.45, y: -0.57, rotation: -0.103, duration: 0.5, ease: "none"}, 6.50);
+      tl.to("#hand", {x: -0.54, y: 0.77, rotation: -0.114, duration: 0.5, ease: "none"}, 7.00);
+      tl.to("#hand", {x: 1.32, y: 1.22, rotation: -0.119, duration: 0.5, ease: "none"}, 7.50);
+      tl.to("#hand", {x: 1.36, y: 1.02, rotation: -0.119, duration: 0.5, ease: "none"}, 8.00);
+      tl.to("#hand", {x: 1.01, y: 0.88, rotation: -0.113, duration: 0.5, ease: "none"}, 8.50);
+      tl.to("#hand", {x: 2.03, y: 1.42, rotation: -0.101, duration: 0.5, ease: "none"}, 9.00);
+      tl.to("#hand", {x: 4.22, y: 2.60, rotation: -0.085, duration: 0.5, ease: "none"}, 9.50);
+      tl.to("#hand", {x: 5.55, y: 3.76, rotation: -0.064, duration: 0.5, ease: "none"}, 10.00);
+      tl.to("#hand", {x: 4.51, y: 4.09, rotation: -0.041, duration: 0.5, ease: "none"}, 10.50);
+      tl.to("#hand", {x: 1.95, y: 3.27, rotation: -0.015, duration: 0.5, ease: "none"}, 11.00);
+      tl.to("#hand", {x: 0.09, y: 1.70, rotation: 0.011, duration: 0.5, ease: "none"}, 11.50);
+      tl.to("#hand", {x: -0.06, y: 0.21, rotation: 0.037, duration: 0.5, ease: "none"}, 12.00);
+      tl.to("#hand", {x: 0.23, y: -0.52, rotation: 0.061, duration: 0.5, ease: "none"}, 12.50);
+      tl.to("#hand", {x: -0.87, y: -0.49, rotation: 0.082, duration: 0.5, ease: "none"}, 13.00);
+      tl.to("#hand", {x: -3.40, y: -0.30, rotation: 0.099, duration: 0.5, ease: "none"}, 13.50);
+      tl.to("#hand", {x: -5.37, y: -0.68, rotation: 0.112, duration: 0.5, ease: "none"}, 14.00);
+      tl.to("#hand", {x: -5.05, y: -1.83, rotation: 0.119, duration: 0.5, ease: "none"}, 14.50);
+      tl.to("#hand", {x: -2.98, y: -3.27, rotation: 0.120, duration: 0.5, ease: "none"}, 15.00);
+      tl.to("#hand", {x: -1.29, y: -4.15, rotation: 0.115, duration: 0.5, ease: "none"}, 15.50);
+      tl.to("#hand", {x: -1.19, y: -3.89, rotation: 0.105, duration: 0.5, ease: "none"}, 16.00);
+      tl.to("#hand", {x: -1.59, y: -2.65, rotation: 0.090, duration: 0.5, ease: "none"}, 16.50);
+      tl.to("#hand", {x: -0.58, y: -1.17, rotation: 0.070, duration: 0.5, ease: "none"}, 17.00);
+      tl.to("#hand", {x: 2.12, y: -0.23, rotation: 0.048, duration: 0.5, ease: "none"}, 17.50);
+      tl.to("#hand", {x: 4.63, y: -0.09, rotation: 0.022, duration: 0.5, ease: "none"}, 18.00);
+      tl.to("#hand", {x: 5.02, y: -0.30, rotation: -0.004, duration: 0.5, ease: "none"}, 18.50);
+      tl.to("#hand", {x: 3.51, y: -0.12, rotation: -0.030, duration: 0.5, ease: "none"}, 19.00);
+      tl.to("#hand", {x: 2.11, y: 0.89, rotation: -0.055, duration: 0.5, ease: "none"}, 19.50);
+      tl.to("#hand", {x: 2.20, y: 2.46, rotation: -0.077, duration: 0.5, ease: "none"}, 20.00);
+      tl.to("#hand", {x: 2.87, y: 3.79, rotation: -0.095, duration: 0.5, ease: "none"}, 20.50);
+      tl.to("#hand", {x: 2.14, y: 4.13, rotation: -0.109, duration: 0.5, ease: "none"}, 21.00);
+      tl.to("#hand", {x: -0.53, y: 3.35, rotation: -0.117, duration: 0.5, ease: "none"}, 21.50);
+      tl.to("#hand", {x: -3.41, y: 2.02, rotation: -0.120, duration: 0.5, ease: "none"}, 22.00);
+      tl.to("#hand", {x: -4.43, y: 0.96, rotation: -0.117, duration: 0.5, ease: "none"}, 22.50);
+      tl.to("#hand", {x: -3.48, y: 0.66, rotation: -0.109, duration: 0.5, ease: "none"}, 23.00);
+      tl.to("#hand", {x: -2.44, y: 0.88, rotation: -0.095, duration: 0.5, ease: "none"}, 23.50);
+      tl.to("#hand", {x: -2.80, y: 0.91, rotation: -0.076, duration: 0.5, ease: "none"}, 24.00);
+      tl.to("#hand", {x: -3.87, y: 0.14, rotation: -0.054, duration: 0.5, ease: "none"}, 24.50);
+      tl.to("#hand", {x: -3.59, y: -1.42, rotation: -0.030, duration: 0.5, ease: "none"}, 25.00);
+      tl.to("#hand", {x: -1.17, y: -3.07, rotation: -0.004, duration: 0.5, ease: "none"}, 25.50);
+      tl.to("#hand", {x: 1.89, y: -3.97, rotation: 0.023, duration: 0.5, ease: "none"}, 26.00);
+      tl.to("#hand", {x: 3.39, y: -3.73, rotation: 0.048, duration: 0.5, ease: "none"}, 26.50);
+      tl.to("#hand", {x: 2.93, y: -2.67, rotation: 0.071, duration: 0.5, ease: "none"}, 27.00);
+      tl.to("#hand", {x: 2.23, y: -1.60, rotation: 0.090, duration: 0.5, ease: "none"}, 27.50);
+      tl.to("#hand", {x: 2.90, y: -1.16, rotation: 0.105, duration: 0.5, ease: "none"}, 28.00);
+      tl.to("#hand", {x: 4.42, y: -1.37, rotation: 0.115, duration: 0.5, ease: "none"}, 28.50);
+      tl.to("#hand", {x: 4.74, y: -1.61, rotation: 0.120, duration: 0.5, ease: "none"}, 29.00);
+      tl.to("#hand", {x: 2.76, y: -1.15, rotation: 0.119, duration: 0.5, ease: "none"}, 29.50);
+      tl.to("#hand", {x: -0.25, y: 0.23, rotation: 0.112, duration: 0.5, ease: "none"}, 30.00);
+      tl.to("#hand", {x: -2.04, y: 2.04, rotation: 0.099, duration: 0.5, ease: "none"}, 30.50);
+      tl.to("#hand", {x: -1.96, y: 3.42, rotation: 0.082, duration: 0.5, ease: "none"}, 31.00);
+      tl.to("#hand", {x: -1.52, y: 3.73, rotation: 0.061, duration: 0.5, ease: "none"}, 31.50);
+      tl.to("#hand", {x: -2.45, y: 3.06, rotation: 0.037, duration: 0.5, ease: "none"}, 32.00);
+      tl.to("#hand", {x: -4.43, y: 2.08, rotation: 0.011, duration: 0.5, ease: "none"}, 32.50);
+      tl.to("#hand", {x: -5.42, y: 1.55, rotation: -0.015, duration: 0.5, ease: "none"}, 33.00);
+      tl.to("#hand", {x: -4.04, y: 1.73, rotation: -0.041, duration: 0.5, ease: "none"}, 33.50);
+      tl.to("#hand", {x: -1.28, y: 2.15, rotation: -0.064, duration: 0.5, ease: "none"}, 34.00);
+      tl.to("#hand", {x: 0.60, y: 2.05, rotation: -0.085, duration: 0.5, ease: "none"}, 34.50);
+      tl.to("#hand", {x: 0.72, y: 0.98, rotation: -0.101, duration: 0.5, ease: "none"}, 35.00);
+      tl.to("#hand", {x: 0.42, y: -0.82, rotation: -0.113, duration: 0.5, ease: "none"}, 35.50);
+      tl.to("#hand", {x: 1.50, y: -2.53, rotation: -0.119, duration: 0.5, ease: "none"}, 36.00);
+      tl.to("#hand", {x: 3.88, y: -3.37, rotation: -0.119, duration: 0.5, ease: "none"}, 36.50);
+      tl.to("#hand", {x: 5.53, y: -3.14, rotation: -0.114, duration: 0.5, ease: "none"}, 37.00);
+      tl.to("#hand", {x: 4.85, y: -2.35, rotation: -0.103, duration: 0.5, ease: "none"}, 37.50);
+      tl.to("#hand", {x: 2.52, y: -1.79, rotation: -0.087, duration: 0.5, ease: "none"}, 38.00);
+      tl.to("#hand", {x: 0.73, y: -1.92, rotation: -0.067, duration: 0.5, ease: "none"}, 38.50);
+      tl.to("#hand", {x: 0.58, y: -2.48, rotation: -0.044, duration: 0.5, ease: "none"}, 39.00);
+      tl.to("#hand", {x: 0.91, y: -2.75, rotation: -0.019, duration: 0.5, ease: "none"}, 39.50);
+      tl.to("#hand", {x: -0.17, y: -2.09, rotation: 0.008, duration: 0.5, ease: "none"}, 40.00);
+      tl.to("#hand", {x: -2.81, y: -0.49, rotation: 0.034, duration: 0.5, ease: "none"}, 40.50);
+      tl.to("#hand", {x: -5.06, y: 1.40, rotation: 0.058, duration: 0.5, ease: "none"}, 41.00);
+      tl.to("#hand", {x: -5.11, y: 2.68, rotation: 0.079, duration: 0.5, ease: "none"}, 41.50);
+      tl.to("#hand", {x: -3.31, y: 2.93, rotation: 0.097, duration: 0.5, ease: "none"}, 42.00);
+      tl.to("#hand", {x: -1.76, y: 2.40, rotation: 0.110, duration: 0.5, ease: "none"}, 42.50);
+      tl.to("#hand", {x: -1.74, y: 1.86, rotation: 0.118, duration: 0.5, ease: "none"}, 43.00);
+      tl.to("#hand", {x: -2.25, y: 1.92, rotation: 0.120, duration: 0.5, ease: "none"}, 43.50);
+      tl.to("#hand", {x: -1.36, y: 2.57, rotation: 0.116, duration: 0.5, ease: "none"}, 44.00);
+      tl.to("#hand", {x: 1.35, y: 3.19, rotation: 0.107, duration: 0.5, ease: "none"}, 44.50);
+      tl.to("#hand", {x: 4.07, y: 3.00, rotation: 0.092, duration: 0.5, ease: "none"}, 45.00);
+      tl.to("#hand", {x: 4.79, y: 1.75, rotation: 0.074, duration: 0.5, ease: "none"}, 45.50);
+      tl.to("#hand", {x: 3.57, y: -0.12, rotation: 0.051, duration: 0.5, ease: "none"}, 46.00);
+      tl.to("#hand", {x: 2.34, y: -1.73, rotation: 0.026, duration: 0.5, ease: "none"}, 46.50);
+      tl.to("#hand", {x: 2.56, y: -2.42, rotation: -0.000, duration: 0.5, ease: "none"}, 47.00);
+      tl.to("#hand", {x: 3.42, y: -2.21, rotation: -0.026, duration: 0.5, ease: "none"}, 47.50);
+      tl.to("#hand", {x: 2.89, y: -1.74, rotation: -0.051, duration: 0.5, ease: "none"}, 48.00);
+      tl.to("#hand", {x: 0.32, y: -1.73, rotation: -0.074, duration: 0.5, ease: "none"}, 48.50);
+      tl.to("#hand", {x: -2.68, y: -2.41, rotation: -0.092, duration: 0.5, ease: "none"}, 49.00);
+      tl.to("#hand", {x: -3.96, y: -3.31, rotation: -0.107, duration: 0.5, ease: "none"}, 49.50);
+      tl.to("#hand", {x: -3.27, y: -3.62, rotation: -0.116, duration: 0.5, ease: "none"}, 50.00);
+      tl.to("#hand", {x: -2.40, y: -2.83, rotation: -0.120, duration: 0.5, ease: "none"}, 50.50);
+      tl.to("#hand", {x: -2.92, y: -1.16, rotation: -0.118, duration: 0.5, ease: "none"}, 51.00);
+      tl.to("#hand", {x: -4.21, y: 0.61, rotation: -0.110, duration: 0.5, ease: "none"}, 51.50);
+      tl.to("#hand", {x: -4.22, y: 1.68, rotation: -0.097, duration: 0.5, ease: "none"}, 52.00);
+      tl.to("#hand", {x: -1.99, y: 1.80, rotation: -0.079, duration: 0.5, ease: "none"}, 52.50);
+      tl.to("#hand", {x: 1.07, y: 1.45, rotation: -0.058, duration: 0.5, ease: "none"}, 53.00);
+      tl.to("#hand", {x: 2.74, y: 1.37, rotation: -0.033, duration: 0.5, ease: "none"}, 53.50);
+      tl.to("#hand", {x: 2.49, y: 2.01, rotation: -0.007, duration: 0.5, ease: "none"}, 54.00);
+      tl.to("#hand", {x: 1.93, y: 3.10, rotation: 0.019, duration: 0.5, ease: "none"}, 54.50);
+      tl.to("#hand", {x: 2.74, y: 3.88, rotation: 0.044, duration: 0.5, ease: "none"}, 55.00);
+      tl.to("#hand", {x: 4.50, y: 3.64, rotation: 0.067, duration: 0.5, ease: "none"}, 55.50);
+      tl.to("#hand", {x: 5.14, y: 2.33, rotation: 0.088, duration: 0.5, ease: "none"}, 56.00);
+      tl.to("#hand", {x: 3.45, y: 0.57, rotation: 0.103, duration: 0.5, ease: "none"}, 56.50);
+      tl.to("#hand", {x: 0.54, y: -0.77, rotation: 0.114, duration: 0.5, ease: "none"}, 57.00);
+      tl.to("#hand", {x: -1.32, y: -1.22, rotation: 0.119, duration: 0.5, ease: "none"}, 57.50);
+      tl.to("#hand", {x: -1.36, y: -1.02, rotation: 0.119, duration: 0.5, ease: "none"}, 58.00);
+      tl.to("#hand", {x: -1.01, y: -0.88, rotation: 0.113, duration: 0.5, ease: "none"}, 58.50);
+      tl.to("#hand", {x: -2.03, y: -1.42, rotation: 0.101, duration: 0.5, ease: "none"}, 59.00);
+      tl.to("#hand", {x: -4.22, y: -2.60, rotation: 0.085, duration: 0.5, ease: "none"}, 59.50);
+      tl.to("#hand", {x: -5.55, y: -3.76, rotation: 0.064, duration: 0.5, ease: "none"}, 60.00);
+      tl.to("#hand", {x: -4.51, y: -4.09, rotation: 0.041, duration: 0.5, ease: "none"}, 60.50);
+      tl.to("#hand", {x: -1.95, y: -3.27, rotation: 0.015, duration: 0.5, ease: "none"}, 61.00);
+      tl.to("#hand", {x: -0.09, y: -1.70, rotation: -0.011, duration: 0.5, ease: "none"}, 61.50);
+      tl.set("#cam", {scale: 1.10}, 0);
+      tl.to("#cam", {scale: 1.14, duration: 3.4, ease: "sine.inOut"}, 0.300);
+      tl.set("#cam", {scale: 1.10}, 7.300);
+      tl.to("#cam", {scale: 1.15, duration: 3.2, ease: "sine.inOut"}, 24.810);
+      tl.set("#cam", {scale: 1.10}, 34.200);
+      tl.to("#cam", {scale: 1.14, duration: 2.6, ease: "sine.inOut"}, 50.860);
+      tl.set("#cam", {scale: 1.10}, 54.950);
+      tl.fromTo("#kb0", {opacity: 0}, {opacity: 1, duration: 0.24, ease: "none"}, 6.980);
+      tl.to("#kb0", {opacity: 0, duration: 0.24, ease: "none"}, 8.880);
+      tl.fromTo("#bv0", {scale: 1.0, xPercent: 0}, {scale: 1.06, xPercent: 0, duration: 2.140, ease: "none"}, 6.980);
+      tl.fromTo("#kb1", {opacity: 0}, {opacity: 1, duration: 0.24, ease: "none"}, 14.280);
+      tl.to("#kb1", {opacity: 0, duration: 0.24, ease: "none"}, 16.580);
+      tl.fromTo("#bv1", {scale: 1.07, xPercent: 2.0}, {scale: 1.07, xPercent: -2.0, duration: 2.540, ease: "none"}, 14.280);
+      tl.fromTo("#kb2", {opacity: 0}, {opacity: 1, duration: 0.24, ease: "none"}, 19.730);
+      tl.to("#kb2", {opacity: 0, duration: 0.24, ease: "none"}, 21.880);
+      tl.fromTo("#bv2", {scale: 1.0, xPercent: 0}, {scale: 1.06, xPercent: 0, duration: 2.390, ease: "none"}, 19.730);
+      tl.fromTo("#kb3", {opacity: 0}, {opacity: 1, duration: 0.24, ease: "none"}, 33.880);
+      tl.set("#kb3", {opacity: 0}, 36.170);
+      tl.fromTo("#bv3", {scale: 1.07, xPercent: 2.0}, {scale: 1.07, xPercent: -2.0, duration: 2.290, ease: "none"}, 33.880);
+      tl.fromTo("#kb4", {opacity: 0}, {opacity: 1, duration: 0.24, ease: "none"}, 35.930);
+      tl.to("#kb4", {opacity: 0, duration: 0.24, ease: "none"}, 38.480);
+      tl.fromTo("#bv4", {scale: 1.0, xPercent: 0}, {scale: 1.06, xPercent: 0, duration: 2.790, ease: "none"}, 35.930);
+      tl.fromTo("#kb5", {opacity: 0}, {opacity: 1, duration: 0.24, ease: "none"}, 42.630);
+      tl.to("#kb5", {opacity: 0, duration: 0.24, ease: "none"}, 45.180);
+      tl.fromTo("#bv5", {scale: 1.07, xPercent: 2.0}, {scale: 1.07, xPercent: -2.0, duration: 2.790, ease: "none"}, 42.630);
+      tl.fromTo("#kb6", {opacity: 0}, {opacity: 1, duration: 0.24, ease: "none"}, 54.630);
+      tl.set("#kb6", {opacity: 0}, 56.520);
+      tl.fromTo("#bv6", {scale: 1.0, xPercent: 0}, {scale: 1.06, xPercent: 0, duration: 1.890, ease: "none"}, 54.630);
+      tl.fromTo("#kb7", {opacity: 0}, {opacity: 1, duration: 0.24, ease: "none"}, 56.280);
+      tl.to("#kb7", {opacity: 0, duration: 0.24, ease: "none"}, 57.830);
+      tl.fromTo("#bv7", {scale: 1.07, xPercent: 2.0}, {scale: 1.07, xPercent: -2.0, duration: 1.790, ease: "none"}, 56.280);
+      tl.fromTo("#g-tag .card", {opacity: 0, y: -10}, {opacity: 1, y: 0, duration: 0.5, ease: "power2.out"}, 0.05);
+      tl.to("#g-tag .card", {opacity: 0, y: -8, duration: 0.3, ease: "power2.in"}, 2.700);
+      tl.fromTo("#g-prob .card", {opacity: 0, y: 24}, {opacity: 1, y: 0, duration: 0.45, ease: "power3.out"}, 9.150);
+      tl.to("#g-prob .card", {opacity: 0, y: 10, duration: 0.3, ease: "power2.in"}, 11.350);
+      tl.fromTo("#g-name .card", {opacity: 0, y: 24}, {opacity: 1, y: 0, duration: 0.45, ease: "power3.out"}, 26.530);
+      tl.to("#g-name .card", {opacity: 0, y: 10, duration: 0.3, ease: "power2.in"}, 28.730);
+      tl.fromTo("#g-proc .card", {opacity: 0, y: 24}, {opacity: 1, y: 0, duration: 0.45, ease: "power3.out"}, 30.550);
+      tl.to("#g-proc .card", {opacity: 0, y: 10, duration: 0.3, ease: "power2.in"}, 33.100);
+      tl.fromTo("#dt0", {backgroundColor: "#ffffff", borderColor: "#dfe5e1", color: "#5d6b63"}, {backgroundColor: "#2f7a53", borderColor: "#2f7a53", color: "#ffffff", duration: 0.25, ease: "power1.out", immediateRender: false}, 31.000);
+      tl.fromTo("#sl0", {color: "#5d6b63"}, {color: "#14231b", duration: 0.25, immediateRender: false}, 31.000);
+      tl.fromTo("#dt1", {backgroundColor: "#ffffff", borderColor: "#dfe5e1", color: "#5d6b63"}, {backgroundColor: "#2f7a53", borderColor: "#2f7a53", color: "#ffffff", duration: 0.25, ease: "power1.out", immediateRender: false}, 31.600);
+      tl.fromTo("#sl1", {color: "#5d6b63"}, {color: "#14231b", duration: 0.25, immediateRender: false}, 31.600);
+      tl.fromTo("#fill", {scaleX: 0.0}, {scaleX: 0.5, duration: 0.35, ease: "power2.out", immediateRender: false}, 31.300);
+      tl.fromTo("#dt2", {backgroundColor: "#ffffff", borderColor: "#dfe5e1", color: "#5d6b63"}, {backgroundColor: "#2f7a53", borderColor: "#2f7a53", color: "#ffffff", duration: 0.25, ease: "power1.out", immediateRender: false}, 32.200);
+      tl.fromTo("#sl2", {color: "#5d6b63"}, {color: "#14231b", duration: 0.25, immediateRender: false}, 32.200);
+      tl.fromTo("#fill", {scaleX: 0.5}, {scaleX: 1.0, duration: 0.35, ease: "power2.out", immediateRender: false}, 31.900);
+      tl.fromTo("#g-offer .card", {opacity: 0, y: 24}, {opacity: 1, y: 0, duration: 0.45, ease: "power3.out"}, 51.370);
+      tl.to("#g-offer .card", {opacity: 0, y: 10, duration: 0.3, ease: "power2.in"}, 53.770);
+      tl.fromTo("#g-end .card", {opacity: 0, y: 24}, {opacity: 1, y: 0, duration: 0.45, ease: "power3.out"}, 58.200);
+      tl.fromTo("#arw", {y: -4}, {y: 4, duration: 0.7, ease: "sine.inOut", yoyo: true, repeat: 3, immediateRender: false}, 58.800);
+      tl.fromTo("#cg2", {opacity: 0}, {opacity: 1, duration: 0.15, ease: "none", immediateRender: false}, 3.000);
+      tl.to("#cg2", {opacity: 0, duration: 0.12, ease: "none"}, 5.670);
+      tl.fromTo("#cg3", {opacity: 0}, {opacity: 1, duration: 0.15, ease: "none", immediateRender: false}, 5.790);
+      tl.to("#cg3", {opacity: 0, duration: 0.12, ease: "none"}, 9.030);
+      tl.fromTo("#cg5", {opacity: 0}, {opacity: 1, duration: 0.15, ease: "none", immediateRender: false}, 12.020);
+      tl.to("#cg5", {opacity: 0, duration: 0.12, ease: "none"}, 14.270);
+      tl.fromTo("#cg6", {opacity: 0}, {opacity: 1, duration: 0.15, ease: "none", immediateRender: false}, 14.390);
+      tl.to("#cg6", {opacity: 0, duration: 0.12, ease: "none"}, 15.990);
+      tl.fromTo("#cg7", {opacity: 0}, {opacity: 1, duration: 0.15, ease: "none", immediateRender: false}, 16.110);
+      tl.to("#cg7", {opacity: 0, duration: 0.12, ease: "none"}, 18.110);
+      tl.fromTo("#cg8", {opacity: 0}, {opacity: 1, duration: 0.15, ease: "none", immediateRender: false}, 18.230);
+      tl.to("#cg8", {opacity: 0, duration: 0.12, ease: "none"}, 19.710);
+      tl.fromTo("#cg9", {opacity: 0}, {opacity: 1, duration: 0.15, ease: "none", immediateRender: false}, 19.830);
+      tl.to("#cg9", {opacity: 0, duration: 0.12, ease: "none"}, 22.220);
+      tl.fromTo("#cg10", {opacity: 0}, {opacity: 1, duration: 0.15, ease: "none", immediateRender: false}, 22.340);
+      tl.to("#cg10", {opacity: 0, duration: 0.12, ease: "none"}, 23.850);
+      tl.fromTo("#cg11", {opacity: 0}, {opacity: 1, duration: 0.15, ease: "none", immediateRender: false}, 23.970);
+      tl.to("#cg11", {opacity: 0, duration: 0.12, ease: "none"}, 26.310);
+      tl.fromTo("#cg13", {opacity: 0}, {opacity: 1, duration: 0.15, ease: "none", immediateRender: false}, 29.030);
+      tl.to("#cg13", {opacity: 0, duration: 0.12, ease: "none"}, 30.390);
+      tl.fromTo("#cg15", {opacity: 0}, {opacity: 1, duration: 0.15, ease: "none", immediateRender: false}, 33.400);
+      tl.to("#cg15", {opacity: 0, duration: 0.12, ease: "none"}, 36.220);
+      tl.fromTo("#cg16", {opacity: 0}, {opacity: 1, duration: 0.15, ease: "none", immediateRender: false}, 36.340);
+      tl.to("#cg16", {opacity: 0, duration: 0.12, ease: "none"}, 39.430);
+      tl.fromTo("#cg17", {opacity: 0}, {opacity: 1, duration: 0.15, ease: "none", immediateRender: false}, 39.550);
+      tl.to("#cg17", {opacity: 0, duration: 0.12, ease: "none"}, 42.500);
+      tl.fromTo("#cg18", {opacity: 0}, {opacity: 1, duration: 0.15, ease: "none", immediateRender: false}, 42.620);
+      tl.to("#cg18", {opacity: 0, duration: 0.12, ease: "none"}, 45.260);
+      tl.fromTo("#cg19", {opacity: 0}, {opacity: 1, duration: 0.15, ease: "none", immediateRender: false}, 45.380);
+      tl.to("#cg19", {opacity: 0, duration: 0.12, ease: "none"}, 48.780);
+      tl.fromTo("#cg20", {opacity: 0}, {opacity: 1, duration: 0.15, ease: "none", immediateRender: false}, 48.900);
+      tl.to("#cg20", {opacity: 0, duration: 0.12, ease: "none"}, 51.250);
+      tl.fromTo("#cg22", {opacity: 0}, {opacity: 1, duration: 0.15, ease: "none", immediateRender: false}, 54.070);
+      tl.to("#cg22", {opacity: 0, duration: 0.12, ease: "none"}, 56.270);
+      tl.fromTo("#cg23", {opacity: 0}, {opacity: 1, duration: 0.15, ease: "none", immediateRender: false}, 56.390);
+      tl.to("#cg23", {opacity: 0, duration: 0.12, ease: "none"}, 57.980);
+      tl.set({}, {}, 61.84);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

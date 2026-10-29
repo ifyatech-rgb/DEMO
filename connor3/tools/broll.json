@@ -1,0 +1,10 @@
+[
+ {"t0": 7.1, "t1": 9.0, "file": "b02-claimform.mp4", "move": "push"},
+ {"t0": 14.4, "t1": 16.7, "file": "b03-hailstorm.mp4", "move": "pan"},
+ {"t0": 19.85, "t1": 22.0, "file": "b05-agingroof.mp4", "move": "push"},
+ {"t0": 34.0, "t1": 36.05, "file": "b07-crew-aerial.mp4", "move": "pan"},
+ {"t0": 36.05, "t1": 38.6, "file": "b09-neighborhood.mp4", "move": "push"},
+ {"t0": 42.75, "t1": 45.3, "file": "b11-crew.mp4", "move": "pan"},
+ {"t0": 54.75, "t1": 56.4, "file": "b14-inspector.mp4", "move": "push"},
+ {"t0": 56.4, "t1": 57.95, "file": "b04-damage.mp4", "move": "pan"}
+]
