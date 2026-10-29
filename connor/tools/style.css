@@ -1,0 +1,38 @@
+      @font-face { font-family: "Montserrat"; font-weight: 900; src: url("vendor/montserrat-latin-900-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Montserrat"; font-weight: 800; src: url("vendor/montserrat-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Noto Color Emoji"; src: url("vendor/NotoColorEmoji.ttf") format("truetype"); }
+      body { margin: 0; background: #000; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #000; color: #fff; font-family: "Montserrat", "Noto Color Emoji", sans-serif; font-weight: 900; }
+      .emo { font-family: "Noto Color Emoji", sans-serif; display: inline-block; }
+      .y { color: #ffd60a; } .r { color: #ff3b30; }
+
+      /* picture: handheld wrapper > exposure wrapper > face (punch levels) + cutaways */
+      #hand, #look { position: absolute; inset: 0; transform-origin: 50% 55%; }
+      #facewrap { position: absolute; inset: 0; transform-origin: 40% 70%; }
+      #face, .media { position: absolute; inset: 0; width: 1080px; height: 1920px; object-fit: cover; }
+      .kb { position: absolute; inset: -40px; overflow: hidden; transform-origin: 50% 50%; }
+      .kb .media { left: 40px; top: 40px; }
+
+      /* top-area pop-ups (Reels safe zone starts at y 270) */
+      .pop { position: absolute; left: 60px; right: 60px; top: 285px; height: 170px; display: flex; align-items: center; justify-content: center; }
+      .pill { display: block; text-align: center; padding: 18px 32px 14px; border-radius: 20px; background: #fff; color: #111; font-size: 50px; white-space: nowrap;
+              box-shadow: 0 12px 34px rgba(0,0,0,0.45); opacity: 0; }
+      .pill.dark { background: rgba(12,12,12,0.86); color: #fff; }
+      .pill.red { background: #dc2626; color: #fff; } .pill.red .y { color: #ffd60a; }
+      .pill.green { background: #16a34a; color: #fff; }
+      .pill small { display: block; margin-top: 6px; font-size: 30px; font-weight: 800; opacity: 0.95; }
+      .brand { position: absolute; left: 60px; right: 60px; top: 300px; height: 280px; display: flex; align-items: center; justify-content: center; }
+      .brandin { position: relative; overflow: hidden; padding: 24px 40px 28px; border-radius: 22px; background: rgba(10,10,10,0.62); border: 3px solid #ffd60a; text-align: center; opacity: 0; }
+      .b1 { font-size: 128px; letter-spacing: 5px; line-height: 1; } .b2 { margin-top: 10px; font-size: 44px; letter-spacing: 2px; color: #ffd60a; }
+      #sweep { position: absolute; top: -30%; bottom: -30%; left: 0; width: 26%; transform: skewX(-18deg);
+               background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,250,230,0.85) 50%, rgba(255,255,255,0) 100%); }
+      .cta { position: absolute; left: 60px; right: 60px; top: 280px; height: 260px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+      .ctaname { margin-bottom: 18px; font-size: 42px; white-space: nowrap; -webkit-text-stroke: 9px #000; paint-order: stroke fill; opacity: 0; }
+      .ctabtn { width: 100%; padding: 30px 16px 26px; border-radius: 30px; background: #e3121e; text-align: center; font-size: 50px; white-space: nowrap;
+                box-shadow: 0 12px 0 #7a0000, 0 18px 44px rgba(227,18,30,0.5); box-sizing: border-box; opacity: 0; }
+
+      /* captions: under the chin, inside the Reels safe zone (bottom 35 % reserved) */
+      #captions { position: absolute; left: 0; right: 0; top: 1135px; height: 110px; }
+      .cg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; }
+      .cg .line { display: flex; flex-wrap: nowrap; justify-content: center; align-items: center; gap: 0 0.3em; max-width: 960px; line-height: 1.08; }
+      .w { display: inline-block; color: #fff; -webkit-text-stroke: 0.17em #000; paint-order: stroke fill; text-shadow: 0 0.08em 0 #000, 0 0.1em 0.25em rgba(0,0,0,0.5); opacity: 0.6; white-space: nowrap; }

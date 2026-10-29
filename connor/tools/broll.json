@@ -1,0 +1,17 @@
+[
+ {"t0": 2.60, "t1": 5.50, "src": "rc", "ss": 0.4,  "file": "assets/prep/b01-aerial.mp4",     "move": "push"},
+ {"t0": 8.40, "t1": 10.20, "src": "rc", "ss": 26.75, "file": "assets/prep/b02-claimform.mp4", "move": "pan"},
+ {"t0": 12.90, "t1": 16.10, "src": "rc", "ss": 28.58, "file": "assets/prep/b03-hailstorm.mp4", "move": "push"},
+ {"t0": 18.30, "t1": 20.30, "src": "rc", "ss": 17.60, "file": "assets/prep/b04-damage.mp4",   "move": "push"},
+ {"t0": 20.30, "t1": 22.30, "src": "rc", "ss": 15.10, "file": "assets/prep/b05-agingroof.mp4", "move": "pan"},
+ {"t0": 26.48, "t1": 29.00, "src": "truck", "ss": 24.3, "file": "assets/prep/b06-truck.mp4",  "move": "push"},
+ {"t0": 29.00, "t1": 31.50, "src": "rc", "ss": 23.50, "file": "assets/prep/b07-crew-aerial.mp4", "move": "pan"},
+ {"t0": 31.50, "t1": 33.10, "src": "rc", "ss": 46.60, "file": "assets/prep/b08-homeowner.mp4", "move": "push"},
+ {"t0": 36.40, "t1": 38.80, "src": "rc", "ss": 3.22,  "file": "assets/prep/b09-neighborhood.mp4", "move": "pan"},
+ {"t0": 38.80, "t1": 39.60, "src": "rc", "ss": 26.02, "file": "assets/prep/b10-house.mp4",     "move": "push"},
+ {"t0": 42.70, "t1": 45.40, "src": "rc", "ss": 6.75,  "file": "assets/prep/b11-crew.mp4",      "move": "pan"},
+ {"t0": 48.90, "t1": 50.40, "src": "rc", "ss": 43.85, "file": "assets/prep/b12-ladder.mp4",    "move": "push"},
+ {"t0": 50.40, "t1": 51.40, "src": "rc", "ss": 49.60, "file": "assets/prep/b13-crew-roof.mp4", "move": "pan"},
+ {"t0": 53.90, "t1": 55.40, "src": "rc", "ss": 45.45, "file": "assets/prep/b14-inspector.mp4", "move": "push", "speed": 0.7},
+ {"t0": 55.40, "t1": 57.90, "src": "rc", "ss": 20.86, "file": "assets/prep/b15-leak.mp4",      "move": "pan"}
+]

@@ -1,0 +1,1095 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Connor Selfie Ad</title>
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Montserrat"; font-weight: 900; src: url("vendor/montserrat-latin-900-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Montserrat"; font-weight: 800; src: url("vendor/montserrat-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Noto Color Emoji"; src: url("vendor/NotoColorEmoji.ttf") format("truetype"); }
+      body { margin: 0; background: #000; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #000; color: #fff; font-family: "Montserrat", "Noto Color Emoji", sans-serif; font-weight: 900; }
+      .emo { font-family: "Noto Color Emoji", sans-serif; display: inline-block; }
+      .y { color: #ffd60a; } .r { color: #ff3b30; }
+
+      /* picture: handheld wrapper > exposure wrapper > face (punch levels) + cutaways */
+      #hand, #look { position: absolute; inset: 0; transform-origin: 50% 55%; }
+      #facewrap { position: absolute; inset: 0; transform-origin: 40% 70%; }
+      #face, .media { position: absolute; inset: 0; width: 1080px; height: 1920px; object-fit: cover; }
+      .kb { position: absolute; inset: -40px; overflow: hidden; transform-origin: 50% 50%; }
+      .kb .media { left: 40px; top: 40px; }
+
+      /* top-area pop-ups (Reels safe zone starts at y 270) */
+      .pop { position: absolute; left: 60px; right: 60px; top: 285px; height: 170px; display: flex; align-items: center; justify-content: center; }
+      .pill { display: block; text-align: center; padding: 18px 32px 14px; border-radius: 20px; background: #fff; color: #111; font-size: 50px; white-space: nowrap;
+              box-shadow: 0 12px 34px rgba(0,0,0,0.45); opacity: 0; }
+      .pill.dark { background: rgba(12,12,12,0.86); color: #fff; }
+      .pill.red { background: #dc2626; color: #fff; } .pill.red .y { color: #ffd60a; }
+      .pill.green { background: #16a34a; color: #fff; }
+      .pill small { display: block; margin-top: 6px; font-size: 30px; font-weight: 800; opacity: 0.95; }
+      .brand { position: absolute; left: 60px; right: 60px; top: 300px; height: 280px; display: flex; align-items: center; justify-content: center; }
+      .brandin { position: relative; overflow: hidden; padding: 24px 40px 28px; border-radius: 22px; background: rgba(10,10,10,0.62); border: 3px solid #ffd60a; text-align: center; opacity: 0; }
+      .b1 { font-size: 128px; letter-spacing: 5px; line-height: 1; } .b2 { margin-top: 10px; font-size: 44px; letter-spacing: 2px; color: #ffd60a; }
+      #sweep { position: absolute; top: -30%; bottom: -30%; left: 0; width: 26%; transform: skewX(-18deg);
+               background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,250,230,0.85) 50%, rgba(255,255,255,0) 100%); }
+      .cta { position: absolute; left: 60px; right: 60px; top: 280px; height: 260px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+      .ctaname { margin-bottom: 18px; font-size: 42px; white-space: nowrap; -webkit-text-stroke: 9px #000; paint-order: stroke fill; opacity: 0; }
+      .ctabtn { width: 100%; padding: 30px 16px 26px; border-radius: 30px; background: #e3121e; text-align: center; font-size: 50px; white-space: nowrap;
+                box-shadow: 0 12px 0 #7a0000, 0 18px 44px rgba(227,18,30,0.5); box-sizing: border-box; opacity: 0; }
+
+      /* captions: under the chin, inside the Reels safe zone (bottom 35 % reserved) */
+      #captions { position: absolute; left: 0; right: 0; top: 1135px; height: 110px; }
+      .cg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; }
+      .cg .line { display: flex; flex-wrap: nowrap; justify-content: center; align-items: center; gap: 0 0.3em; max-width: 960px; line-height: 1.08; }
+      .w { display: inline-block; color: #fff; -webkit-text-stroke: 0.17em #000; paint-order: stroke fill; text-shadow: 0 0.08em 0 #000, 0 0.1em 0.25em rgba(0,0,0,0.5); opacity: 0.6; white-space: nowrap; }
+
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-width="1080" data-height="1920" data-duration="61.783">
+      <div id="hand"><div id="look">
+        <div id="facewrap"><video id="face" class="clip" src="assets/prep/face.mp4" muted playsinline data-start="0" data-duration="61.783" data-track-index="0"></video></div>
+        <div class="kb" id="kb0"><video id="bv0" class="clip media" src="assets/prep/b01-aerial.mp4" muted playsinline data-start="2.600" data-duration="2.900" data-track-index="2"></video></div>
+      <div class="kb" id="kb1"><video id="bv1" class="clip media" src="assets/prep/b02-claimform.mp4" muted playsinline data-start="8.400" data-duration="1.800" data-track-index="3"></video></div>
+      <div class="kb" id="kb2"><video id="bv2" class="clip media" src="assets/prep/b03-hailstorm.mp4" muted playsinline data-start="12.900" data-duration="3.200" data-track-index="2"></video></div>
+      <div class="kb" id="kb3"><video id="bv3" class="clip media" src="assets/prep/b04-damage.mp4" muted playsinline data-start="18.300" data-duration="2.000" data-track-index="3"></video></div>
+      <div class="kb" id="kb4"><video id="bv4" class="clip media" src="assets/prep/b05-agingroof.mp4" muted playsinline data-start="20.300" data-duration="2.000" data-track-index="2"></video></div>
+      <div class="kb" id="kb5"><video id="bv5" class="clip media" src="assets/prep/b06-truck.mp4" muted playsinline data-start="26.480" data-duration="2.520" data-track-index="3"></video></div>
+      <div class="kb" id="kb6"><video id="bv6" class="clip media" src="assets/prep/b07-crew-aerial.mp4" muted playsinline data-start="29.000" data-duration="2.500" data-track-index="2"></video></div>
+      <div class="kb" id="kb7"><video id="bv7" class="clip media" src="assets/prep/b08-homeowner.mp4" muted playsinline data-start="31.500" data-duration="1.600" data-track-index="3"></video></div>
+      <div class="kb" id="kb8"><video id="bv8" class="clip media" src="assets/prep/b09-neighborhood.mp4" muted playsinline data-start="36.400" data-duration="2.400" data-track-index="2"></video></div>
+      <div class="kb" id="kb9"><video id="bv9" class="clip media" src="assets/prep/b10-house.mp4" muted playsinline data-start="38.800" data-duration="0.800" data-track-index="3"></video></div>
+      <div class="kb" id="kb10"><video id="bv10" class="clip media" src="assets/prep/b11-crew.mp4" muted playsinline data-start="42.700" data-duration="2.700" data-track-index="2"></video></div>
+      <div class="kb" id="kb11"><video id="bv11" class="clip media" src="assets/prep/b12-ladder.mp4" muted playsinline data-start="48.900" data-duration="1.500" data-track-index="3"></video></div>
+      <div class="kb" id="kb12"><video id="bv12" class="clip media" src="assets/prep/b13-crew-roof.mp4" muted playsinline data-start="50.400" data-duration="1.000" data-track-index="2"></video></div>
+      <div class="kb" id="kb13"><video id="bv13" class="clip media" src="assets/prep/b14-inspector.mp4" muted playsinline data-start="53.900" data-duration="1.500" data-track-index="3"></video></div>
+      <div class="kb" id="kb14"><video id="bv14" class="clip media" src="assets/prep/b15-leak.mp4" muted playsinline data-start="55.400" data-duration="2.500" data-track-index="2"></video></div>
+      </div></div>
+      <div class="clip pop" id="pop0" data-start="0.000" data-duration="2.080" data-track-index="20"><div class="pill" id="pl0"><span class="emo">📍</span> TEXAS HOMEOWNERS</div></div>
+      <div class="clip pop" id="pop1" data-start="2.180" data-duration="3.400" data-track-index="20"><div class="pill dark" id="pl1">BEFORE YOU SPEND <span class="y">$30,000</span> <span class="emo">💸</span></div></div>
+      <div class="clip pop" id="pop2" data-start="5.840" data-duration="3.310" data-track-index="20"><div class="pill" id="pl2"><span class="emo">📊</span> <span class="r">47%</span> OF ROOF CLAIMS…</div></div>
+      <div class="clip pop" id="pop3" data-start="9.200" data-duration="2.820" data-track-index="20"><div class="pill red" id="pl3"><span class="emo">❌</span> DENIED. NOT PAID OUT.</div></div>
+      <div class="clip pop" id="pop4" data-start="12.730" data-duration="1.980" data-track-index="20"><div class="pill dark" id="pl4"><span class="emo">🏠</span> 10–15 YEAR OLD ROOF?</div></div>
+      <div class="clip pop" id="pop5" data-start="14.760" data-duration="2.730" data-track-index="20"><div class="pill dark" id="pl5"><span class="emo">🌩️</span> RECENT STORM?</div></div>
+      <div class="clip pop" id="pop6" data-start="17.540" data-duration="4.900" data-track-index="20"><div class="pill red" id="pl6"><span class="emo">⚠️</span> THE RISK WINDOW</div></div>
+      <div class="clip pop" id="pop7" data-start="24.490" data-duration="1.940" data-track-index="20"><div class="pill green" id="pl7"><span class="emo">✅</span> THAT'S WHERE WE COME IN</div></div>
+      <div class="clip pop" id="pop8" data-start="29.110" data-duration="2.040" data-track-index="20"><div class="pill" id="pl8"><span class="emo">🏡</span> DOZENS OF LOCAL HOMEOWNERS</div></div>
+      <div class="clip pop" id="pop9" data-start="31.200" data-duration="2.220" data-track-index="20"><div class="pill green" id="pl9"><span class="emo">✅</span> FULLY APPROVED</div></div>
+      <div class="clip pop" id="pop10" data-start="34.210" data-duration="2.130" data-track-index="20"><div class="pill dark" id="pl10"><span class="emo">🛡️</span> NEW ROOF PROTECTION PROGRAM</div></div>
+      <div class="clip pop" id="pop11" data-start="36.390" data-duration="3.510" data-track-index="20"><div class="pill" id="pl11"><span class="emo">📍</span> NORTH &amp; EAST TEXAS ONLY</div></div>
+      <div class="clip pop" id="pop12" data-start="40.420" data-duration="2.530" data-track-index="20"><div class="pill dark" id="pl12">BUILT FOR <span class="y">AGING ROOFS</span></div></div>
+      <div class="clip pop" id="pop13" data-start="45.430" data-duration="3.720" data-track-index="20"><div class="pill red" id="pl13">ONLY <span class="y">9 ROOF PROJECTS</span> / MONTH</div></div>
+      <div class="clip pop" id="pop14" data-start="48.950" data-duration="2.420" data-track-index="20"><div class="pill" id="pl14"><span class="emo">⏳</span> LIMITED TIME</div></div>
+      <div class="clip pop" id="pop15" data-start="51.420" data-duration="2.600" data-track-index="20"><div class="pill green" id="pl15">FREE ROOF INSPECTION<small>$0 • NO OBLIGATION</small></div></div>
+      <div class="clip pop" id="pop16" data-start="54.680" data-duration="3.370" data-track-index="20"><div class="pill dark" id="pl16"><span class="emo">📸</span> PHOTO + VIDEO REPORT</div></div>
+      <div class="clip brand" id="brand" data-start="26.630" data-duration="1.800" data-track-index="21"><div class="brandin" id="brandin"><div class="b1">PINECREST</div><div class="b2">ROOFING &amp; CONSTRUCTION</div><i id="sweep" data-layout-allow-overflow></i></div></div>
+      <div class="clip cta" id="cta" data-start="58.150" data-duration="3.633" data-track-index="22"><div class="ctaname" id="ctn">PINECREST ROOFING &amp; CONSTRUCTION</div><div class="ctabtn" id="ctb">BOOK YOUR FREE INSPECTION <span class="emo">👇</span></div></div>
+      <div id="captions" class="clip" data-start="0" data-duration="61.783" data-track-index="30">
+        <div class="cg" id="cg0"><div class="line" style="font-size:66px"><span class="w" id="w0">TEXAS</span><span class="w" id="w1">HOMEOWNERS</span></div></div>
+      <div class="cg" id="cg1"><div class="line" style="font-size:74px"><span class="w" id="w2">WATCH</span><span class="w" id="w3">THIS</span><span class="w" id="w4">VIDEO</span></div></div>
+      <div class="cg" id="cg2"><div class="line" style="font-size:71px"><span class="w" id="w5">BEFORE</span><span class="w" id="w6">YOU</span><span class="w" id="w7">SPEND</span></div></div>
+      <div class="cg" id="cg3"><div class="line" style="font-size:78px"><span class="w" id="w8">$30,000</span><span class="w" id="w9">ON</span><span class="w" id="w10">A</span></div></div>
+      <div class="cg" id="cg4"><div class="line" style="font-size:78px"><span class="w" id="w11">NEW</span><span class="w" id="w12">ROOF</span></div></div>
+      <div class="cg" id="cg5"><div class="line" style="font-size:78px"><span class="w" id="w13">47%</span><span class="w" id="w14">OF</span><span class="w" id="w15">ROOF</span></div></div>
+      <div class="cg" id="cg6"><div class="line" style="font-size:63px"><span class="w" id="w16">INSURANCE</span><span class="w" id="w17">CLAIMS</span><span class="w" id="w18">IN</span></div></div>
+      <div class="cg" id="cg7"><div class="line" style="font-size:78px"><span class="w" id="w19">THE</span><span class="w" id="w20">STATE</span><span class="w" id="w21">OF</span></div></div>
+      <div class="cg" id="cg8"><div class="line" style="font-size:67px"><span class="w" id="w22">TEXAS</span><span class="w" id="w23">WERE</span><span class="w" id="w24">DENIED</span></div></div>
+      <div class="cg" id="cg9"><div class="line" style="font-size:78px"><span class="w" id="w25">AND</span><span class="w" id="w26">NOT</span><span class="w" id="w27">PAID</span></div></div>
+      <div class="cg" id="cg10"><div class="line" style="font-size:78px"><span class="w" id="w28">OUT</span><span class="w" id="w29">AT</span><span class="w" id="w30">ALL</span></div></div>
+      <div class="cg" id="cg11"><div class="line" style="font-size:78px"><span class="w" id="w31">AND</span><span class="w" id="w32">IF</span><span class="w" id="w33">YOUR</span></div></div>
+      <div class="cg" id="cg12"><div class="line" style="font-size:78px"><span class="w" id="w34">ROOF</span><span class="w" id="w35">IS</span><span class="w" id="w36">10</span></div></div>
+      <div class="cg" id="cg13"><div class="line" style="font-size:78px"><span class="w" id="w37">TO</span><span class="w" id="w38">15</span><span class="w" id="w39">YEARS</span></div></div>
+      <div class="cg" id="cg14"><div class="line" style="font-size:78px"><span class="w" id="w40">OLD</span><span class="w" id="w41">AND</span><span class="w" id="w42">WAS</span></div></div>
+      <div class="cg" id="cg15"><div class="line" style="font-size:78px"><span class="w" id="w43">RECENTLY</span><span class="w" id="w44">HIT</span><span class="w" id="w45">BY</span></div></div>
+      <div class="cg" id="cg16"><div class="line" style="font-size:78px"><span class="w" id="w46">A</span><span class="w" id="w47">STORM</span></div></div>
+      <div class="cg" id="cg17"><div class="line" style="font-size:74px"><span class="w" id="w48">YOU</span><span class="w" id="w49">MAY</span><span class="w" id="w50">ALREADY</span></div></div>
+      <div class="cg" id="cg18"><div class="line" style="font-size:78px"><span class="w" id="w51">BE</span><span class="w" id="w52">IN</span><span class="w" id="w53">THE</span></div></div>
+      <div class="cg" id="cg19"><div class="line" style="font-size:78px"><span class="w" id="w54">RISK</span><span class="w" id="w55">WINDOW</span></div></div>
+      <div class="cg" id="cg20"><div class="line" style="font-size:41px"><span class="w" id="w56">BECAUSE</span><span class="w" id="w57">INSURANCE</span><span class="w" id="w58">COMPANIES</span></div></div>
+      <div class="cg" id="cg21"><div class="line" style="font-size:48px"><span class="w" id="w59">ARE</span><span class="w" id="w60">TIGHTENING</span><span class="w" id="w61">GUIDELINES</span></div></div>
+      <div class="cg" id="cg22"><div class="line" style="font-size:78px"><span class="w" id="w62">ON</span><span class="w" id="w63">AGING</span><span class="w" id="w64">ROOFS</span></div></div>
+      <div class="cg" id="cg23"><div class="line" style="font-size:78px"><span class="w" id="w65">BUT</span><span class="w" id="w66">YOU</span><span class="w" id="w67">DON&#x27;T</span></div></div>
+      <div class="cg" id="cg24"><div class="line" style="font-size:78px"><span class="w" id="w68">NEED</span><span class="w" id="w69">TO</span><span class="w" id="w70">WORRY</span></div></div>
+      <div class="cg" id="cg25"><div class="line" style="font-size:78px"><span class="w" id="w71">NOW</span></div></div>
+      <div class="cg" id="cg26"><div class="line" style="font-size:78px"><span class="w" id="w72">BECAUSE</span><span class="w" id="w73">THAT</span><span class="w" id="w74">IS</span></div></div>
+      <div class="cg" id="cg27"><div class="line" style="font-size:68px"><span class="w" id="w75">EXACTLY</span><span class="w" id="w76">WHERE</span><span class="w" id="w77">WE</span></div></div>
+      <div class="cg" id="cg28"><div class="line" style="font-size:78px"><span class="w" id="w78">COME</span><span class="w" id="w79">IN</span></div></div>
+      <div class="cg" id="cg29"><div class="line" style="font-size:58px"><span class="w" id="w80">AT</span><span class="w" id="w81">PINECREST</span><span class="w" id="w82">ROOFING</span></div></div>
+      <div class="cg" id="cg30"><div class="line" style="font-size:70px"><span class="w" id="w83">AND</span><span class="w" id="w84">CONSTRUCTION</span></div></div>
+      <div class="cg" id="cg31"><div class="line" style="font-size:60px"><span class="w" id="w85">WE&#x27;VE</span><span class="w" id="w86">HELPED</span><span class="w" id="w87">DOZENS</span></div></div>
+      <div class="cg" id="cg32"><div class="line" style="font-size:57px"><span class="w" id="w88">OF</span><span class="w" id="w89">LOCAL</span><span class="w" id="w90">HOMEOWNERS</span></div></div>
+      <div class="cg" id="cg33"><div class="line" style="font-size:78px"><span class="w" id="w91">GET</span><span class="w" id="w92">THEIR</span><span class="w" id="w93">ROOFS</span></div></div>
+      <div class="cg" id="cg34"><div class="line" style="font-size:66px"><span class="w" id="w94">FULLY</span><span class="w" id="w95">APPROVED</span><span class="w" id="w96">BY</span></div></div>
+      <div class="cg" id="cg35"><div class="line" style="font-size:78px"><span class="w" id="w97">THEIR</span><span class="w" id="w98">INSURANCE</span></div></div>
+      <div class="cg" id="cg36"><div class="line" style="font-size:61px"><span class="w" id="w99">AND</span><span class="w" id="w100">WE&#x27;RE</span><span class="w" id="w101">LAUNCHING</span></div></div>
+      <div class="cg" id="cg37"><div class="line" style="font-size:78px"><span class="w" id="w102">THE</span><span class="w" id="w103">NEW</span><span class="w" id="w104">ROOF</span></div></div>
+      <div class="cg" id="cg38"><div class="line" style="font-size:61px"><span class="w" id="w105">PROTECTION</span><span class="w" id="w106">PROGRAM</span></div></div>
+      <div class="cg" id="cg39"><div class="line" style="font-size:42px"><span class="w" id="w107">EXCLUSIVELY</span><span class="w" id="w108">FOR</span><span class="w" id="w109">HOMEOWNERS</span></div></div>
+      <div class="cg" id="cg40"><div class="line" style="font-size:78px"><span class="w" id="w110">IN</span><span class="w" id="w111">NORTH</span><span class="w" id="w112">AND</span></div></div>
+      <div class="cg" id="cg41"><div class="line" style="font-size:78px"><span class="w" id="w113">EAST</span><span class="w" id="w114">TEXAS</span></div></div>
+      <div class="cg" id="cg42"><div class="line" style="font-size:78px"><span class="w" id="w115">THIS</span><span class="w" id="w116">PROGRAM</span><span class="w" id="w117">IS</span></div></div>
+      <div class="cg" id="cg43"><div class="line" style="font-size:55px"><span class="w" id="w118">DESIGNED</span><span class="w" id="w119">SPECIFICALLY</span></div></div>
+      <div class="cg" id="cg44"><div class="line" style="font-size:78px"><span class="w" id="w120">FOR</span><span class="w" id="w121">AGING</span><span class="w" id="w122">ROOFS</span></div></div>
+      <div class="cg" id="cg45"><div class="line" style="font-size:78px"><span class="w" id="w123">AND</span><span class="w" id="w124">JUST</span><span class="w" id="w125">TO</span></div></div>
+      <div class="cg" id="cg46"><div class="line" style="font-size:59px"><span class="w" id="w126">MAINTAIN</span><span class="w" id="w127">QUALITY</span><span class="w" id="w128">AND</span></div></div>
+      <div class="cg" id="cg47"><div class="line" style="font-size:78px"><span class="w" id="w129">PRECISION</span></div></div>
+      <div class="cg" id="cg48"><div class="line" style="font-size:78px"><span class="w" id="w130">WE</span><span class="w" id="w131">LIMIT</span><span class="w" id="w132">IT</span></div></div>
+      <div class="cg" id="cg49"><div class="line" style="font-size:78px"><span class="w" id="w133">TO</span><span class="w" id="w134">JUST</span><span class="w" id="w135">NINE</span></div></div>
+      <div class="cg" id="cg50"><div class="line" style="font-size:62px"><span class="w" id="w136">FULL</span><span class="w" id="w137">ROOF</span><span class="w" id="w138">PROJECTS</span></div></div>
+      <div class="cg" id="cg51"><div class="line" style="font-size:78px"><span class="w" id="w139">PER</span><span class="w" id="w140">MONTH</span></div></div>
+      <div class="cg" id="cg52"><div class="line" style="font-size:78px"><span class="w" id="w141">FOR</span><span class="w" id="w142">A</span><span class="w" id="w143">LIMITED</span></div></div>
+      <div class="cg" id="cg53"><div class="line" style="font-size:78px"><span class="w" id="w144">TIME</span></div></div>
+      <div class="cg" id="cg54"><div class="line" style="font-size:61px"><span class="w" id="w145">WE&#x27;RE</span><span class="w" id="w146">ALSO</span><span class="w" id="w147">OFFERING</span></div></div>
+      <div class="cg" id="cg55"><div class="line" style="font-size:78px"><span class="w" id="w148">A</span><span class="w" id="w149">FREE</span></div></div>
+      <div class="cg" id="cg56"><div class="line" style="font-size:41px"><span class="w" id="w150">NO-OBLIGATION</span><span class="w" id="w151">ROOF</span><span class="w" id="w152">INSPECTION</span></div></div>
+      <div class="cg" id="cg57"><div class="line" style="font-size:59px"><span class="w" id="w153">COMPLETE</span><span class="w" id="w154">WITH</span><span class="w" id="w155">PHOTO</span></div></div>
+      <div class="cg" id="cg58"><div class="line" style="font-size:49px"><span class="w" id="w156">AND</span><span class="w" id="w157">VIDEO</span><span class="w" id="w158">DOCUMENTATION</span></div></div>
+      <div class="cg" id="cg59"><div class="line" style="font-size:78px"><span class="w" id="w159">TO</span><span class="w" id="w160">CHECK</span><span class="w" id="w161">FOR</span></div></div>
+      <div class="cg" id="cg60"><div class="line" style="font-size:78px"><span class="w" id="w162">STORM</span><span class="w" id="w163">DAMAGE</span></div></div>
+      <div class="cg" id="cg61"><div class="line" style="font-size:78px"><span class="w" id="w164">JUST</span><span class="w" id="w165">CLICK</span><span class="w" id="w166">THE</span></div></div>
+      <div class="cg" id="cg62"><div class="line" style="font-size:65px"><span class="w" id="w167">LEARN</span><span class="w" id="w168">MORE</span><span class="w" id="w169">BUTTON</span></div></div>
+      <div class="cg" id="cg63"><div class="line" style="font-size:78px"><span class="w" id="w170">BELOW</span></div></div>
+      <div class="cg" id="cg64"><div class="line" style="font-size:78px"><span class="w" id="w171">AND</span><span class="w" id="w172">BOOK</span><span class="w" id="w173">YOUR</span></div></div>
+      <div class="cg" id="cg65"><div class="line" style="font-size:78px"><span class="w" id="w174">FREE</span><span class="w" id="w175">INSPECTION</span></div></div>
+      </div>
+    </div>
+    <audio id="vo" src="assets/vo.wav" data-start="0" data-duration="61.783" data-track-index="1" data-volume="1"></audio>
+    <audio id="amb" src="assets/ambience.wav" data-start="0" data-duration="61.783" data-track-index="4" data-volume="1"></audio>
+    <audio id="music" src="assets/music_bed.wav" data-start="0" data-duration="61.783" data-track-index="5" data-volume="1"></audio>
+    <audio id="fx0" src="assets/sfx/pop.wav" data-start="2.180" data-duration="0.180" data-track-index="40" data-volume="0.11"></audio>
+    <audio id="fx1" src="assets/sfx/wB.wav" data-start="2.520" data-duration="0.534" data-track-index="41" data-volume="0.09"></audio>
+    <audio id="fx2" src="assets/sfx/pop.wav" data-start="5.840" data-duration="0.180" data-track-index="42" data-volume="0.11"></audio>
+    <audio id="fx3" src="assets/sfx/wA.wav" data-start="8.320" data-duration="0.731" data-track-index="43" data-volume="0.09"></audio>
+    <audio id="fx4" src="assets/sfx/pop.wav" data-start="9.200" data-duration="0.180" data-track-index="44" data-volume="0.11"></audio>
+    <audio id="fx5" src="assets/sfx/pop.wav" data-start="12.730" data-duration="0.180" data-track-index="45" data-volume="0.11"></audio>
+    <audio id="fx6" src="assets/sfx/wB.wav" data-start="12.820" data-duration="0.534" data-track-index="46" data-volume="0.09"></audio>
+    <audio id="fx7" src="assets/sfx/pop.wav" data-start="14.760" data-duration="0.180" data-track-index="47" data-volume="0.11"></audio>
+    <audio id="fx8" src="assets/sfx/pop.wav" data-start="17.540" data-duration="0.180" data-track-index="48" data-volume="0.11"></audio>
+    <audio id="fx9" src="assets/sfx/wA.wav" data-start="18.220" data-duration="0.731" data-track-index="49" data-volume="0.09"></audio>
+    <audio id="fx10" src="assets/sfx/pop.wav" data-start="24.490" data-duration="0.180" data-track-index="50" data-volume="0.11"></audio>
+    <audio id="fx11" src="assets/sfx/wA.wav" data-start="26.400" data-duration="0.731" data-track-index="51" data-volume="0.09"></audio>
+    <audio id="fx12" src="assets/sfx/swoosh.wav" data-start="26.530" data-duration="0.800" data-track-index="52" data-volume="0.18"></audio>
+    <audio id="fx13" src="assets/sfx/pop.wav" data-start="26.680" data-duration="0.180" data-track-index="53" data-volume="0.16"></audio>
+    <audio id="fx14" src="assets/sfx/pop.wav" data-start="29.110" data-duration="0.180" data-track-index="54" data-volume="0.11"></audio>
+    <audio id="fx15" src="assets/sfx/pop.wav" data-start="31.200" data-duration="0.180" data-track-index="55" data-volume="0.11"></audio>
+    <audio id="fx16" src="assets/sfx/pop.wav" data-start="34.210" data-duration="0.180" data-track-index="56" data-volume="0.11"></audio>
+    <audio id="fx17" src="assets/sfx/wB.wav" data-start="36.320" data-duration="0.534" data-track-index="57" data-volume="0.09"></audio>
+    <audio id="fx18" src="assets/sfx/pop.wav" data-start="36.390" data-duration="0.180" data-track-index="58" data-volume="0.11"></audio>
+    <audio id="fx19" src="assets/sfx/pop.wav" data-start="40.420" data-duration="0.180" data-track-index="59" data-volume="0.11"></audio>
+    <audio id="fx20" src="assets/sfx/wB.wav" data-start="42.620" data-duration="0.534" data-track-index="60" data-volume="0.09"></audio>
+    <audio id="fx21" src="assets/sfx/pop.wav" data-start="45.430" data-duration="0.180" data-track-index="61" data-volume="0.11"></audio>
+    <audio id="fx22" src="assets/sfx/wA.wav" data-start="48.820" data-duration="0.731" data-track-index="62" data-volume="0.09"></audio>
+    <audio id="fx23" src="assets/sfx/pop.wav" data-start="48.950" data-duration="0.180" data-track-index="63" data-volume="0.11"></audio>
+    <audio id="fx24" src="assets/sfx/pop.wav" data-start="51.420" data-duration="0.180" data-track-index="64" data-volume="0.11"></audio>
+    <audio id="fx25" src="assets/sfx/wA.wav" data-start="53.820" data-duration="0.731" data-track-index="65" data-volume="0.09"></audio>
+    <audio id="fx26" src="assets/sfx/pop.wav" data-start="54.680" data-duration="0.180" data-track-index="66" data-volume="0.11"></audio>
+    <audio id="fx27" src="assets/sfx/pop.wav" data-start="58.200" data-duration="0.180" data-track-index="67" data-volume="0.14"></audio>
+    <audio id="fx28" src="assets/sfx/notify.wav" data-start="60.590" data-duration="1.193" data-track-index="68" data-volume="0.22"></audio>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.set("#hand", {x: 12.9, y: 4.5, rotation: 0.164}, 0);
+      tl.to("#hand", {x: 14.4, y: 0.7, rotation: 0.118, duration: 0.2, ease: "none"}, 0.00);
+      tl.to("#hand", {x: 10.4, y: 8.9, rotation: 0.062, duration: 0.2, ease: "none"}, 0.20);
+      tl.to("#hand", {x: -0.1, y: 10.0, rotation: 0.241, duration: 0.2, ease: "none"}, 0.40);
+      tl.to("#hand", {x: -3.2, y: 11.6, rotation: 0.271, duration: 0.2, ease: "none"}, 0.60);
+      tl.to("#hand", {x: -10.3, y: 4.2, rotation: 0.542, duration: 0.2, ease: "none"}, 0.80);
+      tl.to("#hand", {x: -11.4, y: 8.1, rotation: 0.600, duration: 0.2, ease: "none"}, 1.00);
+      tl.to("#hand", {x: -6.5, y: 9.5, rotation: 0.643, duration: 0.2, ease: "none"}, 1.20);
+      tl.to("#hand", {x: -8.0, y: 9.3, rotation: 0.604, duration: 0.2, ease: "none"}, 1.40);
+      tl.to("#hand", {x: -4.0, y: 2.4, rotation: 0.338, duration: 0.2, ease: "none"}, 1.60);
+      tl.to("#hand", {x: -5.7, y: -0.7, rotation: 0.239, duration: 0.2, ease: "none"}, 1.80);
+      tl.to("#hand", {x: -11.3, y: 2.8, rotation: -0.058, duration: 0.2, ease: "none"}, 2.00);
+      tl.to("#hand", {x: -9.6, y: 0.6, rotation: -0.093, duration: 0.2, ease: "none"}, 2.20);
+      tl.to("#hand", {x: -12.4, y: -2.7, rotation: -0.144, duration: 0.2, ease: "none"}, 2.40);
+      tl.to("#hand", {x: -7.3, y: -10.7, rotation: -0.137, duration: 0.2, ease: "none"}, 2.60);
+      tl.to("#hand", {x: 2.0, y: -5.5, rotation: -0.009, duration: 0.2, ease: "none"}, 2.80);
+      tl.to("#hand", {x: 5.5, y: -6.5, rotation: -0.118, duration: 0.2, ease: "none"}, 3.00);
+      tl.to("#hand", {x: 14.1, y: -6.0, rotation: -0.081, duration: 0.2, ease: "none"}, 3.20);
+      tl.to("#hand", {x: 14.0, y: -13.5, rotation: -0.317, duration: 0.2, ease: "none"}, 3.40);
+      tl.to("#hand", {x: 10.0, y: -9.5, rotation: -0.454, duration: 0.2, ease: "none"}, 3.60);
+      tl.to("#hand", {x: 10.0, y: -5.9, rotation: -0.583, duration: 0.2, ease: "none"}, 3.80);
+      tl.to("#hand", {x: 3.2, y: -3.6, rotation: -0.711, duration: 0.2, ease: "none"}, 4.00);
+      tl.to("#hand", {x: 4.4, y: -6.7, rotation: -0.550, duration: 0.2, ease: "none"}, 4.20);
+      tl.to("#hand", {x: 7.2, y: -6.7, rotation: -0.511, duration: 0.2, ease: "none"}, 4.40);
+      tl.to("#hand", {x: 5.5, y: 1.3, rotation: -0.210, duration: 0.2, ease: "none"}, 4.60);
+      tl.to("#hand", {x: 9.3, y: 3.3, rotation: -0.076, duration: 0.2, ease: "none"}, 4.80);
+      tl.to("#hand", {x: 3.6, y: 4.6, rotation: 0.043, duration: 0.2, ease: "none"}, 5.00);
+      tl.to("#hand", {x: -3.5, y: -0.0, rotation: 0.135, duration: 0.2, ease: "none"}, 5.20);
+      tl.to("#hand", {x: -7.4, y: 8.1, rotation: 0.005, duration: 0.2, ease: "none"}, 5.40);
+      tl.to("#hand", {x: -16.7, y: 9.6, rotation: 0.074, duration: 0.2, ease: "none"}, 5.60);
+      tl.to("#hand", {x: -15.4, y: 11.7, rotation: -0.037, duration: 0.2, ease: "none"}, 5.80);
+      tl.to("#hand", {x: -12.5, y: 4.7, rotation: 0.100, duration: 0.2, ease: "none"}, 6.00);
+      tl.to("#hand", {x: -10.6, y: 7.5, rotation: 0.235, duration: 0.2, ease: "none"}, 6.20);
+      tl.to("#hand", {x: -1.8, y: 10.0, rotation: 0.378, duration: 0.2, ease: "none"}, 6.40);
+      tl.to("#hand", {x: -2.4, y: 9.6, rotation: 0.635, duration: 0.2, ease: "none"}, 6.60);
+      tl.to("#hand", {x: -2.3, y: 3.8, rotation: 0.605, duration: 0.2, ease: "none"}, 6.80);
+      tl.to("#hand", {x: -1.1, y: -0.7, rotation: 0.688, duration: 0.2, ease: "none"}, 7.00);
+      tl.to("#hand", {x: -5.5, y: 3.4, rotation: 0.479, duration: 0.2, ease: "none"}, 7.20);
+      tl.to("#hand", {x: 0.1, y: 1.0, rotation: 0.315, duration: 0.2, ease: "none"}, 7.40);
+      tl.to("#hand", {x: 4.6, y: -1.4, rotation: 0.159, duration: 0.2, ease: "none"}, 7.60);
+      tl.to("#hand", {x: 8.8, y: -10.2, rotation: -0.049, duration: 0.2, ease: "none"}, 7.80);
+      tl.to("#hand", {x: 17.7, y: -5.5, rotation: 0.018, duration: 0.2, ease: "none"}, 8.00);
+      tl.to("#hand", {x: 15.5, y: -6.2, rotation: -0.070, duration: 0.2, ease: "none"}, 8.20);
+      tl.to("#hand", {x: 13.9, y: -5.7, rotation: 0.066, duration: 0.2, ease: "none"}, 8.40);
+      tl.to("#hand", {x: 9.9, y: -13.0, rotation: 0.037, duration: 0.2, ease: "none"}, 8.60);
+      tl.to("#hand", {x: -0.0, y: -10.4, rotation: -0.042, duration: 0.2, ease: "none"}, 8.80);
+      tl.to("#hand", {x: -0.3, y: -6.1, rotation: -0.118, duration: 0.2, ease: "none"}, 9.00);
+      tl.to("#hand", {x: -3.1, y: -4.3, rotation: -0.418, duration: 0.2, ease: "none"}, 9.20);
+      tl.to("#hand", {x: -3.3, y: -6.4, rotation: -0.485, duration: 0.2, ease: "none"}, 9.40);
+      tl.to("#hand", {x: 1.4, y: -7.9, rotation: -0.694, duration: 0.2, ease: "none"}, 9.60);
+      tl.to("#hand", {x: -3.5, y: 0.6, rotation: -0.641, duration: 0.2, ease: "none"}, 9.80);
+      tl.to("#hand", {x: -4.9, y: 2.5, rotation: -0.533, duration: 0.2, ease: "none"}, 10.00);
+      tl.to("#hand", {x: -9.4, y: 4.5, rotation: -0.415, duration: 0.2, ease: "none"}, 10.20);
+      tl.to("#hand", {x: -17.1, y: -0.6, rotation: -0.134, duration: 0.2, ease: "none"}, 10.40);
+      tl.to("#hand", {x: -14.3, y: 7.1, rotation: -0.118, duration: 0.2, ease: "none"}, 10.60);
+      tl.to("#hand", {x: -14.0, y: 9.3, rotation: 0.037, duration: 0.2, ease: "none"}, 10.80);
+      tl.to("#hand", {x: -8.1, y: 11.6, rotation: -0.051, duration: 0.2, ease: "none"}, 11.00);
+      tl.to("#hand", {x: 2.0, y: 5.3, rotation: -0.087, duration: 0.2, ease: "none"}, 11.20);
+      tl.to("#hand", {x: 3.3, y: 6.9, rotation: -0.062, duration: 0.2, ease: "none"}, 11.40);
+      tl.to("#hand", {x: 8.4, y: 10.4, rotation: -0.098, duration: 0.2, ease: "none"}, 11.60);
+      tl.to("#hand", {x: 7.3, y: 9.8, rotation: 0.157, duration: 0.2, ease: "none"}, 11.80);
+      tl.to("#hand", {x: 2.8, y: 5.1, rotation: 0.245, duration: 0.2, ease: "none"}, 12.00);
+      tl.to("#hand", {x: 6.1, y: -0.6, rotation: 0.522, duration: 0.2, ease: "none"}, 12.20);
+      tl.to("#hand", {x: 4.5, y: 3.9, rotation: 0.631, duration: 0.2, ease: "none"}, 12.40);
+      tl.to("#hand", {x: 9.0, y: 1.6, rotation: 0.631, duration: 0.2, ease: "none"}, 12.60);
+      tl.to("#hand", {x: 14.8, y: -0.3, rotation: 0.631, duration: 0.2, ease: "none"}, 12.80);
+      tl.to("#hand", {x: 12.0, y: -9.6, rotation: 0.362, duration: 0.2, ease: "none"}, 13.00);
+      tl.to("#hand", {x: 12.9, y: -5.6, rotation: 0.300, duration: 0.2, ease: "none"}, 13.20);
+      tl.to("#hand", {x: 5.4, y: -5.8, rotation: 0.079, duration: 0.2, ease: "none"}, 13.40);
+      tl.to("#hand", {x: -3.9, y: -5.4, rotation: 0.064, duration: 0.2, ease: "none"}, 13.60);
+      tl.to("#hand", {x: -6.4, y: -12.3, rotation: 0.097, duration: 0.2, ease: "none"}, 13.80);
+      tl.to("#hand", {x: -13.0, y: -11.3, rotation: 0.078, duration: 0.2, ease: "none"}, 14.00);
+      tl.to("#hand", {x: -10.5, y: -6.3, rotation: 0.211, duration: 0.2, ease: "none"}, 14.20);
+      tl.to("#hand", {x: -6.5, y: -4.9, rotation: 0.051, duration: 0.2, ease: "none"}, 14.40);
+      tl.to("#hand", {x: -7.7, y: -6.2, rotation: 0.016, duration: 0.2, ease: "none"}, 14.60);
+      tl.to("#hand", {x: -3.4, y: -9.0, rotation: -0.238, duration: 0.2, ease: "none"}, 14.80);
+      tl.to("#hand", {x: -7.6, y: -0.3, rotation: -0.451, duration: 0.2, ease: "none"}, 15.00);
+      tl.to("#hand", {x: -11.1, y: 1.7, rotation: -0.553, duration: 0.2, ease: "none"}, 15.20);
+      tl.to("#hand", {x: -8.9, y: 4.4, rotation: -0.710, duration: 0.2, ease: "none"}, 15.40);
+      tl.to("#hand", {x: -10.6, y: -1.0, rotation: -0.540, duration: 0.2, ease: "none"}, 15.60);
+      tl.to("#hand", {x: -2.2, y: 6.0, rotation: -0.506, duration: 0.2, ease: "none"}, 15.80);
+      tl.to("#hand", {x: 5.5, y: 9.0, rotation: -0.274, duration: 0.2, ease: "none"}, 16.00);
+      tl.to("#hand", {x: 9.1, y: 11.4, rotation: -0.153, duration: 0.2, ease: "none"}, 16.20);
+      tl.to("#hand", {x: 16.5, y: 5.9, rotation: -0.137, duration: 0.2, ease: "none"}, 16.40);
+      tl.to("#hand", {x: 12.8, y: 6.3, rotation: -0.060, duration: 0.2, ease: "none"}, 16.60);
+      tl.to("#hand", {x: 9.5, y: 10.7, rotation: -0.228, duration: 0.2, ease: "none"}, 16.80);
+      tl.to("#hand", {x: 8.0, y: 10.0, rotation: -0.155, duration: 0.2, ease: "none"}, 17.00);
+      tl.to("#hand", {x: 1.7, y: 6.4, rotation: -0.201, duration: 0.2, ease: "none"}, 17.20);
+      tl.to("#hand", {x: 5.2, y: -0.4, rotation: -0.051, duration: 0.2, ease: "none"}, 17.40);
+      tl.to("#hand", {x: 6.2, y: 4.4, rotation: 0.177, duration: 0.2, ease: "none"}, 17.60);
+      tl.to("#hand", {x: 5.1, y: 2.1, rotation: 0.317, duration: 0.2, ease: "none"}, 17.80);
+      tl.to("#hand", {x: 7.5, y: 0.8, rotation: 0.608, duration: 0.2, ease: "none"}, 18.00);
+      tl.to("#hand", {x: -0.9, y: -8.7, rotation: 0.580, duration: 0.2, ease: "none"}, 18.20);
+      tl.to("#hand", {x: -6.6, y: -5.7, rotation: 0.641, duration: 0.2, ease: "none"}, 18.40);
+      tl.to("#hand", {x: -11.3, y: -5.3, rotation: 0.483, duration: 0.2, ease: "none"}, 18.60);
+      tl.to("#hand", {x: -18.5, y: -5.2, rotation: 0.312, duration: 0.2, ease: "none"}, 18.80);
+      tl.to("#hand", {x: -13.9, y: -11.5, rotation: 0.251, duration: 0.2, ease: "none"}, 19.00);
+      tl.to("#hand", {x: -11.4, y: -12.0, rotation: 0.081, duration: 0.2, ease: "none"}, 19.20);
+      tl.to("#hand", {x: -7.2, y: -6.4, rotation: 0.209, duration: 0.2, ease: "none"}, 19.40);
+      tl.to("#hand", {x: 0.5, y: -5.5, rotation: 0.168, duration: 0.2, ease: "none"}, 19.60);
+      tl.to("#hand", {x: -2.0, y: -5.9, rotation: 0.269, duration: 0.2, ease: "none"}, 19.80);
+      tl.to("#hand", {x: -0.6, y: -9.9, rotation: 0.253, duration: 0.2, ease: "none"}, 20.00);
+      tl.to("#hand", {x: -1.1, y: -1.2, rotation: 0.085, duration: 0.2, ease: "none"}, 20.20);
+      tl.to("#hand", {x: -3.8, y: 0.9, rotation: -0.009, duration: 0.2, ease: "none"}, 20.40);
+      tl.to("#hand", {x: 3.7, y: 4.1, rotation: -0.352, duration: 0.2, ease: "none"}, 20.60);
+      tl.to("#hand", {x: 6.9, y: -1.3, rotation: -0.445, duration: 0.2, ease: "none"}, 20.80);
+      tl.to("#hand", {x: 12.5, y: 4.8, rotation: -0.624, duration: 0.2, ease: "none"}, 21.00);
+      tl.to("#hand", {x: 18.8, y: 8.7, rotation: -0.611, duration: 0.2, ease: "none"}, 21.20);
+      tl.to("#hand", {x: 13.9, y: 11.0, rotation: -0.472, duration: 0.2, ease: "none"}, 21.40);
+      tl.to("#hand", {x: 12.2, y: 6.6, rotation: -0.420, duration: 0.2, ease: "none"}, 21.60);
+      tl.to("#hand", {x: 5.4, y: 5.6, rotation: -0.179, duration: 0.2, ease: "none"}, 21.80);
+      tl.to("#hand", {x: -2.8, y: 10.9, rotation: -0.224, duration: 0.2, ease: "none"}, 22.00);
+      tl.to("#hand", {x: -1.7, y: 10.1, rotation: -0.156, duration: 0.2, ease: "none"}, 22.20);
+      tl.to("#hand", {x: -5.0, y: 7.6, rotation: -0.243, duration: 0.2, ease: "none"}, 22.40);
+      tl.to("#hand", {x: -2.8, y: -0.1, rotation: -0.330, duration: 0.2, ease: "none"}, 22.60);
+      tl.to("#hand", {x: 0.0, y: 4.7, rotation: -0.247, duration: 0.2, ease: "none"}, 22.80);
+      tl.to("#hand", {x: -5.8, y: 2.7, rotation: -0.262, duration: 0.2, ease: "none"}, 23.00);
+      tl.to("#hand", {x: -6.4, y: 1.8, rotation: 0.036, duration: 0.2, ease: "none"}, 23.20);
+      tl.to("#hand", {x: -12.6, y: -7.7, rotation: 0.178, duration: 0.2, ease: "none"}, 23.40);
+      tl.to("#hand", {x: -17.3, y: -5.9, rotation: 0.432, duration: 0.2, ease: "none"}, 23.60);
+      tl.to("#hand", {x: -12.8, y: -4.7, rotation: 0.584, duration: 0.2, ease: "none"}, 23.80);
+      tl.to("#hand", {x: -11.8, y: -5.0, rotation: 0.541, duration: 0.2, ease: "none"}, 24.00);
+      tl.to("#hand", {x: -2.9, y: -10.5, rotation: 0.574, duration: 0.2, ease: "none"}, 24.20);
+      tl.to("#hand", {x: 5.1, y: -12.7, rotation: 0.331, duration: 0.2, ease: "none"}, 24.40);
+      tl.to("#hand", {x: 5.6, y: -6.6, rotation: 0.306, duration: 0.2, ease: "none"}, 24.60);
+      tl.to("#hand", {x: 10.2, y: -6.0, rotation: 0.187, duration: 0.2, ease: "none"}, 24.80);
+      tl.to("#hand", {x: 6.2, y: -5.7, rotation: 0.194, duration: 0.2, ease: "none"}, 25.00);
+      tl.to("#hand", {x: 3.6, y: -10.6, rotation: 0.316, duration: 0.2, ease: "none"}, 25.20);
+      tl.to("#hand", {x: 6.8, y: -2.2, rotation: 0.284, duration: 0.2, ease: "none"}, 25.40);
+      tl.to("#hand", {x: 5.2, y: 0.2, rotation: 0.414, duration: 0.2, ease: "none"}, 25.60);
+      tl.to("#hand", {x: 11.5, y: 3.6, rotation: 0.230, duration: 0.2, ease: "none"}, 25.80);
+      tl.to("#hand", {x: 14.3, y: -1.5, rotation: 0.124, duration: 0.2, ease: "none"}, 26.00);
+      tl.to("#hand", {x: 10.7, y: 3.5, rotation: -0.119, duration: 0.2, ease: "none"}, 26.20);
+      tl.to("#hand", {x: 10.2, y: 8.4, rotation: -0.388, duration: 0.2, ease: "none"}, 26.40);
+      tl.to("#hand", {x: -0.0, y: 10.5, rotation: -0.454, duration: 0.2, ease: "none"}, 26.60);
+      tl.to("#hand", {x: -7.1, y: 7.2, rotation: -0.621, duration: 0.2, ease: "none"}, 26.80);
+      tl.to("#hand", {x: -9.3, y: 5.0, rotation: -0.461, duration: 0.2, ease: "none"}, 27.00);
+      tl.to("#hand", {x: -14.5, y: 11.0, rotation: -0.428, duration: 0.2, ease: "none"}, 27.20);
+      tl.to("#hand", {x: -9.0, y: 10.2, rotation: -0.286, duration: 0.2, ease: "none"}, 27.40);
+      tl.to("#hand", {x: -6.6, y: 8.7, rotation: -0.190, duration: 0.2, ease: "none"}, 27.60);
+      tl.to("#hand", {x: -6.8, y: 0.4, rotation: -0.280, duration: 0.2, ease: "none"}, 27.80);
+      tl.to("#hand", {x: -3.3, y: 4.8, rotation: -0.237, duration: 0.2, ease: "none"}, 28.00);
+      tl.to("#hand", {x: -9.1, y: 3.4, rotation: -0.429, duration: 0.2, ease: "none"}, 28.20);
+      tl.to("#hand", {x: -9.9, y: 2.6, rotation: -0.372, duration: 0.2, ease: "none"}, 28.40);
+      tl.to("#hand", {x: -7.8, y: -6.5, rotation: -0.353, duration: 0.2, ease: "none"}, 28.60);
+      tl.to("#hand", {x: -7.7, y: -6.0, rotation: -0.210, duration: 0.2, ease: "none"}, 28.80);
+      tl.to("#hand", {x: 2.9, y: -4.1, rotation: 0.086, duration: 0.2, ease: "none"}, 29.00);
+      tl.to("#hand", {x: 8.5, y: -4.8, rotation: 0.213, duration: 0.2, ease: "none"}, 29.20);
+      tl.to("#hand", {x: 12.5, y: -9.5, rotation: 0.505, duration: 0.2, ease: "none"}, 29.40);
+      tl.to("#hand", {x: 17.3, y: -13.3, rotation: 0.484, duration: 0.2, ease: "none"}, 29.60);
+      tl.to("#hand", {x: 10.9, y: -6.8, rotation: 0.512, duration: 0.2, ease: "none"}, 29.80);
+      tl.to("#hand", {x: 8.7, y: -6.5, rotation: 0.418, duration: 0.2, ease: "none"}, 30.00);
+      tl.to("#hand", {x: 5.6, y: -5.5, rotation: 0.253, duration: 0.2, ease: "none"}, 30.20);
+      tl.to("#hand", {x: 0.8, y: -11.2, rotation: 0.289, duration: 0.2, ease: "none"}, 30.40);
+      tl.to("#hand", {x: 5.7, y: -3.3, rotation: 0.182, duration: 0.2, ease: "none"}, 30.60);
+      tl.to("#hand", {x: 4.7, y: -0.4, rotation: 0.358, duration: 0.2, ease: "none"}, 30.80);
+      tl.to("#hand", {x: 4.6, y: 3.1, rotation: 0.381, duration: 0.2, ease: "none"}, 31.00);
+      tl.to("#hand", {x: 4.6, y: -1.5, rotation: 0.442, duration: 0.2, ease: "none"}, 31.20);
+      tl.to("#hand", {x: -5.4, y: 2.2, rotation: 0.448, duration: 0.2, ease: "none"}, 31.40);
+      tl.to("#hand", {x: -9.2, y: 8.0, rotation: 0.215, duration: 0.2, ease: "none"}, 31.60);
+      tl.to("#hand", {x: -14.7, y: 10.0, rotation: 0.111, duration: 0.2, ease: "none"}, 31.80);
+      tl.to("#hand", {x: -18.6, y: 7.8, rotation: -0.238, duration: 0.2, ease: "none"}, 32.00);
+      tl.to("#hand", {x: -11.8, y: 4.4, rotation: -0.352, duration: 0.2, ease: "none"}, 32.20);
+      tl.to("#hand", {x: -9.7, y: 11.0, rotation: -0.478, duration: 0.2, ease: "none"}, 32.40);
+      tl.to("#hand", {x: -3.5, y: 10.3, rotation: -0.504, duration: 0.2, ease: "none"}, 32.60);
+      tl.to("#hand", {x: 2.0, y: 9.6, rotation: -0.344, duration: 0.2, ease: "none"}, 32.80);
+      tl.to("#hand", {x: -1.5, y: 0.9, rotation: -0.357, duration: 0.2, ease: "none"}, 33.00);
+      tl.to("#hand", {x: 0.9, y: 4.9, rotation: -0.182, duration: 0.2, ease: "none"}, 33.20);
+      tl.to("#hand", {x: -1.1, y: 4.1, rotation: -0.279, duration: 0.2, ease: "none"}, 33.40);
+      tl.to("#hand", {x: -1.2, y: 3.4, rotation: -0.313, duration: 0.2, ease: "none"}, 33.60);
+      tl.to("#hand", {x: 7.0, y: -5.2, rotation: -0.397, duration: 0.2, ease: "none"}, 33.80);
+      tl.to("#hand", {x: 9.1, y: -6.2, rotation: -0.534, duration: 0.2, ease: "none"}, 34.00);
+      tl.to("#hand", {x: 15.6, y: -3.5, rotation: -0.411, duration: 0.2, ease: "none"}, 34.20);
+      tl.to("#hand", {x: 18.2, y: -4.7, rotation: -0.404, duration: 0.2, ease: "none"}, 34.40);
+      tl.to("#hand", {x: 11.7, y: -8.4, rotation: -0.099, duration: 0.2, ease: "none"}, 34.60);
+      tl.to("#hand", {x: 9.6, y: -13.6, rotation: 0.086, duration: 0.2, ease: "none"}, 34.80);
+      tl.to("#hand", {x: 0.7, y: -7.0, rotation: 0.290, duration: 0.2, ease: "none"}, 35.00);
+      tl.to("#hand", {x: -4.8, y: -6.8, rotation: 0.467, duration: 0.2, ease: "none"}, 35.20);
+      tl.to("#hand", {x: -3.1, y: -5.4, rotation: 0.385, duration: 0.2, ease: "none"}, 35.40);
+      tl.to("#hand", {x: -6.3, y: -11.5, rotation: 0.438, duration: 0.2, ease: "none"}, 35.60);
+      tl.to("#hand", {x: -2.1, y: -4.5, rotation: 0.245, duration: 0.2, ease: "none"}, 35.80);
+      tl.to("#hand", {x: -2.0, y: -1.0, rotation: 0.252, duration: 0.2, ease: "none"}, 36.00);
+      tl.to("#hand", {x: -7.7, y: 2.4, rotation: 0.249, duration: 0.2, ease: "none"}, 36.20);
+      tl.to("#hand", {x: -8.1, y: -1.5, rotation: 0.283, duration: 0.2, ease: "none"}, 36.40);
+      tl.to("#hand", {x: -15.1, y: 0.8, rotation: 0.484, duration: 0.2, ease: "none"}, 36.60);
+      tl.to("#hand", {x: -16.1, y: 7.6, rotation: 0.455, duration: 0.2, ease: "none"}, 36.80);
+      tl.to("#hand", {x: -10.6, y: 9.3, rotation: 0.571, duration: 0.2, ease: "none"}, 37.00);
+      tl.to("#hand", {x: -8.4, y: 8.3, rotation: 0.392, duration: 0.2, ease: "none"}, 37.20);
+      tl.to("#hand", {x: 2.3, y: 3.9, rotation: 0.225, duration: 0.2, ease: "none"}, 37.40);
+      tl.to("#hand", {x: 7.4, y: 10.8, rotation: 0.019, duration: 0.2, ease: "none"}, 37.60);
+      tl.to("#hand", {x: 7.8, y: 10.4, rotation: -0.278, duration: 0.2, ease: "none"}, 37.80);
+      tl.to("#hand", {x: 10.9, y: 10.4, rotation: -0.304, duration: 0.2, ease: "none"}, 38.00);
+      tl.to("#hand", {x: 5.0, y: 1.7, rotation: -0.456, duration: 0.2, ease: "none"}, 38.20);
+      tl.to("#hand", {x: 4.7, y: 4.8, rotation: -0.321, duration: 0.2, ease: "none"}, 38.40);
+      tl.to("#hand", {x: 7.1, y: 4.9, rotation: -0.282, duration: 0.2, ease: "none"}, 38.60);
+      tl.to("#hand", {x: 6.2, y: 4.0, rotation: -0.242, duration: 0.2, ease: "none"}, 38.80);
+      tl.to("#hand", {x: 13.2, y: -3.8, rotation: -0.181, duration: 0.2, ease: "none"}, 39.00);
+      tl.to("#hand", {x: 12.6, y: -6.3, rotation: -0.368, duration: 0.2, ease: "none"}, 39.20);
+      tl.to("#hand", {x: 8.8, y: -2.9, rotation: -0.372, duration: 0.2, ease: "none"}, 39.40);
+      tl.to("#hand", {x: 6.3, y: -4.4, rotation: -0.573, duration: 0.2, ease: "none"}, 39.60);
+      tl.to("#hand", {x: -5.3, y: -7.4, rotation: -0.548, duration: 0.2, ease: "none"}, 39.80);
+      tl.to("#hand", {x: -9.5, y: -13.8, rotation: -0.470, duration: 0.2, ease: "none"}, 40.00);
+      tl.to("#hand", {x: -11.9, y: -7.3, rotation: -0.351, duration: 0.2, ease: "none"}, 40.20);
+      tl.to("#hand", {x: -14.5, y: -7.1, rotation: -0.020, duration: 0.2, ease: "none"}, 40.40);
+      tl.to("#hand", {x: -7.2, y: -5.3, rotation: 0.086, duration: 0.2, ease: "none"}, 40.60);
+      tl.to("#hand", {x: -6.6, y: -11.6, rotation: 0.344, duration: 0.2, ease: "none"}, 40.80);
+      tl.to("#hand", {x: -5.5, y: -5.8, rotation: 0.333, duration: 0.2, ease: "none"}, 41.00);
+      tl.to("#hand", {x: -3.6, y: -1.5, rotation: 0.316, duration: 0.2, ease: "none"}, 41.20);
+      tl.to("#hand", {x: -10.0, y: 1.6, rotation: 0.289, duration: 0.2, ease: "none"}, 41.40);
+      tl.to("#hand", {x: -8.1, y: -1.4, rotation: 0.145, duration: 0.2, ease: "none"}, 41.60);
+      tl.to("#hand", {x: -6.4, y: -0.5, rotation: 0.267, duration: 0.2, ease: "none"}, 41.80);
+      tl.to("#hand", {x: -3.6, y: 7.1, rotation: 0.240, duration: 0.2, ease: "none"}, 42.00);
+      tl.to("#hand", {x: 7.7, y: 8.7, rotation: 0.447, duration: 0.2, ease: "none"}, 42.20);
+      tl.to("#hand", {x: 11.0, y: 8.7, rotation: 0.541, duration: 0.2, ease: "none"}, 42.40);
+      tl.to("#hand", {x: 15.1, y: 3.4, rotation: 0.564, duration: 0.2, ease: "none"}, 42.60);
+      tl.to("#hand", {x: 16.6, y: 10.5, rotation: 0.594, duration: 0.2, ease: "none"}, 42.80);
+      tl.to("#hand", {x: 8.7, y: 10.5, rotation: 0.326, duration: 0.2, ease: "none"}, 43.00);
+      tl.to("#hand", {x: 7.5, y: 11.0, rotation: 0.217, duration: 0.2, ease: "none"}, 43.20);
+      tl.to("#hand", {x: 3.0, y: 2.5, rotation: -0.096, duration: 0.2, ease: "none"}, 43.40);
+      tl.to("#hand", {x: 0.6, y: 4.7, rotation: -0.221, duration: 0.2, ease: "none"}, 43.60);
+      tl.to("#hand", {x: 5.7, y: 5.6, rotation: -0.278, duration: 0.2, ease: "none"}, 43.80);
+      tl.to("#hand", {x: 3.0, y: 4.6, rotation: -0.333, duration: 0.2, ease: "none"}, 44.00);
+      tl.to("#hand", {x: 3.7, y: -2.3, rotation: -0.165, duration: 0.2, ease: "none"}, 44.20);
+      tl.to("#hand", {x: 0.7, y: -6.3, rotation: -0.229, duration: 0.2, ease: "none"}, 44.40);
+      tl.to("#hand", {x: -9.3, y: -2.3, rotation: -0.139, duration: 0.2, ease: "none"}, 44.60);
+      tl.to("#hand", {x: -11.5, y: -4.2, rotation: -0.276, duration: 0.2, ease: "none"}, 44.80);
+      tl.to("#hand", {x: -17.1, y: -6.4, rotation: -0.415, duration: 0.2, ease: "none"}, 45.00);
+      tl.to("#hand", {x: -17.1, y: -13.8, rotation: -0.495, duration: 0.2, ease: "none"}, 45.20);
+      tl.to("#hand", {x: -9.3, y: -7.7, rotation: -0.672, duration: 0.2, ease: "none"}, 45.40);
+      tl.to("#hand", {x: -7.3, y: -7.3, rotation: -0.531, duration: 0.2, ease: "none"}, 45.60);
+      tl.to("#hand", {x: 0.2, y: -5.4, rotation: -0.501, duration: 0.2, ease: "none"}, 45.80);
+      tl.to("#hand", {x: 2.7, y: -11.6, rotation: -0.225, duration: 0.2, ease: "none"}, 46.00);
+      tl.to("#hand", {x: -0.7, y: -7.0, rotation: -0.013, duration: 0.2, ease: "none"}, 46.20);
+      tl.to("#hand", {x: 2.1, y: -2.0, rotation: 0.119, duration: 0.2, ease: "none"}, 46.40);
+      tl.to("#hand", {x: -0.9, y: 0.8, rotation: 0.298, duration: 0.2, ease: "none"}, 46.60);
+      tl.to("#hand", {x: 2.1, y: -1.3, rotation: 0.183, duration: 0.2, ease: "none"}, 46.80);
+      tl.to("#hand", {x: 9.8, y: -1.8, rotation: 0.240, duration: 0.2, ease: "none"}, 47.00);
+      tl.to("#hand", {x: 11.1, y: 6.4, rotation: 0.112, duration: 0.2, ease: "none"}, 47.20);
+      tl.to("#hand", {x: 17.6, y: 8.0, rotation: 0.144, duration: 0.2, ease: "none"}, 47.40);
+      tl.to("#hand", {x: 16.0, y: 9.0, rotation: 0.257, duration: 0.2, ease: "none"}, 47.60);
+      tl.to("#hand", {x: 9.1, y: 3.1, rotation: 0.318, duration: 0.2, ease: "none"}, 47.80);
+      tl.to("#hand", {x: 6.1, y: 10.0, rotation: 0.582, duration: 0.2, ease: "none"}, 48.00);
+      tl.to("#hand", {x: -3.7, y: 10.6, rotation: 0.570, duration: 0.2, ease: "none"}, 48.20);
+      tl.to("#hand", {x: -6.0, y: 11.4, rotation: 0.661, duration: 0.2, ease: "none"}, 48.40);
+      tl.to("#hand", {x: -4.6, y: 3.5, rotation: 0.510, duration: 0.2, ease: "none"}, 48.60);
+      tl.to("#hand", {x: -6.8, y: 4.5, rotation: 0.300, duration: 0.2, ease: "none"}, 48.80);
+      tl.to("#hand", {x: -1.7, y: 6.4, rotation: 0.149, duration: 0.2, ease: "none"}, 49.00);
+      tl.to("#hand", {x: -4.4, y: 5.0, rotation: -0.140, duration: 0.2, ease: "none"}, 49.20);
+      tl.to("#hand", {x: -9.0, y: -0.8, rotation: -0.126, duration: 0.2, ease: "none"}, 49.40);
+      tl.to("#hand", {x: -9.7, y: -6.2, rotation: -0.236, duration: 0.2, ease: "none"}, 49.60);
+      tl.to("#hand", {x: -16.5, y: -1.8, rotation: -0.136, duration: 0.2, ease: "none"}, 49.80);
+      tl.to("#hand", {x: -13.6, y: -3.9, rotation: -0.086, duration: 0.2, ease: "none"}, 50.00);
+      tl.to("#hand", {x: -8.1, y: -5.4, rotation: -0.146, duration: 0.2, ease: "none"}, 50.20);
+      tl.to("#hand", {x: -4.1, y: -13.5, rotation: -0.127, duration: 0.2, ease: "none"}, 50.40);
+      tl.to("#hand", {x: 7.1, y: -8.1, rotation: -0.389, duration: 0.2, ease: "none"}, 50.60);
+      tl.to("#hand", {x: 8.9, y: -7.3, rotation: -0.451, duration: 0.2, ease: "none"}, 50.80);
+      tl.to("#hand", {x: 9.5, y: -5.5, rotation: -0.642, duration: 0.2, ease: "none"}, 51.00);
+      tl.to("#hand", {x: 10.6, y: -11.3, rotation: -0.660, duration: 0.2, ease: "none"}, 51.20);
+      tl.to("#hand", {x: 3.9, y: -8.3, rotation: -0.532, duration: 0.2, ease: "none"}, 51.40);
+      tl.to("#hand", {x: 5.9, y: -2.5, rotation: -0.447, duration: 0.2, ease: "none"}, 51.60);
+      tl.to("#hand", {x: 7.1, y: -0.0, rotation: -0.119, duration: 0.2, ease: "none"}, 51.80);
+      tl.to("#hand", {x: 7.5, y: -1.1, rotation: -0.042, duration: 0.2, ease: "none"}, 52.00);
+      tl.to("#hand", {x: 13.8, y: -2.9, rotation: 0.149, duration: 0.2, ease: "none"}, 52.20);
+      tl.to("#hand", {x: 10.0, y: 5.7, rotation: 0.146, duration: 0.2, ease: "none"}, 52.40);
+      tl.to("#hand", {x: 6.5, y: 7.3, rotation: 0.078, duration: 0.2, ease: "none"}, 52.60);
+      tl.to("#hand", {x: 1.6, y: 9.1, rotation: 0.111, duration: 0.2, ease: "none"}, 52.80);
+      tl.to("#hand", {x: -9.8, y: 3.0, rotation: -0.001, duration: 0.2, ease: "none"}, 53.00);
+      tl.to("#hand", {x: -11.3, y: 9.3, rotation: 0.188, duration: 0.2, ease: "none"}, 53.20);
+      tl.to("#hand", {x: -13.8, y: 10.7, rotation: 0.248, duration: 0.2, ease: "none"}, 53.40);
+      tl.to("#hand", {x: -13.2, y: 11.7, rotation: 0.467, duration: 0.2, ease: "none"}, 53.60);
+      tl.to("#hand", {x: -5.6, y: 4.5, rotation: 0.629, duration: 0.2, ease: "none"}, 53.80);
+      tl.to("#hand", {x: -6.4, y: 4.2, rotation: 0.618, duration: 0.2, ease: "none"}, 54.00);
+      tl.to("#hand", {x: -4.1, y: 7.0, rotation: 0.668, duration: 0.2, ease: "none"}, 54.20);
+      tl.to("#hand", {x: -4.4, y: 5.5, rotation: 0.398, duration: 0.2, ease: "none"}, 54.40);
+      tl.to("#hand", {x: -9.9, y: 0.7, rotation: 0.291, duration: 0.2, ease: "none"}, 54.60);
+      tl.to("#hand", {x: -5.7, y: -6.0, rotation: 0.048, duration: 0.2, ease: "none"}, 54.80);
+      tl.to("#hand", {x: -4.4, y: -1.4, rotation: -0.075, duration: 0.2, ease: "none"}, 55.00);
+      tl.to("#hand", {x: 1.2, y: -3.5, rotation: -0.052, duration: 0.2, ease: "none"}, 55.20);
+      tl.to("#hand", {x: 11.7, y: -4.5, rotation: -0.120, duration: 0.2, ease: "none"}, 55.40);
+      tl.to("#hand", {x: 12.8, y: -13.1, rotation: 0.043, duration: 0.2, ease: "none"}, 55.60);
+      tl.to("#hand", {x: 16.8, y: -8.6, rotation: -0.054, duration: 0.2, ease: "none"}, 55.80);
+      tl.to("#hand", {x: 14.4, y: -7.3, rotation: -0.058, duration: 0.2, ease: "none"}, 56.00);
+      tl.to("#hand", {x: 6.5, y: -5.7, rotation: -0.219, duration: 0.2, ease: "none"}, 56.20);
+      tl.to("#hand", {x: 5.9, y: -11.0, rotation: -0.450, duration: 0.2, ease: "none"}, 56.40);
+      tl.to("#hand", {x: 0.5, y: -9.5, rotation: -0.525, duration: 0.2, ease: "none"}, 56.60);
+      tl.to("#hand", {x: 0.9, y: -3.0, rotation: -0.725, duration: 0.2, ease: "none"}, 56.80);
+      tl.to("#hand", {x: 4.9, y: -0.9, rotation: -0.588, duration: 0.2, ease: "none"}, 57.00);
+      tl.to("#hand", {x: 1.3, y: -1.0, rotation: -0.535, duration: 0.2, ease: "none"}, 57.20);
+      tl.to("#hand", {x: 2.2, y: -4.0, rotation: -0.317, duration: 0.2, ease: "none"}, 57.40);
+      tl.to("#hand", {x: -3.8, y: 4.8, rotation: -0.099, duration: 0.2, ease: "none"}, 57.60);
+      tl.to("#hand", {x: -12.3, y: 6.6, rotation: -0.053, duration: 0.2, ease: "none"}, 57.80);
+      tl.to("#hand", {x: -13.4, y: 9.1, rotation: 0.102, duration: 0.2, ease: "none"}, 58.00);
+      tl.to("#hand", {x: -18.3, y: 2.9, rotation: -0.038, duration: 0.2, ease: "none"}, 58.20);
+      tl.to("#hand", {x: -14.2, y: 8.5, rotation: 0.003, duration: 0.2, ease: "none"}, 58.40);
+      tl.to("#hand", {x: -6.7, y: 10.8, rotation: -0.050, duration: 0.2, ease: "none"}, 58.60);
+      tl.to("#hand", {x: -4.4, y: 11.8, rotation: -0.004, duration: 0.2, ease: "none"}, 58.80);
+      tl.to("#hand", {x: 3.5, y: 5.5, rotation: 0.212, duration: 0.2, ease: "none"}, 59.00);
+      tl.to("#hand", {x: 2.8, y: 3.9, rotation: 0.300, duration: 0.2, ease: "none"}, 59.20);
+      tl.to("#hand", {x: 0.5, y: 7.7, rotation: 0.599, duration: 0.2, ease: "none"}, 59.40);
+      tl.to("#hand", {x: 3.0, y: 5.9, rotation: 0.613, duration: 0.2, ease: "none"}, 59.60);
+      tl.to("#hand", {x: -0.1, y: 2.1, rotation: 0.669, duration: 0.2, ease: "none"}, 59.80);
+      tl.to("#hand", {x: 5.7, y: -5.7, rotation: 0.564, duration: 0.2, ease: "none"}, 60.00);
+      tl.to("#hand", {x: 11.7, y: -1.0, rotation: 0.331, duration: 0.2, ease: "none"}, 60.20);
+      tl.to("#hand", {x: 12.9, y: -3.0, rotation: 0.248, duration: 0.2, ease: "none"}, 60.40);
+      tl.to("#hand", {x: 18.2, y: -3.6, rotation: 0.001, duration: 0.2, ease: "none"}, 60.60);
+      tl.to("#hand", {x: 12.7, y: -12.4, rotation: 0.055, duration: 0.2, ease: "none"}, 60.80);
+      tl.to("#hand", {x: 6.2, y: -9.1, rotation: 0.008, duration: 0.2, ease: "none"}, 61.00);
+      tl.to("#hand", {x: 2.1, y: -7.1, rotation: 0.070, duration: 0.2, ease: "none"}, 61.20);
+      tl.to("#hand", {x: -7.4, y: -5.9, rotation: 0.134, duration: 0.2, ease: "none"}, 61.40);
+      tl.to("#hand", {x: -6.5, y: -10.5, rotation: -0.011, duration: 0.2, ease: "none"}, 61.60);
+      tl.set("#look", {filter: "brightness(1)"}, 0);
+      tl.to("#look", {filter: "brightness(0.995)", duration: 0.5, ease: "sine.inOut"}, 0.80);
+      tl.to("#look", {filter: "brightness(0.971)", duration: 0.5, ease: "sine.inOut"}, 2.10);
+      tl.to("#look", {filter: "brightness(1.023)", duration: 0.5, ease: "sine.inOut"}, 3.89);
+      tl.to("#look", {filter: "brightness(0.981)", duration: 0.5, ease: "sine.inOut"}, 5.27);
+      tl.to("#look", {filter: "brightness(1.031)", duration: 0.5, ease: "sine.inOut"}, 7.34);
+      tl.to("#look", {filter: "brightness(0.993)", duration: 0.5, ease: "sine.inOut"}, 9.35);
+      tl.to("#look", {filter: "brightness(0.968)", duration: 0.5, ease: "sine.inOut"}, 11.92);
+      tl.to("#look", {filter: "brightness(0.985)", duration: 0.5, ease: "sine.inOut"}, 14.32);
+      tl.to("#look", {filter: "brightness(0.973)", duration: 0.5, ease: "sine.inOut"}, 15.72);
+      tl.to("#look", {filter: "brightness(1.022)", duration: 0.5, ease: "sine.inOut"}, 17.35);
+      tl.to("#look", {filter: "brightness(1.006)", duration: 0.5, ease: "sine.inOut"}, 18.81);
+      tl.to("#look", {filter: "brightness(0.991)", duration: 0.5, ease: "sine.inOut"}, 20.90);
+      tl.to("#look", {filter: "brightness(0.969)", duration: 0.5, ease: "sine.inOut"}, 22.87);
+      tl.to("#look", {filter: "brightness(0.979)", duration: 0.5, ease: "sine.inOut"}, 24.15);
+      tl.to("#look", {filter: "brightness(0.995)", duration: 0.5, ease: "sine.inOut"}, 26.30);
+      tl.to("#look", {filter: "brightness(1.006)", duration: 0.5, ease: "sine.inOut"}, 27.94);
+      tl.to("#look", {filter: "brightness(0.986)", duration: 0.5, ease: "sine.inOut"}, 29.78);
+      tl.to("#look", {filter: "brightness(1.014)", duration: 0.5, ease: "sine.inOut"}, 32.09);
+      tl.to("#look", {filter: "brightness(1.005)", duration: 0.5, ease: "sine.inOut"}, 33.63);
+      tl.to("#look", {filter: "brightness(1.026)", duration: 0.5, ease: "sine.inOut"}, 35.57);
+      tl.to("#look", {filter: "brightness(0.985)", duration: 0.5, ease: "sine.inOut"}, 37.79);
+      tl.to("#look", {filter: "brightness(0.973)", duration: 0.5, ease: "sine.inOut"}, 40.36);
+      tl.to("#look", {filter: "brightness(1.018)", duration: 0.5, ease: "sine.inOut"}, 42.15);
+      tl.to("#look", {filter: "brightness(0.999)", duration: 0.5, ease: "sine.inOut"}, 43.56);
+      tl.to("#look", {filter: "brightness(1.012)", duration: 0.5, ease: "sine.inOut"}, 44.81);
+      tl.to("#look", {filter: "brightness(1.005)", duration: 0.5, ease: "sine.inOut"}, 47.08);
+      tl.to("#look", {filter: "brightness(0.987)", duration: 0.5, ease: "sine.inOut"}, 49.51);
+      tl.to("#look", {filter: "brightness(1.007)", duration: 0.5, ease: "sine.inOut"}, 51.68);
+      tl.to("#look", {filter: "brightness(0.997)", duration: 0.5, ease: "sine.inOut"}, 53.70);
+      tl.to("#look", {filter: "brightness(1.031)", duration: 0.5, ease: "sine.inOut"}, 56.07);
+      tl.to("#look", {filter: "brightness(1.011)", duration: 0.5, ease: "sine.inOut"}, 57.94);
+      tl.to("#look", {filter: "brightness(1.014)", duration: 0.5, ease: "sine.inOut"}, 59.22);
+      tl.set("#facewrap", {scale: 1.24}, 0);
+      tl.to("#facewrap", {scale: 1.12, duration: 0.4, ease: "power2.inOut"}, 1.180);
+      tl.to("#facewrap", {scale: 1.25, duration: 0.4, ease: "power2.inOut"}, 5.740);
+      tl.to("#facewrap", {scale: 1.12, duration: 0.4, ease: "power2.inOut"}, 7.650);
+      tl.to("#facewrap", {scale: 1.25, duration: 0.4, ease: "power2.inOut"}, 10.210);
+      tl.to("#facewrap", {scale: 1.12, duration: 0.4, ease: "power2.inOut"}, 11.970);
+      tl.to("#facewrap", {scale: 1.25, duration: 0.4, ease: "power2.inOut"}, 17.440);
+      tl.to("#facewrap", {scale: 1.12, duration: 0.4, ease: "power2.inOut"}, 22.290);
+      tl.to("#facewrap", {scale: 1.25, duration: 0.4, ease: "power2.inOut"}, 24.780);
+      tl.to("#facewrap", {scale: 1.13, duration: 0.4, ease: "power2.inOut"}, 33.200);
+      tl.to("#facewrap", {scale: 1.22, duration: 0.4, ease: "power2.inOut"}, 34.530);
+      tl.to("#facewrap", {scale: 1.12, duration: 0.4, ease: "power2.inOut"}, 40.320);
+      tl.to("#facewrap", {scale: 1.24, duration: 0.4, ease: "power2.inOut"}, 41.780);
+      tl.to("#facewrap", {scale: 1.12, duration: 0.4, ease: "power2.inOut"}, 45.330);
+      tl.to("#facewrap", {scale: 1.25, duration: 0.4, ease: "power2.inOut"}, 46.460);
+      tl.to("#facewrap", {scale: 1.25, duration: 0.4, ease: "power2.inOut"}, 51.270);
+      tl.to("#facewrap", {scale: 1.12, duration: 0.4, ease: "power2.inOut"}, 58.050);
+      tl.to("#facewrap", {scale: 1.22, duration: 0.4, ease: "power2.inOut"}, 60.490);
+      tl.fromTo("#kb0", {scale: 1.04, xPercent: 0}, {scale: 1.12, xPercent: 0, duration: 2.900, ease: "none"}, 2.600);
+      tl.fromTo("#kb1", {scale: 1.1, xPercent: 2.4}, {scale: 1.1, xPercent: -2.4, duration: 1.800, ease: "none"}, 8.400);
+      tl.fromTo("#kb2", {scale: 1.04, xPercent: 0}, {scale: 1.12, xPercent: 0, duration: 3.200, ease: "none"}, 12.900);
+      tl.fromTo("#kb3", {scale: 1.04, xPercent: 0}, {scale: 1.12, xPercent: 0, duration: 2.000, ease: "none"}, 18.300);
+      tl.fromTo("#kb4", {scale: 1.1, xPercent: -2.4}, {scale: 1.1, xPercent: 2.4, duration: 2.000, ease: "none"}, 20.300);
+      tl.fromTo("#kb5", {scale: 1.04, xPercent: 0}, {scale: 1.12, xPercent: 0, duration: 2.520, ease: "none"}, 26.480);
+      tl.fromTo("#kb6", {scale: 1.1, xPercent: -2.4}, {scale: 1.1, xPercent: 2.4, duration: 2.500, ease: "none"}, 29.000);
+      tl.fromTo("#kb7", {scale: 1.04, xPercent: 0}, {scale: 1.12, xPercent: 0, duration: 1.600, ease: "none"}, 31.500);
+      tl.fromTo("#kb8", {scale: 1.1, xPercent: -2.4}, {scale: 1.1, xPercent: 2.4, duration: 2.400, ease: "none"}, 36.400);
+      tl.fromTo("#kb9", {scale: 1.04, xPercent: 0}, {scale: 1.12, xPercent: 0, duration: 0.800, ease: "none"}, 38.800);
+      tl.fromTo("#kb10", {scale: 1.1, xPercent: -2.4}, {scale: 1.1, xPercent: 2.4, duration: 2.700, ease: "none"}, 42.700);
+      tl.fromTo("#kb11", {scale: 1.04, xPercent: 0}, {scale: 1.12, xPercent: 0, duration: 1.500, ease: "none"}, 48.900);
+      tl.fromTo("#kb12", {scale: 1.1, xPercent: -2.4}, {scale: 1.1, xPercent: 2.4, duration: 1.000, ease: "none"}, 50.400);
+      tl.fromTo("#kb13", {scale: 1.04, xPercent: 0}, {scale: 1.12, xPercent: 0, duration: 1.500, ease: "none"}, 53.900);
+      tl.fromTo("#kb14", {scale: 1.1, xPercent: -2.4}, {scale: 1.1, xPercent: 2.4, duration: 2.500, ease: "none"}, 55.400);
+      tl.set("#pl0", {opacity: 1, scale: 1}, 0);
+      tl.to("#pl0", {opacity: 0, scale: 0.92, duration: 0.12, ease: "power2.in"}, 1.960);
+      tl.fromTo("#pl1", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2.2)"}, 2.180);
+      tl.to("#pl1", {opacity: 0, scale: 0.92, duration: 0.12, ease: "power2.in"}, 5.460);
+      tl.fromTo("#pl2", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2.2)"}, 5.840);
+      tl.to("#pl2", {opacity: 0, scale: 0.92, duration: 0.12, ease: "power2.in"}, 9.030);
+      tl.fromTo("#pl3", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2.2)"}, 9.200);
+      tl.to("#pl3", {opacity: 0, scale: 0.92, duration: 0.12, ease: "power2.in"}, 11.900);
+      tl.fromTo("#pl4", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2.2)"}, 12.730);
+      tl.to("#pl4", {opacity: 0, scale: 0.92, duration: 0.12, ease: "power2.in"}, 14.590);
+      tl.fromTo("#pl5", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2.2)"}, 14.760);
+      tl.to("#pl5", {opacity: 0, scale: 0.92, duration: 0.12, ease: "power2.in"}, 17.370);
+      tl.fromTo("#pl6", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2.2)"}, 17.540);
+      tl.to("#pl6", {opacity: 0, scale: 0.92, duration: 0.12, ease: "power2.in"}, 22.320);
+      tl.fromTo("#pl7", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2.2)"}, 24.490);
+      tl.to("#pl7", {opacity: 0, scale: 0.92, duration: 0.12, ease: "power2.in"}, 26.310);
+      tl.fromTo("#pl8", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2.2)"}, 29.110);
+      tl.to("#pl8", {opacity: 0, scale: 0.92, duration: 0.12, ease: "power2.in"}, 31.030);
+      tl.fromTo("#pl9", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2.2)"}, 31.200);
+      tl.to("#pl9", {opacity: 0, scale: 0.92, duration: 0.12, ease: "power2.in"}, 33.300);
+      tl.fromTo("#pl10", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2.2)"}, 34.210);
+      tl.to("#pl10", {opacity: 0, scale: 0.92, duration: 0.12, ease: "power2.in"}, 36.220);
+      tl.fromTo("#pl11", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2.2)"}, 36.390);
+      tl.to("#pl11", {opacity: 0, scale: 0.92, duration: 0.12, ease: "power2.in"}, 39.780);
+      tl.fromTo("#pl12", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2.2)"}, 40.420);
+      tl.to("#pl12", {opacity: 0, scale: 0.92, duration: 0.12, ease: "power2.in"}, 42.830);
+      tl.fromTo("#pl13", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2.2)"}, 45.430);
+      tl.to("#pl13", {opacity: 0, scale: 0.92, duration: 0.12, ease: "power2.in"}, 49.030);
+      tl.fromTo("#pl14", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2.2)"}, 48.950);
+      tl.to("#pl14", {opacity: 0, scale: 0.92, duration: 0.12, ease: "power2.in"}, 51.250);
+      tl.fromTo("#pl15", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2.2)"}, 51.420);
+      tl.to("#pl15", {opacity: 0, scale: 0.92, duration: 0.12, ease: "power2.in"}, 53.900);
+      tl.fromTo("#pl16", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2.2)"}, 54.680);
+      tl.to("#pl16", {opacity: 0, scale: 0.92, duration: 0.12, ease: "power2.in"}, 57.930);
+      tl.fromTo("#brandin", {opacity: 0, scale: 1.25}, {opacity: 1, scale: 1, duration: 0.2, ease: "back.out(2)"}, 26.630);
+      tl.fromTo("#sweep", {xPercent: -150}, {xPercent: 440, duration: 0.9, ease: "power2.inOut"}, 26.930);
+      tl.to("#brandin", {opacity: 0, scale: 0.92, duration: 0.12, ease: "power2.in"}, 28.310);
+      tl.fromTo("#ctn", {opacity: 0, y: -20}, {opacity: 1, y: 0, duration: 0.2, ease: "power3.out"}, 58.150);
+      tl.fromTo("#ctb", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.24, ease: "back.out(2.2)"}, 58.200);
+      tl.fromTo("#ctb", {scale: 1}, {scale: 1.06, duration: 0.22, ease: "sine.inOut", yoyo: true, repeat: 13, immediateRender: false}, 58.500);
+      tl.fromTo("#cg0", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 0.150);
+      tl.fromTo("#w0", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 0.150);
+      tl.to("#w0", {scale: 1, duration: 0.1}, 0.350);
+      tl.fromTo("#w1", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 0.350);
+      tl.to("#w1", {scale: 1, duration: 0.1}, 1.080);
+      tl.set("#cg0", {opacity: 0, visibility: "hidden"}, 1.280);
+      tl.fromTo("#cg1", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 1.280);
+      tl.fromTo("#w2", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 1.280);
+      tl.to("#w2", {scale: 1, duration: 0.1}, 1.530);
+      tl.fromTo("#w3", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 1.610);
+      tl.to("#w3", {scale: 1, duration: 0.1}, 1.790);
+      tl.fromTo("#w4", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 1.910);
+      tl.to("#w4", {scale: 1, duration: 0.1}, 2.180);
+      tl.set("#cg1", {opacity: 0, visibility: "hidden"}, 2.180);
+      tl.fromTo("#cg2", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 2.180);
+      tl.fromTo("#w5", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 2.180);
+      tl.to("#w5", {scale: 1, duration: 0.1}, 2.600);
+      tl.fromTo("#w6", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 2.600);
+      tl.to("#w6", {scale: 1, duration: 0.1}, 2.810);
+      tl.fromTo("#w7", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 2.810);
+      tl.to("#w7", {scale: 1, duration: 0.1}, 3.150);
+      tl.set("#cg2", {opacity: 0, visibility: "hidden"}, 3.270);
+      tl.fromTo("#cg3", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 3.270);
+      tl.fromTo("#w8", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 3.270);
+      tl.to("#w8", {scale: 1, duration: 0.1}, 4.500);
+      tl.fromTo("#w9", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 4.590);
+      tl.to("#w9", {scale: 1, duration: 0.1}, 4.700);
+      tl.fromTo("#w10", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 4.700);
+      tl.to("#w10", {scale: 1, duration: 0.1}, 4.770);
+      tl.set("#cg3", {opacity: 0, visibility: "hidden"}, 4.770);
+      tl.fromTo("#cg4", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 4.770);
+      tl.fromTo("#w11", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 4.770);
+      tl.to("#w11", {scale: 1, duration: 0.1}, 4.980);
+      tl.fromTo("#w12", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 4.980);
+      tl.to("#w12", {scale: 1, duration: 0.1}, 5.280);
+      tl.set("#cg4", {opacity: 0, visibility: "hidden"}, 5.680);
+      tl.fromTo("#cg5", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 5.840);
+      tl.fromTo("#w13", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ff3b30", duration: 0.07}, 5.840);
+      tl.to("#w13", {scale: 1, duration: 0.1}, 5.910);
+      tl.fromTo("#w14", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 5.990);
+      tl.to("#w14", {scale: 1, duration: 0.1}, 6.060);
+      tl.fromTo("#w15", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 6.050);
+      tl.to("#w15", {scale: 1, duration: 0.1}, 6.390);
+      tl.set("#cg5", {opacity: 0, visibility: "hidden"}, 6.390);
+      tl.fromTo("#cg6", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 6.390);
+      tl.fromTo("#w16", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 6.390);
+      tl.to("#w16", {scale: 1, duration: 0.1}, 7.170);
+      tl.fromTo("#w17", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 7.170);
+      tl.to("#w17", {scale: 1, duration: 0.1}, 7.680);
+      tl.fromTo("#w18", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 7.750);
+      tl.to("#w18", {scale: 1, duration: 0.1}, 7.860);
+      tl.set("#cg6", {opacity: 0, visibility: "hidden"}, 7.860);
+      tl.fromTo("#cg7", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 7.860);
+      tl.fromTo("#w19", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 7.860);
+      tl.to("#w19", {scale: 1, duration: 0.1}, 8.110);
+      tl.fromTo("#w20", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 8.110);
+      tl.to("#w20", {scale: 1, duration: 0.1}, 8.550);
+      tl.fromTo("#w21", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 8.550);
+      tl.to("#w21", {scale: 1, duration: 0.1}, 8.680);
+      tl.set("#cg7", {opacity: 0, visibility: "hidden"}, 8.800);
+      tl.fromTo("#cg8", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 8.800);
+      tl.fromTo("#w22", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 8.800);
+      tl.to("#w22", {scale: 1, duration: 0.1}, 9.200);
+      tl.fromTo("#w23", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 9.200);
+      tl.to("#w23", {scale: 1, duration: 0.1}, 9.430);
+      tl.fromTo("#w24", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ff3b30", duration: 0.07}, 9.590);
+      tl.to("#w24", {scale: 1, duration: 0.1}, 10.080);
+      tl.set("#cg8", {opacity: 0, visibility: "hidden"}, 10.080);
+      tl.fromTo("#cg9", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 10.080);
+      tl.fromTo("#w25", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 10.080);
+      tl.to("#w25", {scale: 1, duration: 0.1}, 10.310);
+      tl.fromTo("#w26", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ff3b30", duration: 0.07}, 10.310);
+      tl.to("#w26", {scale: 1, duration: 0.1}, 10.540);
+      tl.fromTo("#w27", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ff3b30", duration: 0.07}, 10.540);
+      tl.to("#w27", {scale: 1, duration: 0.1}, 10.840);
+      tl.set("#cg9", {opacity: 0, visibility: "hidden"}, 10.840);
+      tl.fromTo("#cg10", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 10.840);
+      tl.fromTo("#w28", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ff3b30", duration: 0.07}, 10.840);
+      tl.to("#w28", {scale: 1, duration: 0.1}, 11.080);
+      tl.fromTo("#w29", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ff3b30", duration: 0.07}, 11.080);
+      tl.to("#w29", {scale: 1, duration: 0.1}, 11.150);
+      tl.fromTo("#w30", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ff3b30", duration: 0.07}, 11.820);
+      tl.to("#w30", {scale: 1, duration: 0.1}, 11.920);
+      tl.set("#cg10", {opacity: 0, visibility: "hidden"}, 12.070);
+      tl.fromTo("#cg11", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 12.070);
+      tl.fromTo("#w31", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 12.070);
+      tl.to("#w31", {scale: 1, duration: 0.1}, 12.140);
+      tl.fromTo("#w32", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 12.120);
+      tl.to("#w32", {scale: 1, duration: 0.1}, 12.240);
+      tl.fromTo("#w33", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 12.260);
+      tl.to("#w33", {scale: 1, duration: 0.1}, 12.510);
+      tl.set("#cg11", {opacity: 0, visibility: "hidden"}, 12.510);
+      tl.fromTo("#cg12", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 12.510);
+      tl.fromTo("#w34", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 12.510);
+      tl.to("#w34", {scale: 1, duration: 0.1}, 12.770);
+      tl.fromTo("#w35", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 12.770);
+      tl.to("#w35", {scale: 1, duration: 0.1}, 12.890);
+      tl.fromTo("#w36", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 12.930);
+      tl.to("#w36", {scale: 1, duration: 0.1}, 13.300);
+      tl.set("#cg12", {opacity: 0, visibility: "hidden"}, 13.300);
+      tl.fromTo("#cg13", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 13.300);
+      tl.fromTo("#w37", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 13.300);
+      tl.to("#w37", {scale: 1, duration: 0.1}, 13.430);
+      tl.fromTo("#w38", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 13.430);
+      tl.to("#w38", {scale: 1, duration: 0.1}, 13.750);
+      tl.fromTo("#w39", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 13.830);
+      tl.to("#w39", {scale: 1, duration: 0.1}, 14.160);
+      tl.set("#cg13", {opacity: 0, visibility: "hidden"}, 14.160);
+      tl.fromTo("#cg14", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 14.160);
+      tl.fromTo("#w40", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 14.160);
+      tl.to("#w40", {scale: 1, duration: 0.1}, 14.290);
+      tl.fromTo("#w41", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 14.440);
+      tl.to("#w41", {scale: 1, duration: 0.1}, 14.560);
+      tl.fromTo("#w42", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 14.560);
+      tl.to("#w42", {scale: 1, duration: 0.1}, 14.760);
+      tl.set("#cg14", {opacity: 0, visibility: "hidden"}, 14.760);
+      tl.fromTo("#cg15", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 14.760);
+      tl.fromTo("#w43", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 14.760);
+      tl.to("#w43", {scale: 1, duration: 0.1}, 15.290);
+      tl.fromTo("#w44", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 15.290);
+      tl.to("#w44", {scale: 1, duration: 0.1}, 15.490);
+      tl.fromTo("#w45", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 15.490);
+      tl.to("#w45", {scale: 1, duration: 0.1}, 15.560);
+      tl.set("#cg15", {opacity: 0, visibility: "hidden"}, 15.670);
+      tl.fromTo("#cg16", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 15.670);
+      tl.fromTo("#w46", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 15.670);
+      tl.to("#w46", {scale: 1, duration: 0.1}, 15.740);
+      tl.fromTo("#w47", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 15.680);
+      tl.to("#w47", {scale: 1, duration: 0.1}, 16.160);
+      tl.set("#cg16", {opacity: 0, visibility: "hidden"}, 16.160);
+      tl.fromTo("#cg17", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 16.160);
+      tl.fromTo("#w48", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 16.160);
+      tl.to("#w48", {scale: 1, duration: 0.1}, 16.400);
+      tl.fromTo("#w49", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 16.400);
+      tl.to("#w49", {scale: 1, duration: 0.1}, 16.640);
+      tl.fromTo("#w50", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 16.640);
+      tl.to("#w50", {scale: 1, duration: 0.1}, 17.120);
+      tl.set("#cg17", {opacity: 0, visibility: "hidden"}, 17.120);
+      tl.fromTo("#cg18", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 17.120);
+      tl.fromTo("#w51", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 17.120);
+      tl.to("#w51", {scale: 1, duration: 0.1}, 17.190);
+      tl.fromTo("#w52", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 17.190);
+      tl.to("#w52", {scale: 1, duration: 0.1}, 17.350);
+      tl.fromTo("#w53", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 17.510);
+      tl.to("#w53", {scale: 1, duration: 0.1}, 17.580);
+      tl.set("#cg18", {opacity: 0, visibility: "hidden"}, 17.540);
+      tl.fromTo("#cg19", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 17.540);
+      tl.fromTo("#w54", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ff3b30", duration: 0.07}, 17.540);
+      tl.to("#w54", {scale: 1, duration: 0.1}, 17.780);
+      tl.fromTo("#w55", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ff3b30", duration: 0.07}, 17.790);
+      tl.to("#w55", {scale: 1, duration: 0.1}, 18.280);
+      tl.set("#cg19", {opacity: 0, visibility: "hidden"}, 18.280);
+      tl.fromTo("#cg20", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 18.280);
+      tl.fromTo("#w56", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 18.280);
+      tl.to("#w56", {scale: 1, duration: 0.1}, 18.710);
+      tl.fromTo("#w57", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 18.710);
+      tl.to("#w57", {scale: 1, duration: 0.1}, 19.200);
+      tl.fromTo("#w58", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 19.270);
+      tl.to("#w58", {scale: 1, duration: 0.1}, 19.730);
+      tl.set("#cg20", {opacity: 0, visibility: "hidden"}, 19.880);
+      tl.fromTo("#cg21", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 19.880);
+      tl.fromTo("#w59", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 19.880);
+      tl.to("#w59", {scale: 1, duration: 0.1}, 20.010);
+      tl.fromTo("#w60", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ff3b30", duration: 0.07}, 20.010);
+      tl.to("#w60", {scale: 1, duration: 0.1}, 20.510);
+      tl.fromTo("#w61", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ff3b30", duration: 0.07}, 20.690);
+      tl.to("#w61", {scale: 1, duration: 0.1}, 21.250);
+      tl.set("#cg21", {opacity: 0, visibility: "hidden"}, 21.250);
+      tl.fromTo("#cg22", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 21.250);
+      tl.fromTo("#w62", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 21.250);
+      tl.to("#w62", {scale: 1, duration: 0.1}, 21.340);
+      tl.fromTo("#w63", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ff3b30", duration: 0.07}, 21.400);
+      tl.to("#w63", {scale: 1, duration: 0.1}, 21.680);
+      tl.fromTo("#w64", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ff3b30", duration: 0.07}, 21.680);
+      tl.to("#w64", {scale: 1, duration: 0.1}, 22.240);
+      tl.set("#cg22", {opacity: 0, visibility: "hidden"}, 22.390);
+      tl.fromTo("#cg23", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 22.390);
+      tl.fromTo("#w65", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 22.390);
+      tl.to("#w65", {scale: 1, duration: 0.1}, 22.460);
+      tl.fromTo("#w66", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 22.440);
+      tl.to("#w66", {scale: 1, duration: 0.1}, 22.640);
+      tl.fromTo("#w67", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 22.640);
+      tl.to("#w67", {scale: 1, duration: 0.1}, 22.970);
+      tl.set("#cg23", {opacity: 0, visibility: "hidden"}, 22.970);
+      tl.fromTo("#cg24", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 22.970);
+      tl.fromTo("#w68", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 22.970);
+      tl.to("#w68", {scale: 1, duration: 0.1}, 23.210);
+      tl.fromTo("#w69", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 23.230);
+      tl.to("#w69", {scale: 1, duration: 0.1}, 23.300);
+      tl.fromTo("#w70", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 23.520);
+      tl.to("#w70", {scale: 1, duration: 0.1}, 23.690);
+      tl.set("#cg24", {opacity: 0, visibility: "hidden"}, 23.690);
+      tl.fromTo("#cg25", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 23.690);
+      tl.fromTo("#w71", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 23.690);
+      tl.to("#w71", {scale: 1, duration: 0.1}, 24.020);
+      tl.set("#cg25", {opacity: 0, visibility: "hidden"}, 24.020);
+      tl.fromTo("#cg26", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 24.020);
+      tl.fromTo("#w72", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 24.020);
+      tl.to("#w72", {scale: 1, duration: 0.1}, 24.490);
+      tl.fromTo("#w73", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 24.490);
+      tl.to("#w73", {scale: 1, duration: 0.1}, 24.610);
+      tl.fromTo("#w74", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 24.760);
+      tl.to("#w74", {scale: 1, duration: 0.1}, 24.880);
+      tl.set("#cg26", {opacity: 0, visibility: "hidden"}, 24.880);
+      tl.fromTo("#cg27", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 24.880);
+      tl.fromTo("#w75", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 24.880);
+      tl.to("#w75", {scale: 1, duration: 0.1}, 25.350);
+      tl.fromTo("#w76", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 25.350);
+      tl.to("#w76", {scale: 1, duration: 0.1}, 25.680);
+      tl.fromTo("#w77", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 25.680);
+      tl.to("#w77", {scale: 1, duration: 0.1}, 25.810);
+      tl.set("#cg27", {opacity: 0, visibility: "hidden"}, 25.810);
+      tl.fromTo("#cg28", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 25.810);
+      tl.fromTo("#w78", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 25.810);
+      tl.to("#w78", {scale: 1, duration: 0.1}, 26.070);
+      tl.fromTo("#w79", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 26.070);
+      tl.to("#w79", {scale: 1, duration: 0.1}, 26.480);
+      tl.set("#cg28", {opacity: 0, visibility: "hidden"}, 26.480);
+      tl.fromTo("#cg29", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 26.480);
+      tl.fromTo("#w80", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 26.480);
+      tl.to("#w80", {scale: 1, duration: 0.1}, 26.630);
+      tl.fromTo("#w81", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 26.630);
+      tl.to("#w81", {scale: 1, duration: 0.1}, 27.100);
+      tl.fromTo("#w82", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 27.100);
+      tl.to("#w82", {scale: 1, duration: 0.1}, 27.450);
+      tl.set("#cg29", {opacity: 0, visibility: "hidden"}, 27.470);
+      tl.fromTo("#cg30", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 27.470);
+      tl.fromTo("#w83", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 27.470);
+      tl.to("#w83", {scale: 1, duration: 0.1}, 27.550);
+      tl.fromTo("#w84", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 27.770);
+      tl.to("#w84", {scale: 1, duration: 0.1}, 28.480);
+      tl.set("#cg30", {opacity: 0, visibility: "hidden"}, 28.480);
+      tl.fromTo("#cg31", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 28.480);
+      tl.fromTo("#w85", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 28.480);
+      tl.to("#w85", {scale: 1, duration: 0.1}, 28.750);
+      tl.fromTo("#w86", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 28.750);
+      tl.to("#w86", {scale: 1, duration: 0.1}, 29.110);
+      tl.fromTo("#w87", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 29.110);
+      tl.to("#w87", {scale: 1, duration: 0.1}, 29.460);
+      tl.set("#cg31", {opacity: 0, visibility: "hidden"}, 29.460);
+      tl.fromTo("#cg32", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 29.460);
+      tl.fromTo("#w88", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 29.460);
+      tl.to("#w88", {scale: 1, duration: 0.1}, 29.570);
+      tl.fromTo("#w89", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 29.570);
+      tl.to("#w89", {scale: 1, duration: 0.1}, 29.860);
+      tl.fromTo("#w90", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 29.860);
+      tl.to("#w90", {scale: 1, duration: 0.1}, 30.560);
+      tl.set("#cg32", {opacity: 0, visibility: "hidden"}, 30.560);
+      tl.fromTo("#cg33", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 30.560);
+      tl.fromTo("#w91", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 30.560);
+      tl.to("#w91", {scale: 1, duration: 0.1}, 30.720);
+      tl.fromTo("#w92", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 30.720);
+      tl.to("#w92", {scale: 1, duration: 0.1}, 30.870);
+      tl.fromTo("#w93", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 31.030);
+      tl.to("#w93", {scale: 1, duration: 0.1}, 31.190);
+      tl.set("#cg33", {opacity: 0, visibility: "hidden"}, 31.200);
+      tl.fromTo("#cg34", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 31.200);
+      tl.fromTo("#w94", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 31.200);
+      tl.to("#w94", {scale: 1, duration: 0.1}, 31.500);
+      tl.fromTo("#w95", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 31.500);
+      tl.to("#w95", {scale: 1, duration: 0.1}, 31.850);
+      tl.fromTo("#w96", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 31.850);
+      tl.to("#w96", {scale: 1, duration: 0.1}, 32.170);
+      tl.set("#cg34", {opacity: 0, visibility: "hidden"}, 32.170);
+      tl.fromTo("#cg35", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 32.170);
+      tl.fromTo("#w97", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 32.170);
+      tl.to("#w97", {scale: 1, duration: 0.1}, 32.410);
+      tl.fromTo("#w98", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 32.500);
+      tl.to("#w98", {scale: 1, duration: 0.1}, 33.120);
+      tl.set("#cg35", {opacity: 0, visibility: "hidden"}, 33.120);
+      tl.fromTo("#cg36", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 33.120);
+      tl.fromTo("#w99", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 33.120);
+      tl.to("#w99", {scale: 1, duration: 0.1}, 33.250);
+      tl.fromTo("#w100", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 33.400);
+      tl.to("#w100", {scale: 1, duration: 0.1}, 33.620);
+      tl.fromTo("#w101", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 33.620);
+      tl.to("#w101", {scale: 1, duration: 0.1}, 34.030);
+      tl.set("#cg36", {opacity: 0, visibility: "hidden"}, 34.210);
+      tl.fromTo("#cg37", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 34.210);
+      tl.fromTo("#w102", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 34.210);
+      tl.to("#w102", {scale: 1, duration: 0.1}, 34.370);
+      tl.fromTo("#w103", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 34.380);
+      tl.to("#w103", {scale: 1, duration: 0.1}, 34.470);
+      tl.fromTo("#w104", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 34.630);
+      tl.to("#w104", {scale: 1, duration: 0.1}, 34.820);
+      tl.set("#cg37", {opacity: 0, visibility: "hidden"}, 34.820);
+      tl.fromTo("#cg38", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 34.820);
+      tl.fromTo("#w105", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 34.820);
+      tl.to("#w105", {scale: 1, duration: 0.1}, 35.490);
+      tl.fromTo("#w106", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 35.510);
+      tl.to("#w106", {scale: 1, duration: 0.1}, 36.240);
+      tl.set("#cg38", {opacity: 0, visibility: "hidden"}, 36.390);
+      tl.fromTo("#cg39", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 36.390);
+      tl.fromTo("#w107", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 36.390);
+      tl.to("#w107", {scale: 1, duration: 0.1}, 37.040);
+      tl.fromTo("#w108", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 37.040);
+      tl.to("#w108", {scale: 1, duration: 0.1}, 37.210);
+      tl.fromTo("#w109", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 37.250);
+      tl.to("#w109", {scale: 1, duration: 0.1}, 37.970);
+      tl.set("#cg39", {opacity: 0, visibility: "hidden"}, 37.970);
+      tl.fromTo("#cg40", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 37.970);
+      tl.fromTo("#w110", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 37.970);
+      tl.to("#w110", {scale: 1, duration: 0.1}, 38.080);
+      tl.fromTo("#w111", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 38.150);
+      tl.to("#w111", {scale: 1, duration: 0.1}, 38.470);
+      tl.fromTo("#w112", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 38.470);
+      tl.to("#w112", {scale: 1, duration: 0.1}, 38.610);
+      tl.set("#cg40", {opacity: 0, visibility: "hidden"}, 38.760);
+      tl.fromTo("#cg41", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 38.760);
+      tl.fromTo("#w113", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 38.760);
+      tl.to("#w113", {scale: 1, duration: 0.1}, 38.970);
+      tl.fromTo("#w114", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 38.970);
+      tl.to("#w114", {scale: 1, duration: 0.1}, 39.600);
+      tl.set("#cg41", {opacity: 0, visibility: "hidden"}, 39.600);
+      tl.fromTo("#cg42", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 39.600);
+      tl.fromTo("#w115", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 39.600);
+      tl.to("#w115", {scale: 1, duration: 0.1}, 39.830);
+      tl.fromTo("#w116", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 39.990);
+      tl.to("#w116", {scale: 1, duration: 0.1}, 40.300);
+      tl.fromTo("#w117", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 40.300);
+      tl.to("#w117", {scale: 1, duration: 0.1}, 40.420);
+      tl.set("#cg42", {opacity: 0, visibility: "hidden"}, 40.420);
+      tl.fromTo("#cg43", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 40.420);
+      tl.fromTo("#w118", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 40.420);
+      tl.to("#w118", {scale: 1, duration: 0.1}, 40.950);
+      tl.fromTo("#w119", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 40.950);
+      tl.to("#w119", {scale: 1, duration: 0.1}, 41.480);
+      tl.set("#cg43", {opacity: 0, visibility: "hidden"}, 41.830);
+      tl.fromTo("#cg44", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 41.830);
+      tl.fromTo("#w120", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 41.830);
+      tl.to("#w120", {scale: 1, duration: 0.1}, 41.900);
+      tl.fromTo("#w121", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ff3b30", duration: 0.07}, 41.880);
+      tl.to("#w121", {scale: 1, duration: 0.1}, 42.220);
+      tl.fromTo("#w122", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ff3b30", duration: 0.07}, 42.220);
+      tl.to("#w122", {scale: 1, duration: 0.1}, 42.650);
+      tl.set("#cg44", {opacity: 0, visibility: "hidden"}, 42.670);
+      tl.fromTo("#cg45", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 42.670);
+      tl.fromTo("#w123", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 42.670);
+      tl.to("#w123", {scale: 1, duration: 0.1}, 42.740);
+      tl.fromTo("#w124", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 42.970);
+      tl.to("#w124", {scale: 1, duration: 0.1}, 43.160);
+      tl.fromTo("#w125", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 43.160);
+      tl.to("#w125", {scale: 1, duration: 0.1}, 43.230);
+      tl.set("#cg45", {opacity: 0, visibility: "hidden"}, 43.290);
+      tl.fromTo("#cg46", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 43.290);
+      tl.fromTo("#w126", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 43.290);
+      tl.to("#w126", {scale: 1, duration: 0.1}, 43.840);
+      tl.fromTo("#w127", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 43.840);
+      tl.to("#w127", {scale: 1, duration: 0.1}, 44.320);
+      tl.fromTo("#w128", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 44.320);
+      tl.to("#w128", {scale: 1, duration: 0.1}, 44.520);
+      tl.set("#cg46", {opacity: 0, visibility: "hidden"}, 44.520);
+      tl.fromTo("#cg47", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 44.520);
+      tl.fromTo("#w129", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 44.520);
+      tl.to("#w129", {scale: 1, duration: 0.1}, 45.270);
+      tl.set("#cg47", {opacity: 0, visibility: "hidden"}, 45.430);
+      tl.fromTo("#cg48", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 45.430);
+      tl.fromTo("#w130", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 45.430);
+      tl.to("#w130", {scale: 1, duration: 0.1}, 45.500);
+      tl.fromTo("#w131", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 45.500);
+      tl.to("#w131", {scale: 1, duration: 0.1}, 45.860);
+      tl.fromTo("#w132", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 45.870);
+      tl.to("#w132", {scale: 1, duration: 0.1}, 46.000);
+      tl.set("#cg48", {opacity: 0, visibility: "hidden"}, 46.000);
+      tl.fromTo("#cg49", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 46.000);
+      tl.fromTo("#w133", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 46.000);
+      tl.to("#w133", {scale: 1, duration: 0.1}, 46.160);
+      tl.fromTo("#w134", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 46.160);
+      tl.to("#w134", {scale: 1, duration: 0.1}, 46.560);
+      tl.fromTo("#w135", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 46.560);
+      tl.to("#w135", {scale: 1, duration: 0.1}, 46.920);
+      tl.set("#cg49", {opacity: 0, visibility: "hidden"}, 46.940);
+      tl.fromTo("#cg50", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 46.940);
+      tl.fromTo("#w136", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 46.940);
+      tl.to("#w136", {scale: 1, duration: 0.1}, 47.060);
+      tl.fromTo("#w137", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 47.060);
+      tl.to("#w137", {scale: 1, duration: 0.1}, 47.750);
+      tl.fromTo("#w138", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 47.750);
+      tl.to("#w138", {scale: 1, duration: 0.1}, 48.170);
+      tl.set("#cg50", {opacity: 0, visibility: "hidden"}, 48.170);
+      tl.fromTo("#cg51", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 48.170);
+      tl.fromTo("#w139", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 48.170);
+      tl.to("#w139", {scale: 1, duration: 0.1}, 48.380);
+      tl.fromTo("#w140", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 48.380);
+      tl.to("#w140", {scale: 1, duration: 0.1}, 48.950);
+      tl.set("#cg51", {opacity: 0, visibility: "hidden"}, 48.950);
+      tl.fromTo("#cg52", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 48.950);
+      tl.fromTo("#w141", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 48.950);
+      tl.to("#w141", {scale: 1, duration: 0.1}, 49.130);
+      tl.fromTo("#w142", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 49.210);
+      tl.to("#w142", {scale: 1, duration: 0.1}, 49.280);
+      tl.fromTo("#w143", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 49.230);
+      tl.to("#w143", {scale: 1, duration: 0.1}, 49.730);
+      tl.set("#cg52", {opacity: 0, visibility: "hidden"}, 49.730);
+      tl.fromTo("#cg53", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 49.730);
+      tl.fromTo("#w144", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 49.730);
+      tl.to("#w144", {scale: 1, duration: 0.1}, 50.150);
+      tl.set("#cg53", {opacity: 0, visibility: "hidden"}, 50.150);
+      tl.fromTo("#cg54", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 50.150);
+      tl.fromTo("#w145", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 50.150);
+      tl.to("#w145", {scale: 1, duration: 0.1}, 50.440);
+      tl.fromTo("#w146", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 50.560);
+      tl.to("#w146", {scale: 1, duration: 0.1}, 50.750);
+      tl.fromTo("#w147", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 50.930);
+      tl.to("#w147", {scale: 1, duration: 0.1}, 51.190);
+      tl.set("#cg54", {opacity: 0, visibility: "hidden"}, 51.350);
+      tl.fromTo("#cg55", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 51.350);
+      tl.fromTo("#w148", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 51.350);
+      tl.to("#w148", {scale: 1, duration: 0.1}, 51.420);
+      tl.fromTo("#w149", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 51.420);
+      tl.to("#w149", {scale: 1, duration: 0.1}, 51.920);
+      tl.set("#cg55", {opacity: 0, visibility: "hidden"}, 51.920);
+      tl.fromTo("#cg56", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 51.920);
+      tl.fromTo("#w150", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 51.920);
+      tl.to("#w150", {scale: 1, duration: 0.1}, 52.840);
+      tl.fromTo("#w151", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 52.840);
+      tl.to("#w151", {scale: 1, duration: 0.1}, 52.930);
+      tl.fromTo("#w152", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 53.580);
+      tl.to("#w152", {scale: 1, duration: 0.1}, 53.920);
+      tl.set("#cg56", {opacity: 0, visibility: "hidden"}, 54.070);
+      tl.fromTo("#cg57", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 54.070);
+      tl.fromTo("#w153", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 54.070);
+      tl.to("#w153", {scale: 1, duration: 0.1}, 54.430);
+      tl.fromTo("#w154", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 54.430);
+      tl.to("#w154", {scale: 1, duration: 0.1}, 54.680);
+      tl.fromTo("#w155", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 54.680);
+      tl.to("#w155", {scale: 1, duration: 0.1}, 54.940);
+      tl.set("#cg57", {opacity: 0, visibility: "hidden"}, 54.990);
+      tl.fromTo("#cg58", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 54.990);
+      tl.fromTo("#w156", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 54.990);
+      tl.to("#w156", {scale: 1, duration: 0.1}, 55.190);
+      tl.fromTo("#w157", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 55.210);
+      tl.to("#w157", {scale: 1, duration: 0.1}, 55.450);
+      tl.fromTo("#w158", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 55.530);
+      tl.to("#w158", {scale: 1, duration: 0.1}, 56.290);
+      tl.set("#cg58", {opacity: 0, visibility: "hidden"}, 56.440);
+      tl.fromTo("#cg59", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 56.440);
+      tl.fromTo("#w159", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 56.440);
+      tl.to("#w159", {scale: 1, duration: 0.1}, 56.510);
+      tl.fromTo("#w160", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 56.480);
+      tl.to("#w160", {scale: 1, duration: 0.1}, 56.770);
+      tl.fromTo("#w161", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 56.880);
+      tl.to("#w161", {scale: 1, duration: 0.1}, 56.990);
+      tl.set("#cg59", {opacity: 0, visibility: "hidden"}, 56.990);
+      tl.fromTo("#cg60", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 56.990);
+      tl.fromTo("#w162", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ff3b30", duration: 0.07}, 56.990);
+      tl.to("#w162", {scale: 1, duration: 0.1}, 57.360);
+      tl.fromTo("#w163", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ff3b30", duration: 0.07}, 57.360);
+      tl.to("#w163", {scale: 1, duration: 0.1}, 58.000);
+      tl.set("#cg60", {opacity: 0, visibility: "hidden"}, 58.150);
+      tl.fromTo("#cg61", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 58.150);
+      tl.fromTo("#w164", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 58.150);
+      tl.to("#w164", {scale: 1, duration: 0.1}, 58.230);
+      tl.fromTo("#w165", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 58.230);
+      tl.to("#w165", {scale: 1, duration: 0.1}, 58.520);
+      tl.fromTo("#w166", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 58.520);
+      tl.to("#w166", {scale: 1, duration: 0.1}, 58.690);
+      tl.set("#cg61", {opacity: 0, visibility: "hidden"}, 58.690);
+      tl.fromTo("#cg62", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 58.690);
+      tl.fromTo("#w167", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 58.690);
+      tl.to("#w167", {scale: 1, duration: 0.1}, 58.970);
+      tl.fromTo("#w168", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 58.970);
+      tl.to("#w168", {scale: 1, duration: 0.1}, 59.040);
+      tl.fromTo("#w169", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 59.280);
+      tl.to("#w169", {scale: 1, duration: 0.1}, 59.530);
+      tl.set("#cg62", {opacity: 0, visibility: "hidden"}, 59.610);
+      tl.fromTo("#cg63", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 59.610);
+      tl.fromTo("#w170", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 59.610);
+      tl.to("#w170", {scale: 1, duration: 0.1}, 59.960);
+      tl.set("#cg63", {opacity: 0, visibility: "hidden"}, 59.960);
+      tl.fromTo("#cg64", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 59.960);
+      tl.fromTo("#w171", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 59.960);
+      tl.to("#w171", {scale: 1, duration: 0.1}, 60.130);
+      tl.fromTo("#w172", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 60.130);
+      tl.to("#w172", {scale: 1, duration: 0.1}, 60.360);
+      tl.fromTo("#w173", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffffff", duration: 0.07}, 60.360);
+      tl.to("#w173", {scale: 1, duration: 0.1}, 60.590);
+      tl.set("#cg64", {opacity: 0, visibility: "hidden"}, 60.590);
+      tl.fromTo("#cg65", {opacity: 0, scale: 0.88}, {opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}, 60.590);
+      tl.fromTo("#w174", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 60.590);
+      tl.to("#w174", {scale: 1, duration: 0.1}, 60.820);
+      tl.fromTo("#w175", {opacity: 0.6, scale: 1, color: "#ffffff"}, {opacity: 1, scale: 1.1, color: "#ffd60a", duration: 0.07}, 60.820);
+      tl.to("#w175", {scale: 1, duration: 0.1}, 61.590);
+      tl.set("#cg65", {opacity: 0, visibility: "hidden"}, 61.783);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
