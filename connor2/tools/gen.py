@@ -256,14 +256,14 @@ for gi, g in enumerate(groups):
     s0 = words[g[0]]["start"]; nxt = words[groups[gi + 1][0]]["start"] if gi + 1 < len(groups) else DUR
     e0 = DUR if gi == len(groups) - 1 else min(nxt, words[g[-1]]["end"] + 0.4, DUR)
     ws = "".join(f'<span class="w" id="w{i}">{html.escape(disp(i))}</span>' for i in vis)
-    em = sum(units(disp(i)) for i in vis) + 0.3 * (len(vis) - 1)
-    fs = int(min(76, 940 / 1.12 / em))
+    em = sum(units(disp(i)) * 1.04 for i in vis) + 0.42 * (len(vis) - 1)
+    fs = int(min(70, 900 / 1.12 / em))
     cap.append(f'<div class="cg" id="cg{gi}"><div class="line" style="font-size:{fs}px">{ws}</div></div>')
-    js.append(f'tl.fromTo("#cg{gi}", {{opacity: 0, scale: 0.88}}, {{opacity: 1, scale: 1, duration: 0.08, ease: "power2.out"}}, {s0:.3f});')
+    js.append(f'tl.fromTo("#cg{gi}", {{opacity: 0, y: 14, scale: 0.94}}, {{opacity: 1, y: 0, scale: 1, duration: 0.14, ease: "back.out(2)"}}, {s0 - 0.04:.3f});')
     for i in vis:
-        col = {"y": "#ffd60a", "r": "#ff3b30"}.get(color.get(i), "#ffffff")
-        js.append(f'tl.fromTo("#w{i}", {{opacity: 0.6, scale: 1, color: "#ffffff"}}, {{opacity: 1, scale: 1.1, color: "{col}", duration: 0.07}}, {words[i]["start"]:.3f});')
-        js.append(f'tl.to("#w{i}", {{scale: 1, duration: 0.1}}, {max(words[i]["start"] + 0.07, words[i]["end"]):.3f});')
+        col = {"y": "#ffd60a", "r": "#ff3b30"}.get(color.get(i), "#5cf27a")
+        js.append(f'tl.fromTo("#w{i}", {{scale: 1, color: "#ffffff"}}, {{scale: 1.08, color: "{col}", duration: 0.08, ease: "power2.out"}}, {words[i]["start"]:.3f});')
+        js.append(f'tl.to("#w{i}", {{scale: 1, duration: 0.12, ease: "power2.inOut"{', color: "#ffffff"' if i not in color else ''}}}, {max(words[i]["start"] + 0.07, words[i]["end"]):.3f});')
     js.append(f'tl.set("#cg{gi}", {{opacity: 0, visibility: "hidden"}}, {e0:.3f});')
 
 aud = []
