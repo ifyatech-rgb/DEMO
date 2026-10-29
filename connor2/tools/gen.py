@@ -89,7 +89,7 @@ for k, ((a, b), kind) in enumerate(zip(SEG, KIND)):
 add(f'<div class="hook" id="hk"><i class="haz"></i><div class="hk1">{E("📍")} TEXAS</div><div class="hk2">HOMEOWNERS {E("🚨")}</div><i class="haz"></i></div>', "full", "g-hook", 0.0, CUTS[0])
 js.append('tl.set("#hk", {opacity: 1, scale: 1}, 0);')
 js.append('tl.fromTo("#hk .emo", {rotation: -12}, {rotation: 12, duration: 0.12, yoyo: true, repeat: 5, ease: "sine.inOut"}, 0.0);')
-fx("boom", 0.0, 0.5); shake(0.0, 10, 5); OUT("#hk", CUTS[0])
+fx("boom", 0.0, 0.36); shake(0.0, 10, 5); OUT("#hk", CUTS[0])
 pill("g-tx", f'{E("📍")} TEXAS HOMEOWNERS', CUTS[0], at("before you") - 0.05, sound=None)
 add('<div class="kin"><span id="kb0">BEFORE</span> <span id="kb1">YOU</span> <span id="kb2">SPEND…</span></div>', "top", "g-before", at("before you"), at("thirty thousand") - 0.1)
 for j, t in enumerate((at("before you"), at("you spend"), at("spend"))):
@@ -111,7 +111,7 @@ add(form, "body", "g-form", F0 + 0.3, F1)
 js.append(f'tl.fromTo("#form", {{opacity: 0, y: 120}}, {{opacity: 1, y: 0, duration: 0.25, ease: "power3.out"}}, {F0 + 0.3:.3f});'); WH(F0 + 0.3)
 SLAM("#st2", at("not paid"), 2.4); fx("stamp", at("not paid") + 0.02, 0.4)
 js.append(f'tl.fromTo("#st1", {{opacity: 0, scale: 3}}, {{opacity: 1, scale: 1, duration: 0.11, ease: "power4.in"}}, {at("were denied") - 0.08:.3f});')
-fx("stamp_heavy", at("were denied") + 0.02, 0.42); fx("buzzer", at("were denied") + 0.1, 0.3); shake(at("were denied") + 0.03, 14, 6)
+fx("stamp_heavy", at("were denied") + 0.02, 0.3); fx("buzzer", at("were denied") + 0.1, 0.2); shake(at("were denied") + 0.03, 14, 6)
 OUT("#form", F1)
 
 # ======================= 3. qualify (over the aerial b-roll) =======================
@@ -136,7 +136,7 @@ OUT("#g-worry .kin", at("that is exactly") - 0.05)
 
 # ======================= 4. the turn + company =======================
 TU = at("that is exactly")
-fx("riser", TU - 1.6, 0.32); flash(TU); fx("drop", TU, 0.4)
+fx("riser", TU - 1.6, 0.32); flash(TU); fx("drop", TU, 0.28)
 FREEZE = (TU, "assets/freeze-turn.jpg")
 pill("g-got", f'{E("✅")} WE\'VE GOT YOU', TU + 0.03, CUTS[3] - 0.05, "pill green", sound=None)
 T0, T1 = BR[2]
