@@ -1,6 +1,6 @@
 """Prep for the Connor avatar ad: phone look on the client's cut (picture timing untouched), voice at -14 LUFS with a
-light outdoor feel, job-site ambience under the avatar shots (dipped under the b-roll), and a driving music bed
-(Mixkit "Running Out of Time"): tense/muffled until the turn, opening up at "that is exactly where we come in", building to the end."""
+light outdoor feel, job-site ambience under the avatar shots (dipped under the b-roll), and an upbeat music bed
+(tools/music.py)."""
 import json, os, re, subprocess
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); os.chdir(ROOT)
 run = lambda *a: subprocess.run(["ffmpeg", "-v", "error", "-y", *a], check=True)
@@ -29,10 +29,5 @@ dip = "+".join(f"between(t,{a:.3f},{b:.3f})" for a, b in BR)
 fc.append("".join(f"[l{k}]" for k in range(len(layers))) + f"amix=inputs={len(layers)}:normalize=0,apad=whole_dur={DUR},atrim=0:{DUR},volume='if({dip},0.4,1)':eval=frame[o]")
 run(*ins, "-filter_complex", ";".join(fc), "-map", "[o]", "assets/amb_raw.wav")
 run("-i", "assets/amb_raw.wav", "-af", f"volume={-28.5 - lufs('assets/amb_raw.wav'):.2f}dB", "assets/ambience.wav")
-OFF = 19.0
-g = -14 - lufs(D + "m77.mp3")
-auto = f"lowpass=f=900:enable='lt(t,{TU})',volume='if(lt(t,{TU}),0.85,1+0.25*min(1,max(0,(t-{TU + 20})/12)))':eval=frame"
-run("-ss", f"{OFF}", "-t", f"{DUR}", "-i", D + "m77.mp3", "-i", "assets/vo.wav", "-filter_complex",
-    f"[0:a]asetpts=PTS-STARTPTS,aresample=48000,aformat=channel_layouts=stereo,volume={g:.2f}dB,{auto},afade=t=in:d=0.4,afade=t=out:st={DUR - 0.6:.2f}:d=0.6,volume=0.2[m];"
-    "[1:a]aformat=channel_layouts=stereo[sc];[m][sc]sidechaincompress=threshold=0.07:ratio=2.5:attack=15:release=250:makeup=1[bed]", "-map", "[bed]", "assets/music_bed.wav")
+subprocess.run(["python3", "tools/music.py"], check=True)
 for f in ("assets/vo.wav", "assets/ambience.wav", "assets/music_bed.wav"): print(f, lufs(f), "LUFS")

@@ -1,6 +1,6 @@
 Connor avatar ad (v2): sources
 Video: the client's own cut (avatar + b-roll), unchanged; no stock footage added.
-Music: Mixkit 77 "Running Out of Time" by Ahjay Stelino (Mixkit Stock Music Free License).
+Music: Mixkit track #112 (https://assets.mixkit.co/music/112/112.mp3), Mixkit Stock Music Free License.
 Ambience (Mixkit Sound Effects Free License): 2658 wind, 2464 garden birds, 797 construction ambience,
   830 hammer, 817 nail-gun, 835/833 metal clanks.
 Graphic SFX: the same Mixkit set used in the finalad project (see finalad/sources.txt), plus blow.wav.

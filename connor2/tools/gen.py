@@ -57,7 +57,7 @@ def hand(t):
     x = 10 * math.sin(2 * math.pi * 0.23 * t + ph[0]) + 5 * math.sin(2 * math.pi * 0.61 * t + ph[1]) + 2 * math.sin(2 * math.pi * 1.9 * t + ph[2])
     y = 8 * math.sin(2 * math.pi * 0.19 * t + ph[3]) + 3.2 * math.sin(2 * math.pi * 1.15 * t + ph[4]) + 1.6 * math.sin(2 * math.pi * 2.3 * t + ph[5])
     r = 0.42 * math.sin(2 * math.pi * 0.17 * t + ph[6]) + 0.2 * math.sin(2 * math.pi * 0.53 * t + ph[7]) + 0.05 * math.sin(2 * math.pi * 2.1 * t + ph[8])
-    k = 0.15 if is_broll(t) else 1.0
+    k = 0.15 if is_broll(t) else 0.7
     return x * k, y * k, r * k
 STEP, t = 0.2, 0.0
 x0, y0, r0 = hand(0); js.append(f'tl.set("#hand", {{x: {x0:.1f}, y: {y0:.1f}, rotation: {r0:.3f}}}, 0);')
@@ -66,23 +66,23 @@ while t < DUR:
     js.append(f'tl.to("#hand", {{x: {x:.1f}, y: {y:.1f}, rotation: {r:.3f}, duration: {STEP}, ease: "none"}}, {t:.2f});'); t += STEP
 
 # ======================= camera per segment =======================
-EMPH = [at("thirty thousand"), at("denied"), at("risk window"), at("tightening"), at("exactly where"), at("north and east"), at("nine full"), at("free no-obligation"), at("learn more")]
+EMPH = [at("thirty thousand"), at("denied"), at("tightening"), at("exactly where"), at("north and east"), at("free no-obligation")]
 PUNCH_T = []
 for k, ((a, b), kind) in enumerate(zip(SEG, KIND)):
     if kind == "avatar":
-        js.append(f'tl.set("#cam", {{scale: 1.12, xPercent: 0, yPercent: 0}}, {a:.3f});')
-        lvl, t = 1.12, a
+        js.append(f'tl.set("#cam", {{scale: 1.05, xPercent: 0, yPercent: 0}}, {a:.3f});')
+        lvl, t = 1.05, a
         for e in [e for e in EMPH if a < e < b]:
-            js.append(f'tl.to("#cam", {{scale: 1.25, duration: 0.3, ease: "power2.out"}}, {e - 0.05:.3f});')
-            js.append(f'tl.to("#cam", {{scale: 1.14, duration: 0.45, ease: "power2.inOut"}}, {min(e + 1.5, b - 0.5):.3f});')
+            js.append(f'tl.to("#cam", {{scale: 1.1, duration: 0.6, ease: "sine.inOut"}}, {e - 0.05:.3f});')
+            js.append(f'tl.to("#cam", {{scale: 1.05, duration: 0.8, ease: "sine.inOut"}}, {min(e + 2.0, b - 0.9):.3f});')
             PUNCH_T.append(e)
     else:
         mv = ["push", "pan", "push", "panR", "push", "pan"][len([1 for s in SEG[:k] if s in BR]) % 6]
-        a0, b0 = {"push": ("scale: 1.0, xPercent: 0", "scale: 1.1, xPercent: 0"), "pan": ("scale: 1.1, xPercent: 2.5", "scale: 1.1, xPercent: -2.5"),
-                  "panR": ("scale: 1.1, xPercent: -2.5", "scale: 1.1, xPercent: 2.5")}[mv]
+        a0, b0 = {"push": ("scale: 1.02, xPercent: 0", "scale: 1.05, xPercent: 0"), "pan": ("scale: 1.05, xPercent: 1.2", "scale: 1.05, xPercent: -1.2"),
+                  "panR": ("scale: 1.05, xPercent: -1.2", "scale: 1.05, xPercent: 1.2")}[mv]
         js.append(f'tl.fromTo("#cam", {{{a0}, yPercent: 0}}, {{{b0}, duration: {b - a:.3f}, ease: "none", immediateRender: {"true" if a == 0 else "false"}}}, {a:.3f});')
     if a > 0:   # whip into every segment change + a whoosh
-        js.append(f'tl.fromTo("#whip", {{yPercent: {7 if kind == "broll" else -7}}}, {{yPercent: 0, duration: 0.2, ease: "power3.out", immediateRender: false}}, {a:.3f});')
+        js.append(f'tl.fromTo("#whip", {{yPercent: {3 if kind == "broll" else -3}}}, {{yPercent: 0, duration: 0.2, ease: "power3.out", immediateRender: false}}, {a:.3f});')
         fx("wB" if kind == "broll" else "wA", a - 0.1, 0.16)
 
 # ======================= 1. hook + money =======================
