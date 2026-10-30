@@ -117,6 +117,14 @@ fx("boom", 0.0, 0.36); shake(0.0, 10, 5)
 for k in range(4):   # peel off, one after another
     js.append(f'tl.to("#sk{k}", {{opacity: 0, y: -140, rotation: {(-1) ** k * 25}, scale: 0.8, duration: 0.22, ease: "power2.in"}}, {H1 - 0.05 + k * 0.05:.3f});')
 fx("swoosh", H1, 0.2)
+# name tag, lower left, first ~5 s (company / name / title bars wipe in one after another)
+NT0, NT1 = 0.35, BR[0][0] - 0.1
+add('<div class="nt"><div class="ntb ntc" id="nt0">Pinecrest Roofing &amp; Construction LLC</div><div class="ntb ntn" id="nt1">Conner Pennington</div>'
+    '<div class="ntb ntr" id="nt2">Owner</div></div>', "ntz", "g-nametag", NT0, NT1)
+for k in range(3):
+    js.append(f'tl.fromTo("#nt{k}", {{clipPath: "inset(0 100% 0 0)", x: -30}}, {{clipPath: "inset(0 0% 0 0)", x: 0, duration: 0.35, ease: "power3.out"}}, {NT0 + k * 0.15:.3f});')
+    js.append(f'tl.to("#nt{k}", {{clipPath: "inset(0 100% 0 0)", x: -30, duration: 0.25, ease: "power2.in"}}, {NT1 - 0.3 + (2 - k) * 0.05:.3f});')
+fx("wB", NT0 - 0.05, 0.14)
 pill("g-watch", f'{E("⚠️")} WATCH THIS FIRST', H1 + 0.15, at("$30,000") - 0.08, "pill yel", sound="blow", vol=0.24)
 js.append(f'tl.fromTo("#g-watchi", {{scale: 1}}, {{scale: 1.12, duration: 0.1, yoyo: true, repeat: 3, immediateRender: false}}, {at("watch this"):.3f});')
 M0 = at("$30,000")
@@ -133,7 +141,7 @@ OUT("#g-wal .wal", BR[0][0])
 
 # ======================= 2. denied claims =======================
 F0, F1 = BR[0]
-pill("g-47", f'{E("📊")} <span class="r">47%</span> OF TEXAS ROOF CLAIMS…', at("47%"), F1 - 0.05, "pill", "full")
+pill("g-47", f'{E("📊")} <span class="r">47%</span> OF TEXAS ROOF CLAIMS…', max(at("47%"), F0 + 0.05), F1 - 0.05, "pill", "full")
 D0, D1 = F1, at("and if your")
 pill("g-den", f'{E("❌")} DENIED. NOT PAID OUT.', at("denied"), D1, "pill red", sound=None)
 form = ('<div class="form" id="form" data-layout-allow-occlusion><div class="fh">INSURANCE CLAIM <span>Roof · Storm</span></div>'
