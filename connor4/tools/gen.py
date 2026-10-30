@@ -131,7 +131,7 @@ js.append(f'tl.fromTo("#form", {{opacity: 0, y: 120}}, {{opacity: 1, y: 0, durat
 js.append(f'tl.fromTo("#mag", {{opacity: 1, x: 0, y: 0}}, {{x: 640, y: 40, duration: 1.2, ease: "sine.inOut", immediateRender: false}}, {D0 + 0.3:.3f});')
 js.append(f'tl.to("#mag", {{opacity: 0, duration: 0.1}}, {at("denied") - 0.15:.3f});')
 js.append(f'tl.fromTo("#st1", {{opacity: 0, scale: 3}}, {{opacity: 1, scale: 1, duration: 0.11, ease: "power4.in"}}, {at("denied") - 0.08:.3f});')
-fx("stamp_heavy", at("denied") + 0.02, 0.3); fx("buzzer", at("denied") + 0.1, 0.2); shake(at("denied") + 0.03, 14, 6)
+fx("stamp_heavy", at("denied") + 0.02, 0.22); fx("buzzer", at("denied") + 0.1, 0.15); shake(at("denied") + 0.03, 14, 6)
 SLAM("#st2", at("not paid"), 2.4); fx("stamp", at("not paid") + 0.02, 0.36)
 OUT("#form", D1)
 
