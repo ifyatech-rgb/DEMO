@@ -71,7 +71,7 @@ while t < DUR:
 # ======================= camera per segment =======================
 TU = at("that is exactly")
 KEY = [at("$30,000"), at("denied"), TU, at("risk window"), at("approved"), at("9"), at("free no-obligation"), at("book your")]   # 125 %
-MID = [at("tightening"), at("worry now"), at("this program"), at("aging roofs", find("this program")[0]), at("we limit"), at("for a limited")]   # 117 %
+MID = [at("tightening"), at("but you"), at("worry now"), at("this program"), at("aging roofs", find("this program")[0]), at("we limit"), at("for a limited")]   # 117 %
 PUNCH_T = []
 for k, ((a, b), kind) in enumerate(zip(SEG, KIND)):
     if kind == "avatar":
@@ -125,25 +125,14 @@ for k in range(3):
     js.append(f'tl.fromTo("#nt{k}", {{clipPath: "inset(0 100% 0 0)", x: -30}}, {{clipPath: "inset(0 0% 0 0)", x: 0, duration: 0.35, ease: "power3.out"}}, {NT0 + k * 0.15:.3f});')
     js.append(f'tl.to("#nt{k}", {{clipPath: "inset(0 100% 0 0)", x: -30, duration: 0.25, ease: "power2.in"}}, {NT1 - 0.3 + (2 - k) * 0.05:.3f});')
 fx("wB", NT0 - 0.05, 0.14)
-pill("g-watch", f'{E("⚠️")} WATCH THIS FIRST', H1 + 0.15, at("$30,000") - 0.08, "pill yel", sound="blow", vol=0.24)
-js.append(f'tl.fromTo("#g-watchi", {{scale: 1}}, {{scale: 1.12, duration: 0.1, yoyo: true, repeat: 3, immediateRender: false}}, {at("watch this"):.3f});')
 M0 = at("$30,000")
 add('<div class="m30" id="m30">$30,000</div>', "top", "g-m30", M0, BR[0][0])
 SLAM("#m30", M0, 3.0); shake(M0 + 0.05, 18, 7); fx("kaching", M0, 0.42); fx("boom", M0, 0.22); OUT("#m30", BR[0][0])
-W0 = at("on a new")
-coins = "".join(f'<i class="coin" id="cn{j}" style="left:{40 + j * 50}px">$</i>' for j in range(3))
-add(f'<div class="wal"><div class="wallet" id="wlt"><i class="wbody"></i><i class="wflap"></i>{coins}</div><div class="oop" id="oop">OUT OF YOUR POCKET?</div></div>', "body", "g-wal", W0, BR[0][0])
-POP("#wlt", W0, 0.2); POP("#oop", W0 + 0.15); fx("coindrop", W0 + 0.1, 0.4)
-for j in range(3):
-    js.append(f'tl.fromTo("#cn{j}", {{opacity: 1, y: 0}}, {{opacity: 0, y: 230, rotation: {(j - 1) * 40}, duration: 0.5, ease: "power2.in", immediateRender: false}}, {W0 + 0.2 + j * 0.12:.3f});')
-js.append(f'tl.to("#wlt", {{rotation: -8, duration: 0.1, yoyo: true, repeat: 3}}, {W0 + 0.2:.3f});')
-OUT("#g-wal .wal", BR[0][0])
 
 # ======================= 2. denied claims =======================
 F0, F1 = BR[0]
 pill("g-47", f'{E("📊")} <span class="r">47%</span> OF TEXAS ROOF CLAIMS…', max(at("47%"), F0 + 0.05), F1 - 0.05, "pill", "full")
 D0, D1 = F1, at("and if your")
-pill("g-den", f'{E("❌")} DENIED. NOT PAID OUT.', at("denied"), D1, "pill red", sound=None)
 form = ('<div class="form" id="form" data-layout-allow-occlusion><div class="fh">INSURANCE CLAIM <span>Roof · Storm</span></div>'
         '<div class="frow"><span>Status</span><b id="fst">Under review…</b></div><div class="frow"><span>Payout</span><b>$ ———</b></div>'
         f'<div class="mag" id="mag">🔍</div>'
@@ -172,9 +161,6 @@ for j, (_, _, ta, tb) in enumerate(CK):
 js.append(f'tl.fromTo("#ck1 .ckico", {{y: 0}}, {{y: -10, duration: 0.15, yoyo: true, repeat: 5, immediateRender: false}}, {at("recently hit") + 0.2:.3f});')
 fx("thunder", at("recently hit"), 0.3); OUT("#g-check .check", Q1)
 pill("g-risk", f'{E("⚠️")} YOU\'RE IN THE RISK WINDOW', Q1 + 0.05, at("because insurance") - 0.05, "pill red", sound="blow", vol=0.24)
-pill("g-tight", 'INSURERS ARE <span class="y">TIGHTENING</span> GUIDELINES', at("because insurance"), at("but you") - 0.05, "pill dark")
-add(f'<div class="badge" id="corner"><span class="bk">✓</span>WE\'RE IN YOUR CORNER {E("🤝")}</div>', "top", "g-corner", at("but you"), TU - 0.05)
-POP("#corner", at("but you")); fx("ding", at("but you"), 0.2); OUT("#corner", TU - 0.05)
 
 # ======================= 4. the turn + company =======================
 fx("riser", TU - 1.6, 0.3); flash(TU); fx("drop", TU, 0.28)
@@ -219,12 +205,8 @@ add(f'<div class="prog" id="prog"><span class="pl">NOW LAUNCHING</span><b>{E("�
 POP("#prog", G0 + 0.05, 0.26); fx("pop", G0 + 0.05, 0.24)
 js.append(f'tl.fromTo("#prog b", {{scale: 1}}, {{scale: 1.06, duration: 0.15, yoyo: true, repeat: 1}}, {at("protection program"):.3f});')
 OUT("#prog", at("exclusively") - 0.05)
-pill("g-ne", f'{E("📍")} NORTH &amp; EAST TEXAS ONLY', at("exclusively"), BR[6][1] - 0.05, "pill", "full")
-pill("g-age", 'BUILT FOR <span class="y">AGING ROOFS</span>', at("this program"), BR[7][0] - 0.05, "pill dark")
-pill("g-qp", f'{E("🔨")} QUALITY + PRECISION', max(at("maintain"), BR[7][0] + 0.1), BR[7][1] - 0.05, "pill", "full")
 
 # ======================= 7. offer =======================
-pill("g-lim0", f'{E("🔒")} LIMITED SPOTS', BR[7][1] + 0.05, at("for a limited") - 0.05, "pill red", sound="pop")
 add('<div class="nine" id="nine"><span class="n9">9</span><div><b>ROOF PROJECTS</b><i>PER MONTH · THAT\'S IT</i></div></div>', "body", "g-nine", at("9") - 0.1, at("for a limited") - 0.05)
 SLAM("#nine", at("9"), 2.2); fx("stamp", at("9"), 0.3); OUT("#nine", at("for a limited") - 0.05)
 L0, L1 = at("for a limited"), at("free no-obligation") - 0.05
@@ -239,7 +221,6 @@ OUT("#lim", L1)
 O0 = at("free no-obligation")
 add('<div class="offer" id="offer"><b>FREE ROOF INSPECTION</b><i>$0 • NO OBLIGATION</i></div>', "body", "g-offer", O0, BR[8][0])
 SLAM("#offer", O0, 2.2); fx("pop", O0, 0.38); fx("ding", at("no-obligation") + 0.3, 0.24); OUT("#offer", BR[8][0])
-pill("g-photo", f'{E("📸")} PHOTO + VIDEO REPORT', BR[8][0] + 0.1, BR[8][1] - 0.05, "pill dark", "full")
 
 # ======================= 8. damage callouts on the roof b-roll =======================
 R0, R1 = BR[9]
@@ -267,7 +248,6 @@ for j, (txt, t) in enumerate((("Your name", PH0 + 0.25), ("Your address", PH0 + 
 TS = PH0 + 0.9
 js.append(f'tl.to("#fing", {{y: 205, scale: 0.9, duration: 0.1}}, {TS - 0.12:.3f});'); fx("click", TS, 0.4)
 POP("#pok", TS + 0.12); fx("notify", TS + 0.12, 0.28); OUT("#phone", C0 + 0.1)
-add('<div class="pill dark" id="g-namei">PINECREST ROOFING &amp; CONSTRUCTION</div>', "top", "g-name", C0, DUR); POP("#g-namei", C0)
 add(f'<div class="cta"><div class="ctabtn" id="ctb">BOOK YOUR FREE INSPECTION {E("👇")}</div><svg class="arrow" id="arw" viewBox="0 0 120 150" width="84" height="104">'
     '<path d="M42 0h36v80h32L60 145 10 80h32z" fill="#ffd60a" stroke="#000" stroke-width="8" stroke-linejoin="round"/></svg></div>', "body", "g-cta", C0, DUR)
 POP("#ctb", C0 + 0.05, 0.24); fx("pop", C0 + 0.05, 0.32); fx("notify", at("free inspection"), 0.26); POP("#arw", C0 + 0.25)
@@ -318,7 +298,7 @@ for gi, g in enumerate(groups):
     e0 = DUR if gi == len(groups) - 1 else min(nxt - 0.05, words[g[-1]]["end"] + 0.4, DUR)
     ws = "".join(f'<span class="w" id="w{i}">{html.escape(disp(i))}</span>' for i in g)
     em = sum(units(disp(i)) * 1.06 for i in g) + 0.42 * (len(g) - 1)
-    fs = int(min(78, 940 / 1.14 / em))
+    fs = int(min(66, 900 / 1.14 / em))
     cap.append(f'<div class="cg" id="cg{gi}"><div class="line" style="font-size:{fs}px">{ws}</div></div>')
     js.append(f'tl.fromTo("#cg{gi}", {{opacity: 0, scale: 0.9}}, {{opacity: 1, scale: 1, duration: 0.12, ease: "back.out(2)"}}, {s0 - 0.04:.3f});')
     for i in g:
@@ -326,6 +306,16 @@ for gi, g in enumerate(groups):
         js.append(f'tl.fromTo("#w{i}", {{scale: 1, color: "#ffffff"}}, {{scale: 1.08, color: "{col}", duration: 0.08, ease: "power2.out"}}, {words[i]["start"]:.3f});')
         js.append(f'tl.to("#w{i}", {{scale: 1, duration: 0.12, ease: "power2.inOut"{', color: "#ffffff"' if i not in color else ''}}}, {max(words[i]["start"] + 0.07, words[i]["end"]):.3f});')
     js.append(f'tl.set("#cg{gi}", {{opacity: 0, visibility: "hidden"}}, {e0:.3f});')
+
+
+# ======================= captions yield to the big graphics =======================
+QUIET = {"g-nametag", "g-form", "g-check", "g-brand", "g-proof", "g-trk", "g-nine", "g-offer", "g-cta"}
+for e in el:
+    gid = re.search(r'id="([^"]+)"', e).group(1)
+    if gid in QUIET:
+        a = float(re.search(r'data-start="([\d.]+)"', e).group(1)); d = float(re.search(r'data-duration="([\d.]+)"', e).group(1))
+        js.append(f'tl.to("#captions", {{opacity: 0, duration: 0.1}}, {a:.3f});')
+        if a + d < DUR - 0.05: js.append(f'tl.to("#captions", {{opacity: 1, duration: 0.1}}, {a + d:.3f});')
 
 aud = []
 for n, (k, t, v) in enumerate(sorted(sfx, key=lambda x: x[1])):
