@@ -6,3 +6,4 @@ Music: Mixkit track #112 (https://assets.mixkit.co/music/112/112.mp3), Mixkit St
 Ambience (Mixkit Sound Effects Free License): 2658 wind, 2464 garden birds, 797 construction ambience,
   830 hammer, 817 nail-gun, 835/833 metal clanks (ladder).
 Graphic SFX: the same Mixkit set as the finalad project (see finalad/sources.txt), plus blow.wav.
+Shirt logo: the client-supplied Pinecrest logo (assets/logo-src.jpg), composited over the AI shirt print by tools/logo.py.

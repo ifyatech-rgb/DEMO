@@ -11,7 +11,8 @@ TU = [w["start"] for i, w in enumerate(words) if w["text"].lower() == "that" and
 BR = json.load(open("tools/broll.json"))
 
 LOOK = "eq=contrast=1.04:saturation=1.05,colorbalance=rs=0.015:bs=-0.015"
-run("-i", "assets/source.mp4", "-an", "-vf", f"{LOOK},noise=alls=4:allf=t", "-c:v", "libx264", "-crf", "19", "-preset", "medium", "-g", "25", "-pix_fmt", "yuv420p", "assets/look.mp4")
+if not os.path.exists("assets/source_logo.mp4"): subprocess.run(["python3", "tools/logo.py"], check=True)   # real shirt logo
+run("-i", "assets/source_logo.mp4", "-an", "-vf", f"{LOOK},noise=alls=4:allf=t", "-c:v", "libx264", "-crf", "19", "-preset", "medium", "-g", "25", "-pix_fmt", "yuv420p", "assets/look.mp4")
 run("-ss", f"{TU}", "-i", "assets/look.mp4", "-frames:v", "1", "-q:v", "2", "assets/freeze-turn.jpg")
 os.makedirs("assets/br", exist_ok=True)
 for b, ss in {(b["file"], b.get("ss", 0)) for b in BR}:   # ss trims a clip's fade-from-black head
