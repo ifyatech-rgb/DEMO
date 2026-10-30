@@ -2,7 +2,7 @@
 graphics, captions, SFX, music and ambience layered on top. Time everything to the transcript.
 
 Picture: #hand (handheld drift / bob / micro-shake, avatar shots only) > #cam (112 % framing, 117/125 % punch-ins on the
-avatar, push / pan / punch on b-roll) > #whip (whip into and out of each b-roll) > #shake > #grade > take + b-roll + freeze.
+avatar, push / pan / punch on b-roll) > #whip (whip into and out of each b-roll) > #shake > #grade > take + b-roll.
 Zones (face y ~510-840, head top ~505): TOP y 262-452 in the sky above his head, BODY y 905-1285 on his shirt,
 CAPTIONS y 1330-1450, SIDE x 724-1054 beside him (phone), FULL screen only over b-roll.
 """
@@ -70,8 +70,8 @@ while t < DUR:
 
 # ======================= camera per segment =======================
 TU = at("that is exactly")
-KEY = [at("$30,000"), at("denied"), at("risk window"), at("approved"), at("9"), at("free no-obligation"), at("book your")]   # 125 %
-MID = [at("tightening"), at("worry now"), TU + 0.6, at("this program"), at("aging roofs", find("this program")[0]), at("we limit"), at("for a limited")]   # 117 %
+KEY = [at("$30,000"), at("denied"), TU, at("risk window"), at("approved"), at("9"), at("free no-obligation"), at("book your")]   # 125 %
+MID = [at("tightening"), at("worry now"), at("this program"), at("aging roofs", find("this program")[0]), at("we limit"), at("for a limited")]   # 117 %
 PUNCH_T = []
 for k, ((a, b), kind) in enumerate(zip(SEG, KIND)):
     if kind == "avatar":
@@ -170,7 +170,6 @@ POP("#corner", at("but you")); fx("ding", at("but you"), 0.2); OUT("#corner", TU
 
 # ======================= 4. the turn + company =======================
 fx("riser", TU - 1.6, 0.3); flash(TU); fx("drop", TU, 0.28)
-FREEZE = (TU, "assets/freeze-turn.jpg")
 pill("g-got", f'{E("✅")} WE\'VE GOT YOU', TU + 0.5, BR[3][0] - 0.05, "pill green", sound="pop", vol=0.3)
 T0, T1 = BR[3]
 add('<div class="brandin" id="brandin"><div class="b1">PINECREST</div><div class="b2">ROOFING &amp; CONSTRUCTION</div><i id="sweep" data-layout-allow-overflow></i></div>', "full", "g-brand", T0, T1)
@@ -343,7 +342,6 @@ doc = f"""<!doctype html>
       <div id="hand"><div id="cam"><div id="whip"><div id="shake"><div id="grade">
         <video id="src" class="clip" src="assets/look.mp4" muted playsinline data-start="0" data-duration="{DUR}" data-track-index="0"></video>
         {(nl + "  ").join(brv)}
-        <img class="clip freeze" id="fz" src="{FREEZE[1]}" alt="" data-start="{FREEZE[0]:.3f}" data-duration="0.5" data-track-index="4" />
       </div></div></div></div></div>
       {nl.join(el)}
       <div id="captions" class="clip" data-start="0" data-duration="{DUR}" data-track-index="30">
