@@ -11,6 +11,10 @@ import html, json, math, os, random, re, subprocess, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
 W, H = 1080, 1920
+FMT = sys.argv[1] if len(sys.argv) > 1 else "916"   # "45" writes the 4:5 feed version to ../connor4-4x5
+SH = 1920                                          # the stage is always laid out at 9:16
+OFF = 220 if FMT == "45" else 0                    # 4:5 window starts just above his head: sky graphics, face, shirt cards, captions all fit
+if FMT == "45": H = 1350
 probe = lambda f: float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", f], capture_output=True, text=True).stdout)
 DUR = round(probe("assets/look.mp4") - 0.04, 3)
 words = json.load(open("transcript.json"))
@@ -329,7 +333,7 @@ doc = f"""<!doctype html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width={W}, height={H}" />
-    <title>Connor Field Ad</title>
+    <title>Connor Field Ad {"4x5" if FMT == "45" else "9x16"}</title>
     <script src="vendor/gsap.min.js"></script>
     <style>
 {CSS}
@@ -337,6 +341,7 @@ doc = f"""<!doctype html>
   </head>
   <body>
     <div id="root" data-composition-id="main" data-start="0" data-width="{W}" data-height="{H}" data-duration="{DUR}">
+      <div id="stage" style="position:absolute; left:0; top:{-OFF}px; width:{W}px; height:{SH}px;">
       <div id="hand"><div id="cam"><div id="whip"><div id="shake"><div id="grade">
         <video id="src" class="clip" src="assets/look.mp4" muted playsinline data-start="0" data-duration="{DUR}" data-track-index="0"></video>
         {(nl + "  ").join(brv)}
@@ -345,11 +350,10 @@ doc = f"""<!doctype html>
       <div id="captions" class="clip" data-start="0" data-duration="{DUR}" data-track-index="30">
         {nl.join(cap)}
       </div>
+      </div>
       <div id="flash"></div>
     </div>
     <audio id="vo" src="assets/vo.wav" data-start="0" data-duration="{DUR}" data-track-index="1" data-volume="1"></audio>
-    <audio id="amb" src="assets/ambience.wav" data-start="0" data-duration="{DUR}" data-track-index="5" data-volume="1"></audio>
-    <audio id="music" src="assets/music_bed.wav" data-start="0" data-duration="{DUR}" data-track-index="6" data-volume="1"></audio>
     {chr(10).join("    " + a for a in aud).lstrip()}
     <script>
       window.__timelines = window.__timelines || {{}};
@@ -360,7 +364,15 @@ doc = f"""<!doctype html>
   </body>
 </html>
 """
-open("index.html", "w").write(doc)
+if FMT == "45":   # the name tag moves up into the caption spot (captions are hidden while it is up)
+    doc = doc.replace("</style>", "  .ntz { top: 1316px; }\n      .stks { top: 18px; transform: scale(0.86); transform-origin: 50% 0; }\n    </style>", 1)
+    OUTD = "../connor4-4x5"; os.makedirs(OUTD, exist_ok=True)
+    for d in ("assets", "vendor"):
+        if not os.path.lexists(f"{OUTD}/{d}"): os.symlink(f"../connor4/{d}", f"{OUTD}/{d}")
+    for f in ("hyperframes.json", "package.json"): open(f"{OUTD}/{f}", "w").write(open(f).read())
+    json.dump({"id": "connor4-4x5"}, open(f"{OUTD}/meta.json", "w"))
+    open(f"{OUTD}/index.html", "w").write(doc)
+else: open("index.html", "w").write(doc)
 ev = sorted({0.0, *CUTS, *PUNCH_T, *[float(re.search(r'data-start="([\d.]+)"', e).group(1)) for e in el], *[t for _, t, _ in sfx]})
 gaps = [(round(a, 2), round(b - a, 2)) for a, b in zip(ev, ev[1:] + [DUR]) if b - a > 3.0]
 wide = []   # avatar stretches held at 112 % for more than 3 s with no punch, graphic or cut
@@ -368,4 +380,4 @@ for (a, b), kind in zip(SEG, KIND):
     if kind != "avatar": continue
     pts = sorted({a, b, *[p for p in PUNCH_T if a < p < b], *[float(re.search(r'data-start="([\d.]+)"', e).group(1)) for e in el if a < float(re.search(r'data-start="([\d.]+)"', e).group(1)) < b]})
     wide += [(round(x, 2), round(y - x, 2)) for x, y in zip(pts, pts[1:]) if y - x > 3.0]
-print(f"{DUR}s · {len(el)} graphics · {len(PUNCH_T)} punches · {len(groups)} captions · {len(sfx)} sfx · gaps>3s: {gaps or 'none'} · wide>3s: {wide or 'none'}")
+print(f"{FMT} {W}x{H} · {DUR}s · {len(el)} graphics · {len(PUNCH_T)} punches · {len(groups)} captions · {len(sfx)} sfx · gaps>3s: {gaps or 'none'} · wide>3s: {wide or 'none'}")
