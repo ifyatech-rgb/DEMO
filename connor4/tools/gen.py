@@ -75,7 +75,8 @@ MID = [at("tightening"), at("worry now"), TU + 0.6, at("this program"), at("agin
 PUNCH_T = []
 for k, ((a, b), kind) in enumerate(zip(SEG, KIND)):
     if kind == "avatar":
-        js.append(f'tl.set("#cam", {{scale: 1.12, xPercent: 0, yPercent: 0}}, {a:.3f});')
+        if a == 0: js.append('tl.fromTo("#cam", {scale: 1.32, xPercent: 0, yPercent: 0}, {scale: 1.12, duration: 1.3, ease: "power3.out", immediateRender: true}, 0);')   # open tight on his face
+        else: js.append(f'tl.set("#cam", {{scale: 1.12, xPercent: 0, yPercent: 0}}, {a:.3f});')
         hits = sorted([(e, 1.25) for e in KEY if a < e < b] + [(e, 1.17) for e in MID if a < e < b])
         for j, (e, s) in enumerate(hits):
             js.append(f'tl.to("#cam", {{scale: {s}, duration: 0.18, ease: "power3.out"}}, {e - 0.04:.3f});')
@@ -97,28 +98,41 @@ for k, ((a, b), kind) in enumerate(zip(SEG, KIND)):
         js.append(f'tl.fromTo("#whip", {{yPercent: {7 if kind == "broll" else -7}}}, {{yPercent: 0, duration: 0.2, ease: "power3.out", immediateRender: false}}, {a:.3f});')
         fx("whip" if kind == "broll" else "wA", a - 0.1, 0.16)
 
-# ======================= 1. hook + money =======================
-B1 = BR[0][1]
-add(f'<div class="hook" id="hk"><i class="haz"></i><div class="hk1">{E("📍")} TEXAS</div><div class="hk2">HOMEOWNERS {E("🚨")}</div><i class="haz"></i></div>', "full", "g-hook", 0.0, B1)
-js.append('tl.set("#hk", {opacity: 1, scale: 1}, 0);')
-js.append('tl.fromTo("#hk .emo", {rotation: -12}, {rotation: 12, duration: 0.12, yoyo: true, repeat: 5, ease: "sine.inOut"}, 0.0);')
-fx("boom", 0.0, 0.36); shake(0.0, 10, 5); OUT("#hk", B1)
-pill("g-watch", f'{E("⚠️")} WATCH THIS FIRST', B1 + 0.02, at("$30,000") - 0.08, "pill yel", sound="blow", vol=0.24)
+# ======================= 1. hook: sticker pack on his face shot =======================
+H1 = at("watch this") - 0.05
+TX = "M22 0H38V30L46 32L52 35L60 35L68 37L78 38L88 40L97 42L98 58L100 66L96 72L88 76L80 82L72 88L66 96L64 100L58 98L52 90L46 80L40 72L34 66L28 68L22 62L14 54L6 46L0 40H22Z"
+stk = (f'<div class="stk" id="sk0" style="left:20px;top:0px"><svg viewBox="-8 -8 116 116" width="176" height="176"><path d="{TX}" fill="#fff" stroke="#fff" stroke-width="14" stroke-linejoin="round"/>'
+       f'<path d="{TX}" fill="#ffd60a" stroke="#111" stroke-width="3" stroke-linejoin="round"/><circle cx="58" cy="52" r="9" fill="#e3121e" stroke="#111" stroke-width="3"/></svg></div>'
+       '<div class="stk tag" id="sk1" style="left:214px;top:4px">TEXAS</div>'
+       '<div class="stk tag red" id="sk2" style="left:214px;top:116px">HOMEOWNERS</div>'
+       f'<div class="stk emo2" id="sk3" style="left:850px;top:40px">{E("🚨")}</div>')
+add(f'<div class="stks" id="stks">{stk}</div>', "top", "g-hook", 0.0, H1 + 0.3)
+for k, (t, rot, snd) in enumerate([(0.0, -10, None), (0.0, -6, None), (at("homeowners"), 4, "stamp"), (at("homeowners") + 0.2, 12, "pop")]):
+    if t == 0: js.append(f'tl.fromTo("#sk{k}", {{opacity: 1, scale: 1.25, rotation: {rot - 8}}}, {{opacity: 1, scale: 1, rotation: {rot}, duration: 0.2, ease: "back.out(2.4)", immediateRender: true}}, 0);')   # on screen from frame 1
+    else: js.append(f'tl.fromTo("#sk{k}", {{opacity: 0, scale: 1.9, rotation: {rot - 18}}}, {{opacity: 1, scale: 1, rotation: {rot}, duration: 0.18, ease: "back.out(2.4)", immediateRender: false}}, {t:.3f});')
+    if snd: fx(snd, t, 0.22)
+js.append('tl.fromTo("#sk3", {rotation: 12}, {rotation: -4, duration: 0.14, yoyo: true, repeat: 7, ease: "sine.inOut", immediateRender: false}, 0.7);')
+js.append('tl.fromTo("#sk0", {rotation: -10}, {rotation: -4, duration: 0.25, yoyo: true, repeat: 3, ease: "sine.inOut", immediateRender: false}, 0.5);')
+fx("boom", 0.0, 0.36); shake(0.0, 10, 5)
+for k in range(4):   # peel off, one after another
+    js.append(f'tl.to("#sk{k}", {{opacity: 0, y: -140, rotation: {(-1) ** k * 25}, scale: 0.8, duration: 0.22, ease: "power2.in"}}, {H1 - 0.05 + k * 0.05:.3f});')
+fx("swoosh", H1, 0.2)
+pill("g-watch", f'{E("⚠️")} WATCH THIS FIRST', H1 + 0.15, at("$30,000") - 0.08, "pill yel", sound="blow", vol=0.24)
 js.append(f'tl.fromTo("#g-watchi", {{scale: 1}}, {{scale: 1.12, duration: 0.1, yoyo: true, repeat: 3, immediateRender: false}}, {at("watch this"):.3f});')
 M0 = at("$30,000")
-add('<div class="m30" id="m30">$30,000</div>', "top", "g-m30", M0, BR[1][0])
-SLAM("#m30", M0, 3.0); shake(M0 + 0.05, 18, 7); fx("kaching", M0, 0.42); fx("boom", M0, 0.22); OUT("#m30", BR[1][0])
+add('<div class="m30" id="m30">$30,000</div>', "top", "g-m30", M0, BR[0][0])
+SLAM("#m30", M0, 3.0); shake(M0 + 0.05, 18, 7); fx("kaching", M0, 0.42); fx("boom", M0, 0.22); OUT("#m30", BR[0][0])
 W0 = at("on a new")
 coins = "".join(f'<i class="coin" id="cn{j}" style="left:{40 + j * 50}px">$</i>' for j in range(3))
-add(f'<div class="wal"><div class="wallet" id="wlt"><i class="wbody"></i><i class="wflap"></i>{coins}</div><div class="oop" id="oop">OUT OF YOUR POCKET?</div></div>', "body", "g-wal", W0, BR[1][0])
+add(f'<div class="wal"><div class="wallet" id="wlt"><i class="wbody"></i><i class="wflap"></i>{coins}</div><div class="oop" id="oop">OUT OF YOUR POCKET?</div></div>', "body", "g-wal", W0, BR[0][0])
 POP("#wlt", W0, 0.2); POP("#oop", W0 + 0.15); fx("coindrop", W0 + 0.1, 0.4)
 for j in range(3):
     js.append(f'tl.fromTo("#cn{j}", {{opacity: 1, y: 0}}, {{opacity: 0, y: 230, rotation: {(j - 1) * 40}, duration: 0.5, ease: "power2.in", immediateRender: false}}, {W0 + 0.2 + j * 0.12:.3f});')
 js.append(f'tl.to("#wlt", {{rotation: -8, duration: 0.1, yoyo: true, repeat: 3}}, {W0 + 0.2:.3f});')
-OUT("#g-wal .wal", BR[1][0])
+OUT("#g-wal .wal", BR[0][0])
 
 # ======================= 2. denied claims =======================
-F0, F1 = BR[1]
+F0, F1 = BR[0]
 pill("g-47", f'{E("📊")} <span class="r">47%</span> OF TEXAS ROOF CLAIMS…', at("47%"), F1 - 0.05, "pill", "full")
 D0, D1 = F1, at("and if your")
 pill("g-den", f'{E("❌")} DENIED. NOT PAID OUT.', at("denied"), D1, "pill red", sound=None)
@@ -136,7 +150,7 @@ SLAM("#st2", at("not paid"), 2.4); fx("stamp", at("not paid") + 0.02, 0.36)
 OUT("#form", D1)
 
 # ======================= 3. qualify (over the aging-roof + storm b-roll) =======================
-Q0, Q1 = BR[2][0], BR[3][1]
+Q0, Q1 = BR[1][0], BR[2][1]
 CK = [("ROOF 10–15 YEARS OLD", "", at("10 to 15"), end("years old")), ("RECENT STORM", "⛈️", at("recently hit"), at("a storm"))]
 rows = "".join(f'<div class="ck" id="ck{j}"><span class="box" id="bx{j}"><b id="tk{j}">✓</b></span>{html.escape(t)}{f"<span class=ckico>{i}</span>" if i else ""}</div>' for j, (t, i, _, _) in enumerate(CK))
 add(f'<div class="check"><div class="ckh" id="ckh">DOES THIS SOUND LIKE YOU?</div>{rows}</div>', "full", "g-check", Q0, Q1)
@@ -157,15 +171,15 @@ POP("#corner", at("but you")); fx("ding", at("but you"), 0.2); OUT("#corner", TU
 # ======================= 4. the turn + company =======================
 fx("riser", TU - 1.6, 0.3); flash(TU); fx("drop", TU, 0.28)
 FREEZE = (TU, "assets/freeze-turn.jpg")
-pill("g-got", f'{E("✅")} WE\'VE GOT YOU', TU + 0.5, BR[4][0] - 0.05, "pill green", sound="pop", vol=0.3)
-T0, T1 = BR[4]
+pill("g-got", f'{E("✅")} WE\'VE GOT YOU', TU + 0.5, BR[3][0] - 0.05, "pill green", sound="pop", vol=0.3)
+T0, T1 = BR[3]
 add('<div class="brandin" id="brandin"><div class="b1">PINECREST</div><div class="b2">ROOFING &amp; CONSTRUCTION</div><i id="sweep" data-layout-allow-overflow></i></div>', "full", "g-brand", T0, T1)
 js.append(f'tl.fromTo("#brandin", {{opacity: 0, scale: 1.3}}, {{opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2)"}}, {at("pinecrest"):.3f});')
 js.append(f'tl.fromTo("#sweep", {{xPercent: -150}}, {{xPercent: 440, duration: 0.9, ease: "power2.inOut"}}, {at("pinecrest") + 0.3:.3f});')
 fx("swoosh", at("pinecrest") - 0.12, 0.34); fx("pop", at("pinecrest") + 0.06, 0.3); OUT("#brandin", T1)
 
 # ======================= 5. proof, tracker + approval =======================
-P0, P1 = BR[5]
+P0, P1 = BR[4]
 houses = "".join(f'<span class="hs" id="hs{j}">🏠</span>' for j in range(12))
 add(f'<div class="proof"><div class="houses">{houses}</div><div class="dz"><span class="dz1">DOZENS OF LOCAL</span><span class="dz2">HOMEOWNERS</span></div></div>', "full", "g-proof", P0, P1)
 POP("#g-proof .houses", P0); POP("#g-proof .dz", at("dozens") if at("dozens") > P0 else P0 + 0.15)
@@ -193,17 +207,17 @@ fx("stamp", AP + 0.05, 0.3); fx("ding", AP + 0.1, 0.32)
 OUT("#trk", A1)
 
 # ======================= 6. program + area (over b-roll) =======================
-G0, G1 = BR[6]
+G0, G1 = BR[5]
 add(f'<div class="prog" id="prog"><span class="pl">NOW LAUNCHING</span><b>{E("🛡️")} ROOF PROTECTION PROGRAM</b></div>', "full", "g-prog", G0, at("exclusively") - 0.05)
 POP("#prog", G0 + 0.05, 0.26); fx("pop", G0 + 0.05, 0.24)
 js.append(f'tl.fromTo("#prog b", {{scale: 1}}, {{scale: 1.06, duration: 0.15, yoyo: true, repeat: 1}}, {at("protection program"):.3f});')
 OUT("#prog", at("exclusively") - 0.05)
-pill("g-ne", f'{E("📍")} NORTH &amp; EAST TEXAS ONLY', at("exclusively"), BR[7][1] - 0.05, "pill", "full")
-pill("g-age", 'BUILT FOR <span class="y">AGING ROOFS</span>', at("this program"), BR[8][0] - 0.05, "pill dark")
-pill("g-qp", f'{E("🔨")} QUALITY + PRECISION', max(at("maintain"), BR[8][0] + 0.1), BR[8][1] - 0.05, "pill", "full")
+pill("g-ne", f'{E("📍")} NORTH &amp; EAST TEXAS ONLY', at("exclusively"), BR[6][1] - 0.05, "pill", "full")
+pill("g-age", 'BUILT FOR <span class="y">AGING ROOFS</span>', at("this program"), BR[7][0] - 0.05, "pill dark")
+pill("g-qp", f'{E("🔨")} QUALITY + PRECISION', max(at("maintain"), BR[7][0] + 0.1), BR[7][1] - 0.05, "pill", "full")
 
 # ======================= 7. offer =======================
-pill("g-lim0", f'{E("🔒")} LIMITED SPOTS', BR[8][1] + 0.05, at("for a limited") - 0.05, "pill red", sound="pop")
+pill("g-lim0", f'{E("🔒")} LIMITED SPOTS', BR[7][1] + 0.05, at("for a limited") - 0.05, "pill red", sound="pop")
 add('<div class="nine" id="nine"><span class="n9">9</span><div><b>ROOF PROJECTS</b><i>PER MONTH · THAT\'S IT</i></div></div>', "body", "g-nine", at("9") - 0.1, at("for a limited") - 0.05)
 SLAM("#nine", at("9"), 2.2); fx("stamp", at("9"), 0.3); OUT("#nine", at("for a limited") - 0.05)
 L0, L1 = at("for a limited"), at("free no-obligation") - 0.05
@@ -216,12 +230,12 @@ js.append(f'tl.fromTo("#rg", {{strokeDashoffset: 0}}, {{strokeDashoffset: 390, d
 for j, n in enumerate(("2", "1")): js.append(f'tl.set("#rgt", {{textContent: "{n}"}}, {L0 + (L1 - L0) * (j + 1) / 3:.3f});')
 OUT("#lim", L1)
 O0 = at("free no-obligation")
-add('<div class="offer" id="offer"><b>FREE ROOF INSPECTION</b><i>$0 • NO OBLIGATION</i></div>', "body", "g-offer", O0, BR[9][0])
-SLAM("#offer", O0, 2.2); fx("pop", O0, 0.38); fx("ding", at("no-obligation") + 0.3, 0.24); OUT("#offer", BR[9][0])
-pill("g-photo", f'{E("📸")} PHOTO + VIDEO REPORT', BR[9][0] + 0.1, BR[9][1] - 0.05, "pill dark", "full")
+add('<div class="offer" id="offer"><b>FREE ROOF INSPECTION</b><i>$0 • NO OBLIGATION</i></div>', "body", "g-offer", O0, BR[8][0])
+SLAM("#offer", O0, 2.2); fx("pop", O0, 0.38); fx("ding", at("no-obligation") + 0.3, 0.24); OUT("#offer", BR[8][0])
+pill("g-photo", f'{E("📸")} PHOTO + VIDEO REPORT', BR[8][0] + 0.1, BR[8][1] - 0.05, "pill dark", "full")
 
 # ======================= 8. damage callouts on the roof b-roll =======================
-R0, R1 = BR[10]
+R0, R1 = BR[9]
 def callout(spots, t0, t1):
     svg, labs = [], []
     for j, (x, y, lab, side, tt) in enumerate(spots):

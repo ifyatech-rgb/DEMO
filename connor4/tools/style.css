@@ -100,5 +100,10 @@
 
       #captions { position: absolute; left: 40px; right: 40px; top: 1330px; height: 120px; }
       .cg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; }
-      .cg .line { display: flex; flex-wrap: nowrap; justify-content: center; align-items: center; gap: 0 0.42em; line-height: 1.1; }
+      .cg .line { display: flex; flex-wrap: nowrap; justify-content: center; align-items: center; gap: 0 0.58em; line-height: 1.1; }
       .w { display: inline-block; color: #fff; font-weight: 900; -webkit-text-stroke: 0.13em #000; paint-order: stroke fill; text-shadow: 0 0.06em 0 #000, 0 0.08em 0.3em rgba(0,0,0,0.55); white-space: nowrap; }
+      .stks { position: relative; top: -40px; width: 980px; height: 220px; }
+      .stk { position: absolute; opacity: 0; filter: drop-shadow(0 8px 14px rgba(0,0,0,0.45)); }
+      .stk.tag { padding: 10px 26px 6px; border-radius: 18px; background: #111; color: #ffd60a; font-size: 74px; line-height: 1; border: 8px solid #fff; white-space: nowrap; }
+      .stk.tag.red { background: #e3121e; color: #fff; font-size: 66px; }
+      .stk.emo2 { font-family: "Noto Color Emoji", sans-serif; font-size: 112px; line-height: 1; }
