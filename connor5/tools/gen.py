@@ -7,6 +7,9 @@ yellow, big build-up lines with the spoken word in green, one photo card, and a 
 import html, json, math, os, random, re, subprocess, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); os.chdir(ROOT)
 W, H = 1080, 1920
+FMT = sys.argv[1] if len(sys.argv) > 1 else "916"   # "45" writes the 4:5 feed version to ../connor5-4x5
+SH, OFF = 1920, (180 if FMT == "45" else 0)          # the 4:5 window starts just above the header
+if FMT == "45": H = 1350
 probe = lambda f: float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", f], capture_output=True, text=True).stdout)
 DUR = round(probe("assets/look.mp4") - 0.04, 3)
 words = json.load(open("transcript.json"))
@@ -128,7 +131,7 @@ doc = f"""<!doctype html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width={W}, height={H}" />
-    <title>Connor Reference Ad</title>
+    <title>Connor Reference Ad {"4x5" if FMT == "45" else "9x16"}</title>
     <script src="vendor/gsap.min.js"></script>
     <style>
 {CSS}
@@ -136,12 +139,14 @@ doc = f"""<!doctype html>
   </head>
   <body>
     <div id="root" data-composition-id="main" data-start="0" data-width="{W}" data-height="{H}" data-duration="{DUR}">
+      <div id="stage" style="position:absolute; left:0; top:{-OFF}px; width:{W}px; height:{SH}px;">
       <div id="hand"><div id="cam">
         <video id="src" class="clip" src="assets/look.mp4" muted playsinline data-start="0" data-duration="{DUR}" data-track-index="0"></video>
       </div></div>
       {nl.join(el)}
       <div id="captions" class="clip" data-start="0" data-duration="{DUR}" data-track-index="30">
         {(nl + "  ").join(cap)}
+      </div>
       </div>
     </div>
     <audio id="vo" src="assets/vo.wav" data-start="0" data-duration="{DUR}" data-track-index="1" data-volume="1"></audio>
@@ -156,6 +161,15 @@ doc = f"""<!doctype html>
   </body>
 </html>
 """
-open("index.html", "w").write(doc)
-print(f"{DUR}s · {len(sfx)} sfx · {len(CUTS) - 1} framing cuts · {len(groups)} caption groups · big lines {len(BIG)}")
+if FMT == "45":   # header off the top edge, photo card under the captions, CTA lifted so the arrows stay in frame
+    doc = doc.replace("</style>", "  .hdr { top: 236px; }\n      .card { left: 200px; top: 985px; width: 680px; height: 497px; }\n"
+                      "      .cta { top: 990px; }\n    </style>", 1)
+    OUTD = "../connor5-4x5"; os.makedirs(OUTD, exist_ok=True)
+    for d in ("assets", "vendor"):
+        if not os.path.lexists(f"{OUTD}/{d}"): os.symlink(f"../connor5/{d}", f"{OUTD}/{d}")
+    for f in ("hyperframes.json", "package.json"): open(f"{OUTD}/{f}", "w").write(open(f).read())
+    json.dump({"id": "connor5-4x5"}, open(f"{OUTD}/meta.json", "w"))
+    open(f"{OUTD}/index.html", "w").write(doc)
+else: open("index.html", "w").write(doc)
+print(f"{FMT} {W}x{H} · {DUR}s · {len(sfx)} sfx · {len(CUTS) - 1} framing cuts · {len(groups)} caption groups · big lines {len(BIG)}")
 for g in groups: print(f"  {words[g[0]]['start']:6.2f} " + " ".join(d for d in (disp(i) for i in g) if d))
