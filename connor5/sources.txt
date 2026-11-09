@@ -4,4 +4,4 @@ Shirt logo: the client's Pinecrest logo (assets/logo-src.jpg), composited by too
 Opening sketch reveal: tools/intro.py, matte from `hyperframes remove-background`.
 Photo card: still from the client's own claim-form b-roll (connor/assets/prep/b02-claimform.mp4).
 Fonts: Bebas Neue and Anton (SIL Open Font License, via @fontsource), Montserrat, Inter.
-Audio: the client's voice only.
+Audio: the client's voice; music Mixkit track #112 (Mixkit Stock Music Free License) ~10 % ducked; SFX from the finalad Mixkit set.

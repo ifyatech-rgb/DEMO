@@ -4,7 +4,7 @@
       @font-face { font-family: "Inter"; font-weight: 700; src: url("vendor/inter-latin-700-normal.woff2") format("woff2"); }
       body { margin: 0; background: #000; }
       #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #000; color: #fff; }
-      #cam { position: absolute; inset: 0; transform-origin: 50% 36%; }
+      #hand, #cam { position: absolute; inset: 0; transform-origin: 50% 36%; }
       #src { position: absolute; inset: 0; width: 1080px; height: 1920px; object-fit: cover; }
 
       /* hook header: two white text boxes, TikTok style */
