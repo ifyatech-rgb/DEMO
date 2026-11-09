@@ -1,0 +1,40 @@
+      @font-face { font-family: "Bebas"; src: url("vendor/bebas-neue-latin-400-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Anton"; src: url("vendor/anton-latin-400-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Montserrat"; font-weight: 800; src: url("vendor/montserrat-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 700; src: url("vendor/inter-latin-700-normal.woff2") format("woff2"); }
+      body { margin: 0; background: #000; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #000; color: #fff; }
+      #cam { position: absolute; inset: 0; transform-origin: 50% 36%; }
+      #src { position: absolute; inset: 0; width: 1080px; height: 1920px; object-fit: cover; }
+
+      /* hook header: two white text boxes, TikTok style */
+      .hdr { position: absolute; left: 0; right: 0; top: 200px; display: flex; flex-direction: column; align-items: center; }
+      .hb { background: #fff; color: #111; border-radius: 12px; line-height: 1.1; white-space: nowrap; }
+      .hb1 { font-family: "Montserrat", sans-serif; font-weight: 800; font-size: 62px; padding: 10px 22px 8px; }
+      .hb2 { font-family: "Inter", sans-serif; font-weight: 700; font-size: 44px; padding: 4px 18px 8px; margin-top: -6px; }
+
+      /* photo card */
+      .card { position: absolute; left: 90px; top: 1110px; width: 900px; height: 658px; border-radius: 26px; border: 6px solid #fff; overflow: hidden;
+              box-shadow: 0 18px 44px rgba(0,0,0,0.45); opacity: 0; }
+      .card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+      /* captions */
+      #captions { position: absolute; left: 40px; right: 40px; top: 860px; height: 120px; }
+      .cg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 0 20px; opacity: 0; }
+      .w { font-family: "Bebas", sans-serif; font-size: 84px; line-height: 1; color: #fff; letter-spacing: 0.01em; -webkit-text-stroke: 1.2px currentColor;
+           text-shadow: 0 3px 8px rgba(0,0,0,0.55), 0 0 2px rgba(0,0,0,0.6); white-space: nowrap; }
+
+      /* big emphasis lines */
+      .big { position: absolute; left: 40px; right: 40px; top: 1010px; display: flex; flex-direction: column; align-items: center; }
+      .bl { font-family: "Bebas", sans-serif; font-size: 190px; line-height: 0.9; white-space: nowrap; -webkit-text-stroke: 2px currentColor;
+            text-shadow: 0 6px 16px rgba(0,0,0,0.55), 0 0 3px rgba(0,0,0,0.7); }
+      .bw { color: #fff; opacity: 0; }
+
+      /* end CTA */
+      .shade { position: absolute; left: 0; right: 0; bottom: 0; height: 860px; background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 38%, rgba(0,0,0,0.82) 100%); opacity: 0; }
+      .cta { position: absolute; left: 0; right: 0; top: 1030px; display: flex; flex-direction: column; align-items: center; opacity: 0; }
+      .c1 { font-family: "Anton", sans-serif; font-size: 62px; line-height: 1; color: #fff; text-shadow: 0 3px 8px rgba(0,0,0,0.6); }
+      .c2 { font-family: "Anton", sans-serif; font-size: 172px; line-height: 0.93; color: #22c55e; text-align: center; margin-top: 8px;
+            -webkit-text-stroke: 3px #d9ffe6; paint-order: stroke fill; text-shadow: 0 6px 18px rgba(0,0,0,0.6); }
+      .arrows { display: flex; gap: 190px; margin-top: 18px; }
+      .arrows svg { width: 74px; height: 92px; }

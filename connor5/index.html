@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Connor Reference Ad</title>
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Bebas"; src: url("vendor/bebas-neue-latin-400-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Anton"; src: url("vendor/anton-latin-400-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Montserrat"; font-weight: 800; src: url("vendor/montserrat-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 700; src: url("vendor/inter-latin-700-normal.woff2") format("woff2"); }
+      body { margin: 0; background: #000; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #000; color: #fff; }
+      #cam { position: absolute; inset: 0; transform-origin: 50% 36%; }
+      #src { position: absolute; inset: 0; width: 1080px; height: 1920px; object-fit: cover; }
+
+      /* hook header: two white text boxes, TikTok style */
+      .hdr { position: absolute; left: 0; right: 0; top: 200px; display: flex; flex-direction: column; align-items: center; }
+      .hb { background: #fff; color: #111; border-radius: 12px; line-height: 1.1; white-space: nowrap; }
+      .hb1 { font-family: "Montserrat", sans-serif; font-weight: 800; font-size: 62px; padding: 10px 22px 8px; }
+      .hb2 { font-family: "Inter", sans-serif; font-weight: 700; font-size: 44px; padding: 4px 18px 8px; margin-top: -6px; }
+
+      /* photo card */
+      .card { position: absolute; left: 90px; top: 1110px; width: 900px; height: 658px; border-radius: 26px; border: 6px solid #fff; overflow: hidden;
+              box-shadow: 0 18px 44px rgba(0,0,0,0.45); opacity: 0; }
+      .card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+      /* captions */
+      #captions { position: absolute; left: 40px; right: 40px; top: 860px; height: 120px; }
+      .cg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 0 20px; opacity: 0; }
+      .w { font-family: "Bebas", sans-serif; font-size: 84px; line-height: 1; color: #fff; letter-spacing: 0.01em; -webkit-text-stroke: 1.2px currentColor;
+           text-shadow: 0 3px 8px rgba(0,0,0,0.55), 0 0 2px rgba(0,0,0,0.6); white-space: nowrap; }
+
+      /* big emphasis lines */
+      .big { position: absolute; left: 40px; right: 40px; top: 1010px; display: flex; flex-direction: column; align-items: center; }
+      .bl { font-family: "Bebas", sans-serif; font-size: 190px; line-height: 0.9; white-space: nowrap; -webkit-text-stroke: 2px currentColor;
+            text-shadow: 0 6px 16px rgba(0,0,0,0.55), 0 0 3px rgba(0,0,0,0.7); }
+      .bw { color: #fff; opacity: 0; }
+
+      /* end CTA */
+      .shade { position: absolute; left: 0; right: 0; bottom: 0; height: 860px; background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 38%, rgba(0,0,0,0.82) 100%); opacity: 0; }
+      .cta { position: absolute; left: 0; right: 0; top: 1030px; display: flex; flex-direction: column; align-items: center; opacity: 0; }
+      .c1 { font-family: "Anton", sans-serif; font-size: 62px; line-height: 1; color: #fff; text-shadow: 0 3px 8px rgba(0,0,0,0.6); }
+      .c2 { font-family: "Anton", sans-serif; font-size: 172px; line-height: 0.93; color: #22c55e; text-align: center; margin-top: 8px;
+            -webkit-text-stroke: 3px #d9ffe6; paint-order: stroke fill; text-shadow: 0 6px 18px rgba(0,0,0,0.6); }
+      .arrows { display: flex; gap: 190px; margin-top: 18px; }
+      .arrows svg { width: 74px; height: 92px; }
+
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-width="1080" data-height="1920" data-duration="34.0">
+      <div id="cam">
+        <video id="src" class="clip" src="assets/look.mp4" muted playsinline data-start="0" data-duration="34.0" data-track-index="0"></video>
+      </div>
+      <div class="clip hdr" id="hdr" data-start="0" data-duration="5.600" data-track-index="20"><div class="hb hb1">TEXAS HOMEOWNERS,</div><div class="hb hb2">read your mail!</div></div>
+      <div class="clip" id="g-card" data-start="1.020" data-duration="4.580" data-track-index="21"><div class="card" id="card"><img src="assets/card-insurance.jpg" alt="" /></div></div>
+      <div class="clip big" id="g-big0" data-start="5.600" data-duration="1.000" data-track-index="22"><div class="bl"><span class="bw" id="bw14">YOU</span> <span class="bw" id="bw15">NEED</span></div><div class="bl"><span class="bw" id="bw16">AN</span> <span class="bw" id="bw17">EXPERT</span></div></div>
+      <div class="clip big" id="g-big1" data-start="6.600" data-duration="1.680" data-track-index="22"><div class="bl"><span class="bw" id="bw18">TO</span> <span class="bw" id="bw19">HELP</span> <span class="bw" id="bw20">YOU</span></div><div class="bl"><span class="bw" id="bw21">NAVIGATE</span> <span class="bw" id="bw22">IT</span></div></div>
+      <div class="clip" id="g-cta" data-start="27.570" data-duration="6.430" data-track-index="23"><div class="shade" id="shade"></div><div class="cta" id="cta"><div class="c1">BOOK YOUR</div><div class="c2">30-MINUTE<br>INSPECTION</div><div class="arrows"><svg viewBox="0 0 74 92"><path d="M37 4v70M10 50l27 30 27-30" stroke="#22c55e" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><svg viewBox="0 0 74 92"><path d="M37 4v70M10 50l27 30 27-30" stroke="#22c55e" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><svg viewBox="0 0 74 92"><path d="M37 4v70M10 50l27 30 27-30" stroke="#22c55e" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div></div>
+      <div id="captions" class="clip" data-start="0" data-duration="34.0" data-track-index="30">
+        <div class="cg" id="cg0"><span class="w" id="w0">IF</span><span class="w" id="w1">YOU&#x27;VE</span><span class="w" id="w2">RECEIVED</span><span class="w" id="w3">A</span></div>
+        <div class="cg" id="cg1"><span class="w" id="w4">NON-RENEWAL</span><span class="w" id="w5">NOTICE</span></div>
+        <div class="cg" id="cg2"><span class="w" id="w6">FROM</span><span class="w" id="w7">YOUR</span><span class="w" id="w8">INSURANCE</span></div>
+        <div class="cg" id="cg3"><span class="w" id="w9">OR</span><span class="w" id="w10">YOUR</span><span class="w" id="w11">PREMIUMS</span></div>
+        <div class="cg" id="cg4"><span class="w" id="w12">ARE</span><span class="w" id="w13">SKYROCKETING,</span></div>
+        <div class="cg" id="cg5"><span class="w" id="w23">INSURANCE</span><span class="w" id="w24">CARRIERS</span></div>
+        <div class="cg" id="cg6"><span class="w" id="w25">IN</span><span class="w" id="w26">TEXAS</span><span class="w" id="w27">ARE</span></div>
+        <div class="cg" id="cg7"><span class="w" id="w28">TIGHTENING</span><span class="w" id="w29">THE</span><span class="w" id="w30">SCREWS</span></div>
+        <div class="cg" id="cg8"><span class="w" id="w31">AND</span><span class="w" id="w32">SIMPLY</span><span class="w" id="w33">GOOD</span></div>
+        <div class="cg" id="cg9"><span class="w" id="w34">ENOUGH</span><span class="w" id="w35">JUST</span><span class="w" id="w36">DOESN&#x27;T</span></div>
+        <div class="cg" id="cg10"><span class="w" id="w37">CUT</span><span class="w" id="w38">IT</span><span class="w" id="w39">ANYMORE.</span></div>
+        <div class="cg" id="cg11"><span class="w" id="w40">WE</span><span class="w" id="w41">AT</span><span class="w" id="w42">PINECREST</span></div>
+        <div class="cg" id="cg12"><span class="w" id="w44">ROOFING</span><span class="w" id="w45">AND</span><span class="w" id="w46">CONSTRUCTION</span></div>
+        <div class="cg" id="cg13"><span class="w" id="w47">PROVIDE</span><span class="w" id="w48">A</span><span class="w" id="w49">DETAILED</span></div>
+        <div class="cg" id="cg14"><span class="w" id="w50">ROOF</span><span class="w" id="w51">ANALYSIS</span><span class="w" id="w52">TO</span></div>
+        <div class="cg" id="cg15"><span class="w" id="w53">PROVIDE</span><span class="w" id="w54">YOU</span><span class="w" id="w55">WITH</span></div>
+        <div class="cg" id="cg16"><span class="w" id="w56">THE</span><span class="w" id="w57">DOCUMENTATION</span></div>
+        <div class="cg" id="cg17"><span class="w" id="w58">YOU</span><span class="w" id="w59">NEED</span><span class="w" id="w60">TO</span><span class="w" id="w61">SATISFY</span></div>
+        <div class="cg" id="cg18"><span class="w" id="w62">YOUR</span><span class="w" id="w63">INSURANCE.</span></div>
+        <div class="cg" id="cg19"><span class="w" id="w64">AND</span><span class="w" id="w65">WITH</span><span class="w" id="w66">THAT,</span><span class="w" id="w67">WE</span><span class="w" id="w68">GIVE</span></div>
+        <div class="cg" id="cg20"><span class="w" id="w69">YOU</span><span class="w" id="w70">A</span><span class="w" id="w71">REAL</span><span class="w" id="w72">COST</span><span class="w" id="w73">ON</span></div>
+        <div class="cg" id="cg21"><span class="w" id="w74">ROOF</span><span class="w" id="w75">REPLACEMENT</span></div>
+        <div class="cg" id="cg22"><span class="w" id="w76">WITH</span><span class="w" id="w77">NO</span><span class="w" id="w78">HIDDEN</span><span class="w" id="w79">FEES.</span></div>
+        <div class="cg" id="cg23"><span class="w" id="w80">SO</span><span class="w" id="w81">BOOK</span><span class="w" id="w82">YOUR</span></div>
+        <div class="cg" id="cg24"><span class="w" id="w83">30-MINUTE</span><span class="w" id="w84">INSPECTION</span></div>
+        <div class="cg" id="cg25"><span class="w" id="w85">TO</span><span class="w" id="w86">GET</span><span class="w" id="w87">YOUR</span></div>
+        <div class="cg" id="cg26"><span class="w" id="w88">ROOF</span><span class="w" id="w89">ANALYZED</span></div>
+        <div class="cg" id="cg27"><span class="w" id="w90">FOR</span><span class="w" id="w91">INSURANCE</span></div>
+        <div class="cg" id="cg28"><span class="w" id="w92">COMPLIANCE</span><span class="w" id="w93">AND</span></div>
+        <div class="cg" id="cg29"><span class="w" id="w94">SAVE</span><span class="w" id="w95">YOUR</span><span class="w" id="w96">COVERAGE.</span></div>
+      </div>
+    </div>
+    <audio id="vo" src="assets/vo.wav" data-start="0" data-duration="34.0" data-track-index="1" data-volume="1"></audio>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.set("#cam", {scale: 1.0}, 0.000);
+      tl.set("#cam", {scale: 1.45}, 5.600);
+      tl.set("#cam", {scale: 1.0}, 8.280);
+      tl.set("#cam", {scale: 1.25}, 12.380);
+      tl.set("#cam", {scale: 1.0}, 13.800);
+      tl.set("#cam", {scale: 1.45}, 19.240);
+      tl.set("#cam", {scale: 1.0}, 22.760);
+      tl.set("#cam", {scale: 1.45}, 26.180);
+      tl.set("#cam", {scale: 1.0}, 27.530);
+      tl.fromTo("#card", {opacity: 0, scale: 0.86, y: 30}, {opacity: 1, scale: 1, y: 0, duration: 0.18, ease: "back.out(1.8)"}, 1.020);
+      tl.to("#card", {opacity: 0, y: 140, filter: "blur(14px)", duration: 0.2, ease: "power2.in"}, 5.400);
+      tl.set("#bw14", {opacity: 1, color: "#22c55e"}, 5.640);
+      tl.set("#bw14", {color: "#ffffff"}, 5.780);
+      tl.set("#bw15", {opacity: 1, color: "#22c55e"}, 5.780);
+      tl.set("#bw15", {color: "#ffffff"}, 6.040);
+      tl.set("#bw16", {opacity: 1, color: "#22c55e"}, 6.040);
+      tl.set("#bw16", {color: "#ffffff"}, 6.200);
+      tl.set("#bw17", {opacity: 1, color: "#22c55e"}, 6.200);
+      tl.set("#bw18", {opacity: 1, color: "#22c55e"}, 6.640);
+      tl.set("#bw18", {color: "#ffffff"}, 6.790);
+      tl.set("#bw19", {opacity: 1, color: "#22c55e"}, 6.790);
+      tl.set("#bw19", {color: "#ffffff"}, 7.090);
+      tl.set("#bw20", {opacity: 1, color: "#22c55e"}, 7.090);
+      tl.set("#bw20", {color: "#ffffff"}, 7.310);
+      tl.set("#bw21", {opacity: 1, color: "#22c55e"}, 7.310);
+      tl.set("#bw21", {color: "#ffffff"}, 7.920);
+      tl.set("#bw22", {opacity: 1, color: "#22c55e"}, 7.920);
+      tl.to("#shade", {opacity: 1, duration: 0.25}, 27.570);
+      tl.fromTo("#cta", {opacity: 0, y: 40}, {opacity: 1, y: 0, duration: 0.25, ease: "power3.out"}, 27.570);
+      tl.set("#cg0", {opacity: 1}, 0.090);
+      tl.set("#cg0", {opacity: 0}, 0.990);
+      tl.set("#w0", {color: "#ffd21f"}, 0.120);
+      tl.set("#w0", {color: "#ffffff"}, 0.120);
+      tl.set("#w1", {color: "#ffd21f"}, 0.120);
+      tl.set("#w1", {color: "#ffffff"}, 0.480);
+      tl.set("#w2", {color: "#ffd21f"}, 0.480);
+      tl.set("#w2", {color: "#ffffff"}, 0.960);
+      tl.set("#w3", {color: "#ffd21f"}, 0.960);
+      tl.set("#w3", {color: "#ffffff"}, 0.990);
+      tl.set("#cg1", {opacity: 1}, 0.990);
+      tl.set("#cg1", {opacity: 0}, 2.130);
+      tl.set("#w4", {color: "#ffd21f"}, 1.020);
+      tl.set("#w4", {color: "#ffffff"}, 1.680);
+      tl.set("#w5", {color: "#ffd21f"}, 1.680);
+      tl.set("#w5", {color: "#ffffff"}, 2.130);
+      tl.set("#cg2", {opacity: 1}, 2.130);
+      tl.set("#cg2", {opacity: 0}, 3.180);
+      tl.set("#w6", {color: "#ffd21f"}, 2.160);
+      tl.set("#w6", {color: "#ffffff"}, 2.320);
+      tl.set("#w7", {color: "#ffd21f"}, 2.320);
+      tl.set("#w7", {color: "#ffffff"}, 2.560);
+      tl.set("#w8", {color: "#ffd21f"}, 2.560);
+      tl.set("#w8", {color: "#ffffff"}, 3.180);
+      tl.set("#cg3", {opacity: 1}, 3.180);
+      tl.set("#cg3", {opacity: 0}, 4.130);
+      tl.set("#w9", {color: "#ffd21f"}, 3.210);
+      tl.set("#w9", {color: "#ffffff"}, 3.360);
+      tl.set("#w10", {color: "#ffd21f"}, 3.360);
+      tl.set("#w10", {color: "#ffffff"}, 3.760);
+      tl.set("#w11", {color: "#ffd21f"}, 3.760);
+      tl.set("#w11", {color: "#ffffff"}, 4.130);
+      tl.set("#cg4", {opacity: 1}, 4.130);
+      tl.set("#cg4", {opacity: 0}, 5.600);
+      tl.set("#w12", {color: "#ffd21f"}, 4.160);
+      tl.set("#w12", {color: "#ffffff"}, 4.360);
+      tl.set("#w13", {color: "#ffd21f"}, 4.360);
+      tl.set("#w13", {color: "#ffffff"}, 5.600);
+      tl.set("#cg5", {opacity: 1}, 8.290);
+      tl.set("#cg5", {opacity: 0}, 9.330);
+      tl.set("#w23", {color: "#ffd21f"}, 8.320);
+      tl.set("#w23", {color: "#ffffff"}, 8.870);
+      tl.set("#w24", {color: "#ffd21f"}, 8.870);
+      tl.set("#w24", {color: "#ffffff"}, 9.330);
+      tl.set("#cg6", {opacity: 1}, 9.330);
+      tl.set("#cg6", {opacity: 0}, 10.020);
+      tl.set("#w25", {color: "#ffd21f"}, 9.360);
+      tl.set("#w25", {color: "#ffffff"}, 9.480);
+      tl.set("#w26", {color: "#ffd21f"}, 9.480);
+      tl.set("#w26", {color: "#ffffff"}, 9.790);
+      tl.set("#w27", {color: "#ffd21f"}, 9.790);
+      tl.set("#w27", {color: "#ffffff"}, 10.020);
+      tl.set("#cg7", {opacity: 1}, 10.020);
+      tl.set("#cg7", {opacity: 0}, 10.940);
+      tl.set("#w28", {color: "#ffd21f"}, 10.050);
+      tl.set("#w28", {color: "#ffffff"}, 10.520);
+      tl.set("#w29", {color: "#ffd21f"}, 10.520);
+      tl.set("#w29", {color: "#ffffff"}, 10.590);
+      tl.set("#w30", {color: "#ffd21f"}, 10.590);
+      tl.set("#w30", {color: "#ffffff"}, 10.940);
+      tl.set("#cg8", {opacity: 1}, 10.940);
+      tl.set("#cg8", {opacity: 0}, 11.760);
+      tl.set("#w31", {color: "#ffd21f"}, 10.970);
+      tl.set("#w31", {color: "#ffffff"}, 11.160);
+      tl.set("#w32", {color: "#ffd21f"}, 11.160);
+      tl.set("#w32", {color: "#ffffff"}, 11.540);
+      tl.set("#w33", {color: "#ffd21f"}, 11.540);
+      tl.set("#w33", {color: "#ffffff"}, 11.760);
+      tl.set("#cg9", {opacity: 1}, 11.760);
+      tl.set("#cg9", {opacity: 0}, 12.820);
+      tl.set("#w34", {color: "#ffd21f"}, 11.790);
+      tl.set("#w34", {color: "#ffffff"}, 12.170);
+      tl.set("#w35", {color: "#ffd21f"}, 12.170);
+      tl.set("#w35", {color: "#ffffff"}, 12.420);
+      tl.set("#w36", {color: "#ffd21f"}, 12.420);
+      tl.set("#w36", {color: "#ffffff"}, 12.820);
+      tl.set("#cg10", {opacity: 1}, 12.820);
+      tl.set("#cg10", {opacity: 0}, 13.810);
+      tl.set("#w37", {color: "#ffd21f"}, 12.850);
+      tl.set("#w37", {color: "#ffffff"}, 13.040);
+      tl.set("#w38", {color: "#ffd21f"}, 13.040);
+      tl.set("#w38", {color: "#ffffff"}, 13.160);
+      tl.set("#w39", {color: "#ffd21f"}, 13.160);
+      tl.set("#w39", {color: "#ffffff"}, 13.810);
+      tl.set("#cg11", {opacity: 1}, 13.810);
+      tl.set("#cg11", {opacity: 0}, 15.410);
+      tl.set("#w40", {color: "#ffd21f"}, 13.840);
+      tl.set("#w40", {color: "#ffffff"}, 14.160);
+      tl.set("#w41", {color: "#ffd21f"}, 14.160);
+      tl.set("#w41", {color: "#ffffff"}, 14.320);
+      tl.set("#w42", {color: "#ffd21f"}, 14.320);
+      tl.set("#w42", {color: "#ffd21f"}, 14.830);
+      tl.set("#w42", {color: "#ffffff"}, 15.410);
+      tl.set("#cg12", {opacity: 1}, 15.410);
+      tl.set("#cg12", {opacity: 0}, 16.610);
+      tl.set("#w44", {color: "#ffd21f"}, 15.440);
+      tl.set("#w44", {color: "#ffffff"}, 15.760);
+      tl.set("#w45", {color: "#ffd21f"}, 15.760);
+      tl.set("#w45", {color: "#ffffff"}, 16.040);
+      tl.set("#w46", {color: "#ffd21f"}, 16.040);
+      tl.set("#w46", {color: "#ffffff"}, 16.610);
+      tl.set("#cg13", {opacity: 1}, 16.610);
+      tl.set("#cg13", {opacity: 0}, 17.570);
+      tl.set("#w47", {color: "#ffd21f"}, 16.640);
+      tl.set("#w47", {color: "#ffffff"}, 17.060);
+      tl.set("#w48", {color: "#ffd21f"}, 17.060);
+      tl.set("#w48", {color: "#ffffff"}, 17.120);
+      tl.set("#w49", {color: "#ffd21f"}, 17.120);
+      tl.set("#w49", {color: "#ffffff"}, 17.570);
+      tl.set("#cg14", {opacity: 1}, 17.570);
+      tl.set("#cg14", {opacity: 0}, 18.410);
+      tl.set("#w50", {color: "#ffd21f"}, 17.600);
+      tl.set("#w50", {color: "#ffffff"}, 17.840);
+      tl.set("#w51", {color: "#ffd21f"}, 17.840);
+      tl.set("#w51", {color: "#ffffff"}, 18.320);
+      tl.set("#w52", {color: "#ffd21f"}, 18.320);
+      tl.set("#w52", {color: "#ffffff"}, 18.410);
+      tl.set("#cg15", {opacity: 1}, 18.410);
+      tl.set("#cg15", {opacity: 0}, 19.250);
+      tl.set("#w53", {color: "#ffd21f"}, 18.440);
+      tl.set("#w53", {color: "#ffffff"}, 18.870);
+      tl.set("#w54", {color: "#ffd21f"}, 18.870);
+      tl.set("#w54", {color: "#ffffff"}, 19.130);
+      tl.set("#w55", {color: "#ffd21f"}, 19.130);
+      tl.set("#w55", {color: "#ffffff"}, 19.250);
+      tl.set("#cg16", {opacity: 1}, 19.250);
+      tl.set("#cg16", {opacity: 0}, 20.250);
+      tl.set("#w56", {color: "#ffd21f"}, 19.280);
+      tl.set("#w56", {color: "#ffffff"}, 19.460);
+      tl.set("#w57", {color: "#ffd21f"}, 19.460);
+      tl.set("#w57", {color: "#ffffff"}, 20.250);
+      tl.set("#cg17", {opacity: 1}, 20.250);
+      tl.set("#cg17", {opacity: 0}, 21.640);
+      tl.set("#w58", {color: "#ffd21f"}, 20.280);
+      tl.set("#w58", {color: "#ffffff"}, 20.480);
+      tl.set("#w59", {color: "#ffd21f"}, 20.480);
+      tl.set("#w59", {color: "#ffffff"}, 21.160);
+      tl.set("#w60", {color: "#ffd21f"}, 21.160);
+      tl.set("#w60", {color: "#ffffff"}, 21.180);
+      tl.set("#w61", {color: "#ffd21f"}, 21.180);
+      tl.set("#w61", {color: "#ffffff"}, 21.640);
+      tl.set("#cg18", {opacity: 1}, 21.640);
+      tl.set("#cg18", {opacity: 0}, 22.770);
+      tl.set("#w62", {color: "#ffd21f"}, 21.670);
+      tl.set("#w62", {color: "#ffffff"}, 21.950);
+      tl.set("#w63", {color: "#ffd21f"}, 21.950);
+      tl.set("#w63", {color: "#ffffff"}, 22.770);
+      tl.set("#cg19", {opacity: 1}, 22.770);
+      tl.set("#cg19", {opacity: 0}, 24.210);
+      tl.set("#w64", {color: "#ffd21f"}, 22.800);
+      tl.set("#w64", {color: "#ffffff"}, 23.010);
+      tl.set("#w65", {color: "#ffd21f"}, 23.010);
+      tl.set("#w65", {color: "#ffffff"}, 23.290);
+      tl.set("#w66", {color: "#ffd21f"}, 23.290);
+      tl.set("#w66", {color: "#ffffff"}, 23.710);
+      tl.set("#w67", {color: "#ffd21f"}, 23.710);
+      tl.set("#w67", {color: "#ffffff"}, 23.850);
+      tl.set("#w68", {color: "#ffd21f"}, 23.850);
+      tl.set("#w68", {color: "#ffffff"}, 24.210);
+      tl.set("#cg20", {opacity: 1}, 24.210);
+      tl.set("#cg20", {opacity: 0}, 25.080);
+      tl.set("#w69", {color: "#ffd21f"}, 24.240);
+      tl.set("#w69", {color: "#ffffff"}, 24.340);
+      tl.set("#w70", {color: "#ffd21f"}, 24.340);
+      tl.set("#w70", {color: "#ffffff"}, 24.410);
+      tl.set("#w71", {color: "#ffd21f"}, 24.410);
+      tl.set("#w71", {color: "#ffffff"}, 24.800);
+      tl.set("#w72", {color: "#ffd21f"}, 24.800);
+      tl.set("#w72", {color: "#ffffff"}, 24.970);
+      tl.set("#w73", {color: "#ffd21f"}, 24.970);
+      tl.set("#w73", {color: "#ffffff"}, 25.080);
+      tl.set("#cg21", {opacity: 1}, 25.080);
+      tl.set("#cg21", {opacity: 0}, 26.190);
+      tl.set("#w74", {color: "#ffd21f"}, 25.110);
+      tl.set("#w74", {color: "#ffffff"}, 25.400);
+      tl.set("#w75", {color: "#ffd21f"}, 25.400);
+      tl.set("#w75", {color: "#ffffff"}, 26.190);
+      tl.set("#cg22", {opacity: 1}, 26.190);
+      tl.set("#cg22", {opacity: 0}, 27.540);
+      tl.set("#w76", {color: "#ffd21f"}, 26.220);
+      tl.set("#w76", {color: "#ffffff"}, 26.680);
+      tl.set("#w77", {color: "#ffd21f"}, 26.680);
+      tl.set("#w77", {color: "#ffffff"}, 26.690);
+      tl.set("#w78", {color: "#ffd21f"}, 26.690);
+      tl.set("#w78", {color: "#ffffff"}, 27.100);
+      tl.set("#w79", {color: "#ffd21f"}, 27.100);
+      tl.set("#w79", {color: "#ffffff"}, 27.540);
+      tl.set("#cg23", {opacity: 1}, 27.540);
+      tl.set("#cg23", {opacity: 0}, 28.210);
+      tl.set("#w80", {color: "#ffd21f"}, 27.570);
+      tl.set("#w80", {color: "#ffffff"}, 27.700);
+      tl.set("#w81", {color: "#ffd21f"}, 27.700);
+      tl.set("#w81", {color: "#ffffff"}, 27.970);
+      tl.set("#w82", {color: "#ffd21f"}, 27.970);
+      tl.set("#w82", {color: "#ffffff"}, 28.210);
+      tl.set("#cg24", {opacity: 1}, 28.210);
+      tl.set("#cg24", {opacity: 0}, 29.760);
+      tl.set("#w83", {color: "#ffd21f"}, 28.240);
+      tl.set("#w83", {color: "#ffffff"}, 29.110);
+      tl.set("#w84", {color: "#ffd21f"}, 29.110);
+      tl.set("#w84", {color: "#ffffff"}, 29.760);
+      tl.set("#cg25", {opacity: 1}, 29.760);
+      tl.set("#cg25", {opacity: 0}, 30.360);
+      tl.set("#w85", {color: "#ffd21f"}, 29.790);
+      tl.set("#w85", {color: "#ffffff"}, 29.920);
+      tl.set("#w86", {color: "#ffd21f"}, 29.920);
+      tl.set("#w86", {color: "#ffffff"}, 30.120);
+      tl.set("#w87", {color: "#ffd21f"}, 30.120);
+      tl.set("#w87", {color: "#ffffff"}, 30.360);
+      tl.set("#cg26", {opacity: 1}, 30.360);
+      tl.set("#cg26", {opacity: 0}, 31.250);
+      tl.set("#w88", {color: "#ffd21f"}, 30.390);
+      tl.set("#w88", {color: "#ffffff"}, 30.660);
+      tl.set("#w89", {color: "#ffd21f"}, 30.660);
+      tl.set("#w89", {color: "#ffffff"}, 31.250);
+      tl.set("#cg27", {opacity: 1}, 31.250);
+      tl.set("#cg27", {opacity: 0}, 32.100);
+      tl.set("#w90", {color: "#ffd21f"}, 31.280);
+      tl.set("#w90", {color: "#ffffff"}, 31.430);
+      tl.set("#w91", {color: "#ffd21f"}, 31.430);
+      tl.set("#w91", {color: "#ffffff"}, 32.100);
+      tl.set("#cg28", {opacity: 1}, 32.150);
+      tl.set("#cg28", {opacity: 0}, 32.790);
+      tl.set("#w92", {color: "#ffd21f"}, 32.180);
+      tl.set("#w92", {color: "#ffffff"}, 32.760);
+      tl.set("#w93", {color: "#ffd21f"}, 32.760);
+      tl.set("#w93", {color: "#ffffff"}, 32.790);
+      tl.set("#cg29", {opacity: 1}, 32.790);
+      tl.set("#cg29", {opacity: 0}, 34.000);
+      tl.set("#w94", {color: "#ffd21f"}, 32.820);
+      tl.set("#w94", {color: "#ffffff"}, 33.110);
+      tl.set("#w95", {color: "#ffd21f"}, 33.110);
+      tl.set("#w95", {color: "#ffffff"}, 33.330);
+      tl.set("#w96", {color: "#ffd21f"}, 33.330);
+      tl.set("#w96", {color: "#ffffff"}, 34.000);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

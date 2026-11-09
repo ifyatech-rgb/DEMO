@@ -1,0 +1,7 @@
+Connor reference-style ad: sources
+Video: the client's take (Save_Your_Texas_Home_Insurance_Coverage), timing unchanged; framing cuts are crops of it.
+Shirt logo: the client's Pinecrest logo (assets/logo-src.jpg), composited by tools/logo.py.
+Opening sketch reveal: tools/intro.py, matte from `hyperframes remove-background`.
+Photo card: still from the client's own claim-form b-roll (connor/assets/prep/b02-claimform.mp4).
+Fonts: Bebas Neue and Anton (SIL Open Font License, via @fontsource), Montserrat, Inter.
+Audio: the client's voice only.
