@@ -9,16 +9,16 @@ DUR = round(float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "fo
                                  capture_output=True, text=True).stdout) - 0.03, 3)
 BOXES = [  # (id, top px, class, html, in-time)
     ("b1", 370, "tb bold", "“I was just curious<br>what a roof costs.”", 1.0),
-    ("b2", 690, "tb", "That’s not a lead.<br>That’s a <b>tire kicker</b> you paid for.", 2.4),
-    ("b3", 960, "tb", "We put you at the kitchen table<br>with homeowners who are <b>ready</b><br><b>for a new roof.</b>", 3.9),
-    ("b4", 1310, "tb", "<b>You pay per sit.</b><br>Not per lead. Not per click.", 5.5),
-    ("b5", 1570, "tb bold cta", "Tap below to see if<br>your area is open", 6.9),
+    ("b2", 690, "tb", "That’s not a lead.<br>That’s a <b>tire kicker</b> you paid for.", 1.0),
+    ("b3", 960, "tb", "We put you at the kitchen table<br>with homeowners who are <b>ready</b><br><b>for a new roof.</b>", 1.0),
+    ("b4", 1310, "tb", "<b>You pay per sit.</b><br>Not per lead. Not per click.", 1.0),
+    ("b5", 1570, "tb bold cta", "Tap below to see if<br>your area is open", 1.0),
 ]
 el, js, aud = [], [], []
 for k, (bid, top, cls, txt, t) in enumerate(BOXES):
     el.append(f'<div class="box" id="{bid}" style="top:{top}px"><div class="{cls}"><span>{txt}</span></div></div>')
     js.append(f'tl.fromTo("#{bid}", {{opacity: 0, scale: 0.82, y: 24}}, {{opacity: 1, scale: 1, y: 0, duration: 0.32, ease: "back.out(2)"}}, {t:.2f});')
-    aud.append(f'<audio id="p{k}" src="assets/pop.wav" data-start="{t:.2f}" data-duration="0.08" data-track-index="{10 + k}" data-volume="0.25"></audio>')
+    if k == 0: aud.append(f'<audio id="p{k}" src="assets/pop.wav" data-start="{t:.2f}" data-duration="0.08" data-track-index="{10 + k}" data-volume="0.25"></audio>')
 C0 = BOXES[-1][4]
 el.append('<div class="arrow" id="arw">👇</div>')
 js.append(f'tl.fromTo("#arw", {{opacity: 0, y: -10}}, {{opacity: 1, y: 0, duration: 0.25}}, {C0 + 0.35:.2f});')
