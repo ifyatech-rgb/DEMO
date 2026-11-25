@@ -8,23 +8,16 @@ W, H = 1080, 1920
 DUR = round(float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", "assets/source.mp4"],
                                  capture_output=True, text=True).stdout) - 0.03, 3)
 BOXES = [  # (id, top px, class, html, in-time)
-    ("b1", 370, "tb bold", "“I was just curious<br>what a roof costs.”", 1.0),
-    ("b2", 690, "tb", "That’s not a lead.<br>That’s a <b>tire kicker</b> you paid for.", 1.0),
-    ("b3", 960, "tb", "We put you at the kitchen table<br>with homeowners who are <b>ready</b><br><b>for a new roof.</b>", 1.0),
-    ("b4", 1310, "tb", "<b>You pay per sit.</b><br>Not per lead. Not per click.", 1.0),
-    ("b5", 1570, "tb bold cta", "Tap below to see if<br>your area is open", 1.0),
+    ("b1", 370, "tb bold", "“I was just curious<br>what a roof costs.”", 0.0),
+    ("b2", 690, "tb", "That’s not a lead.<br>That’s a <b>tire kicker</b> you paid for.", 0.0),
+    ("b3", 960, "tb", "We put you at the kitchen table<br>with homeowners who are <b>ready</b><br><b>for a new roof.</b>", 0.0),
+    ("b4", 1310, "tb", "<b>You pay per sit.</b><br>Not per lead. Not per click.", 0.0),
+    ("b5", 1570, "tb bold cta", "Tap below to see if<br>your area is open", 0.0),
 ]
 el, js, aud = [], [], []
 for k, (bid, top, cls, txt, t) in enumerate(BOXES):
     el.append(f'<div class="box" id="{bid}" style="top:{top}px"><div class="{cls}"><span>{txt}</span></div></div>')
-    js.append(f'tl.fromTo("#{bid}", {{opacity: 0, scale: 0.82, y: 24}}, {{opacity: 1, scale: 1, y: 0, duration: 0.32, ease: "back.out(2)"}}, {t:.2f});')
-    if k == 0: aud.append(f'<audio id="p{k}" src="assets/pop.wav" data-start="{t:.2f}" data-duration="0.08" data-track-index="{10 + k}" data-volume="0.25"></audio>')
-C0 = BOXES[-1][4]
-el.append('<div class="arrow" id="arw">👇</div>')
-js.append(f'tl.fromTo("#arw", {{opacity: 0, y: -10}}, {{opacity: 1, y: 0, duration: 0.25}}, {C0 + 0.35:.2f});')
-js.append(f'tl.fromTo("#arw", {{y: 0}}, {{y: 18, duration: 0.35, ease: "sine.inOut", yoyo: true, repeat: {int((DUR - C0 - 0.7) / 0.35)}, immediateRender: false}}, {C0 + 0.6:.2f});')
-js.append(f'tl.fromTo("#b4 .tb", {{scale: 1}}, {{scale: 1.04, duration: 0.45, ease: "sine.inOut", yoyo: true, repeat: {int((DUR - C0 - 0.6) / 0.45)}, immediateRender: false}}, {C0 + 0.45:.2f});')
-
+    js.append(f'tl.set("#{bid}", {{opacity: 1}}, 0);')
 doc = f"""<!doctype html>
 <html lang="en">
   <head>
@@ -39,7 +32,7 @@ doc = f"""<!doctype html>
       body {{ margin: 0; background: #000; }}
       #root {{ position: relative; width: 100%; height: 100%; overflow: hidden; background: #000; }}
       #src {{ position: absolute; inset: 0; width: 1080px; height: 1920px; object-fit: cover; }}
-      .box {{ position: absolute; left: 60px; right: 60px; display: flex; justify-content: center; opacity: 0; filter: drop-shadow(0 10px 18px rgba(0,0,0,0.28)); }}
+      .box {{ position: absolute; left: 60px; right: 60px; display: flex; justify-content: center; opacity: 1; filter: drop-shadow(0 10px 18px rgba(0,0,0,0.28)); }}
       .tb {{ font-family: "Inter", sans-serif; font-weight: 500; font-size: 58px; line-height: 1.42; color: #111; text-align: center; }}
       .tb span {{ background: #fff; padding: 6px 26px 8px; border-radius: 22px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }}
       .tb b {{ font-weight: 800; }}

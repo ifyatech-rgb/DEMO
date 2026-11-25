@@ -31,16 +31,19 @@
       <div class="arrow" id="arw">👇</div>
     </div>
     <audio id="p0" src="assets/pop.wav" data-start="1.00" data-duration="0.08" data-track-index="10" data-volume="0.25"></audio>
+    <audio id="p1" src="assets/pop.wav" data-start="2.60" data-duration="0.08" data-track-index="11" data-volume="0.25"></audio>
+    <audio id="p2" src="assets/pop.wav" data-start="4.30" data-duration="0.08" data-track-index="12" data-volume="0.25"></audio>
+    <audio id="p3" src="assets/pop.wav" data-start="5.80" data-duration="0.08" data-track-index="13" data-volume="0.25"></audio>
     <script>
       window.__timelines = window.__timelines || {};
       const tl = gsap.timeline({ paused: true });
       tl.fromTo("#b1", {opacity: 0, scale: 0.82, y: 24}, {opacity: 1, scale: 1, y: 0, duration: 0.32, ease: "back.out(2)"}, 1.00);
-      tl.fromTo("#b2", {opacity: 0, scale: 0.82, y: 24}, {opacity: 1, scale: 1, y: 0, duration: 0.32, ease: "back.out(2)"}, 1.00);
-      tl.fromTo("#b3", {opacity: 0, scale: 0.82, y: 24}, {opacity: 1, scale: 1, y: 0, duration: 0.32, ease: "back.out(2)"}, 1.00);
-      tl.fromTo("#b4", {opacity: 0, scale: 0.82, y: 24}, {opacity: 1, scale: 1, y: 0, duration: 0.32, ease: "back.out(2)"}, 1.00);
-      tl.fromTo("#arw", {opacity: 0, y: -10}, {opacity: 1, y: 0, duration: 0.25}, 1.35);
-      tl.fromTo("#arw", {y: 0}, {y: 18, duration: 0.35, ease: "sine.inOut", yoyo: true, repeat: 22, immediateRender: false}, 1.60);
-      tl.fromTo("#b4 .tb", {scale: 1}, {scale: 1.04, duration: 0.45, ease: "sine.inOut", yoyo: true, repeat: 17, immediateRender: false}, 1.45);
+      tl.fromTo("#b2", {opacity: 0, scale: 0.82, y: 24}, {opacity: 1, scale: 1, y: 0, duration: 0.32, ease: "back.out(2)"}, 2.60);
+      tl.fromTo("#b3", {opacity: 0, scale: 0.82, y: 24}, {opacity: 1, scale: 1, y: 0, duration: 0.32, ease: "back.out(2)"}, 4.30);
+      tl.fromTo("#b4", {opacity: 0, scale: 0.82, y: 24}, {opacity: 1, scale: 1, y: 0, duration: 0.32, ease: "back.out(2)"}, 5.80);
+      tl.fromTo("#arw", {opacity: 0, y: -10}, {opacity: 1, y: 0, duration: 0.25}, 6.15);
+      tl.fromTo("#arw", {y: 0}, {y: 18, duration: 0.35, ease: "sine.inOut", yoyo: true, repeat: 8, immediateRender: false}, 6.40);
+      tl.fromTo("#b4 .tb", {scale: 1}, {scale: 1.04, duration: 0.45, ease: "sine.inOut", yoyo: true, repeat: 6, immediateRender: false}, 6.25);
       window.__timelines["main"] = tl;
     </script>
   </body>
