@@ -2,9 +2,11 @@
 1 s to the last frame. Improvements: staggered pop-in timed for reading, the key words in bold, a soft shadow so
 the white boxes lift off bright sky, and a gently pulsing CTA with a bouncing down-arrow. Original sound kept,
 with a soft pop on each box."""
-import os, subprocess
+import json, os, shutil, subprocess, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); os.chdir(ROOT)
 W, H = 1080, 1920
+FMT = sys.argv[1] if len(sys.argv) > 1 else "916"   # "45" writes the 4:5 feed version to ../<project>-4x5
+if FMT == "45": H = 1350
 DUR = round(float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", "assets/source.mp4"],
                                  capture_output=True, text=True).stdout) - 0.03, 3)
 BOXES = [  # (id, top px, class, html, in-time)
@@ -15,6 +17,8 @@ BOXES = [  # (id, top px, class, html, in-time)
     ("b5", 1570, "tb bold cta", "Tap below to see if<br>your area is open", 0.0),
 ]
 el, js, aud = [], [], []
+if FMT == "45":   # same boxes, re-spaced and a touch smaller to fit 1350 px; the video is centre-cropped
+    BOXES = [(b, round(70 + (t - BOXES[0][1]) * 0.74), c, x, tt) for b, t, c, x, tt in BOXES]
 for k, (bid, top, cls, txt, t) in enumerate(BOXES):
     el.append(f'<div class="box" id="{bid}" style="top:{top}px"><div class="{cls}"><span>{txt}</span></div></div>')
     js.append(f'tl.set("#{bid}", {{opacity: 1}}, 0);')
@@ -56,5 +60,13 @@ doc = f"""<!doctype html>
   </body>
 </html>
 """
-open("index.html", "w").write(doc)
+if FMT == "45":
+    doc = doc.replace("</style>", "  .tb {{ font-size: 50px; }}\n      .tb.bold {{ font-size: 56px; }}\n    </style>".replace("{{", "{").replace("}}", "}"), 1)
+    OUTD = f"../{os.path.basename(ROOT)}-4x5"; os.makedirs(OUTD, exist_ok=True)
+    for x in ("assets", "vendor"):
+        if not os.path.lexists(f"{OUTD}/{x}"): shutil.copytree(x, f"{OUTD}/{x}")   # real copies: the renderer does not serve symlinked folders
+    for f in ("hyperframes.json", "package.json"): open(f"{OUTD}/{f}", "w").write(open(f).read())
+    json.dump({"id": f"{os.path.basename(ROOT)}-4x5"}, open(f"{OUTD}/meta.json", "w"))
+    open(f"{OUTD}/index.html", "w").write(doc)
+else: open("index.html", "w").write(doc)
 print(f"{DUR}s · {len(BOXES)} boxes")
