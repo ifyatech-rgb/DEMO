@@ -7,7 +7,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); os.chdir(ROO
 W, H = 1080, 1920
 FMT = sys.argv[1] if len(sys.argv) > 1 else "916"   # "45" writes the 4:5 feed version to ../<project>-4x5
 if FMT == "45": H = 1350
-SAFE = 285 if FMT == "safe" else 0                  # "safe": 9:16 with all text inside the centred 4:5 feed crop (y 285-1635)
+# "safe": 9:16 with all text, big, inside the centred 4:5 feed crop (y 285-1635)
 DUR = round(float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", "assets/source.mp4"],
                                  capture_output=True, text=True).stdout) - 0.03, 3)
 BOXES = [  # (id, top px, class, html, in-time)
@@ -18,8 +18,14 @@ BOXES = [  # (id, top px, class, html, in-time)
     ("b5", 1570, "tb bold cta", "Tap below to see if<br>your area is open", 0.0),
 ]
 el, js, aud = [], [], []
-if FMT in ("45", "safe"):   # same boxes, re-spaced and a touch smaller to fit 1350 px; the video is centre-cropped
-    BOXES = [(b, SAFE + round(70 + (t - BOXES[0][1]) * 0.74), c, x, tt) for b, t, c, x, tt in BOXES]
+FS_N, FS_B = (58, 68)                                  # "safe" font sizes (normal / bold boxes): as big as the widest line allows
+if FMT == "45":   # same boxes, re-spaced and a touch smaller to fit 1350 px; the video is centre-cropped
+    BOXES = [(b, round(70 + (t - BOXES[0][1]) * 0.74), c, x, tt) for b, t, c, x, tt in BOXES]
+if FMT == "safe":   # big text spread evenly over y 330-1570, inside the feed's centre crop (y 285-1635)
+    hts = [(x.count("<br>") + 1) * (FS_B if "bold" in c else FS_N) * 1.42 + 14 for _, _, c, x, _ in BOXES]
+    gap = (1570 - 330 - sum(hts)) / (len(BOXES) - 1); y, nb = 330.0, []
+    for (b, _, c, x, tt), h in zip(BOXES, hts): nb.append((b, round(y), c, x, tt)); y += h + gap
+    BOXES = nb
 for k, (bid, top, cls, txt, t) in enumerate(BOXES):
     el.append(f'<div class="box" id="{bid}" style="top:{top}px"><div class="{cls}"><span>{txt}</span></div></div>')
     js.append(f'tl.set("#{bid}", {{opacity: 1}}, 0);')
@@ -62,7 +68,8 @@ doc = f"""<!doctype html>
 </html>
 """
 if FMT in ("45", "safe"):
-    doc = doc.replace("</style>", "  .tb {{ font-size: 50px; }}\n      .tb.bold {{ font-size: 56px; }}\n    </style>".replace("{{", "{").replace("}}", "}"), 1)
+    fs = (50, 56) if FMT == "45" else (FS_N, FS_B)
+    doc = doc.replace("</style>", f"  .tb {{ font-size: {fs[0]}px; }}\n      .tb.bold {{ font-size: {fs[1]}px; }}\n    </style>", 1)
     OUTD = f"../{os.path.basename(ROOT)}-{'4x5' if FMT == '45' else 'safe'}"; os.makedirs(OUTD, exist_ok=True)
     for x in ("assets", "vendor"):
         if not os.path.lexists(f"{OUTD}/{x}"): shutil.copytree(x, f"{OUTD}/{x}")   # real copies: the renderer does not serve symlinked folders
