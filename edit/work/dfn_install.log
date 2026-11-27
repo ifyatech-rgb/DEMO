@@ -1,0 +1,8 @@
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+audio-separator 0.48.0 requires numpy>=2, but you have numpy 1.26.4 which is incompatible.
+opencv-contrib-python 5.1.0.95 requires numpy>=2; python_version >= "3.9", but you have numpy 1.26.4 which is incompatible.
+librosa 1.0.1 requires numpy>=2.1.0, but you have numpy 1.26.4 which is incompatible.
+contourpy 1.4.0 requires numpy>=2.0, but you have numpy 1.26.4 which is incompatible.
+scipy 1.18.1 requires numpy<2.8,>=2.0.0, but you have numpy 1.26.4 which is incompatible.
+ml-dtypes 0.7.0 requires numpy>=2.0.0, but you have numpy 1.26.4 which is incompatible.
+ml-dtypes 0.7.0 requires numpy>=2.1.0; python_version >= "3.13", but you have numpy 1.26.4 which is incompatible.

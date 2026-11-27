@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from df.enhance import init_df; init_df()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/claude-0/-home-user-DEMO/b9b65042-0f71-535d-b595-c1f55e0d4384/scratchpad/sepenv/lib/python3.13/site-packages/df/__init__.py", line 2, in <module>
+    from .enhance import enhance, init_df
+  File "/tmp/claude-0/-home-user-DEMO/b9b65042-0f71-535d-b595-c1f55e0d4384/scratchpad/sepenv/lib/python3.13/site-packages/df/enhance.py", line 16, in <module>
+    from df.io import load_audio, resample, save_audio
+  File "/tmp/claude-0/-home-user-DEMO/b9b65042-0f71-535d-b595-c1f55e0d4384/scratchpad/sepenv/lib/python3.13/site-packages/df/io.py", line 5, in <module>
+    import torchaudio as ta
+ModuleNotFoundError: No module named 'torchaudio'
+dfn exit 1

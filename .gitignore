@@ -136,3 +136,13 @@ next-env.d.ts
 /textad2-safe/assets/
 /textad-safe/.hyperframes/
 /textad2-safe/.hyperframes/
+/ad_1_for_feed.mp4
+/edit/out/*.mp4
+/edit/out/*.wav
+/edit/work/*.mp4
+/edit/work/*.wav
+/edit/work/pieces/
+/edit/work/*.tflite
+/edit/remotion/*/assets/
+/edit/remotion/*/.hyperframes/
+/edit/remotion/*/vendor/

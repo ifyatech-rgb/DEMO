@@ -1,0 +1,111 @@
+{
+ "ad1_feed_4x5_1080x1350.mp4": {
+  "duration": 26.733333,
+  "streams": [
+   {
+    "codec_name": "h264",
+    "profile": "High",
+    "codec_type": "video",
+    "width": 1080,
+    "height": 1350,
+    "pix_fmt": "yuv420p",
+    "r_frame_rate": "30/1",
+    "bit_rate": "4565356"
+   },
+   {
+    "codec_name": "aac",
+    "profile": "LC",
+    "codec_type": "audio",
+    "sample_rate": "48000",
+    "r_frame_rate": "0/0",
+    "bit_rate": "163212"
+   }
+  ],
+  "lufs": -14.0,
+  "true_peak": -2.0,
+  "loudness_pass": true
+ },
+ "ad1_reels_9x16_1080x1920.mp4": {
+  "duration": 26.733333,
+  "streams": [
+   {
+    "codec_name": "h264",
+    "profile": "High",
+    "codec_type": "video",
+    "width": 1080,
+    "height": 1920,
+    "pix_fmt": "yuv420p",
+    "r_frame_rate": "30/1",
+    "bit_rate": "4761642"
+   },
+   {
+    "codec_name": "aac",
+    "profile": "LC",
+    "codec_type": "audio",
+    "sample_rate": "48000",
+    "r_frame_rate": "0/0",
+    "bit_rate": "163212"
+   }
+  ],
+  "lufs": -14.0,
+  "true_peak": -2.0,
+  "loudness_pass": true
+ },
+ "voice_only_test.wav": {
+  "duration": 26.733,
+  "streams": [
+   {
+    "codec_name": "pcm_s16le",
+    "codec_type": "audio",
+    "sample_rate": "48000",
+    "r_frame_rate": "0/0",
+    "bit_rate": "1536000"
+   }
+  ],
+  "lufs": -14.0,
+  "true_peak": -2.3,
+  "loudness_pass": true
+ },
+ "joints": [
+  {
+   "t": 2.233,
+   "max_jump_vs_p99.9": 0.92
+  },
+  {
+   "t": 4.0,
+   "max_jump_vs_p99.9": 1.05
+  },
+  {
+   "t": 8.267,
+   "max_jump_vs_p99.9": 0.84
+  },
+  {
+   "t": 10.8,
+   "max_jump_vs_p99.9": 0.81
+  },
+  {
+   "t": 11.733,
+   "max_jump_vs_p99.9": 1.13
+  },
+  {
+   "t": 16.133,
+   "max_jump_vs_p99.9": 0.9
+  },
+  {
+   "t": 16.7,
+   "max_jump_vs_p99.9": 0.48
+  },
+  {
+   "t": 20.833,
+   "max_jump_vs_p99.9": 0.02
+  },
+  {
+   "t": 23.733,
+   "max_jump_vs_p99.9": 0.0
+  }
+ ],
+ "clicks_pass": true,
+ "first_word_s": 0.0,
+ "longest_static_s": 2.95,
+ "runtime_s": 26.733333333333334
+}

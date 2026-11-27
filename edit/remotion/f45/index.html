@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1350" />
+    <title>High Roof Partners Ad 45</title>
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Montserrat"; font-weight: 800; src: url("vendor/montserrat-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Montserrat"; font-weight: 900; src: url("vendor/montserrat-latin-900-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Noto Color Emoji"; src: url("vendor/NotoColorEmoji.ttf") format("truetype"); }
+      body { margin: 0; background: #000; }
+      #root { position: relative; width: 1080px; height: 1350px; overflow: hidden; background: #0F1B2D; font-family: "Montserrat", "Noto Color Emoji", sans-serif; font-weight: 900; color: #fff; }
+      #plate { position: absolute; inset: 0; width: 1080px; height: 1350px; }
+      .g { position: absolute; left: 0; right: 0; display: flex; justify-content: center; }
+      .y { color: #FFD400; } .o { color: #FF7A1A; }
+      .banner { display: flex; align-items: center; gap: 18px; padding: 14px 34px 12px; border-radius: 16px; background: #E01E26; font-size: 62px; letter-spacing: 1px; box-shadow: 0 10px 28px rgba(0,0,0,0.45); white-space: nowrap; }
+      .siren { font-family: "Noto Color Emoji", sans-serif; display: inline-block; font-size: 58px; }
+      .hook { font-size: 96px; line-height: 1.02; text-align: center; white-space: nowrap; -webkit-text-stroke: 10px #000; paint-order: stroke fill; text-shadow: 0 8px 18px rgba(0,0,0,0.5); opacity: 0; }
+      .name { position: absolute; left: 60px; display: flex; align-items: baseline; gap: 14px; padding: 16px 28px 20px; border-radius: 14px; background: rgba(15,27,45,0.94); font-size: 56px; white-space: nowrap; opacity: 0; }
+      .name i { font-style: normal; color: #FF7A1A; } .name span { font-weight: 800; }
+      .name u { position: absolute; left: 28px; right: 28px; bottom: 8px; height: 7px; border-radius: 4px; background: #FF7A1A; transform-origin: 0 50%; }
+      .chip { padding: 16px 34px 14px; border-radius: 999px; font-size: 60px; white-space: nowrap; box-shadow: 0 10px 26px rgba(0,0,0,0.45); opacity: 0; }
+      .chip.orange { background: #FF7A1A; color: #0F1B2D; } .chip.yellow { background: #FFD400; color: #0F1B2D; }
+      .pin { display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0; }
+      .pmain { padding: 12px 30px 10px; border-radius: 14px; background: #0F1B2D; border: 4px solid #FFD400; font-size: 58px; white-space: nowrap; }
+      .psub { padding: 6px 22px 4px; border-radius: 999px; background: #FF7A1A; color: #0F1B2D; font-size: 56px; white-space: nowrap; }
+      .card { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 40%, #1B2C47 0%, #0F1B2D 70%); }
+      .cin { position: absolute; left: 50px; right: 50px; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; }
+      .ct { font-size: 76px; line-height: 1.05; } .ct.big { font-size: 100px; } .ct.huge { font-size: 128px; line-height: 1.0; }
+      .svgt { font-family: "Montserrat"; font-weight: 900; font-size: 30px; fill: #0F1B2D; }
+      .cal { width: 960px; padding: 22px; border-radius: 26px; background: rgba(255,255,255,0.07); border: 4px solid rgba(255,255,255,0.25); }
+      .calh { display: flex; justify-content: space-around; font-size: 56px; color: #FF7A1A; margin-bottom: 14px; }
+      .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+      .slot { height: 104px; border-radius: 16px; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; font-size: 56px; }
+      .ex { padding: 6px 18px 4px; border-radius: 10px; border: 3px solid #fff; font-size: 56px; }
+      .webook { position: relative; font-size: 84px; white-space: nowrap; -webkit-text-stroke: 9px #000; paint-order: stroke fill; text-shadow: 0 8px 18px rgba(0,0,0,0.5); opacity: 0; }
+      .webook u { position: absolute; left: 0; right: 0; bottom: -12px; height: 10px; border-radius: 5px; background: #FFD400; transform-origin: 0 50%; }
+      .strip { position: absolute; left: 0; right: 0; background: #0F1B2D; box-shadow: 0 -60px 50px -10px rgba(15,27,45,0.85); opacity: 0; }
+      .nc { display: flex; align-items: center; gap: 30px; opacity: 0; }
+      .nct { font-size: 60px; line-height: 1.05; }
+      .one { display: flex; align-items: center; gap: 18px; padding: 22px 40px 20px; border-radius: 22px; background: #FF7A1A; color: #0F1B2D; font-size: 66px; white-space: nowrap; box-shadow: 0 12px 30px rgba(0,0,0,0.5); opacity: 0; }
+      .end { background: #0F1B2D; opacity: 0; }
+      .wm { font-size: 64px; letter-spacing: 2px; padding-bottom: 12px; border-bottom: 8px solid #FF7A1A; }
+      .tap { font-size: 124px; line-height: 1.0; color: #FFD400; margin-top: 30px; }
+      .sub { font-size: 56px; line-height: 1.2; font-weight: 800; margin-top: 10px; }
+      .arrow { position: absolute; left: 485px; }
+      #captions { position: absolute; left: 90px; right: 90px; top: 781px; height: 220px; }
+      .cg { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; line-height: 1.12; }
+      .cg div { display: flex; gap: 0 0.58em; white-space: nowrap; }
+      .w { display: inline-block; color: #fff; -webkit-text-stroke: 6px #000; paint-order: stroke fill; text-shadow: 0 6px 14px rgba(0,0,0,0.6); }
+      .w.key { color: #FFD400; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-width="1080" data-height="1350" data-duration="26.733">
+      <video id="plate" class="clip" src="assets/plate.mp4" muted playsinline data-start="0" data-duration="26.733" data-track-index="0"></video>
+      <div class="clip g" id="g-banner" data-start="0.000" data-duration="2.500" data-track-index="20" style="top:26px"><div class="banner" id="banner"><span class="siren" id="siren">🚨</span>ATTENTION NC ROOFERS<span class="siren s2">🚨</span></div></div>
+      <div class="clip g" id="g-hook" data-start="0.680" data-duration="2.200" data-track-index="21" style="top:975px"><div class="hook" id="hook">5 TO 10 ROOFS<br><span class="y">A MONTH?</span></div></div>
+      <div class="clip g" id="g-name" data-start="0.500" data-duration="2.380" data-track-index="22" style="top:1238px"><div class="name" id="name"><b>PARTH</b><i>|</i><span>HIGH ROOF PARTNERS</span><u id="nameline"></u></div></div>
+      <div class="clip g" id="c-trash" data-start="2.880" data-duration="1.380" data-track-index="30" style=""><div class="card" id="cd-trash"><div class="cin" style="top:675px"><svg class="trash" viewBox="0 0 400 420" width="400" height="420"><g id="lead1"><rect x="150" y="-40" width="100" height="64" rx="10" fill="#fff"/><text x="200" y="0" text-anchor="middle" class="svgt">LEAD</text></g><g id="lead2"><rect x="150" y="-40" width="100" height="64" rx="10" fill="#fff"/><text x="200" y="0" text-anchor="middle" class="svgt">LEAD</text></g><g id="lead3"><rect x="150" y="-40" width="100" height="64" rx="10" fill="#fff"/><text x="200" y="0" text-anchor="middle" class="svgt">LEAD</text></g><path d="M90 150 L120 400 H280 L310 150 Z" fill="#8A94A6"/><path d="M150 190 L160 370 M200 190 V370 M250 190 L240 370" stroke="#5B6474" stroke-width="12" stroke-linecap="round"/><g id="lid"><rect x="70" y="112" width="260" height="34" rx="12" fill="#A9B2C3"/><rect x="170" y="92" width="60" height="26" rx="8" fill="#A9B2C3"/></g></svg><div class="ct">SHARED LEADS <span class="o">= TRASH</span></div></div></div></div>
+      <div class="clip g" id="c-sitdown" data-start="5.700" data-duration="1.360" data-track-index="30" style=""><div class="card" id="cd-sitdown"><div class="cin" style="top:675px"><div class="ct big">YOU ONLY PAY</div><div class="ct">WHEN YOU SIT DOWN</div><div class="ct y">&amp; GIVE AN ESTIMATE</div></div></div></div>
+      <div class="clip g" id="c-intent" data-start="7.500" data-duration="0.920" data-track-index="30" style=""><div class="card" id="cd-intent"><div class="cin" style="top:675px"><div class="ct big">HIGH-INTENT</div><div class="ct big y">HOMEOWNERS</div></div></div></div>
+      <div class="clip g" id="g-noret" data-start="8.421" data-duration="1.129" data-track-index="23" style="top:1050px"><div class="chip orange" id="noret">NO MONTHLY RETAINERS ✓</div></div>
+      <div class="clip g" id="c-noest" data-start="9.550" data-duration="1.370" data-track-index="30" style=""><div class="card" id="cd-noest"><div class="cin" style="top:675px"><div class="ct huge" id="ne1">NO ESTIMATE</div><div class="ct huge y" id="ne2">= NO PAY</div></div></div></div>
+      <div class="clip g" id="g-pinned" data-start="10.920" data-duration="9.947" data-track-index="24" style="top:26px"><div class="pin" id="pin"><div class="pmain">NO ESTIMATE = <span class="y">NO PAY</span></div><div class="psub">NO RETAINERS</div></div></div>
+      <div class="clip g" id="g-excl" data-start="13.013" data-duration="1.600" data-track-index="23" style="top:1050px"><div class="chip yellow" id="excl">EXCLUSIVE TO YOU</div></div>
+      <div class="clip g" id="c-phone" data-start="15.340" data-duration="1.040" data-track-index="30" style=""><div class="card" id="cd-phone"><div class="cin" style="top:675px"><svg class="phone" viewBox="0 0 300 420" width="300" height="420" id="phonesvg"><circle id="ring1" cx="150" cy="190" r="120" fill="none" stroke="#FF7A1A" stroke-width="8" opacity="0"/><circle id="ring2" cx="150" cy="190" r="120" fill="none" stroke="#FF7A1A" stroke-width="8" opacity="0"/><rect x="85" y="40" width="130" height="300" rx="26" fill="#1E2A3F" stroke="#fff" stroke-width="8"/><circle cx="150" cy="250" r="34" fill="#22C55E"/><path d="M133 238c6 14 14 22 28 28l8-8c2-2 5-2 7-1l12 5c3 1 4 4 3 7l-3 10c-1 3-4 5-7 5-34-3-61-30-64-64 0-3 2-6 5-7l10-3c3-1 6 0 7 3l5 12c1 2 1 5-1 7z" fill="#fff" transform="translate(-6 -10) scale(0.6) translate(100 165)"/></svg><div class="ct">WE CALL EVERY <span class="y">HOMEOWNER</span></div></div></div></div>
+      <div class="clip g" id="c-calendar" data-start="16.380" data-duration="1.570" data-track-index="30" style=""><div class="card" id="cd-calendar"><div class="cin" style="top:675px"><div class="cal"><div class="calh">MON<span>TUE</span>WED</div><div class="grid"><div class="slot" id="sl0"><span>9 AM</span></div><div class="slot" id="sl1"><span>1 PM</span></div><div class="slot" id="sl2"><span>4 PM</span></div><div class="slot" id="sl3"><span>10 AM</span></div><div class="slot" id="sl4"><span>2 PM</span></div><div class="slot" id="sl5"><span>5 PM</span></div><div class="slot" id="sl6"><span>11 AM</span></div><div class="slot" id="sl7"><span>3 PM</span></div><div class="slot" id="sl8"><span>6 PM</span></div></div></div><div class="ct">FREE ESTIMATES: <span class="y" id="cnt">0</span></div><div class="ex">EXAMPLE</div></div></div></div>
+      <div class="clip g" id="g-webook" data-start="19.304" data-duration="1.610" data-track-index="23" style="top:1050px"><div class="webook" id="webook">WE BOOK. <span class="y">YOU CLOSE.</span><u id="wbline"></u></div></div>
+      <div class="clip g" id="g-strip" data-start="20.850" data-duration="3.383" data-track-index="25" style=""><div class="strip" style="top:1100px;height:250px"></div></div>
+      <div class="clip g" id="g-nc" data-start="20.867" data-duration="0.980" data-track-index="26" style="top:1128px"><div class="nc" id="nc"><svg viewBox="0 0 490 130" width="420" height="111"><path d="M8 70 L60 52 L120 50 L180 40 L260 30 L340 22 L420 14 L470 8 L478 30 L462 52 L440 70 L410 96 L370 110 L330 104 L300 122 L250 120 L205 104 L160 104 L120 98 L70 104 L30 112 L12 100 Z" fill="#1E2A3F" stroke="#fff" stroke-width="5" stroke-linejoin="round"/><g id="pin0"><circle cx="175" cy="92" r="12" fill="#FF7A1A"/><circle class="pulse" cx="175" cy="92" r="12" fill="none" stroke="#FF7A1A" stroke-width="4"/></g><g id="pin1"><circle cx="330" cy="62" r="12" fill="#FF7A1A"/><circle class="pulse" cx="330" cy="62" r="12" fill="none" stroke="#FF7A1A" stroke-width="4"/></g><g id="pin2"><circle cx="262" cy="54" r="12" fill="#FF7A1A"/><circle class="pulse" cx="262" cy="54" r="12" fill="none" stroke="#FF7A1A" stroke-width="4"/></g></svg><div class="nct">NORTH CAROLINA<br><span class="y">ONLY</span></div></div></div>
+      <div class="clip g" id="g-one" data-start="21.847" data-duration="2.386" data-track-index="26" style="top:1140px"><div class="one" id="one"><svg viewBox="0 0 24 24" width="62" height="62"><path d="M7 10V7a5 5 0 0 1 10 0v3" fill="none" stroke="#0F1B2D" stroke-width="2.6"/><rect x="4.5" y="10" width="15" height="11" rx="2.5" fill="#0F1B2D"/></svg>ONLY 1 ROOFER PER AREA</div></div>
+      <div class="clip g" id="c-end" data-start="24.233" data-duration="2.500" data-track-index="31" style=""><div class="card end" id="cd-end"><div class="cin" style="top:635px"><div class="wm">HIGH ROOF <span class="o">PARTNERS</span></div><div class="tap" id="tap">TAP SEND<br>MESSAGE</div><div class="sub">Only 1 roofer per area.<br>Check if yours is open.</div></div><svg class="arrow" id="arw" viewBox="0 0 120 150" width="110" height="138" style="top:1180px"><path d="M42 0h36v80h32L60 145 10 80h32z" fill="#FF7A1A"/></svg></div></div>
+      <div id="captions" class="clip" data-start="0" data-duration="26.733" data-track-index="40">
+        <div class="cg" id="cg0" style="font-size:68px"><div><span class="w" id="w0">ROOFERS</span> <span class="w" id="w1">GETTING</span></div></div>
+        <div class="cg" id="cg2" style="font-size:68px"><div><span class="w" id="w5">ROOFS</span> <span class="w" id="w6">PER</span> <span class="w" id="w7">MONTH</span></div></div>
+        <div class="cg" id="cg3" style="font-size:68px"><div><span class="w" id="w8">STOP</span> <span class="w" id="w9">BUYING</span></div></div>
+        <div class="cg" id="cg6" style="font-size:68px"><div><span class="w" id="w13">DON&#x27;T</span> <span class="w key" id="w14">PAY</span> <span class="w" id="w15">ME</span></div></div>
+        <div class="cg" id="cg7" style="font-size:68px"><div><span class="w" id="w16">ANYTHING</span> <span class="w" id="w17">UNLESS</span> <span class="w" id="w18">YOU</span></div></div>
+        <div class="cg" id="cg9" style="font-size:68px"><div><span class="w" id="w22">WITH</span> <span class="w" id="w23">HIGH-INTENT</span></div></div>
+        <div class="cg" id="cg11" style="font-size:68px"><div><span class="w" id="w25">NO</span> <span class="w" id="w26">MONTHLY</span></div><div><span class="w" id="w27">RETAINERS</span></div></div>
+        <div class="cg" id="cg14" style="font-size:68px"><div><span class="w" id="w32">HERE&#x27;S</span> <span class="w" id="w33">HOW</span> <span class="w" id="w34">IT</span></div></div>
+        <div class="cg" id="cg15" style="font-size:68px"><div><span class="w" id="w35">WORKS</span></div></div>
+        <div class="cg" id="cg16" style="font-size:68px"><div><span class="w" id="w36">MY</span> <span class="w" id="w37">TEAM</span> <span class="w" id="w38">AND</span></div></div>
+        <div class="cg" id="cg17" style="font-size:68px"><div><span class="w" id="w39">I</span> <span class="w" id="w40">GENERATE</span></div><div><span class="w key" id="w41">EXCLUSIVE</span></div></div>
+        <div class="cg" id="cg18" style="font-size:68px"><div><span class="w" id="w42">HOMEOWNER</span> <span class="w" id="w43">LEADS</span></div><div><span class="w" id="w44">FOR</span></div></div>
+        <div class="cg" id="cg19" style="font-size:68px"><div><span class="w" id="w45">YOUR</span> <span class="w" id="w46">COMPANY</span></div></div>
+        <div class="cg" id="cg24" style="font-size:68px"><div><span class="w" id="w56">SO</span> <span class="w" id="w57">YOU</span> <span class="w" id="w58">DON&#x27;T</span></div></div>
+        <div class="cg" id="cg25" style="font-size:68px"><div><span class="w" id="w59">HAVE</span> <span class="w" id="w60">TO</span> <span class="w" id="w61">WASTE</span></div></div>
+        <div class="cg" id="cg26" style="font-size:68px"><div><span class="w" id="w62">ANY</span> <span class="w" id="w63">TIME</span> <span class="w" id="w64">AT</span></div></div>
+        <div class="cg" id="cg27" style="font-size:68px"><div><span class="w" id="w65">ALL</span> <span class="w" id="w66">SIFTING</span> <span class="w" id="w67">THROUGH</span></div></div>
+        <div class="cg" id="cg28" style="font-size:68px"><div><span class="w" id="w68">ALL</span> <span class="w" id="w69">THE</span> <span class="w" id="w70">DIRT</span></div></div>
+        <div class="cg" id="cg29" style="font-size:68px"><div><span class="w" id="w71">WE</span> <span class="w" id="w72">ONLY</span> <span class="w" id="w73">WORK</span></div></div>
+        <div class="cg" id="cg30" style="font-size:68px"><div><span class="w" id="w74">WITH</span> <span class="w key" id="w75">ONE</span> <span class="w key" id="w76">ROOFING</span></div></div>
+        <div class="cg" id="cg31" style="font-size:68px"><div><span class="w" id="w77">CONTRACTOR</span> <span class="w" id="w78">PER</span></div><div><span class="w" id="w79">AREA</span></div></div>
+        <div class="cg" id="cg32" style="font-size:68px"><div><span class="w" id="w80">CLICK</span> <span class="w" id="w81">THE</span></div></div>
+        <div class="cg" id="cg33" style="font-size:68px"><div><span class="w" id="w82">BUTTON</span></div></div>
+      </div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#banner", {y: -160}, {y: 0, duration: 0.3, ease: "back.out(1.6)", immediateRender: true}, 0);
+      tl.fromTo("#g-banner .siren", {scale: 1}, {scale: 1.25, duration: 0.18, yoyo: true, repeat: 11, ease: "sine.inOut", immediateRender: false}, 0.1);
+      tl.to("#banner", {opacity: 0, duration: 0.2, ease: "power2.in"}, 2.300);
+      tl.fromTo("#hook", {opacity: 0, scale: 2.2}, {opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2.4)"}, 0.680);
+      tl.to("#hook", {scale: 0.62, y: 60, duration: 0.25, ease: "power2.inOut"}, 1.830);
+      tl.to("#hook", {opacity: 0, duration: 0.12, ease: "power2.in"}, 2.760);
+      tl.fromTo("#name", {opacity: 0, x: -420}, {opacity: 1, x: 0, duration: 0.3, ease: "back.out(1.4)"}, 0.500);
+      tl.fromTo("#nameline", {scaleX: 0}, {scaleX: 1, duration: 0.35, ease: "power3.out"}, 0.750);
+      tl.to("#name", {opacity: 0, duration: 0.12, ease: "power2.in"}, 2.760);
+      tl.fromTo("#cd-trash .cin", {opacity: 0, scale: 0.86}, {opacity: 1, scale: 1, duration: 0.22, ease: "back.out(1.8)"}, 2.880);
+      tl.fromTo("#lid", {rotation: 0, transformOrigin: "70px 146px"}, {rotation: -38, duration: 0.25, ease: "back.out(2)"}, 2.980);
+      tl.fromTo("#lead1", {y: -120, x: -60, rotation: -25, opacity: 0}, {y: 250, x: 0, rotation: 40, opacity: 1, duration: 0.32, ease: "power2.in"}, 3.180);
+      tl.to("#lead1", {opacity: 0, duration: 0.05}, 3.500);
+      tl.fromTo("#lead2", {y: -120, x: 0, rotation: 0, opacity: 0}, {y: 250, x: 0, rotation: 0, opacity: 1, duration: 0.32, ease: "power2.in"}, 3.360);
+      tl.to("#lead2", {opacity: 0, duration: 0.05}, 3.680);
+      tl.fromTo("#lead3", {y: -120, x: 60, rotation: 25, opacity: 0}, {y: 250, x: 0, rotation: -40, opacity: 1, duration: 0.32, ease: "power2.in"}, 3.540);
+      tl.to("#lead3", {opacity: 0, duration: 0.05}, 3.860);
+      tl.to("#lid", {rotation: 0, duration: 0.18, ease: "power2.in"}, 3.830);
+      tl.fromTo("#cd-sitdown .cin", {opacity: 0, scale: 0.86}, {opacity: 1, scale: 1, duration: 0.22, ease: "back.out(1.8)"}, 5.700);
+      tl.fromTo("#cd-intent .cin", {opacity: 0, scale: 0.86}, {opacity: 1, scale: 1, duration: 0.22, ease: "back.out(1.8)"}, 7.500);
+      tl.fromTo("#noret", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.27, ease: "back.out(1.7)"}, 8.421);
+      tl.to("#noret", {opacity: 0, duration: 0.12, ease: "power2.in"}, 9.430);
+      tl.fromTo("#cd-noest .cin", {opacity: 0, scale: 0.86}, {opacity: 1, scale: 1, duration: 0.22, ease: "back.out(1.8)"}, 9.550);
+      tl.fromTo("#ne1, #ne2", {scale: 2.4, opacity: 0}, {scale: 1, opacity: 1, duration: 0.2, ease: "back.out(2.2)", stagger: 0.12}, 9.550);
+      tl.fromTo("#pin", {opacity: 0, y: -40, scale: 1.3}, {opacity: 1, y: 0, scale: 1, duration: 0.3, ease: "back.out(1.6)"}, 10.920);
+      tl.to("#pin", {opacity: 0, duration: 0.15, ease: "power2.in"}, 20.717);
+      tl.fromTo("#excl", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.27, ease: "back.out(1.7)"}, 13.013);
+      tl.to("#excl", {opacity: 0, duration: 0.12, ease: "power2.in"}, 14.493);
+      tl.fromTo("#cd-phone .cin", {opacity: 0, scale: 0.86}, {opacity: 1, scale: 1, duration: 0.22, ease: "back.out(1.8)"}, 15.340);
+      tl.fromTo("#ring1", {attr: {r: 100}, opacity: 0.9}, {attr: {r: 200}, opacity: 0, duration: 0.6, ease: "power1.out", repeat: 1}, 15.440);
+      tl.fromTo("#ring2", {attr: {r: 100}, opacity: 0.9}, {attr: {r: 200}, opacity: 0, duration: 0.6, ease: "power1.out", repeat: 1}, 15.740);
+      tl.fromTo("#phonesvg", {rotation: -4}, {rotation: 4, duration: 0.06, yoyo: true, repeat: 9, ease: "none", immediateRender: false}, 15.440);
+      tl.fromTo("#cd-calendar .cin", {opacity: 1, scale: 0.94}, {opacity: 1, scale: 1, duration: 0.2, ease: "back.out(1.8)"}, 16.380);
+      tl.fromTo("#sl0", {backgroundColor: "rgba(255,255,255,0.08)", scale: 0.7}, {backgroundColor: "#FF7A1A", scale: 1, duration: 0.12, ease: "back.out(2)", immediateRender: false}, 16.560);
+      tl.set("#cnt", {textContent: "1"}, 16.560);
+      tl.fromTo("#sl3", {backgroundColor: "rgba(255,255,255,0.08)", scale: 0.7}, {backgroundColor: "#FF7A1A", scale: 1, duration: 0.12, ease: "back.out(2)", immediateRender: false}, 16.680);
+      tl.set("#cnt", {textContent: "2"}, 16.680);
+      tl.fromTo("#sl6", {backgroundColor: "rgba(255,255,255,0.08)", scale: 0.7}, {backgroundColor: "#FF7A1A", scale: 1, duration: 0.12, ease: "back.out(2)", immediateRender: false}, 16.800);
+      tl.set("#cnt", {textContent: "3"}, 16.800);
+      tl.fromTo("#sl1", {backgroundColor: "rgba(255,255,255,0.08)", scale: 0.7}, {backgroundColor: "#FF7A1A", scale: 1, duration: 0.12, ease: "back.out(2)", immediateRender: false}, 16.920);
+      tl.set("#cnt", {textContent: "4"}, 16.920);
+      tl.fromTo("#sl4", {backgroundColor: "rgba(255,255,255,0.08)", scale: 0.7}, {backgroundColor: "#FF7A1A", scale: 1, duration: 0.12, ease: "back.out(2)", immediateRender: false}, 17.040);
+      tl.set("#cnt", {textContent: "5"}, 17.040);
+      tl.fromTo("#sl7", {backgroundColor: "rgba(255,255,255,0.08)", scale: 0.7}, {backgroundColor: "#FF7A1A", scale: 1, duration: 0.12, ease: "back.out(2)", immediateRender: false}, 17.160);
+      tl.set("#cnt", {textContent: "6"}, 17.160);
+      tl.fromTo("#sl2", {backgroundColor: "rgba(255,255,255,0.08)", scale: 0.7}, {backgroundColor: "#FF7A1A", scale: 1, duration: 0.12, ease: "back.out(2)", immediateRender: false}, 17.280);
+      tl.set("#cnt", {textContent: "7"}, 17.280);
+      tl.fromTo("#sl5", {backgroundColor: "rgba(255,255,255,0.08)", scale: 0.7}, {backgroundColor: "#FF7A1A", scale: 1, duration: 0.12, ease: "back.out(2)", immediateRender: false}, 17.400);
+      tl.set("#cnt", {textContent: "8"}, 17.400);
+      tl.fromTo("#sl8", {backgroundColor: "rgba(255,255,255,0.08)", scale: 0.7}, {backgroundColor: "#FF7A1A", scale: 1, duration: 0.12, ease: "back.out(2)", immediateRender: false}, 17.520);
+      tl.set("#cnt", {textContent: "9"}, 17.520);
+      tl.fromTo("#webook", {opacity: 0, scale: 0.7}, {opacity: 1, scale: 1, duration: 0.27, ease: "back.out(1.7)"}, 19.304);
+      tl.fromTo("#wbline", {scaleX: 0}, {scaleX: 1, duration: 0.3, ease: "power3.out"}, 19.504);
+      tl.to("#webook", {opacity: 0, duration: 0.12, ease: "power2.in"}, 20.794);
+      tl.fromTo("#g-strip .strip", {opacity: 0}, {opacity: 1, duration: 0.1}, 20.850);
+      tl.fromTo("#nc", {opacity: 0, y: 40}, {opacity: 1, y: 0, duration: 0.27, ease: "back.out(1.7)"}, 20.867);
+      tl.fromTo("#g-nc .pulse", {attr: {r: 12}, opacity: 1}, {attr: {r: 34}, opacity: 0, duration: 0.5, repeat: 2, stagger: 0.12}, 20.967);
+      tl.to("#nc", {opacity: 0, duration: 0.1, ease: "power2.in"}, 21.747);
+      tl.fromTo("#one", {opacity: 0, scale: 2.2}, {opacity: 1, scale: 1, duration: 0.2, ease: "power4.in"}, 21.747);
+      tl.to("#one", {opacity: 0, duration: 0.1, ease: "power2.in"}, 24.133);
+      tl.fromTo("#cd-end", {opacity: 0}, {opacity: 1, duration: 0.2}, 24.233);
+      tl.fromTo("#cd-end .cin", {scale: 0.9}, {scale: 1, duration: 0.3, ease: "back.out(1.6)"}, 24.233);
+      tl.fromTo("#arw", {y: 0}, {y: 30, duration: 0.32, ease: "power2.in", yoyo: true, repeat: 6, immediateRender: false}, 24.533);
+      tl.set("#cg0", {opacity: 1}, -0.067); tl.set("#cg0", {opacity: 0}, 0.613);
+      tl.fromTo("#w0", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, -0.067);
+      tl.to("#w0", {color: "#ffffff", scale: 1, duration: 0.05}, 0.460);
+      tl.fromTo("#w1", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 0.393);
+      tl.to("#w1", {color: "#ffffff", scale: 1, duration: 0.05}, 0.613);
+      tl.set("#cg2", {opacity: 1}, 1.880); tl.set("#cg2", {opacity: 0}, 2.316);
+      tl.fromTo("#w5", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 1.880);
+      tl.to("#w5", {color: "#ffffff", scale: 1, duration: 0.05}, 1.960);
+      tl.fromTo("#w6", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 1.880);
+      tl.to("#w6", {color: "#ffffff", scale: 1, duration: 0.05}, 2.040);
+      tl.fromTo("#w7", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 1.973);
+      tl.to("#w7", {color: "#ffffff", scale: 1, duration: 0.05}, 2.316);
+      tl.set("#cg3", {opacity: 1}, 2.316); tl.set("#cg3", {opacity: 0}, 2.836);
+      tl.fromTo("#w8", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 2.316);
+      tl.to("#w8", {color: "#ffffff", scale: 1, duration: 0.05}, 2.543);
+      tl.fromTo("#w9", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 2.476);
+      tl.to("#w9", {color: "#ffffff", scale: 1, duration: 0.05}, 2.836);
+      tl.set("#cg6", {opacity: 1}, 4.260); tl.set("#cg6", {opacity: 0}, 4.693);
+      tl.fromTo("#w13", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 4.260);
+      tl.to("#w13", {color: "#ffffff", scale: 1, duration: 0.05}, 4.340);
+      tl.fromTo("#w14", {color: "#FFD400", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 4.260);
+      tl.to("#w14", {color: "#FFD400", scale: 1, duration: 0.05}, 4.480);
+      tl.fromTo("#w15", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 4.413);
+      tl.to("#w15", {color: "#ffffff", scale: 1, duration: 0.05}, 4.693);
+      tl.set("#cg7", {opacity: 1}, 4.693); tl.set("#cg7", {opacity: 0}, 5.633);
+      tl.fromTo("#w16", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 4.693);
+      tl.to("#w16", {color: "#ffffff", scale: 1, duration: 0.05}, 5.180);
+      tl.fromTo("#w17", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 5.113);
+      tl.to("#w17", {color: "#ffffff", scale: 1, duration: 0.05}, 5.540);
+      tl.fromTo("#w18", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 5.473);
+      tl.to("#w18", {color: "#ffffff", scale: 1, duration: 0.05}, 5.633);
+      tl.set("#cg9", {opacity: 1}, 7.060); tl.set("#cg9", {opacity: 0}, 7.500);
+      tl.fromTo("#w22", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 7.060);
+      tl.to("#w22", {color: "#ffffff", scale: 1, duration: 0.05}, 7.220);
+      tl.fromTo("#w23", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 7.153);
+      tl.to("#w23", {color: "#ffffff", scale: 1, duration: 0.05}, 7.500);
+      tl.set("#cg11", {opacity: 1}, 8.420); tl.set("#cg11", {opacity: 0}, 9.550);
+      tl.fromTo("#w25", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 8.420);
+      tl.to("#w25", {color: "#ffffff", scale: 1, duration: 0.05}, 8.561);
+      tl.fromTo("#w26", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 8.494);
+      tl.to("#w26", {color: "#ffffff", scale: 1, duration: 0.05}, 8.881);
+      tl.fromTo("#w27", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 8.814);
+      tl.to("#w27", {color: "#ffffff", scale: 1, duration: 0.05}, 9.481);
+      tl.set("#cg14", {opacity: 1}, 10.920); tl.set("#cg14", {opacity: 0}, 11.323);
+      tl.fromTo("#w32", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 10.920);
+      tl.to("#w32", {color: "#ffffff", scale: 1, duration: 0.05}, 11.150);
+      tl.fromTo("#w33", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 11.083);
+      tl.to("#w33", {color: "#ffffff", scale: 1, duration: 0.05}, 11.250);
+      tl.fromTo("#w34", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 11.183);
+      tl.to("#w34", {color: "#ffffff", scale: 1, duration: 0.05}, 11.323);
+      tl.set("#cg15", {opacity: 1}, 11.323); tl.set("#cg15", {opacity: 0}, 11.826);
+      tl.fromTo("#w35", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 11.323);
+      tl.to("#w35", {color: "#ffffff", scale: 1, duration: 0.05}, 11.730);
+      tl.set("#cg16", {opacity: 1}, 11.826); tl.set("#cg16", {opacity: 0}, 12.366);
+      tl.fromTo("#w36", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 11.826);
+      tl.to("#w36", {color: "#ffffff", scale: 1, duration: 0.05}, 12.053);
+      tl.fromTo("#w37", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 11.986);
+      tl.to("#w37", {color: "#ffffff", scale: 1, duration: 0.05}, 12.293);
+      tl.fromTo("#w38", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 12.226);
+      tl.to("#w38", {color: "#ffffff", scale: 1, duration: 0.05}, 12.366);
+      tl.set("#cg17", {opacity: 1}, 12.366); tl.set("#cg17", {opacity: 0}, 13.646);
+      tl.fromTo("#w39", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 12.366);
+      tl.to("#w39", {color: "#ffffff", scale: 1, duration: 0.05}, 12.593);
+      tl.fromTo("#w40", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 12.526);
+      tl.to("#w40", {color: "#ffffff", scale: 1, duration: 0.05}, 13.013);
+      tl.fromTo("#w41", {color: "#FFD400", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 12.946);
+      tl.to("#w41", {color: "#FFD400", scale: 1, duration: 0.05}, 13.646);
+      tl.set("#cg18", {opacity: 1}, 13.646); tl.set("#cg18", {opacity: 0}, 14.586);
+      tl.fromTo("#w42", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 13.646);
+      tl.to("#w42", {color: "#ffffff", scale: 1, duration: 0.05}, 14.173);
+      tl.fromTo("#w43", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 14.106);
+      tl.to("#w43", {color: "#ffffff", scale: 1, duration: 0.05}, 14.453);
+      tl.fromTo("#w44", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 14.386);
+      tl.to("#w44", {color: "#ffffff", scale: 1, duration: 0.05}, 14.586);
+      tl.set("#cg19", {opacity: 1}, 14.586); tl.set("#cg19", {opacity: 0}, 15.340);
+      tl.fromTo("#w45", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 14.586);
+      tl.to("#w45", {color: "#ffffff", scale: 1, duration: 0.05}, 14.813);
+      tl.fromTo("#w46", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 14.746);
+      tl.to("#w46", {color: "#ffffff", scale: 1, duration: 0.05}, 15.213);
+      tl.set("#cg24", {opacity: 1}, 17.950); tl.set("#cg24", {opacity: 0}, 18.127);
+      tl.fromTo("#w56", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 17.950);
+      tl.to("#w56", {color: "#ffffff", scale: 1, duration: 0.05}, 18.030);
+      tl.fromTo("#w57", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 17.950);
+      tl.to("#w57", {color: "#ffffff", scale: 1, duration: 0.05}, 18.034);
+      tl.fromTo("#w58", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 17.967);
+      tl.to("#w58", {color: "#ffffff", scale: 1, duration: 0.05}, 18.127);
+      tl.set("#cg25", {opacity: 1}, 18.127); tl.set("#cg25", {opacity: 0}, 18.607);
+      tl.fromTo("#w59", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 18.127);
+      tl.to("#w59", {color: "#ffffff", scale: 1, duration: 0.05}, 18.334);
+      tl.fromTo("#w60", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 18.267);
+      tl.to("#w60", {color: "#ffffff", scale: 1, duration: 0.05}, 18.534);
+      tl.fromTo("#w61", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 18.467);
+      tl.to("#w61", {color: "#ffffff", scale: 1, duration: 0.05}, 18.607);
+      tl.set("#cg26", {opacity: 1}, 18.607); tl.set("#cg26", {opacity: 0}, 19.367);
+      tl.fromTo("#w62", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 18.607);
+      tl.to("#w62", {color: "#ffffff", scale: 1, duration: 0.05}, 19.014);
+      tl.fromTo("#w63", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 18.947);
+      tl.to("#w63", {color: "#ffffff", scale: 1, duration: 0.05}, 19.294);
+      tl.fromTo("#w64", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 19.227);
+      tl.to("#w64", {color: "#ffffff", scale: 1, duration: 0.05}, 19.367);
+      tl.set("#cg27", {opacity: 1}, 19.367); tl.set("#cg27", {opacity: 0}, 20.227);
+      tl.fromTo("#w65", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 19.367);
+      tl.to("#w65", {color: "#ffffff", scale: 1, duration: 0.05}, 19.654);
+      tl.fromTo("#w66", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 19.587);
+      tl.to("#w66", {color: "#ffffff", scale: 1, duration: 0.05}, 20.054);
+      tl.fromTo("#w67", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 19.987);
+      tl.to("#w67", {color: "#ffffff", scale: 1, duration: 0.05}, 20.227);
+      tl.set("#cg28", {opacity: 1}, 20.227); tl.set("#cg28", {opacity: 0}, 20.800);
+      tl.fromTo("#w68", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 20.227);
+      tl.to("#w68", {color: "#ffffff", scale: 1, duration: 0.05}, 20.434);
+      tl.fromTo("#w69", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 20.367);
+      tl.to("#w69", {color: "#ffffff", scale: 1, duration: 0.05}, 20.614);
+      tl.fromTo("#w70", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 20.547);
+      tl.to("#w70", {color: "#ffffff", scale: 1, duration: 0.05}, 20.800);
+      tl.set("#cg29", {opacity: 1}, 20.800); tl.set("#cg29", {opacity: 0}, 21.580);
+      tl.fromTo("#w71", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 20.800);
+      tl.to("#w71", {color: "#ffffff", scale: 1, duration: 0.05}, 21.067);
+      tl.fromTo("#w72", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 21.000);
+      tl.to("#w72", {color: "#ffffff", scale: 1, duration: 0.05}, 21.367);
+      tl.fromTo("#w73", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 21.300);
+      tl.to("#w73", {color: "#ffffff", scale: 1, duration: 0.05}, 21.580);
+      tl.set("#cg30", {opacity: 1}, 21.580); tl.set("#cg30", {opacity: 0}, 22.520);
+      tl.fromTo("#w74", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 21.580);
+      tl.to("#w74", {color: "#ffffff", scale: 1, duration: 0.05}, 21.847);
+      tl.fromTo("#w75", {color: "#FFD400", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 21.780);
+      tl.to("#w75", {color: "#FFD400", scale: 1, duration: 0.05}, 22.187);
+      tl.fromTo("#w76", {color: "#FFD400", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 22.120);
+      tl.to("#w76", {color: "#FFD400", scale: 1, duration: 0.05}, 22.520);
+      tl.set("#cg31", {opacity: 1}, 22.520); tl.set("#cg31", {opacity: 0}, 23.856);
+      tl.fromTo("#w77", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 22.520);
+      tl.to("#w77", {color: "#ffffff", scale: 1, duration: 0.05}, 23.127);
+      tl.fromTo("#w78", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 23.060);
+      tl.to("#w78", {color: "#ffffff", scale: 1, duration: 0.05}, 23.467);
+      tl.fromTo("#w79", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 23.400);
+      tl.to("#w79", {color: "#ffffff", scale: 1, duration: 0.05}, 23.847);
+      tl.set("#cg32", {opacity: 1}, 23.856); tl.set("#cg32", {opacity: 0}, 24.116);
+      tl.fromTo("#w80", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 23.856);
+      tl.to("#w80", {color: "#ffffff", scale: 1, duration: 0.05}, 24.003);
+      tl.fromTo("#w81", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 23.936);
+      tl.to("#w81", {color: "#ffffff", scale: 1, duration: 0.05}, 24.116);
+      tl.set("#cg33", {opacity: 1}, 24.116); tl.set("#cg33", {opacity: 0}, 24.233);
+      tl.fromTo("#w82", {color: "#ffffff", scale: 1}, {color: "#FFD400", scale: 1.1, duration: 0.05, immediateRender: false}, 24.116);
+      tl.to("#w82", {color: "#ffffff", scale: 1, duration: 0.05}, 24.233);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
