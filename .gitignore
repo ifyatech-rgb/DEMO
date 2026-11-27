@@ -146,3 +146,4 @@ next-env.d.ts
 /edit/remotion/*/assets/
 /edit/remotion/*/.hyperframes/
 /edit/remotion/*/vendor/
+/edit/assets/music.mp3

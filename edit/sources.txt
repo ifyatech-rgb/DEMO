@@ -1,0 +1,2 @@
+Music: Mixkit track #112 (https://assets.mixkit.co/music/112/112.mp3), Mixkit Stock Music Free License, ducked under the voice.
+SFX: all synthetic (ffmpeg), assets/sfx.

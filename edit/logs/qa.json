@@ -18,11 +18,11 @@
     "codec_type": "audio",
     "sample_rate": "48000",
     "r_frame_rate": "0/0",
-    "bit_rate": "163212"
+    "bit_rate": "202888"
    }
   ],
   "lufs": -14.0,
-  "true_peak": -2.0,
+  "true_peak": -1.6,
   "loudness_pass": true
  },
  "ad1_reels_9x16_1080x1920.mp4": {
@@ -44,11 +44,11 @@
     "codec_type": "audio",
     "sample_rate": "48000",
     "r_frame_rate": "0/0",
-    "bit_rate": "163212"
+    "bit_rate": "202888"
    }
   ],
   "lufs": -14.0,
-  "true_peak": -2.0,
+  "true_peak": -1.6,
   "loudness_pass": true
  },
  "voice_only_test.wav": {
@@ -69,11 +69,11 @@
  "joints": [
   {
    "t": 2.233,
-   "max_jump_vs_p99.9": 0.92
+   "max_jump_vs_p99.9": 0.95
   },
   {
    "t": 4.0,
-   "max_jump_vs_p99.9": 1.05
+   "max_jump_vs_p99.9": 1.09
   },
   {
    "t": 8.267,
@@ -81,7 +81,7 @@
   },
   {
    "t": 10.8,
-   "max_jump_vs_p99.9": 0.81
+   "max_jump_vs_p99.9": 0.79
   },
   {
    "t": 11.733,
@@ -89,7 +89,7 @@
   },
   {
    "t": 16.133,
-   "max_jump_vs_p99.9": 0.9
+   "max_jump_vs_p99.9": 0.89
   },
   {
    "t": 16.7,
@@ -97,11 +97,11 @@
   },
   {
    "t": 20.833,
-   "max_jump_vs_p99.9": 0.02
+   "max_jump_vs_p99.9": 0.08
   },
   {
    "t": 23.733,
-   "max_jump_vs_p99.9": 0.0
+   "max_jump_vs_p99.9": 0.34
   }
  ],
  "clicks_pass": true,
