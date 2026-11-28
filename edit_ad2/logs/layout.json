@@ -1,0 +1,82 @@
+{
+ "source": "../ad_2_for_feed.mp4",
+ "size": [
+  1080,
+  1350
+ ],
+ "fps": 30,
+ "duration": 39.082,
+ "speaker_pane": {
+  "x": 0,
+  "y": 163,
+  "w": 1080,
+  "h": 1024
+ },
+ "top_header_bar": {
+  "y0": 0,
+  "y1": 163,
+  "text_rows": [
+   26,
+   137
+  ]
+ },
+ "bottom_caption_bar": {
+  "y0": 1187,
+  "y1": 1350,
+  "text_rows": [
+   1235,
+   1302
+  ]
+ },
+ "fullscreen_graphics": [
+  {
+   "t0": 1.133,
+   "t1": 2.233
+  },
+  {
+   "t0": 2.267,
+   "t1": 3.367
+  },
+  {
+   "t0": 7.533,
+   "t1": 9.067
+  },
+  {
+   "t0": 11.5,
+   "t1": 15.9
+  },
+  {
+   "t0": 20.567,
+   "t1": 22.0
+  },
+  {
+   "t0": 25.233,
+   "t1": 28.133
+  },
+  {
+   "t0": 29.1,
+   "t1": 31.667
+  },
+  {
+   "t0": 32.667,
+   "t1": 34.7
+  }
+ ],
+ "fullscreen_graphics_content": [
+  "door knocking door",
+  "shared lead sites (Leads4Sale) + X",
+  "sales rep calendar",
+  "we handle everything checklist",
+  "green house ready to buy",
+  "partner closed $ cards ($0 fade, $49,691->$70,000)",
+  "partner closed $912,844->$4,000,000",
+  "fully booked calendar"
+ ],
+ "red_cta_pill": {
+  "t0": 36.067,
+  "t1": 39.082,
+  "y0": 1013,
+  "y1": 1128
+ },
+ "baked_text": "header line in top bar (ATTENTION ROOFING COMPANIES, OLD WAYS ARE DEAD, 3-6 APPOINTMENTS/DAY, ...), word captions + sub-line in bottom bar, text inside every full-screen graphic, red CLICK LEARN MORE pill"
+}

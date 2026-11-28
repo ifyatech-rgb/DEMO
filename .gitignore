@@ -147,3 +147,13 @@ next-env.d.ts
 /edit/remotion/*/.hyperframes/
 /edit/remotion/*/vendor/
 /edit/assets/music.mp3
+/ad_2_for_feed.mp4
+/edit_ad2/work/*.wav
+/edit_v2/out/*.mp4
+/edit_v2/out/*.wav
+/edit_v2/work/*.mp4
+/edit_v2/work/*.wav
+/edit_v2/assets/music.mp3
+/edit_v2/remotion/*/assets/
+/edit_v2/remotion/*/.hyperframes/
+/edit_v2/remotion/*/vendor/

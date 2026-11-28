@@ -1,0 +1,830 @@
+[
+ {
+  "text": "Roofers",
+  "start": 0.0,
+  "end": 0.46,
+  "p": 0.588
+ },
+ {
+  "text": "getting",
+  "start": 0.46,
+  "end": 0.68,
+  "p": 0.319
+ },
+ {
+  "text": "5",
+  "start": 0.68,
+  "end": 1.1,
+  "p": 0.565
+ },
+ {
+  "text": "to",
+  "start": 1.1,
+  "end": 1.28,
+  "p": 0.551
+ },
+ {
+  "text": "10",
+  "start": 1.28,
+  "end": 1.54,
+  "p": 0.994
+ },
+ {
+  "text": "roofs",
+  "start": 1.54,
+  "end": 1.76,
+  "p": 0.972
+ },
+ {
+  "text": "per",
+  "start": 1.76,
+  "end": 2.04,
+  "p": 0.993
+ },
+ {
+  "text": "month?",
+  "start": 2.04,
+  "end": 2.34,
+  "p": 0.993
+ },
+ {
+  "text": "Stop",
+  "start": 2.72,
+  "end": 2.88,
+  "p": 0.915
+ },
+ {
+  "text": "buying",
+  "start": 2.88,
+  "end": 3.24,
+  "p": 0.995
+ },
+ {
+  "text": "garbage,",
+  "start": 3.24,
+  "end": 3.82,
+  "p": 0.93
+ },
+ {
+  "text": "Angi",
+  "start": 3.92,
+  "end": 4.28,
+  "p": 0.443
+ },
+ {
+  "text": "leads.",
+  "start": 4.28,
+  "end": 4.44,
+  "p": 0.421
+ },
+ {
+  "text": "Don't",
+  "start": 4.82,
+  "end": 4.94,
+  "p": 0.984
+ },
+ {
+  "text": "pay",
+  "start": 4.94,
+  "end": 5.1,
+  "p": 0.996
+ },
+ {
+  "text": "me",
+  "start": 5.1,
+  "end": 5.38,
+  "p": 0.993
+ },
+ {
+  "text": "anything",
+  "start": 5.38,
+  "end": 5.8,
+  "p": 0.988
+ },
+ {
+  "text": "unless",
+  "start": 5.8,
+  "end": 6.16,
+  "p": 0.949
+ },
+ {
+  "text": "you",
+  "start": 6.16,
+  "end": 6.32,
+  "p": 0.999
+ },
+ {
+  "text": "get",
+  "start": 6.32,
+  "end": 6.5,
+  "p": 0.998
+ },
+ {
+  "text": "face",
+  "start": 6.5,
+  "end": 6.82,
+  "p": 0.995
+ },
+ {
+  "text": "-to",
+  "start": 6.82,
+  "end": 6.98,
+  "p": 0.727
+ },
+ {
+  "text": "-face",
+  "start": 6.98,
+  "end": 7.18,
+  "p": 0.998
+ },
+ {
+  "text": "meetings",
+  "start": 7.18,
+  "end": 7.56,
+  "p": 0.994
+ },
+ {
+  "text": "with",
+  "start": 7.56,
+  "end": 7.84,
+  "p": 0.994
+ },
+ {
+  "text": "high",
+  "start": 7.84,
+  "end": 8.18,
+  "p": 0.984
+ },
+ {
+  "text": "-intent",
+  "start": 8.18,
+  "end": 8.44,
+  "p": 0.798
+ },
+ {
+  "text": "homeowners",
+  "start": 8.44,
+  "end": 8.94,
+  "p": 0.968
+ },
+ {
+  "text": "who",
+  "start": 8.94,
+  "end": 9.26,
+  "p": 0.976
+ },
+ {
+  "text": "can",
+  "start": 9.26,
+  "end": 9.42,
+  "p": 0.998
+ },
+ {
+  "text": "actually",
+  "start": 9.42,
+  "end": 9.9,
+  "p": 0.994
+ },
+ {
+  "text": "afford",
+  "start": 9.9,
+  "end": 10.22,
+  "p": 0.999
+ },
+ {
+  "text": "a",
+  "start": 10.22,
+  "end": 10.44,
+  "p": 0.995
+ },
+ {
+  "text": "roof.",
+  "start": 10.44,
+  "end": 10.52,
+  "p": 0.993
+ },
+ {
+  "text": "No",
+  "start": 10.68,
+  "end": 10.82,
+  "p": 0.989
+ },
+ {
+  "text": "monthly",
+  "start": 10.82,
+  "end": 11.14,
+  "p": 0.997
+ },
+ {
+  "text": "retainers,",
+  "start": 11.14,
+  "end": 11.74,
+  "p": 0.988
+ },
+ {
+  "text": "only",
+  "start": 11.88,
+  "end": 12.18,
+  "p": 0.993
+ },
+ {
+  "text": "pay",
+  "start": 12.18,
+  "end": 12.5,
+  "p": 0.978
+ },
+ {
+  "text": "per",
+  "start": 12.5,
+  "end": 12.72,
+  "p": 0.89
+ },
+ {
+  "text": "estimate.",
+  "start": 12.72,
+  "end": 13.14,
+  "p": 0.996
+ },
+ {
+  "text": "Here's",
+  "start": 13.28,
+  "end": 13.5,
+  "p": 0.989
+ },
+ {
+  "text": "how",
+  "start": 13.5,
+  "end": 13.6,
+  "p": 0.999
+ },
+ {
+  "text": "it",
+  "start": 13.6,
+  "end": 13.74,
+  "p": 0.999
+ },
+ {
+  "text": "works.",
+  "start": 13.74,
+  "end": 14.08,
+  "p": 0.999
+ },
+ {
+  "text": "My",
+  "start": 14.34,
+  "end": 14.5,
+  "p": 0.98
+ },
+ {
+  "text": "team",
+  "start": 14.5,
+  "end": 14.74,
+  "p": 0.999
+ },
+ {
+  "text": "and",
+  "start": 14.74,
+  "end": 14.88,
+  "p": 0.995
+ },
+ {
+  "text": "I",
+  "start": 14.88,
+  "end": 15.04,
+  "p": 0.998
+ },
+ {
+  "text": "generate",
+  "start": 15.04,
+  "end": 15.46,
+  "p": 0.996
+ },
+ {
+  "text": "exclusive",
+  "start": 15.46,
+  "end": 16.16,
+  "p": 0.995
+ },
+ {
+  "text": "homeowner",
+  "start": 16.16,
+  "end": 16.62,
+  "p": 0.971
+ },
+ {
+  "text": "leads",
+  "start": 16.62,
+  "end": 16.9,
+  "p": 0.997
+ },
+ {
+  "text": "for",
+  "start": 16.9,
+  "end": 17.1,
+  "p": 0.997
+ },
+ {
+  "text": "your",
+  "start": 17.1,
+  "end": 17.26,
+  "p": 0.995
+ },
+ {
+  "text": "company,",
+  "start": 17.26,
+  "end": 17.66,
+  "p": 0.999
+ },
+ {
+  "text": "call",
+  "start": 17.88,
+  "end": 18.04,
+  "p": 0.957
+ },
+ {
+  "text": "them",
+  "start": 18.04,
+  "end": 18.2,
+  "p": 0.995
+ },
+ {
+  "text": "ourselves",
+  "start": 18.2,
+  "end": 18.64,
+  "p": 0.996
+ },
+ {
+  "text": "to",
+  "start": 18.64,
+  "end": 18.88,
+  "p": 0.98
+ },
+ {
+  "text": "make",
+  "start": 18.88,
+  "end": 19.02,
+  "p": 0.999
+ },
+ {
+  "text": "sure",
+  "start": 19.02,
+  "end": 19.22,
+  "p": 1.0
+ },
+ {
+  "text": "that",
+  "start": 19.22,
+  "end": 19.4,
+  "p": 0.956
+ },
+ {
+  "text": "they're",
+  "start": 19.4,
+  "end": 19.66,
+  "p": 0.987
+ },
+ {
+  "text": "motivated",
+  "start": 19.66,
+  "end": 20.12,
+  "p": 0.998
+ },
+ {
+  "text": "buyers",
+  "start": 20.12,
+  "end": 20.52,
+  "p": 0.989
+ },
+ {
+  "text": "and",
+  "start": 20.52,
+  "end": 20.84,
+  "p": 0.946
+ },
+ {
+  "text": "financially",
+  "start": 20.84,
+  "end": 21.46,
+  "p": 0.992
+ },
+ {
+  "text": "qualified",
+  "start": 21.46,
+  "end": 22.06,
+  "p": 0.993
+ },
+ {
+  "text": "to",
+  "start": 22.06,
+  "end": 22.32,
+  "p": 0.998
+ },
+ {
+  "text": "get",
+  "start": 22.32,
+  "end": 22.44,
+  "p": 0.999
+ },
+ {
+  "text": "a",
+  "start": 22.44,
+  "end": 22.62,
+  "p": 0.999
+ },
+ {
+  "text": "roof,",
+  "start": 22.62,
+  "end": 22.8,
+  "p": 0.999
+ },
+ {
+  "text": "and",
+  "start": 22.96,
+  "end": 23.06,
+  "p": 0.991
+ },
+ {
+  "text": "book",
+  "start": 23.06,
+  "end": 23.2,
+  "p": 0.9
+ },
+ {
+  "text": "them",
+  "start": 23.2,
+  "end": 23.42,
+  "p": 0.998
+ },
+ {
+  "text": "directly",
+  "start": 23.42,
+  "end": 23.9,
+  "p": 0.998
+ },
+ {
+  "text": "into",
+  "start": 23.9,
+  "end": 24.2,
+  "p": 0.998
+ },
+ {
+  "text": "your",
+  "start": 24.2,
+  "end": 24.46,
+  "p": 0.999
+ },
+ {
+  "text": "calendar",
+  "start": 24.46,
+  "end": 24.78,
+  "p": 0.907
+ },
+ {
+  "text": "so",
+  "start": 24.78,
+  "end": 25.04,
+  "p": 0.793
+ },
+ {
+  "text": "you",
+  "start": 25.04,
+  "end": 25.2,
+  "p": 0.982
+ },
+ {
+  "text": "don't",
+  "start": 25.2,
+  "end": 25.36,
+  "p": 0.999
+ },
+ {
+  "text": "have",
+  "start": 25.36,
+  "end": 25.5,
+  "p": 0.993
+ },
+ {
+  "text": "to",
+  "start": 25.5,
+  "end": 25.7,
+  "p": 0.999
+ },
+ {
+  "text": "waste",
+  "start": 25.7,
+  "end": 25.84,
+  "p": 0.999
+ },
+ {
+  "text": "any",
+  "start": 25.84,
+  "end": 26.18,
+  "p": 0.988
+ },
+ {
+  "text": "time",
+  "start": 26.18,
+  "end": 26.46,
+  "p": 0.999
+ },
+ {
+  "text": "at",
+  "start": 26.46,
+  "end": 26.6,
+  "p": 0.995
+ },
+ {
+  "text": "all",
+  "start": 26.6,
+  "end": 26.82,
+  "p": 0.999
+ },
+ {
+  "text": "sifting",
+  "start": 26.82,
+  "end": 27.22,
+  "p": 0.986
+ },
+ {
+  "text": "through",
+  "start": 27.22,
+  "end": 27.46,
+  "p": 0.999
+ },
+ {
+  "text": "all",
+  "start": 27.46,
+  "end": 27.6,
+  "p": 0.829
+ },
+ {
+  "text": "the",
+  "start": 27.6,
+  "end": 27.78,
+  "p": 0.981
+ },
+ {
+  "text": "dirt.",
+  "start": 27.78,
+  "end": 28.02,
+  "p": 0.998
+ },
+ {
+  "text": "If",
+  "start": 28.24,
+  "end": 28.34,
+  "p": 0.962
+ },
+ {
+  "text": "you",
+  "start": 28.34,
+  "end": 28.48,
+  "p": 0.999
+ },
+ {
+  "text": "want",
+  "start": 28.48,
+  "end": 28.66,
+  "p": 0.998
+ },
+ {
+  "text": "us",
+  "start": 28.66,
+  "end": 28.8,
+  "p": 0.997
+ },
+ {
+  "text": "to",
+  "start": 28.8,
+  "end": 28.96,
+  "p": 0.998
+ },
+ {
+  "text": "get",
+  "start": 28.96,
+  "end": 29.08,
+  "p": 0.992
+ },
+ {
+  "text": "you",
+  "start": 29.08,
+  "end": 29.26,
+  "p": 0.992
+ },
+ {
+  "text": "high",
+  "start": 29.26,
+  "end": 29.6,
+  "p": 0.963
+ },
+ {
+  "text": "-intent",
+  "start": 29.6,
+  "end": 29.88,
+  "p": 0.77
+ },
+ {
+  "text": "homeowner",
+  "start": 29.88,
+  "end": 30.36,
+  "p": 0.935
+ },
+ {
+  "text": "estimates",
+  "start": 30.36,
+  "end": 30.88,
+  "p": 0.973
+ },
+ {
+  "text": "and",
+  "start": 30.88,
+  "end": 31.18,
+  "p": 0.864
+ },
+ {
+  "text": "only",
+  "start": 31.18,
+  "end": 31.58,
+  "p": 0.989
+ },
+ {
+  "text": "pay",
+  "start": 31.58,
+  "end": 31.84,
+  "p": 0.998
+ },
+ {
+  "text": "us",
+  "start": 31.84,
+  "end": 32.04,
+  "p": 0.997
+ },
+ {
+  "text": "when",
+  "start": 32.04,
+  "end": 32.18,
+  "p": 0.992
+ },
+ {
+  "text": "you're",
+  "start": 32.18,
+  "end": 32.44,
+  "p": 0.939
+ },
+ {
+  "text": "face",
+  "start": 32.44,
+  "end": 32.58,
+  "p": 0.998
+ },
+ {
+  "text": "-to",
+  "start": 32.58,
+  "end": 32.76,
+  "p": 0.821
+ },
+ {
+  "text": "-face",
+  "start": 32.76,
+  "end": 32.96,
+  "p": 0.999
+ },
+ {
+  "text": "with",
+  "start": 32.96,
+  "end": 33.16,
+  "p": 0.998
+ },
+ {
+  "text": "them,",
+  "start": 33.16,
+  "end": 33.34,
+  "p": 0.998
+ },
+ {
+  "text": "click",
+  "start": 33.54,
+  "end": 33.62,
+  "p": 0.98
+ },
+ {
+  "text": "the",
+  "start": 33.62,
+  "end": 33.8,
+  "p": 0.999
+ },
+ {
+  "text": "button",
+  "start": 33.8,
+  "end": 33.98,
+  "p": 0.998
+ },
+ {
+  "text": "below",
+  "start": 33.98,
+  "end": 34.32,
+  "p": 0.998
+ },
+ {
+  "text": "to",
+  "start": 34.32,
+  "end": 34.52,
+  "p": 0.997
+ },
+ {
+  "text": "see",
+  "start": 34.52,
+  "end": 34.72,
+  "p": 0.999
+ },
+ {
+  "text": "if",
+  "start": 34.72,
+  "end": 34.86,
+  "p": 0.999
+ },
+ {
+  "text": "your",
+  "start": 34.86,
+  "end": 35.02,
+  "p": 0.992
+ },
+ {
+  "text": "area",
+  "start": 35.02,
+  "end": 35.26,
+  "p": 0.954
+ },
+ {
+  "text": "is",
+  "start": 35.26,
+  "end": 35.42,
+  "p": 0.88
+ },
+ {
+  "text": "available,",
+  "start": 35.42,
+  "end": 35.86,
+  "p": 0.999
+ },
+ {
+  "text": "as",
+  "start": 35.86,
+  "end": 36.2,
+  "p": 0.996
+ },
+ {
+  "text": "we",
+  "start": 36.2,
+  "end": 36.4,
+  "p": 0.999
+ },
+ {
+  "text": "only",
+  "start": 36.4,
+  "end": 36.7,
+  "p": 0.996
+ },
+ {
+  "text": "work",
+  "start": 36.7,
+  "end": 36.98,
+  "p": 0.999
+ },
+ {
+  "text": "with",
+  "start": 36.98,
+  "end": 37.18,
+  "p": 0.999
+ },
+ {
+  "text": "one",
+  "start": 37.18,
+  "end": 37.52,
+  "p": 0.953
+ },
+ {
+  "text": "roofing",
+  "start": 37.52,
+  "end": 37.92,
+  "p": 0.998
+ },
+ {
+  "text": "contractor",
+  "start": 37.92,
+  "end": 38.46,
+  "p": 0.988
+ },
+ {
+  "text": "per",
+  "start": 38.46,
+  "end": 38.8,
+  "p": 0.994
+ },
+ {
+  "text": "area.",
+  "start": 38.8,
+  "end": 39.18,
+  "p": 0.998
+ }
+]

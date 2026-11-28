@@ -1,0 +1,82 @@
+{
+ "source": "../ad_1_for_feed.mp4",
+ "size": [
+  1080,
+  1350
+ ],
+ "fps": 30,
+ "frames": 1179,
+ "duration": 39.3,
+ "speaker_pane": {
+  "x": 0,
+  "y": 211,
+  "w": 1080,
+  "h": 928
+ },
+ "top_header_bar": {
+  "y0": 0,
+  "y1": 211,
+  "note": "baked header line, e.g. ATTENTION ROOFERS / NO LEADS = NO PAY"
+ },
+ "bottom_caption_bar": {
+  "y0": 1139,
+  "y1": 1350,
+  "note": "baked word captions + sub-line"
+ },
+ "fullscreen_graphics": [
+  [
+   3.333,
+   4.767
+  ],
+  [
+   6.4,
+   7.6
+  ],
+  [
+   8.567,
+   10.6
+  ],
+  [
+   17.9,
+   19.333
+  ],
+  [
+   23.133,
+   25.0
+  ],
+  [
+   32.233,
+   33.467
+  ]
+ ],
+ "red_cta_pill": [
+  [
+   6.433,
+   7.567
+  ],
+  [
+   23.133,
+   24.967
+  ],
+  [
+   32.267,
+   33.433
+  ],
+  [
+   36.2,
+   39.3
+  ]
+ ],
+ "money_emoji_overlay": [
+  [
+   11.95,
+   13.5
+  ]
+ ],
+ "face_box_in_pane": {
+  "x0": 152,
+  "x1": 828,
+  "y0": 156,
+  "y1": 774
+ }
+}
