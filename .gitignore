@@ -157,3 +157,9 @@ next-env.d.ts
 /edit_v2/remotion/*/assets/
 /edit_v2/remotion/*/.hyperframes/
 /edit_v2/remotion/*/vendor/
+/edit_v3/out/*.mp4
+/edit_v3/work/*.mp4
+/edit_v3/work/*.wav
+/edit_v3/remotion/assets/
+/edit_v3/remotion/vendor/
+/edit_v3/remotion/.hyperframes/
